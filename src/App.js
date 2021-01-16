@@ -7,6 +7,7 @@ function App() {
   const [end, setEnd] = useState("(a)");
   const [startInput, setStartInput] = useState("(and(a;or(a;b)))");
   const [endInput, setEndInput] = useState("(a)");
+    const [rulePacks, setRulePacks] = useState(["Logic"]);
 
   return (
     <div className="App">
@@ -32,7 +33,7 @@ function App() {
       >
         Создать
       </button>
-      <GameEditor start={start} end={end} />
+      <GameEditor start={start} end={end} rulePacks={rulePacks} />
     </div>
   );
 }
