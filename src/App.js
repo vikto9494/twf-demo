@@ -1,38 +1,133 @@
 import React, { useState } from "react";
 
 import GameEditor from "./components/game-editor/game-editor";
+import MathQuillEditor from "./components/tex-editor/tex-editor";
+import { convertMathInput } from "./utils/kotlin-lib-functions";
+import { Alert, Button, Select, Switch } from "antd";
+import "antd/dist/antd.compact.min.css";
+import "./App.scss";
+
+const { Option } = Select;
 
 function App() {
-  const [start, setStart] = useState("(+(2;2))");
-  const [end, setEnd] = useState("(4)");
-  const [startInput, setStartInput] = useState("(+(2;2))");
-  const [endInput, setEndInput] = useState("(4)");
+  const defaultStart = "(+(2;+(2;*(4;5))))";
+  const defaultEnd = "(24)";
+  const [start, setStart] = useState(defaultStart);
+  const [end, setEnd] = useState(defaultEnd);
+  const [startInput, setStartInput] = useState(defaultStart);
+  const [endInput, setEndInput] = useState(defaultEnd);
+
+  // inputs
+  const [isGameMode, setIsGameMode] = useState(true);
+
+  // data
+  const mathFieldSelectOptions = [
+    "Logic",
+    "ShortMultiplication",
+    "Logarithm",
+    "Trigonometry",
+  ];
+  const [
+    currentMathFieldSelectOption,
+    setCurrentMathFieldSelectOption,
+  ] = useState("Logic");
+
+  // errors
+  const [startError, setStartError] = useState(null);
+  const [endError, setEndError] = useState(null);
 
   return (
-    <div className="App">
-      <input
-        type="text"
-        value={startInput}
-        onChange={(e) => {
-          setStartInput(e.currentTarget.value);
-        }}
-      />
-      <input
-        type="text"
-        value={endInput}
-        onChange={(e) => {
-          setEndInput(e.currentTarget.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          setStart(startInput);
-          setEnd(endInput);
-        }}
-      >
-        Создать
-      </button>
+    <div className="app">
       <GameEditor start={start} end={end} />
+      <div className="app__inputs">
+        <div className="app__input-group">
+          <label>Start</label>
+          <MathQuillEditor
+            startingLatexExpression={convertMathInput(
+              "STRUCTURE_STRING",
+              "TEX",
+              defaultStart
+            )}
+            width="300px"
+            updateValue={(value) => {
+              try {
+                setStartInput(
+                  convertMathInput("TEX", "STRUCTURE_STRING", value)
+                );
+                setStartError(null);
+              } catch (e) {
+                setStartError(e.message);
+              }
+            }}
+          />
+          {startError && (
+            <Alert
+              message={startError}
+              type="error"
+              style={{ maxWidth: "300px", marginTop: "15px" }}
+            />
+          )}
+        </div>
+        <div className="app__input-group">
+          <label>End</label>
+          <MathQuillEditor
+            startingLatexExpression={convertMathInput(
+              "STRUCTURE_STRING",
+              "TEX",
+              endInput
+            )}
+            width="300px"
+            updateValue={(value) => {
+              try {
+                setEndInput(convertMathInput("TEX", "STRUCTURE_STRING", value));
+                setEndError(null);
+              } catch (e) {
+                setEndError(e.message);
+              }
+            }}
+          />
+          {endError && (
+            <Alert
+              message={endError}
+              type="error"
+              style={{ maxWidth: "300px", marginTop: "15px" }}
+            />
+          )}
+        </div>
+        <div className="app__input-group">
+          <label>Math Field</label>
+          <Select
+            defaultValue={mathFieldSelectOptions[0]}
+            onChange={(value) => {
+              setCurrentMathFieldSelectOption(value);
+            }}
+            style={{ width: "150px" }}
+          >
+            {mathFieldSelectOptions.map((option) => (
+              <Option key={option} value={option}>
+                {option}
+              </Option>
+            ))}
+          </Select>
+        </div>
+        <div className="app__input-group">
+          <label>Game mode</label>
+          <Switch
+            checked={isGameMode}
+            onChange={(value) => {
+              setIsGameMode(value);
+            }}
+          />
+        </div>
+        <Button
+          onClick={() => {
+            setStart(startInput);
+            setEnd(endInput);
+          }}
+        >
+          Create task!
+        </Button>
+      </div>
     </div>
   );
 }

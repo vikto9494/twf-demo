@@ -1,0 +1,20 @@
+.app {
+  margin: 0 50px;
+  &__inputs {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    & > label {
+      margin-right: 5px;
+    }
+    & >:nth-child(3) {
+      flex-basis: 100%;
+    }
+  }
+}
