@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import GameEditor from "./components/game-editor/game-editor";
 
 function App() {
+  const [start, setStart] = useState("(+(2;2))");
+  const [end, setEnd] = useState("(4)");
+  const [startInput, setStartInput] = useState("(+(2;2))");
+  const [endInput, setEndInput] = useState("(4)");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="text"
+        value={startInput}
+        onChange={(e) => {
+          setStartInput(e.currentTarget.value);
+        }}
+      />
+      <input
+        type="text"
+        value={endInput}
+        onChange={(e) => {
+          setEndInput(e.currentTarget.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          setStart(startInput);
+          setEnd(endInput);
+        }}
+      >
+        Создать
+      </button>
+      <GameEditor start={start} end={end} />
     </div>
   );
 }
