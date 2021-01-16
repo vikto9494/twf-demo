@@ -54,7 +54,7 @@ function initTestingGround(test_expr, font_size) {
     app.viewbox(0, 0, background_width, background_height);
     app.rect(background_width, background_height).fill(background_colour);
 
-    let NewTreeRoot = window['twf-kotlin-lib'].structureStringToExpression(test_expr);
+    let NewTreeRoot = this['twf-kotlin-lib'].structureStringToExpression(test_expr);
     let expr = PrintTree(NewTreeRoot, font_size, app);
     expr.move(0, 100);
 }
@@ -85,6 +85,12 @@ function getColor(n) {
     return color.at(2 / (n + 2)).toHex();
 }
 
+function setDefaultColor(index) {
+    for (let i = index; i < multiArr.length; ++i) {
+        changeColor(multiArrCont[i], multiArrCont[i].classes()[0], `colored${multiArr[i]}`, default_text_color);
+    }
+}
+
 function recolor(index) {
     for (let i = index; i < multiArr.length; ++i) {
         changeColor(multiArrCont[i], multiArrCont[i].classes()[0], `colored${multiArr[i]}`, getColor(i));
@@ -92,8 +98,6 @@ function recolor(index) {
 }
 
 function changeColor(con, fromClass, toClass, toColor) {
-    if (!con.hasClass(fromClass))
-        return;
     con.animate(300, "<>").fill(toColor);
     con.removeClass(fromClass);
     con.addClass(toClass);
@@ -156,7 +160,8 @@ function PrintTree(TWF_v, init_font_size, app) {
         txt.css("user-select", "none");
         txt.leading(0.9);
         txt
-            .on("mousedown", () => onButtonDown(cont, nodeId))
+//            .on("dblclick", () => multipleSelectionHandling(cont, nodeId))
+            .on("mousedown", () => onePlaceSelectionHandling(cont, nodeId))
             .on("mouseup mouseover", () => onButtonOver(cont, nodeId))
             .on("mouseout", () => onButtonOut(cont, nodeId));
         txt.addClass("uncolored");
@@ -178,7 +183,8 @@ function PrintTree(TWF_v, init_font_size, app) {
             .move(line.x(), line.y() - height * 2);
         line_hitbox.css("cursor", "pointer");
         line_hitbox
-            .on("mousedown", () => onButtonDown(cont, nodeId))
+//            .on("dblclick", () => multipleSelectionHandling(cont, nodeId))
+            .on("mousedown", () => onePlaceSelectionHandling(cont, nodeId))
             .on("mouseup mouseover", () => onButtonOver(cont))
             .on("mouseout", () => onButtonOut(cont));
         line_hitbox.opacity(0);
@@ -242,13 +248,14 @@ function PrintTree(TWF_v, init_font_size, app) {
             let pow_hitbox = cur_cont
                 .rect(pow_hitbox_width[min(size, max_size - 1)],
                     pow_hitbox_height[min(size, max_size - 1)])
-                .move(another_child.bbox().x, another_child.bbox().y)
+                .move(another_child.bbox().x, another_child.bbox().y);
             pow_hitbox.dy(another_child.bbox().height - pow_hitbox.height()
                 - pow_hitbox_vert_offset[min(size, max_size - 1)]);
             pow_hitbox.dx(-pow_hitbox.width() / 1.8);
             pow_hitbox.css("cursor", "pointer");
             pow_hitbox
-                .on("mousedown", () => onButtonDown(cur_cont, v.twfNode.nodeId))
+//                .on("dblclick", () => multipleSelectionHandling(cur_cont, v.twfNode.nodeId))
+                .on("mousedown", () => onePlaceSelectionHandling(cur_cont, v.twfNode.nodeId))
                 .on("mouseup mouseover", () => onButtonOver(cur_cont))
                 .on("mouseout", () => onButtonOut(cur_cont));
             pow_hitbox.opacity(0);
@@ -296,9 +303,9 @@ function PrintTree(TWF_v, init_font_size, app) {
 
         } else if (v.value === "-") {
             let child, cur_shift, tmp;
-            tmp = interactive_text("\u2212", cur_cont, size, v.twfNode.nodeId);
+            tmp = interactive_text("\u2212", cur_cont, size, v.twfNode.parent ? v.twfNode.parent.nodeId : v.twfNode.nodeId);
             delta += draw(cur_cont, tmp, delta) + interletter_interval;
-            [child, cur_shift] = recPrintTree(v.children[0], size)
+            [child, cur_shift] = recPrintTree(v.children[0], size);
             vert_shift = min(cur_shift, vert_shift);
             if (v.children[0].value === "-" ||
                 v.children[0].value === "*" ||
@@ -321,23 +328,27 @@ function PrintTree(TWF_v, init_font_size, app) {
                     delta, cur_shift, size) + interletter_interval;
             }
             for (let i = 1; i < v.children.length; i++) {
-                if (v.children[i].value !== "-") {
+                let child = v.children[i];
+                if (child.value !== "-") {
                     tmp = interactive_text(v.value, cur_cont,
                         size, v.twfNode.nodeId);
                     delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                } else {
+                    tmp = interactive_text("\u2212", cur_cont,
+                        size, v.twfNode.nodeId);
+                    delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                    child = child.children[0];
                 }
-                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                [another_child, cur_shift] = recPrintTree(child, size);
                 vert_shift = min(cur_shift, vert_shift);
-                if (v.children[i].value === "+") {
+                if (child.value === "+") {
                     delta = draw_with_brackets(cur_cont, another_child,
-                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                        delta, cur_shift, size, child.twfNode.nodeId);
                 } else {
                     delta += v_draw(cur_cont, another_child,
                         delta, cur_shift, size) + interletter_interval;
                 }
             }
-
-
         } else if (v.value === "*") {
             let first_child, another_child, cur_shift, tmp;
             [first_child, cur_shift] = recPrintTree(v.children[0], size);
@@ -350,7 +361,7 @@ function PrintTree(TWF_v, init_font_size, app) {
                     delta, cur_shift, size) + interletter_interval;
             }
             for (let i = 1; i < v.children.length; i++) {
-                tmp = interactive_text("\u2219", cur_cont,
+                tmp = interactive_text("\u00B7", cur_cont,
                     size, v.twfNode.nodeId);
                 delta += draw(cur_cont, tmp, delta) + interletter_interval;
                 [another_child, cur_shift] = recPrintTree(v.children[i], size);
@@ -363,10 +374,183 @@ function PrintTree(TWF_v, init_font_size, app) {
                         delta, cur_shift, size) + interletter_interval;
                 }
             }
-
-        } else if (v.value === "" ||
-            v.value === "sin" ||
-            v.value === "cos") {
+        } else if (v.value === "and") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            for (let i = 1; i < v.children.length; i++) {
+                tmp = interactive_text("\u2227", cur_cont,
+                    size, v.twfNode.nodeId);
+                delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                vert_shift = min(cur_shift, vert_shift);
+                if (v.children[i].value === "and" || v.children[i].value === "or" || v.children[i].value === "xor" || v.children[i].value === "alleq" || v.children[i].value === "set-" || v.children[i].value === "implic") {
+                    delta = draw_with_brackets(cur_cont, another_child,
+                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                } else {
+                    delta += v_draw(cur_cont, another_child,
+                        delta, cur_shift, size) + interletter_interval;
+                }
+            }
+        } else if (v.value === "or") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            for (let i = 1; i < v.children.length; i++) {
+                tmp = interactive_text("\u2228", cur_cont,
+                    size, v.twfNode.nodeId);
+                delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                vert_shift = min(cur_shift, vert_shift);
+                if (v.children[i].value === "and" || v.children[i].value === "or" || v.children[i].value === "xor" || v.children[i].value === "alleq" || v.children[i].value === "set-" || v.children[i].value === "implic") {
+                    delta = draw_with_brackets(cur_cont, another_child,
+                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                } else {
+                    delta += v_draw(cur_cont, another_child,
+                        delta, cur_shift, size) + interletter_interval;
+                }
+            }
+        } else if (v.value === "xor") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            for (let i = 1; i < v.children.length; i++) {
+                tmp = interactive_text("\u2295", cur_cont,
+                    size, v.twfNode.nodeId);
+                delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                vert_shift = min(cur_shift, vert_shift);
+                if (v.children[i].value === "and" || v.children[i].value === "or" || v.children[i].value === "xor" || v.children[i].value === "alleq" || v.children[i].value === "set-" || v.children[i].value === "implic") {
+                    delta = draw_with_brackets(cur_cont, another_child,
+                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                } else {
+                    delta += v_draw(cur_cont, another_child,
+                        delta, cur_shift, size) + interletter_interval;
+                }
+            }
+        } else if (v.value === "alleq") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            for (let i = 1; i < v.children.length; i++) {
+                tmp = interactive_text("\u2261", cur_cont,
+                    size, v.twfNode.nodeId);
+                delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                vert_shift = min(cur_shift, vert_shift);
+                if (v.children[i].value === "and" || v.children[i].value === "or" || v.children[i].value === "xor" || v.children[i].value === "alleq" || v.children[i].value === "set-" || v.children[i].value === "implic") {
+                    delta = draw_with_brackets(cur_cont, another_child,
+                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                } else {
+                    delta += v_draw(cur_cont, another_child,
+                        delta, cur_shift, size) + interletter_interval;
+                }
+            }
+        } else if (v.value === "set-") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            for (let i = 1; i < v.children.length; i++) {
+                tmp = interactive_text("\u2216", cur_cont,
+                    size, v.twfNode.nodeId);
+                delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                vert_shift = min(cur_shift, vert_shift);
+                if (v.children[i].value === "and" || v.children[i].value === "or" || v.children[i].value === "xor" || v.children[i].value === "alleq" || v.children[i].value === "set-" || v.children[i].value === "implic") {
+                    delta = draw_with_brackets(cur_cont, another_child,
+                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                } else {
+                    delta += v_draw(cur_cont, another_child,
+                        delta, cur_shift, size) + interletter_interval;
+                }
+            }
+        } else if (v.value === "implic") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            for (let i = 1; i < v.children.length; i++) {
+                tmp = interactive_text("\u21D2", cur_cont,
+                    size, v.twfNode.nodeId);
+                delta += draw(cur_cont, tmp, delta) + interletter_interval;
+                [another_child, cur_shift] = recPrintTree(v.children[i], size);
+                vert_shift = min(cur_shift, vert_shift);
+                if (v.children[i].value === "and" || v.children[i].value === "or" || v.children[i].value === "xor" || v.children[i].value === "alleq" || v.children[i].value === "set-" || v.children[i].value === "implic") {
+                    delta = draw_with_brackets(cur_cont, another_child,
+                        delta, cur_shift, size, v.children[i].twfNode.nodeId);
+                } else {
+                    delta += v_draw(cur_cont, another_child,
+                        delta, cur_shift, size) + interletter_interval;
+                }
+            }
+        } else if (v.value === "not") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            tmp = interactive_text("\u00AC", cur_cont, size, v.twfNode.nodeId);
+            delta += draw(cur_cont, tmp, delta) + interletter_interval;
+            if (v.children[0].value === "and" || v.children[0].value === "or" || v.children[0].value === "xor" || v.children[0].value === "alleq" || v.children[0].value === "set-" || v.children[0].value === "implic") {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+        } else if (v.value === "factorial") {
+            let first_child, another_child, cur_shift, tmp;
+            [first_child, cur_shift] = recPrintTree(v.children[0], size);
+            vert_shift = min(cur_shift, vert_shift);
+            if (v.children[0].children.length > 0) {
+                delta = draw_with_brackets(cur_cont, first_child,
+                    delta, cur_shift, size, v.children[0].twfNode.nodeId);
+            } else {
+                delta += v_draw(cur_cont, first_child,
+                    delta, cur_shift, size) + interletter_interval;
+            }
+            tmp = interactive_text("!", cur_cont, size, v.twfNode.nodeId);
+            delta += draw(cur_cont, tmp, delta) + interletter_interval;
+        } else if (v.children.length === 1) {
             let child, cur_shift, tmp;
             [child, cur_shift] = recPrintTree(v.children[0], size);
             vert_shift = min(cur_shift, vert_shift);
@@ -384,21 +568,21 @@ function PrintTree(TWF_v, init_font_size, app) {
         return [cur_cont, vert_shift];
     }
 
-    function onButtonDown(con, nodeId) {
+    function multipleSelectionHandling(con, nodeId) {
         let index = multiArr.indexOf(nodeId);
         if (index !== -1) {
+            if (multiArrCont[index].parent().hasClass("uncolored") || multiArrCont[index].parent().classes().length === 0) {
+                changeColor(multiArrCont[index], multiArrCont[index].classes()[0], "uncolored", default_text_color);
+            } else {
+                changeColor(multiArrCont[index], multiArrCont[index].classes()[0], multiArrCont[index].parent().classes()[0], getColor(multiArrCont.indexOf(multiArrCont[index].parent())));
+            }
+            setDefaultColor(index);
             multiArrCont.splice(index, 1);
             multiArr.splice(index, 1);
-            if (con.parent().hasClass("uncolored") || con.parent().classes().length === 0) {
-                changeColor(con, con.classes()[0], "uncolored", default_text_color);
-            } else {
-                changeColor(con, con.classes()[0], con.parent().classes()[0], getColor(multiArrCont.indexOf(con.parent())));
-            }
-            recolor(index);
         } else {
             multiArr.unshift(nodeId);
             multiArrCont.unshift(con);
-            recolor(0);
+            recolor(multiArr.length - 1);
             /*
             multiArr.push(nodeId);
             multiArrCont.push(con);
@@ -407,14 +591,46 @@ function PrintTree(TWF_v, init_font_size, app) {
         }
         console.log(multiArr);
 
-        let arr = []
+        let arr = [];
         if (multiArr.length !== 0) {
-            arr = window['twf-kotlin-lib'].findApplicableSubstitutionsInSelectedPlace(
-                window['twf-kotlin-lib'].structureStringToExpression(level),
+            arr = this['twf-kotlin-lib'].findApplicableSubstitutionsInSelectedPlace(
+                this['twf-kotlin-lib'].structureStringToExpression(level),
                 multiArr,
                 compiledConfiguration, true, true).toArray();
         }
-        let new_arr = []
+        let new_arr = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].resultExpression.toString() === "To get application result use argument 'withReadyApplicationResult' = 'true'()") continue;
+            new_arr.push([arr[i].originalExpressionChangingPart.toString(), arr[i].resultExpressionChangingPart.toString()])
+        }
+        MakeMenu(new_arr, arr);
+    }
+
+
+    function onePlaceSelectionHandling(con, nodeId) {
+        for (let i = 0; i < multiArr.length; i++) {
+            if (multiArrCont[i].parent().hasClass("uncolored") || multiArrCont[i].parent().classes().length === 0) {
+                changeColor(multiArrCont[i], multiArrCont[i].classes()[0], "uncolored", default_text_color);
+            } else {
+                changeColor(multiArrCont[i], multiArrCont[i].classes()[0], multiArrCont[i].parent().classes()[0], getColor(multiArrCont.indexOf(multiArrCont[i].parent())));
+            }
+            setDefaultColor(i);
+            multiArrCont.splice(i, 1);
+            multiArr.splice(i, 1);
+        }
+        multiArr.unshift(nodeId);
+        multiArrCont.unshift(con);
+        recolor(0);
+        console.log(multiArr);
+
+        let arr = [];
+        if (multiArr.length !== 0) {
+            arr = this['twf-kotlin-lib'].findApplicableSubstitutionsInSelectedPlace(
+                this['twf-kotlin-lib'].structureStringToExpression(level),
+                multiArr,
+                compiledConfiguration, true, true).toArray();
+        }
+        let new_arr = [];
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].resultExpression.toString() === "To get application result use argument 'withReadyApplicationResult' = 'true'()") continue;
             new_arr.push([arr[i].originalExpressionChangingPart.toString(), arr[i].resultExpressionChangingPart.toString()])

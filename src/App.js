@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import GameEditor from "./components/game-editor/game-editor";
 
 function App() {
-  const [start, setStart] = useState("(+(2;2))");
-  const [end, setEnd] = useState("(4)");
-  const [startInput, setStartInput] = useState("(+(2;2))");
-  const [endInput, setEndInput] = useState("(4)");
+  const [start, setStart] = useState("(and(a;or(a;b)))");
+  const [end, setEnd] = useState("(a)");
+  const [startInput, setStartInput] = useState("(and(a;or(a;b)))");
+  const [endInput, setEndInput] = useState("(a)");
 
   return (
     <div className="App">
