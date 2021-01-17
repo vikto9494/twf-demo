@@ -15,8 +15,8 @@ const { Option } = Select;
 
 function App() {
   // data
-  const defaultStart = "(+(2;+(2;*(4;5))))";
-  const defaultEnd = "(24)";
+  const defaultStart = "(and(a;or(a;b)))";
+  const defaultEnd = "(a)";
   const mathFieldSelectOptions = [
     "Logic",
     "ShortMultiplication",
