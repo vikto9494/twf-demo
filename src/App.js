@@ -1,44 +1,50 @@
+// hooks and libs
 import React, { useState } from "react";
-
+// lib components
+import { Alert, Button, Select, Switch } from "antd";
+// custom components
 import GameEditor from "./components/game-editor/game-editor";
 import MathQuillEditor from "./components/tex-editor/tex-editor";
+// utils
 import { convertMathInput } from "./utils/kotlin-lib-functions";
-import { Alert, Button, Select, Switch } from "antd";
+// styles
 import "antd/dist/antd.compact.min.css";
 import "./App.scss";
 
 const { Option } = Select;
 
 function App() {
+  // data
   const defaultStart = "(+(2;+(2;*(4;5))))";
   const defaultEnd = "(24)";
-  const [start, setStart] = useState(defaultStart);
-  const [end, setEnd] = useState(defaultEnd);
-  const [startInput, setStartInput] = useState(defaultStart);
-  const [endInput, setEndInput] = useState(defaultEnd);
-
-  // inputs
-  const [isGameMode, setIsGameMode] = useState(true);
-
-  // data
   const mathFieldSelectOptions = [
     "Logic",
     "ShortMultiplication",
     "Logarithm",
     "Trigonometry",
   ];
+  // demo task deps
+  const [start, setStart] = useState(defaultStart);
+  const [end, setEnd] = useState(defaultEnd);
   const [
     currentMathFieldSelectOption,
     setCurrentMathFieldSelectOption,
   ] = useState("Logic");
-
+  // app deps
+  const [startInput, setStartInput] = useState(defaultStart);
+  const [endInput, setEndInput] = useState(defaultEnd);
+  const [isGameMode, setIsGameMode] = useState(true);
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
 
   return (
     <div className="app">
-      <GameEditor start={start} end={end} />
+      <GameEditor
+        start={start}
+        end={end}
+        rulePacks={currentMathFieldSelectOption}
+      />
       <div className="app__inputs">
         <div className="app__input-group">
           <label>Start</label>

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 
-const GameEditor = ({ start, end }) => {
+const GameEditor = ({ start, end, rulePacks }) => {
   const cleanDocument = () => {
     document
       .getElementsByTagName("svg")
@@ -34,10 +34,11 @@ const GameEditor = ({ start, end }) => {
     let height_inner_cont = substitutionAreaHeight / 4;
     let width_inner_cont = substitutionAreaWidth / 8 * 8;
 
-    const originalExpression = start ? start : "(+(2;+(2;*(4;5))))";
-    const endExpression = end ? end : "(24)";
+    const originalExpression = start ? start : "(and(a;or(a;b)))";
+    const endExpression = end ? end : "(a)";
+    const rules = rulePacks ? rulePacks : ["Logic"];
 
-    compiledConfiguration = window['twf-kotlin-lib'].createConfigurationFromRulePacksAndParams(["Algebra", "Set"]);
+    compiledConfiguration = window['twf-kotlin-lib'].createConfigurationFromRulePacksAndParams(rules);
 
 
     let app = new SVG().addTo('body').size(window.innerWidth, window.innerHeight);
@@ -115,7 +116,7 @@ const GameEditor = ({ start, end }) => {
         let abs = (PlainPrintTree(window['twf-kotlin-lib'].structureStringToExpression(listOfValues[i][1]), substitutionSize, curCont)).x(actualShiftX + tmpWidth).y(heighContOfConts);
 
         lolkek.center(lolkek.x() + lolkek.width() / 2, heighContOfConts + abs.height() / 2);
-        arrowRight.y(lolkek.y())
+        arrowRight.y(lolkek.y());
         draw.rect(width_inner_cont, curCont.height()).radius(10)
             .fill(defaultRulesBack).x(substitutionAreaX).y(heighContOfConts);
 
