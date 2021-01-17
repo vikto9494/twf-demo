@@ -621,6 +621,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         multiArr.unshift(nodeId);
         multiArrCont.unshift(con);
         recolor(0);
+        console.log(level);
         console.log(multiArr);
 
         let arr = [];
@@ -630,6 +631,7 @@ function PrintTree(TWF_v, init_font_size, app) {
                 multiArr,
                 compiledConfiguration, true, true).toArray();
         }
+        console.log(arr);
         let new_arr = [];
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].resultExpression.toString() === "To get application result use argument 'withReadyApplicationResult' = 'true'()") continue;

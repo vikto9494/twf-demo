@@ -75,7 +75,7 @@ function App() {
           )}
         </div>
         <div className="app__input-group">
-          <label>End</label>
+          <label>Target</label>
           <MathQuillEditor
             startingLatexExpression={convertMathInput(
               "STRUCTURE_STRING",
@@ -101,7 +101,7 @@ function App() {
           )}
         </div>
         <div className="app__input-group">
-          <label>Math Field</label>
+          <label>Subject Area</label>
           <Select
             defaultValue={mathFieldSelectOptions[0]}
             onChange={(value) => {
@@ -131,7 +131,7 @@ function App() {
             setEnd(endInput);
           }}
         >
-          Create task!
+          Change Task!
         </Button>
       </div>
     </div>

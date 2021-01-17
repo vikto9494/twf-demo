@@ -36,7 +36,9 @@ const GameEditor = ({ start, end, rulePacks }) => {
 
     const originalExpression = start ? start : "(and(a;or(a;b)))";
     const endExpression = end ? end : "(a)";
-    const rules = rulePacks ? rulePacks : ["Logic"];
+    const rules = rulePacks ? [rulePacks] : ["Logic"];
+    console.log(rulePacks);
+    console.log(rules);
 
     compiledConfiguration = window['twf-kotlin-lib'].createConfigurationFromRulePacksAndParams(rules);
 
