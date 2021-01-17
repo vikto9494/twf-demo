@@ -11,25 +11,35 @@ const GameEditor = ({ start, end, rulePacks }) => {
 
   useEffect(() => {
     cleanDocument();
-    const topButtonsLineHeight = 80;
-    const paddingFromTopButtonsLine = 80;
-    const centralExpressionSize = 80;
+    console.log(window.innerWidth);
+    console.log(window.innerHeight);
+    const topButtonsLineHeight = 0;
+    const paddingFromTopButtonsLine = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
+    const centralExpressionSize = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
 
-    const substitutionAreaPadding = 100;
+    const substitutionAreaPadding = (window.innerWidth > 1200) ? 120 : window.innerWidth / 10;
     const substitutionAreaX = substitutionAreaPadding;
     const substitutionAreaY = topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize + substitutionAreaPadding;
     const substitutionAreaWidth = window.innerWidth - 2 * substitutionAreaPadding;
     const substitutionAreaHeight = window.innerHeight - (topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize) - 2 * substitutionAreaPadding;
-    const substitutionSize = 50;
+    const substitutionSize = (window.innerWidth > 1000) ? 50 : window.innerWidth / 20;
+    const explanationsSize = (window.innerWidth > 900) ? 30 : window.innerWidth / 30;
 
-    const substitutionAreaInternalPadding = 5;
-    const substitutionPaddingBetweenParts = 8;
+    const substitutionAreaInternalPadding = window.innerWidth / 200;
+    const substitutionPaddingBetweenParts = window.innerWidth / 150;
+
+    const winLabelAreaY = topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize + substitutionAreaPadding / 2;
+    const winLabelTextSize = (window.innerWidth > 800) ? 40 : window.innerWidth / 20;
+    const winLabelHeight = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
+    const winLabelWidth = window.innerWidth - 4 * substitutionAreaPadding;
 
     const backgroundColour = "#efefef";
     const defaultTextColor = "#254b25";
     const defaultRulesBack = "#cfd8dc";
     const highlightedRulesBack = '#bfc8cc';
     const selectedRuleBack = '#ffbf00';
+    const winTextColor = "#254b25";
+    const winLabelColor = "#59df5e";
 
     let height_inner_cont = substitutionAreaHeight / 4;
     let width_inner_cont = substitutionAreaWidth / 8 * 8;
@@ -57,8 +67,37 @@ const GameEditor = ({ start, end, rulePacks }) => {
       let NewTreeRoot = window['twf-kotlin-lib'].structureStringToExpression(originalExpression);
       let expr = PrintTree(NewTreeRoot, centralExpressionSize, app);
       expr.center((window.innerWidth) / 2, topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize / 2);
+
+      if (!CheckAndHandleWin (originalExpression, expr.height() - centralExpressionSize)) {
+        app.text("Click a part of the expression to transform it").font({
+          size: explanationsSize,
+          family: "u2000",
+          fill: "#000000"
+        }).center((window.innerWidth) / 2, substitutionAreaY + explanationsSize);
+      }
     }
 
+
+    function CheckAndHandleWin(currentExpression, shift) {
+      let y = (shift < 50) ? winLabelAreaY : window.innerHeight / 5 * 2;
+      if (currentExpression === endExpression) {
+//        if (window['twf-kotlin-lib'].compareWithoutSubstitutions(currentExpression, endExpression)) {
+        app.rect(winLabelWidth, winLabelHeight)
+            .fill(winLabelColor).radius(10)
+            .center((window.innerWidth) / 2, y);
+        app.text("Congratulations! You win!").font({
+          size: winLabelTextSize,
+          family: "u2000",
+          fill: winTextColor
+        }).center((window.innerWidth) / 2, y);
+        return true;
+      } else {
+        app.rect(winLabelWidth, winLabelHeight)
+            .fill(backgroundColour).radius(10)
+            .center((window.innerWidth) / 2, y);
+        return false;
+      }
+    }
 
     // function wheel(event) {
     //   let delta;
@@ -174,13 +213,8 @@ const GameEditor = ({ start, end, rulePacks }) => {
         }
         if (index !== -1) {
           let currentExpression = arrSubs[index].resultExpression.toString();
-          if (currentExpression === endExpression) {
-            cleanMenuOfLevel('win');
-            return;
-          }
           StartLevel(currentExpression);
         }
-        if (f) cleanMenuOfLevel('main');
       }
 
 

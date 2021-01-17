@@ -52,14 +52,12 @@ function App() {
             startingLatexExpression={convertMathInput(
               "STRUCTURE_STRING",
               "TEX",
-              defaultStart
+                startInput !== "" ? startInput : "()"
             )}
             width="300px"
             updateValue={(value) => {
               try {
-                setStartInput(
-                  convertMathInput("TEX", "STRUCTURE_STRING", value)
-                );
+                setStartInput(value !== "" ? convertMathInput("TEX", "STRUCTURE_STRING", value) : "()");
                 setStartError(null);
               } catch (e) {
                 setStartError(e.message);
@@ -80,12 +78,12 @@ function App() {
             startingLatexExpression={convertMathInput(
               "STRUCTURE_STRING",
               "TEX",
-              endInput
+              endInput !== "" ? endInput : "()"
             )}
             width="300px"
             updateValue={(value) => {
               try {
-                setEndInput(convertMathInput("TEX", "STRUCTURE_STRING", value));
+                setEndInput(value !== "" ? convertMathInput("TEX", "STRUCTURE_STRING", value) : "()");
                 setEndError(null);
               } catch (e) {
                 setEndError(e.message);
