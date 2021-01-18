@@ -34,17 +34,18 @@ function App() {
   const [startInput, setStartInput] = useState(defaultStart);
   const [endInput, setEndInput] = useState(defaultEnd);
   const [isGameMode, setIsGameMode] = useState(true);
+  const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
+  // local utils
+  const rerenderTexSolutionInput = async () => {
+    await setTexSolutionRerendered(false);
+    await setTexSolutionRerendered(true);
+  };
 
   return (
     <div className="app">
-      <GameEditor
-        start={start}
-        end={end}
-        rulePacks={currentMathFieldSelectOption}
-      />
       <div className="app__inputs">
         <div className="app__input-group">
           <label>Start</label>
@@ -52,12 +53,16 @@ function App() {
             startingLatexExpression={convertMathInput(
               "STRUCTURE_STRING",
               "TEX",
-                startInput !== "" ? startInput : "()"
+              startInput !== "" ? startInput : "()"
             )}
             width="300px"
             updateValue={(value) => {
               try {
-                setStartInput(value !== "" ? convertMathInput("TEX", "STRUCTURE_STRING", value) : "()");
+                setStartInput(
+                  value !== ""
+                    ? convertMathInput("TEX", "STRUCTURE_STRING", value)
+                    : "()"
+                );
                 setStartError(null);
               } catch (e) {
                 setStartError(e.message);
@@ -83,7 +88,11 @@ function App() {
             width="300px"
             updateValue={(value) => {
               try {
-                setEndInput(value !== "" ? convertMathInput("TEX", "STRUCTURE_STRING", value) : "()");
+                setEndInput(
+                  value !== ""
+                    ? convertMathInput("TEX", "STRUCTURE_STRING", value)
+                    : "()"
+                );
                 setEndError(null);
               } catch (e) {
                 setEndError(e.message);
@@ -124,14 +133,49 @@ function App() {
           />
         </div>
         <Button
-          onClick={() => {
-            setStart(startInput);
-            setEnd(endInput);
+          onClick={async () => {
+            await setStart(startInput);
+            await setEnd(endInput);
+            await rerenderTexSolutionInput();
           }}
         >
           Change Task!
         </Button>
       </div>
+      {isGameMode && (
+        <GameEditor
+          start={start}
+          end={end}
+          rulePacks={currentMathFieldSelectOption}
+        />
+      )}
+      {!isGameMode && texSolutionRerendered && (
+        <div className="app__tex-solution-block">
+          <h1>Your Solution</h1>
+          <MathQuillEditor
+            startingLatexExpression={
+              convertMathInput(
+                "STRUCTURE_STRING",
+                "TEX",
+                startInput !== "" ? startInput : "()"
+              ) +
+              "=...=" +
+              convertMathInput(
+                "STRUCTURE_STRING",
+                "TEX",
+                endInput !== "" ? endInput : "()"
+              )
+            }
+          />
+          <Button
+            style={{
+              marginTop: "10px",
+            }}
+          >
+            Check
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
