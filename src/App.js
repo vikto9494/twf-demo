@@ -55,6 +55,7 @@ function App() {
           <div className="app__tex-input">
             <label>Start</label>
             <MathQuillEditor
+              showOperationTab={false}
               startingLatexExpression={startTex}
               width={window.innerWidth >= 600 ? "300px" : "250px"}
               updateValue={(value) => {
@@ -65,6 +66,7 @@ function App() {
           <div className="app__tex-input">
             <label>Target</label>
             <MathQuillEditor
+              showOperationTab={false}
               startingLatexExpression={endTex}
               width={window.innerWidth >= 600 ? "300px" : "250px"}
               updateValue={(value) => {

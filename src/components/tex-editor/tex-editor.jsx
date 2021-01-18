@@ -6,7 +6,11 @@ import jQuery from "jquery";
 //@ts-ignore
 import MQ from "../../local-libs/math-quill";
 import "../../local-libs/math-quill/mathquill.css";
+import piIcon from "../../assets/math-symbols/pi.svg";
+import squareIcon from "../../assets/math-symbols/square-root.svg";
+import sumIcon from "../../assets/math-symbols/sum.svg";
 // style
+import "./tex-editor.scss";
 // import "./math-quill-editor.scss";
 // @ts-ignore
 window.jQuery = jQuery;
@@ -115,33 +119,33 @@ const MathQuillEditor = ({
     }
   }, []);
 
-  // const actions = [
-  //   {
-  //     iconUrl: require("../../assets/math-symbols/sum.svg"),
-  //     latexCmd: "\\sum",
-  //   },
-  //   {
-  //     iconUrl: require("../../assets/math-symbols/square-root.svg"),
-  //     latexCmd: "\\sqrt",
-  //   },
-  //   {
-  //     iconUrl: require("../../assets/math-symbols/pi.svg"),
-  //     latexCmd: "\\pi",
-  //   },
-  // ];
+  const actions = [
+    {
+      iconUrl: sumIcon,
+      latexCmd: "\\sum",
+    },
+    {
+      iconUrl: squareIcon,
+      latexCmd: "\\sqrt",
+    },
+    {
+      iconUrl: piIcon,
+      latexCmd: "\\pi",
+    },
+  ];
 
   return (
     <div className="math-quill-editor" style={{ width }}>
       {showOperationTab && (
         <div className="math-quill-editor__operations">
-          {/*{actions.map((action, i) => {*/}
-          {/*  const { iconUrl, latexCmd } = action;*/}
-          {/*  return (*/}
-          {/*    <div key={i} className="math-quill-editor__operation">*/}
-          {/*      <img src={iconUrl} onClick={() => editor.cmd(latexCmd)} />*/}
-          {/*    </div>*/}
-          {/*  );*/}
-          {/*})}*/}
+          {actions.map((action, i) => {
+            const { iconUrl, latexCmd } = action;
+            return (
+              <div key={i} className="math-quill-editor__operation">
+                <img src={iconUrl} onClick={() => editor.cmd(latexCmd)} />
+              </div>
+            );
+          })}
         </div>
       )}
       <span

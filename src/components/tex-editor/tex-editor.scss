@@ -1,0 +1,35 @@
+.math-quill-editor {
+  min-width: 17rem;
+  &__operations {
+    display: flex;
+    //background-color: $color-primary-light;
+    padding: 10px;
+    //border: 1px solid $color-primary-dark;
+    border-bottom: none;
+    background-color: gray;
+  }
+  &__operation > img {
+    width: 15px;
+    margin-right: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__main-input {
+    margin-top: -0.3rem;
+    .mq-root-block {
+      overflow-x: scroll;
+      &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 2px;
+        height: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
