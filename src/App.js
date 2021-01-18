@@ -51,80 +51,84 @@ function App() {
   return (
     <div className="app">
       <div className="app__inputs">
-        <div className="app__input-group">
-          <label>Start</label>
-          <MathQuillEditor
-            startingLatexExpression={startTex}
-            width="300px"
-            updateValue={(value) => {
-              setStartTex(value);
-            }}
-          />
+        <div className="app__tex-inputs">
+          <div className="app__tex-input">
+            <label>Start</label>
+            <MathQuillEditor
+              startingLatexExpression={startTex}
+              width={window.innerWidth >= 600 ? "300px" : "250px"}
+              updateValue={(value) => {
+                setStartTex(value);
+              }}
+            />
+          </div>
+          <div className="app__tex-input">
+            <label>Target</label>
+            <MathQuillEditor
+              startingLatexExpression={endTex}
+              width={window.innerWidth >= 600 ? "300px" : "250px"}
+              updateValue={(value) => {
+                setEndTex(value);
+              }}
+            />
+          </div>
         </div>
-        <div className="app__input-group">
-          <label>Target</label>
-          <MathQuillEditor
-            startingLatexExpression={endTex}
-            width="300px"
-            updateValue={(value) => {
-              setEndTex(value);
+        <div className="app__add-inputs">
+          <div className="app__input-group">
+            <label>Subject Area</label>
+            <Select
+              defaultValue={mathFieldSelectOptions[0]}
+              onChange={(value) => {
+                setCurrentMathFieldSelectOption(value);
+              }}
+              style={{ width: "150px" }}
+            >
+              {mathFieldSelectOptions.map((option) => (
+                <Option key={option} value={option}>
+                  {option}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <div className="app__input-group">
+            <label>Game mode</label>
+            <Switch
+              checked={isGameMode}
+              onChange={(value) => {
+                setIsGameMode(value);
+              }}
+            />
+          </div>
+          <Button
+            onClick={async () => {
+              try {
+                setStartSS(
+                  startTex !== ""
+                    ? convertMathInput("TEX", "STRUCTURE_STRING", startTex)
+                    : "()"
+                );
+                setStartError(null);
+              } catch (e) {
+                setStartError(e.message);
+              }
+              try {
+                setEndSS(
+                  endTex !== ""
+                    ? convertMathInput("TEX", "STRUCTURE_STRING", endTex)
+                    : "()"
+                );
+                setEndError(null);
+              } catch (e) {
+                setEndError(e.message);
+              }
+              if (!startError && !endError) {
+                await rerenderTexSolutionInput();
+              }
             }}
-          />
-        </div>
-        <div className="app__input-group">
-          <label>Subject Area</label>
-          <Select
-            defaultValue={mathFieldSelectOptions[0]}
-            onChange={(value) => {
-              setCurrentMathFieldSelectOption(value);
-            }}
-            style={{ width: "150px" }}
           >
-            {mathFieldSelectOptions.map((option) => (
-              <Option key={option} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
+            Change Task!
+          </Button>
         </div>
-        <div className="app__input-group">
-          <label>Game mode</label>
-          <Switch
-            checked={isGameMode}
-            onChange={(value) => {
-              setIsGameMode(value);
-            }}
-          />
-        </div>
-        <Button
-          onClick={async () => {
-            try {
-              setStartSS(
-                startTex !== ""
-                  ? convertMathInput("TEX", "STRUCTURE_STRING", startTex)
-                  : "()"
-              );
-              setStartError(null);
-            } catch (e) {
-              setStartError(e.message);
-            }
-            try {
-              setEndSS(
-                endTex !== ""
-                  ? convertMathInput("TEX", "STRUCTURE_STRING", endTex)
-                  : "()"
-              );
-              setEndError(null);
-            } catch (e) {
-              setEndError(e.message);
-            }
-            if (!startError && !endError) {
-              await rerenderTexSolutionInput();
-            }
-          }}
-        >
-          Change Task!
-        </Button>
       </div>
       <div className="app__errors">
         {startError && (
