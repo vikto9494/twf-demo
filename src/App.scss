@@ -56,12 +56,19 @@
   &__errors {
     display: flex;
     margin-bottom: 10px;
+    margin-left: 0 !important;
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
   }
 }
 
 .alert-msg {
-  max-width: 300px;
-  margin: 10px 10px 0 10px
+  max-width: 350px;
+  margin: 10px 10px 0 0;
+  @media (max-width: 600px) {
+    max-width: 320px;
+  }
 }
 
 .u-flex {
