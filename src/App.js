@@ -6,7 +6,7 @@ import { Alert, Button, Select, Switch } from "antd";
 import GameEditor from "./components/game-editor/game-editor";
 import MathQuillEditor from "./components/tex-editor/tex-editor";
 // utils
-import { convertMathInput } from "./utils/kotlin-lib-functions";
+import { checkTex, convertMathInput } from "./utils/kotlin-lib-functions";
 // styles
 import "antd/dist/antd.compact.min.css";
 import "./App.scss";
@@ -39,9 +39,12 @@ function App() {
   );
   const [isGameMode, setIsGameMode] = useState(true);
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
+  const [solutionInTex, setSolutionInTex] = useState("");
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
+  const [solutionError, setSolutionError] = useState(null);
+  const [successMsg, setSuccessMsg] = useState(null);
   // local utils
   const rerenderTexSolutionInput = async () => {
     await setTexSolutionRerendered(false);
@@ -126,6 +129,8 @@ function App() {
               if (!startError && !endError) {
                 await rerenderTexSolutionInput();
               }
+              setSuccessMsg(null);
+              setSolutionError(null);
             }}
           >
             Change Task!
@@ -160,10 +165,33 @@ function App() {
           <h1>Your Solution</h1>
           <MathQuillEditor
             startingLatexExpression={startTex + "=...=" + endTex}
+            updateValue={(value) => {
+              setSolutionInTex(value);
+            }}
           />
+          {(successMsg || solutionError) && (
+            <Alert
+              message={solutionError ? solutionError : successMsg}
+              className="alert-msg"
+              type={solutionError ? "error" : "success"}
+              style={{ marginRight: "0" }}
+            />
+          )}
           <Button
             style={{
               marginTop: "10px",
+            }}
+            onClick={() => {
+              const res = checkTex(solutionInTex, startSS, endSS, [
+                currentMathFieldSelectOption,
+              ]);
+              if (res.errorMessage) {
+                setSuccessMsg(null);
+                setSolutionError(res.errorMessage);
+              } else {
+                setSolutionError(null);
+                setSuccessMsg("Correct!");
+              }
             }}
           >
             Check
