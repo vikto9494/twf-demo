@@ -40,6 +40,9 @@ function App() {
   const [isGameMode, setIsGameMode] = useState(true);
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   const [solutionInTex, setSolutionInTex] = useState("");
+  const [solutionStartingTex, setSolutionStartingTex] = useState(
+    startTex + "=...=" + endTex
+  );
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
@@ -164,7 +167,7 @@ function App() {
         <div className="app__tex-solution-block">
           <h1>Your Solution</h1>
           <MathQuillEditor
-            startingLatexExpression={startTex + "=...=" + endTex}
+            startingLatexExpression={solutionStartingTex}
             updateValue={(value) => {
               setSolutionInTex(value);
             }}
@@ -181,7 +184,7 @@ function App() {
             style={{
               marginTop: "10px",
             }}
-            onClick={() => {
+            onClick={async () => {
               const res = checkTex(solutionInTex, startSS, endSS, [
                 currentMathFieldSelectOption,
               ]);
@@ -192,6 +195,8 @@ function App() {
                 setSolutionError(null);
                 setSuccessMsg("Correct!");
               }
+              setSolutionStartingTex(res.validatedSolution);
+              await rerenderTexSolutionInput();
             }}
           >
             Check
