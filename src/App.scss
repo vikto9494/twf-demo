@@ -23,4 +23,22 @@
     align-items: center;
     margin-top: 50px;
   }
+  &__errors {
+    display: flex;
+    margin-bottom: 10px;
+  }
 }
+
+.alert-msg {
+  max-width: 300px;
+  margin: 10px 10px 0 10px
+}
+
+.u-flex {
+  display: flex;
+}
+
+.u-mr-sm {
+  margin-right: 10px;
+}
+

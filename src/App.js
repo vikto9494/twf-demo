@@ -24,15 +24,19 @@ function App() {
     "Trigonometry",
   ];
   // demo task deps
-  const [start, setStart] = useState(defaultStart);
-  const [end, setEnd] = useState(defaultEnd);
+  const [startSS, setStartSS] = useState(defaultStart);
+  const [endSS, setEndSS] = useState(defaultEnd);
   const [
     currentMathFieldSelectOption,
     setCurrentMathFieldSelectOption,
   ] = useState("Logic");
   // app deps
-  const [startInput, setStartInput] = useState(defaultStart);
-  const [endInput, setEndInput] = useState(defaultEnd);
+  const [startTex, setStartTex] = useState(
+    convertMathInput("STRUCTURE_STRING", "TEX", defaultStart)
+  );
+  const [endTex, setEndTex] = useState(
+    convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
+  );
   const [isGameMode, setIsGameMode] = useState(true);
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   // errors
@@ -50,62 +54,22 @@ function App() {
         <div className="app__input-group">
           <label>Start</label>
           <MathQuillEditor
-            startingLatexExpression={convertMathInput(
-              "STRUCTURE_STRING",
-              "TEX",
-              startInput !== "" ? startInput : "()"
-            )}
+            startingLatexExpression={startTex}
             width="300px"
             updateValue={(value) => {
-              try {
-                setStartInput(
-                  value !== ""
-                    ? convertMathInput("TEX", "STRUCTURE_STRING", value)
-                    : "()"
-                );
-                setStartError(null);
-              } catch (e) {
-                setStartError(e.message);
-              }
+              setStartTex(value);
             }}
           />
-          {startError && (
-            <Alert
-              message={startError}
-              type="error"
-              style={{ maxWidth: "300px", marginTop: "15px" }}
-            />
-          )}
         </div>
         <div className="app__input-group">
           <label>Target</label>
           <MathQuillEditor
-            startingLatexExpression={convertMathInput(
-              "STRUCTURE_STRING",
-              "TEX",
-              endInput !== "" ? endInput : "()"
-            )}
+            startingLatexExpression={endTex}
             width="300px"
             updateValue={(value) => {
-              try {
-                setEndInput(
-                  value !== ""
-                    ? convertMathInput("TEX", "STRUCTURE_STRING", value)
-                    : "()"
-                );
-                setEndError(null);
-              } catch (e) {
-                setEndError(e.message);
-              }
+              setEndTex(value);
             }}
           />
-          {endError && (
-            <Alert
-              message={endError}
-              type="error"
-              style={{ maxWidth: "300px", marginTop: "15px" }}
-            />
-          )}
         </div>
         <div className="app__input-group">
           <label>Subject Area</label>
@@ -134,18 +98,54 @@ function App() {
         </div>
         <Button
           onClick={async () => {
-            await setStart(startInput);
-            await setEnd(endInput);
-            await rerenderTexSolutionInput();
+            try {
+              setStartSS(
+                startTex !== ""
+                  ? convertMathInput("TEX", "STRUCTURE_STRING", startTex)
+                  : "()"
+              );
+              setStartError(null);
+            } catch (e) {
+              setStartError(e.message);
+            }
+            try {
+              setEndSS(
+                endTex !== ""
+                  ? convertMathInput("TEX", "STRUCTURE_STRING", endTex)
+                  : "()"
+              );
+              setEndError(null);
+            } catch (e) {
+              setEndError(e.message);
+            }
+            if (!startError && !endError) {
+              await rerenderTexSolutionInput();
+            }
           }}
         >
           Change Task!
         </Button>
       </div>
+      <div className="app__errors">
+        {startError && (
+          <Alert
+            message={"Error in start expression! " + startError}
+            className="alert-msg"
+            type="error"
+          />
+        )}
+        {endError && (
+          <Alert
+            message={"Error in target expression! " + endError}
+            className="alert-msg"
+            type="error"
+          />
+        )}
+      </div>
       {isGameMode && (
         <GameEditor
-          start={start}
-          end={end}
+          start={startSS}
+          end={endSS}
           rulePacks={currentMathFieldSelectOption}
         />
       )}
@@ -153,19 +153,7 @@ function App() {
         <div className="app__tex-solution-block">
           <h1>Your Solution</h1>
           <MathQuillEditor
-            startingLatexExpression={
-              convertMathInput(
-                "STRUCTURE_STRING",
-                "TEX",
-                startInput !== "" ? startInput : "()"
-              ) +
-              "=...=" +
-              convertMathInput(
-                "STRUCTURE_STRING",
-                "TEX",
-                endInput !== "" ? endInput : "()"
-              )
-            }
+            startingLatexExpression={startTex + "=...=" + endTex}
           />
           <Button
             style={{
