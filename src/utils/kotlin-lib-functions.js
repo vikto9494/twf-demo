@@ -61,7 +61,7 @@ export const getErrorFromMathInput = (format, expression) => {
     : null;
 };
 
-export const checkTex = (fullExpression, start, end) => {
+export const checkTex = (fullExpression, start, end, rulePacks) => {
   const wellKnownFunctionsString = `
     ;;;0;;;
     ;;;1;;;
@@ -131,12 +131,12 @@ export const checkTex = (fullExpression, start, end) => {
     end,
     undefined,
     undefined,
-    wellKnownFunctionsString,
+      undefined,
     undefined,
     undefined,
     undefined,
-    expressionTransformationRulesString,
-    undefined,
+      undefined,
+    rulePacks,
     undefined,
     undefined,
     undefined,
