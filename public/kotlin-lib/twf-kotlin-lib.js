@@ -28046,7 +28046,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         var endIndex = index.first;
         result.append_gw00v9$(string.substring(startIndex, endIndex));
         currentPosition = index.first + index.second.length | 0;
-        currentPosition = skipFromRemainingExpressionWhile(dropPerformedTexBrushingInternal$lambda, string, currentPosition) + 1 | 0;
+        currentPosition = skipFromRemainingExpressionWhile(dropPerformedTexBrushingInternal$lambda, string, currentPosition) + 2 | 0;
         var newCurrentPosition = skipFromRemainingExpressionWhileClosingBracketNotFound('}', '{', string, currentPosition);
         var startIndex_0 = currentPosition;
         result.append_gw00v9$(string.substring(startIndex_0, newCurrentPosition));

@@ -132,6 +132,31 @@ const MathQuillEditor = ({
       iconUrl: piIcon,
       latexCmd: "\\pi",
     },
+      // TODO: find icons and finish
+    // {
+    //   iconUrl: andIcon,
+    //   latexCmd: "\\land",
+    // },
+    // {
+    //   iconUrl: orIcon,
+    //   latexCmd: "\\lor",
+    // },
+    // {
+    //   iconUrl: oplusIcon,
+    //   latexCmd: "\\oplus",
+    // },
+    // {
+    //   iconUrl: negIcon,
+    //   latexCmd: "\\neg",
+    // },
+    // {
+    //   iconUrl: impliesIcon,
+    //   latexCmd: "\\implies",
+    // },
+    // {
+    //   iconUrl: setminusIcon,
+    //   latexCmd: "\\setminus",
+    // },
   ];
 
   return (
