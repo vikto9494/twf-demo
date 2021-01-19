@@ -11,8 +11,6 @@ const GameEditor = ({start, end, rulePacks}) => {
 
     useEffect(() => {
         cleanDocument();
-        console.log(window.innerWidth);
-        console.log(window.innerHeight);
         const topButtonsLineHeight = 0;
         const paddingFromTopButtonsLine = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
         const centralExpressionSize = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
@@ -33,7 +31,8 @@ const GameEditor = ({start, end, rulePacks}) => {
         const winLabelHeight = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
         const winLabelWidth = window.innerWidth - 4 * substitutionAreaPadding;
 
-        const backgroundColour = "#efefef";
+        const backgroundColour = "#ffffff";
+//        const backgroundColour = "#efefef";
         const defaultTextColor = "#254b25";
         const defaultRulesBack = "#cfd8dc";
         const highlightedRulesBack = '#bfc8cc';
@@ -50,16 +49,17 @@ const GameEditor = ({start, end, rulePacks}) => {
 
         compiledConfiguration = window['twf-kotlin-lib'].createConfigurationFromRulePacksAndParams(rules);
 
+        const gameHeight = window.innerHeight - parseFloat(getComputedStyle(document.querySelector('.app__inputs')).height.slice(0, -2));
 
-        let app = new SVG().addTo('body').size(window.innerWidth, window.innerHeight);
+        let app = new SVG().addTo('body').size(window.innerWidth, gameHeight);
 
         StartLevel(originalExpression);
 
 
         function StartLevel(originalExpression) {
             init(compiledConfiguration, originalExpression, PrintSubstitutions, false, []);
-            app.viewbox(0, 0, window.innerWidth, window.innerHeight);
-            app.rect(window.innerWidth, window.innerHeight).fill(backgroundColour);
+            app.viewbox(0, 0, window.innerWidth, gameHeight);
+            app.rect(window.innerWidth, gameHeight).fill(backgroundColour);
 
             let NewTreeRoot = window['twf-kotlin-lib'].structureStringToExpression(originalExpression);
             let expr = PrintTree(NewTreeRoot, centralExpressionSize, app);
@@ -83,7 +83,7 @@ const GameEditor = ({start, end, rulePacks}) => {
          * @return {boolean}
          */
         function CheckAndHandleWin(currentExpression, shift) {
-            let y = (shift < 50) ? winLabelAreaY : window.innerHeight / 5 * 2;
+            let y = (shift < 50) ? winLabelAreaY : gameHeight / 5 * 2;
             if (currentExpression === endExpression) {
 //        if (window['twf-kotlin-lib'].compareWithoutSubstitutions(currentExpression, endExpression)) {
                 app.rect(winLabelWidth, winLabelHeight)

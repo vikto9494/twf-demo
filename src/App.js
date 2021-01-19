@@ -14,6 +14,15 @@ import "./App.scss";
 const { Option } = Select;
 
 function App() {
+    // local utils
+    const rerenderTexSolutionInput = async () => {
+        await setTexSolutionRerendered(false);
+        await setTexSolutionRerendered(true);
+    };
+    const formSolutionStartingTex = () => {
+        return startTex + "=...=" + endTex;
+    };
+
   // data
   const defaultStart = "(and(a;or(a;b)))";
   const defaultEnd = "(a)";
@@ -41,40 +50,45 @@ function App() {
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   const [solutionInTex, setSolutionInTex] = useState("");
   const [solutionStartingTex, setSolutionStartingTex] = useState(
-    startTex + "=...=" + endTex
+      formSolutionStartingTex()
   );
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
   const [solutionError, setSolutionError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
-  // local utils
-  const rerenderTexSolutionInput = async () => {
-    await setTexSolutionRerendered(false);
-    await setTexSolutionRerendered(true);
-  };
+
+    const rerenderGameEditor = async () => {
+        await setIsGameMode(false);
+        await setIsGameMode(true);
+    };
+
+    const reverseGameMode = async () => {
+        await setIsGameMode(prevState => !prevState)
+        await setIsGameMode(prevState => !prevState)
+    };
 
   return (
     <div className="app">
       <div className="app__inputs">
         <div className="app__tex-inputs">
           <div className="app__tex-input">
-            <label>Start</label>
+            <label>Prove that </label>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={startTex}
-              width={window.innerWidth >= 600 ? "300px" : "250px"}
+              width={window.innerWidth >= 600 ? "300px" : "120px"}
               updateValue={(value) => {
                 setStartTex(value);
               }}
             />
           </div>
           <div className="app__tex-input">
-            <label>Target</label>
+            <label>equals</label>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={endTex}
-              width={window.innerWidth >= 600 ? "300px" : "250px"}
+              width={window.innerWidth >= 600 ? "300px" : "120px"}
               updateValue={(value) => {
                 setEndTex(value);
               }}
@@ -110,21 +124,13 @@ function App() {
           <Button
             onClick={async () => {
               try {
-                setStartSS(
-                  startTex !== ""
-                    ? convertMathInput("TEX", "STRUCTURE_STRING", startTex)
-                    : "()"
-                );
+                setStartSS(convertMathInput("TEX", "STRUCTURE_STRING", startTex));
                 setStartError(null);
               } catch (e) {
                 setStartError(e.message);
               }
               try {
-                setEndSS(
-                  endTex !== ""
-                    ? convertMathInput("TEX", "STRUCTURE_STRING", endTex)
-                    : "()"
-                );
+                setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", endTex));
                 setEndError(null);
               } catch (e) {
                 setEndError(e.message);
@@ -134,6 +140,9 @@ function App() {
               }
               setSuccessMsg(null);
               setSolutionError(null);
+              setSolutionStartingTex(formSolutionStartingTex());
+              await reverseGameMode();
+              await rerenderTexSolutionInput();
             }}
           >
             Change Task!
@@ -165,13 +174,14 @@ function App() {
       )}
       {!isGameMode && texSolutionRerendered && (
         <div className="app__tex-solution-block">
-          <h1>Your Solution</h1>
+          <h1>Write solution instead of dots</h1>
           <MathQuillEditor
             startingLatexExpression={solutionStartingTex}
             updateValue={(value) => {
               setSolutionInTex(value);
             }}
             big={true}
+            width={"600px"}
           />
           {(successMsg || solutionError) && (
             <Alert
@@ -194,7 +204,7 @@ function App() {
                 setSolutionError(res.errorMessage);
               } else {
                 setSolutionError(null);
-                setSuccessMsg("Correct!");
+                setSuccessMsg("Congratulations! Correct solution!");
               }
               setSolutionStartingTex(res.validatedSolution);
               await rerenderTexSolutionInput();
