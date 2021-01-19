@@ -1,6 +1,9 @@
 .math-quill-editor {
   min-width: 17rem;
-  font-size: 30px;
+  font-size: 15px;
+  &--big{
+    font-size: 30px;
+  }
   &__operations {
     display: flex;
     //background-color: $color-primary-light;

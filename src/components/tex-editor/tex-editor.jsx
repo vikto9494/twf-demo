@@ -27,6 +27,7 @@ const MathQuillEditor = ({
   updateValue,
   isInvalid,
   onBlur,
+  big = false,
 }) => {
   if (inputRef && inputRef.current) {
     inputRef.current.style.display = "none";
@@ -132,7 +133,7 @@ const MathQuillEditor = ({
       iconUrl: piIcon,
       latexCmd: "\\pi",
     },
-      // TODO: find icons and finish
+    // TODO: find icons and finish
     // {
     //   iconUrl: andIcon,
     //   latexCmd: "\\land",
@@ -160,7 +161,10 @@ const MathQuillEditor = ({
   ];
 
   return (
-    <div className="math-quill-editor" style={{ width }}>
+    <div
+      className={`math-quill-editor ${big ? "math-quill-editor--big" : ""}`}
+      style={{ width }}
+    >
       {showOperationTab && (
         <div className="math-quill-editor__operations">
           {actions.map((action, i) => {

@@ -171,6 +171,7 @@ function App() {
             updateValue={(value) => {
               setSolutionInTex(value);
             }}
+            big={true}
           />
           {(successMsg || solutionError) && (
             <Alert
