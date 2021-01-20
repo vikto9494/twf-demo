@@ -142,22 +142,22 @@ function App() {
       <div className="app__inputs">
         <div className="app__tex-inputs">
           <div className="app__tex-input">
-            <label>Prove that </label>
+            <h2>Prove that</h2>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={startTex}
-              width={window.innerWidth >= 600 ? "300px" : "120px"}
+              width={window.innerWidth / 20}
               updateValue={(value) => {
                 setStartTex(value);
               }}
             />
           </div>
           <div className="app__tex-input">
-            <label>equals</label>
+            <h2>equals</h2>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={endTex}
-              width={window.innerWidth >= 600 ? "300px" : "120px"}
+              width={window.innerWidth / 20}
               updateValue={(value) => {
                 setEndTex(value);
               }}
