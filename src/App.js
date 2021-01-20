@@ -74,6 +74,7 @@ function App() {
   const [endTex, setEndTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
+  console.log(!modeUrl || modeUrl === "play");
   const [isGameMode, setIsGameMode] = useState(!modeUrl || modeUrl === "play");
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   const [solutionInTex, setSolutionInTex] = useState("");
@@ -108,7 +109,7 @@ function App() {
     if (!isError) {
       history.push(
         `/?` +
-          `modeUrl=${isGameMode ? "play" : "solve"}` +
+          `mode=${isGameMode ? "play" : "solve"}` +
           `&originalExpression=${startSSConverted}` +
           `&endExpression=${endSSConverted}` +
           `&rulePack=${currentRulePack}` +
