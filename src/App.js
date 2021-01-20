@@ -232,14 +232,33 @@ function App() {
               style={{ marginRight: "0" }}
             />
           )}
-          <Button
-            onClick={onCheckTexSolutionInput}
-            style={{
-              marginTop: "10px",
-            }}
-          >
-            Check
-          </Button>
+          <div className="app__tex-solution-btns">
+            <Button
+              onClick={onCheckTexSolutionInput}
+              style={{
+                marginTop: "10px",
+              }}
+              type="primary"
+            >
+              Check
+            </Button>
+            {correctSolution && (
+              <Button
+                onClick={async () => {
+                  if (correctSolution) {
+                    await setSolutionStartingTex(correctSolution);
+                    await rerenderTexSolutionInput();
+                  }
+                }}
+                style={{
+                  marginTop: "10px",
+                }}
+                type="success"
+              >
+                Get correct solution
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </div>

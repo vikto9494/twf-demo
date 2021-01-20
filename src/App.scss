@@ -76,6 +76,12 @@
     align-items: center;
     margin-top: 50px;
   }
+  &__tex-solution-btns {
+    display: flex;
+    & >:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
   &__errors {
     display: flex;
     margin-bottom: 10px;
