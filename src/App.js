@@ -1,5 +1,6 @@
 // hooks and libs
 import React, { useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 // lib components
 import { Alert, Button, Select, Switch } from "antd";
 // custom components
@@ -14,19 +15,41 @@ import "./App.scss";
 const { Option } = Select;
 
 function App() {
-    // local utils
-    const rerenderTexSolutionInput = async () => {
-        await setTexSolutionRerendered(false);
-        await setTexSolutionRerendered(true);
-    };
-    const formSolutionStartingTex = () => {
-        return startTex + "=...=" + endTex;
-    };
-
+  const history = useHistory();
+  // getting url query params
+  const {
+    mode: modeUrl,
+    originalExpression: originalExpressionUrl,
+    endExpression: endExpressionUrl,
+    rulePack: rulePackUrl,
+    hideDetails: hideDetailsUrl,
+    correctSolution: correctSolutionUrl,
+  } = Object.fromEntries(
+    useLocation()
+      .search.slice(1)
+      .split("&")
+      .map((queryStr) => {
+        return queryStr.split("=");
+      })
+  );
+  // local utils
+  const rerenderTexSolutionInput = async () => {
+    await setTexSolutionRerendered(false);
+    await setTexSolutionRerendered(true);
+  };
+  const formSolutionStartingTex = () => {
+    return startTex + "=...=" + endTex;
+  };
+  const reverseGameMode = async () => {
+    await setIsGameMode((prevState) => !prevState);
+    await setIsGameMode((prevState) => !prevState);
+  };
   // data
-  const defaultStart = "(and(a;or(a;b)))";
-  const defaultEnd = "(a)";
-  const mathFieldSelectOptions = [
+  const defaultStart = originalExpressionUrl
+    ? originalExpressionUrl
+    : "(and(a;or(a;b)))";
+  const defaultEnd = endExpressionUrl ? endExpressionUrl : "(a)";
+  const rulePacks = [
     "Logic",
     "ShortMultiplication",
     "Logarithm",
@@ -35,10 +58,15 @@ function App() {
   // demo task deps
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
-  const [
-    currentMathFieldSelectOption,
-    setCurrentMathFieldSelectOption,
-  ] = useState("Logic");
+  const [currentRulePack, setCurrentRulePack] = useState(
+    rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
+  );
+  const [hideDetails, setHideDetails] = useState(
+    hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false
+  );
+  const [correctSolution, setCorrectSolution] = useState(
+    correctSolutionUrl ? correctSolutionUrl : null
+  );
   // app deps
   const [startTex, setStartTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultStart)
@@ -46,27 +74,68 @@ function App() {
   const [endTex, setEndTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
-  const [isGameMode, setIsGameMode] = useState(true);
+  const [isGameMode, setIsGameMode] = useState(!modeUrl || modeUrl === "play");
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   const [solutionInTex, setSolutionInTex] = useState("");
   const [solutionStartingTex, setSolutionStartingTex] = useState(
-      formSolutionStartingTex()
+    formSolutionStartingTex()
   );
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
   const [solutionError, setSolutionError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
-
-    const rerenderGameEditor = async () => {
-        await setIsGameMode(false);
-        await setIsGameMode(true);
-    };
-
-    const reverseGameMode = async () => {
-        await setIsGameMode(prevState => !prevState)
-        await setIsGameMode(prevState => !prevState)
-    };
+  // user actions
+  const onCreateTask = async () => {
+    // making local vars to have scope outside "try catch" block
+    let isError = false;
+    let startSSConverted;
+    let endSSConverted;
+    try {
+      startSSConverted = convertMathInput("TEX", "STRUCTURE_STRING", startTex);
+      setStartSS(startSSConverted);
+    } catch (e) {
+      setStartError(e.message);
+      isError = true;
+    }
+    try {
+      endSSConverted = convertMathInput("TEX", "STRUCTURE_STRING", endTex);
+      setEndSS(endSSConverted);
+    } catch (e) {
+      setEndError(e.message);
+      isError = true;
+    }
+    if (!isError) {
+      history.push(
+        `/?` +
+          `modeUrl=${isGameMode ? "play" : "solve"}` +
+          `&originalExpression=${startSSConverted}` +
+          `&endExpression=${endSSConverted}` +
+          `&rulePack=${currentRulePack}` +
+          `&hideDetails=${hideDetails}` +
+          `&correctSolution=${correctSolution ? correctSolution : ""}`
+      );
+      setStartError(null);
+      setEndError(null);
+      setSuccessMsg(null);
+      setSolutionError(null);
+      setSolutionStartingTex(formSolutionStartingTex());
+      await reverseGameMode();
+      await rerenderTexSolutionInput();
+    }
+  };
+  const onCheckTexSolutionInput = async () => {
+    const res = checkTex(solutionInTex, startSS, endSS, [currentRulePack]);
+    if (res.errorMessage) {
+      setSuccessMsg(null);
+      setSolutionError(res.errorMessage);
+    } else {
+      setSolutionError(null);
+      setSuccessMsg("Congratulations! Correct solution!");
+    }
+    setSolutionStartingTex(res.validatedSolution);
+    await rerenderTexSolutionInput();
+  };
 
   return (
     <div className="app">
@@ -99,13 +168,13 @@ function App() {
           <div className="app__input-group">
             <label>Subject Area</label>
             <Select
-              defaultValue={mathFieldSelectOptions[0]}
+              defaultValue={currentRulePack}
               onChange={(value) => {
-                setCurrentMathFieldSelectOption(value);
+                setCurrentRulePack(value);
               }}
               style={{ width: "150px" }}
             >
-              {mathFieldSelectOptions.map((option) => (
+              {rulePacks.map((option) => (
                 <Option key={option} value={option}>
                   {option}
                 </Option>
@@ -121,32 +190,7 @@ function App() {
               }}
             />
           </div>
-          <Button
-            onClick={async () => {
-              try {
-                setStartSS(convertMathInput("TEX", "STRUCTURE_STRING", startTex));
-                setStartError(null);
-              } catch (e) {
-                setStartError(e.message);
-              }
-              try {
-                setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", endTex));
-                setEndError(null);
-              } catch (e) {
-                setEndError(e.message);
-              }
-              if (!startError && !endError) {
-                await rerenderTexSolutionInput();
-              }
-              setSuccessMsg(null);
-              setSolutionError(null);
-              setSolutionStartingTex(formSolutionStartingTex());
-              await reverseGameMode();
-              await rerenderTexSolutionInput();
-            }}
-          >
-            Change Task!
-          </Button>
+          <Button onClick={onCreateTask}>Change Task!</Button>
         </div>
       </div>
       <div className="app__errors">
@@ -166,11 +210,7 @@ function App() {
         )}
       </div>
       {isGameMode && (
-        <GameEditor
-          start={startSS}
-          end={endSS}
-          rulePacks={currentMathFieldSelectOption}
-        />
+        <GameEditor start={startSS} end={endSS} rulePacks={currentRulePack} />
       )}
       {!isGameMode && texSolutionRerendered && (
         <div className="app__tex-solution-block">
@@ -192,22 +232,9 @@ function App() {
             />
           )}
           <Button
+            onClick={onCheckTexSolutionInput}
             style={{
               marginTop: "10px",
-            }}
-            onClick={async () => {
-              const res = checkTex(solutionInTex, startSS, endSS, [
-                currentMathFieldSelectOption,
-              ]);
-              if (res.errorMessage) {
-                setSuccessMsg(null);
-                setSolutionError(res.errorMessage);
-              } else {
-                setSolutionError(null);
-                setSuccessMsg("Congratulations! Correct solution!");
-              }
-              setSolutionStartingTex(res.validatedSolution);
-              await rerenderTexSolutionInput();
             }}
           >
             Check
