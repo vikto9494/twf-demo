@@ -28,6 +28,7 @@ const MathQuillEditor = ({
   isInvalid,
   onBlur,
   big = false,
+  disable = false,
 }) => {
   if (inputRef && inputRef.current) {
     inputRef.current.style.display = "none";
@@ -41,9 +42,15 @@ const MathQuillEditor = ({
     MQ();
     // @ts-ignore
     const MathQuill = window.MathQuill.getInterface(2);
-    const mathField = config
-      ? MathQuill.MathField(htmlElement, config)
-      : MathQuill.MathField(htmlElement);
+    const mathField = (() => {
+      if (disable) {
+        return MathQuill.StaticMath(htmlElement);
+      } else {
+        return config
+          ? MathQuill.MathField(htmlElement, config)
+          : MathQuill.MathField(htmlElement);
+      }
+    })();
 
     // if (config && config.handlers) {
     //   mathField.config({
@@ -92,20 +99,22 @@ const MathQuillEditor = ({
     //   });
     // }
 
-    mathField.config({
-      ...config,
-      spaceBehavesLikeTab: true,
-      handlers: {
-        edit: function () {
-          if (inputRef && inputRef.current) {
-            inputRef.current.value = mathField.latex();
-          }
-          if (updateValue) {
-            updateValue(mathField.latex());
-          }
+    if (!disable) {
+      mathField.config({
+        ...config,
+        spaceBehavesLikeTab: true,
+        handlers: {
+          edit: function () {
+            if (inputRef && inputRef.current) {
+              inputRef.current.value = mathField.latex();
+            }
+            if (updateValue) {
+              updateValue(mathField.latex());
+            }
+          },
         },
-      },
-    });
+      });
+    }
 
     if (startingLatexExpression) {
       mathField.latex(startingLatexExpression);
@@ -180,7 +189,7 @@ const MathQuillEditor = ({
       <span
         className="math-quill-editor__main-input"
         id={id}
-        style={{ width, minWidth: "17rem" }}
+        style={{ width }}
       />
     </div>
   );

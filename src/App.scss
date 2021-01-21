@@ -12,6 +12,11 @@
       flex-direction: column;
       align-items: flex-start;
     }
+    &--disabled {
+      @media (max-width: 600px) {
+        flex-direction: row;
+      }
+    }
   }
   &__add-inputs {
     display: flex;
@@ -50,6 +55,12 @@
       margin-left: auto;
       flex-direction: column;
     }
+    &--disabled {
+      @media (max-width: 835px) {
+        margin-left: 0;
+        flex-direction: row;
+      }
+    }
   }
   &__tex-input {
     align-items: center;
@@ -68,6 +79,16 @@
     @media (max-width: 600px) {
       justify-content: space-between;
       width: 100%;
+    }
+    &--disabled {
+      justify-content: flex-start;
+      @media (max-width: 835px) {
+        margin-right: 0;
+      }
+      @media (max-width: 600px) {
+        justify-content: flex-start;
+        width: 100%;
+      }
     }
   }
   &__tex-solution-block {

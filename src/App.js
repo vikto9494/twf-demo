@@ -64,8 +64,11 @@ function App() {
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false
   );
   const [correctSolution, setCorrectSolution] = useState(
-      (startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" && endSS === "(*(8;^(cos(x);4)))" && currentRulePack === "Trigonometry") ?
-          "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4" : null
+    startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" &&
+      endSS === "(*(8;^(cos(x);4)))" &&
+      currentRulePack === "Trigonometry"
+      ? "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4"
+      : null
   );
   // app deps
   const [startTex, setStartTex] = useState(
@@ -139,48 +142,68 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__inputs">
-        <div className="app__tex-inputs">
-          <div className="app__tex-input">
+      <div
+        className={`app__inputs${
+          hideDetailsUrl ? " app__inputs--disabled" : ""
+        }`}
+      >
+        <div
+          className={`app__tex-inputs${
+            hideDetailsUrl ? " app__tex-inputs--disabled" : ""
+          }`}
+        >
+          <div
+            className={`app__tex-input${
+              hideDetailsUrl ? " app__tex-input--disabled" : ""
+            }`}
+          >
             <h2>Prove that</h2>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={startTex}
-              width={window.innerWidth / 20}
+              width={hideDetailsUrl ? undefined : "250px"}
               updateValue={(value) => {
                 setStartTex(value);
               }}
+              disable={hideDetailsUrl}
             />
           </div>
-          <div className="app__tex-input">
+          <div
+            className={`app__tex-input${
+              hideDetailsUrl ? " app__tex-input--disabled" : ""
+            }`}
+          >
             <h2>equals</h2>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={endTex}
-              width={window.innerWidth / 20}
+              width={hideDetailsUrl ? undefined : "250px"}
               updateValue={(value) => {
                 setEndTex(value);
               }}
+              disable={hideDetailsUrl}
             />
           </div>
         </div>
         <div className="app__add-inputs">
-          <div className="app__input-group">
-            <label>Subject Area</label>
-            <Select
-              defaultValue={currentRulePack}
-              onChange={(value) => {
-                setCurrentRulePack(value);
-              }}
-              style={{ width: "150px" }}
-            >
-              {rulePacks.map((option) => (
-                <Option key={option} value={option}>
-                  {option}
-                </Option>
-              ))}
-            </Select>
-          </div>
+          {!hideDetails && (
+            <div className="app__input-group">
+              <label>Subject Area</label>
+              <Select
+                defaultValue={currentRulePack}
+                onChange={(value) => {
+                  setCurrentRulePack(value);
+                }}
+                style={{ width: "150px" }}
+              >
+                {rulePacks.map((option) => (
+                  <Option key={option} value={option}>
+                    {option}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+          )}
           <div className="app__input-group">
             <label>Game mode</label>
             <Switch
@@ -190,7 +213,7 @@ function App() {
               }}
             />
           </div>
-          <Button onClick={onCreateTask}>Change Task!</Button>
+          {!hideDetails && <Button onClick={onCreateTask}>Change Task!</Button>}
         </div>
       </div>
       <div className="app__errors">
