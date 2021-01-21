@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { checkTex, convertMathInput } from "../utils/kotlin-lib-functions";
+import { checkTex, convertMathInput, checkTexWithoutCompiledConfigurationCreating, createConfigurationFromRulePacksAndDetailSolutionCheckingParams } from "../utils/kotlin-lib-functions";
 import MathQuillEditor from "../components/tex-editor/tex-editor";
 import { Alert, Button, Select, Switch } from "antd";
 import GameEditor from "../components/game-editor/game-editor";
@@ -55,6 +55,7 @@ const MainPage = () => {
   const [currentRulePack, setCurrentRulePack] = useState(
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
   );
+  const [compiledConfiguration, setCompiledConfiguration] = useState(createConfigurationFromRulePacksAndDetailSolutionCheckingParams(currentRulePack));
   const [hideDetails, setHideDetails] = useState(
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false
   );
@@ -123,7 +124,7 @@ const MainPage = () => {
     }
   };
   const onCheckTexSolutionInput = async () => {
-    const res = checkTex(solutionInTex, startSS, endSS, [currentRulePack]);
+    const res = checkTexWithoutCompiledConfigurationCreating(solutionInTex, startSS, endSS, compiledConfiguration);
     if (res.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(res.errorMessage);
@@ -179,6 +180,7 @@ const MainPage = () => {
                 defaultValue={currentRulePack}
                 onChange={(value) => {
                   setCurrentRulePack(value);
+                  setCompiledConfiguration();
                 }}
                 style={{ width: "150px" }}
               >
