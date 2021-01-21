@@ -62,7 +62,6 @@ export const getErrorFromMathInput = (format, expression) => {
 };
 
 export const checkTex = (fullExpression, start, end, rulePacks) => {
-  console.log(fullExpression, start, end);
   return twfKotlinLibrary.api.checkSolutionInTex_1eteoc$(
     fullExpression,
     start,

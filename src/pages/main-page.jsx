@@ -4,9 +4,9 @@ import { checkTex, convertMathInput } from "../utils/kotlin-lib-functions";
 import MathQuillEditor from "../components/tex-editor/tex-editor";
 import { Alert, Button, Select, Switch } from "antd";
 import GameEditor from "../components/game-editor/game-editor";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./main-page.scss";
-
+import ClipLoader from "react-spinners/ClipLoader";
 const { Option } = Select;
 
 const MainPage = () => {
@@ -72,7 +72,6 @@ const MainPage = () => {
   const [endTex, setEndTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
-  console.log(!modeUrl || modeUrl === "play");
   const [isGameMode, setIsGameMode] = useState(!modeUrl || modeUrl === "play");
   const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
   const [solutionInTex, setSolutionInTex] = useState("");
@@ -146,16 +145,16 @@ const MainPage = () => {
     <div className="app">
       <div className="app__inputs">
         <div className="app__tex-inputs">
-          <div className="app__tex-input">
+          <div className={createDefaultAndDisabledClassName("app__tex-input")}>
             <h2>Prove that</h2>
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={startTex}
-              width={hideDetailsUrl ? undefined : "22rem"}
+              width={hideDetails ? undefined : "22rem"}
               updateValue={(value) => {
                 setStartTex(value);
               }}
-              disable={hideDetailsUrl}
+              disable={hideDetails}
             />
           </div>
           <div className={createDefaultAndDisabledClassName("app__tex-input")}>
@@ -163,15 +162,15 @@ const MainPage = () => {
             <MathQuillEditor
               showOperationTab={false}
               startingLatexExpression={endTex}
-              width={hideDetailsUrl ? undefined : "22rem"}
+              width={hideDetails ? undefined : "22rem"}
               updateValue={(value) => {
                 setEndTex(value);
               }}
-              disable={hideDetailsUrl}
+              disable={hideDetails}
             />
           </div>
         </div>
-        <div className={createDefaultAndDisabledClassName("app__add-inputs")}>
+        <div className="app__add-inputs">
           {!hideDetails && (
             <div className="app__input-group">
               <label>Subject Area</label>
