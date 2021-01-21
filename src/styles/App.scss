@@ -1,0 +1,20 @@
+@import "../../node_modules/antd/dist/antd.compact.min.css";
+
+@import "abstracts/variables";
+@import "abstracts/mixins";
+@import "base/utilities";
+
+@import "base/base";
+@import "base/animations";
+
+
+  // override antdesign style
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: inherit;
+  }
+

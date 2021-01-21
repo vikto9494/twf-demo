@@ -1,0 +1,105 @@
+@import "../styles/abstracts/variables";
+@import "../styles/abstracts/mixins";
+
+.app {
+  padding: 2rem;
+  font-size: $sm-font-size;
+  &__inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include respond(tab-land) {
+      flex-direction: column;
+    }
+    @include respond(phone) {
+      align-items: flex-end;
+    }
+  }
+  &__add-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    & > *:not(:last-child) {
+      margin-right: 2rem;
+    }
+    @include respond(phone) {
+      flex-direction: column;
+      align-items: flex-end;
+      & > * {
+        margin-top: 1.5rem;
+        margin-right: 0 !important;
+      }
+    }
+  }
+  &__input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    & > label {
+      margin-right: .5rem;
+    }
+  }
+  &__tex-inputs {
+    display: flex;
+    margin-right: 2rem;
+    @include respond(phone) {
+      flex-direction: column;
+      margin-right: 0;
+    }
+  }
+  &__tex-input {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    margin-right: 1rem;
+    & > :first-child {
+      margin-top: .7rem;
+      margin-right: .5rem;
+      margin-left: auto;
+    }
+    & > :nth-child(2) {
+      margin-top: -.2rem;
+    }
+    @include respond(phone) {
+      margin-right: 0 !important;
+    }
+  }
+  &__tex-solution-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+  }
+  &__tex-solution-btns {
+    display: flex;
+    & >:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+  &__errors {
+    display: flex;
+    margin-bottom: 1rem;
+    margin-left: 0 !important;
+    & > *:first-child {
+      margin-right: 1rem;
+    }
+    @include respond(tab-land) {
+      margin-top: 1rem;
+      align-items: center;
+      flex-direction: column;
+      & > *:first-child {
+        margin-bottom: 1rem;
+        margin-right: 0;
+      }
+    }
+    @include respond(phone) {
+      margin-top: 1rem;
+      align-items: flex-end;
+    }
+  }
+}
+
+.alert-msg {
+  max-width: 75rem;
+  margin: 1rem 1rem 0 0;
+}
