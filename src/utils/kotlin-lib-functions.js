@@ -61,6 +61,25 @@ export const getErrorFromMathInput = (format, expression) => {
     : null;
 };
 
+export const createConfigurationFromRulePacksAndDetailSolutionCheckingParams = (rulePacks) => {
+  console.log(rulePacks);
+  return twfKotlinLibrary.createConfigurationFromRulePacksAndDetailSolutionCheckingParams(rulePacks);
+};
+
+export const checkTexWithoutCompiledConfigurationCreating = (fullExpression, start, end, compiledConfiguration) => {
+    console.log(fullExpression, start, end);
+    return twfKotlinLibrary.checkSolutionInTexWithCompiledConfiguration(
+        fullExpression,
+        compiledConfiguration,
+        start,
+        undefined,
+        "",
+        end,
+        undefined,
+        undefined
+    );
+};
+
 export const checkTex = (fullExpression, start, end, rulePacks) => {
   return twfKotlinLibrary.api.checkSolutionInTex_1eteoc$(
     fullExpression,

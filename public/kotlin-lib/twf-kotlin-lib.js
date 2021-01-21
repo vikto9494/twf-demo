@@ -11,8 +11,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var setOf_0 = Kotlin.kotlin.collections.setOf_i5x0yv$;
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var copyToArray = Kotlin.kotlin.collections.copyToArray;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var mutableListOf = Kotlin.kotlin.collections.mutableListOf_i5x0yv$;
   var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
@@ -207,6 +207,34 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return createConfigurationFromRulePacksAndParams(rulePacks, additionalParamsMap);
   }
+  function createConfigurationFromRulePacksAndDetailSolutionCheckingParams_JS(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules) {
+    if (rulePacks === void 0) {
+      rulePacks = copyToArray(listOf('Algebra'));
+    }
+    if (wellKnownFunctionsString === void 0)
+      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
+    if (expressionTransformationRulesString === void 0)
+      expressionTransformationRulesString = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
+    if (maxExpressionTransformationWeight === void 0)
+      maxExpressionTransformationWeight = '1.0';
+    if (unlimitedWellKnownFunctionsString === void 0)
+      unlimitedWellKnownFunctionsString = wellKnownFunctionsString;
+    if (taskContextExpressionTransformationRules === void 0)
+      taskContextExpressionTransformationRules = '';
+    if (maxDistBetweenDiffSteps === void 0)
+      maxDistBetweenDiffSteps = '';
+    if (scopeFilter === void 0)
+      scopeFilter = '';
+    if (wellKnownFunctions === void 0) {
+      wellKnownFunctions = emptyList();
+    }
+    if (unlimitedWellKnownFunctions === void 0)
+      unlimitedWellKnownFunctions = wellKnownFunctions;
+    if (expressionTransformationRules === void 0) {
+      expressionTransformationRules = emptyList();
+    }
+    return createConfigurationFromRulePacksAndDetailSolutionCheckingParams(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules);
+  }
   function getSubstitutionsByRulePacks_JS(rulePacks) {
     return copyToArray(getSubstitutionsByRulePacks(rulePacks));
   }
@@ -361,6 +389,21 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       shortErrorDescription = '0';
     return checkSolutionInTex(originalTexSolution, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, wellKnownFunctions, wellKnownFunctionsString, unlimitedWellKnownFunctions, unlimitedWellKnownFunctionsString, expressionTransformationRules, expressionTransformationRulesString, taskContextExpressionTransformationRules, rulePacks, maxExpressionTransformationWeight, maxDistBetweenDiffSteps, scopeFilter, shortErrorDescription);
   }
+  function checkSolutionInTexWithCompiledConfiguration_JS(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription) {
+    if (startExpressionIdentifier === void 0)
+      startExpressionIdentifier = '';
+    if (targetFactPattern === void 0)
+      targetFactPattern = '';
+    if (additionalFactsIdentifiers === void 0)
+      additionalFactsIdentifiers = '';
+    if (endExpressionIdentifier === void 0)
+      endExpressionIdentifier = '';
+    if (targetFactIdentifier === void 0)
+      targetFactIdentifier = '';
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
+    return checkSolutionInTexWithCompiledConfiguration(originalTexSolution, compiledConfiguration, startExpressionIdentifier, endExpressionIdentifier, targetFactIdentifier, targetFactPattern, additionalFactsIdentifiers, shortErrorDescription);
+  }
   function getParsedExpressionByMathML(mathML) {
     var expressionTreeParser = new ExpressionTreeParser(mathML);
     expressionTreeParser.parse();
@@ -459,6 +502,62 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       }
     }
     return $receiver;
+  }
+  function createConfigurationFromRulePacksAndDetailSolutionCheckingParams(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules) {
+    if (rulePacks === void 0) {
+      rulePacks = copyToArray(listOf('Algebra'));
+    }
+    if (wellKnownFunctionsString === void 0)
+      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
+    if (expressionTransformationRulesString === void 0)
+      expressionTransformationRulesString = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
+    if (maxExpressionTransformationWeight === void 0)
+      maxExpressionTransformationWeight = '1.0';
+    if (unlimitedWellKnownFunctionsString === void 0)
+      unlimitedWellKnownFunctionsString = wellKnownFunctionsString;
+    if (taskContextExpressionTransformationRules === void 0)
+      taskContextExpressionTransformationRules = '';
+    if (maxDistBetweenDiffSteps === void 0)
+      maxDistBetweenDiffSteps = '';
+    if (scopeFilter === void 0)
+      scopeFilter = '';
+    if (wellKnownFunctions === void 0) {
+      wellKnownFunctions = emptyList();
+    }
+    if (unlimitedWellKnownFunctions === void 0)
+      unlimitedWellKnownFunctions = wellKnownFunctions;
+    if (expressionTransformationRules === void 0) {
+      expressionTransformationRules = emptyList();
+    }
+    var compiledConfiguration = compiledConfigurationBySettings(wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules);
+    if (!(rulePacks.length === 0)) {
+      var expressionSubstitutions = getSubstitutionsByRulePacks(rulePacks);
+      var tmp$;
+      compiledConfiguration.compiledExpressionTreeTransformationRules.clear();
+      compiledConfiguration.compiledExpressionSimpleAdditionalTreeTransformationRules.clear();
+      var handledCodesHashSet = HashSet_init();
+      tmp$ = expressionSubstitutions.iterator();
+      while (tmp$.hasNext()) {
+        var substitution = tmp$.next();
+        if (handledCodesHashSet.contains_11rb$(substitution.code))
+          continue;
+        handledCodesHashSet.add_11rb$(substitution.code);
+        if (substitution.left.nodeType === NodeType$EMPTY_getInstance() || substitution.right.nodeType === NodeType$EMPTY_getInstance()) {
+          if (substitution.code.length > 0) {
+            compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.put_xwzc9p$(substitution.code, substitution);
+          }
+        }
+         else {
+          if (substitution.left.containsFunctionBesides_ywdfdh$(compiledConfiguration.definedFunctionNameNumberOfArgsSet) || substitution.right.containsFunctionBesides_ywdfdh$(compiledConfiguration.definedFunctionNameNumberOfArgsSet)) {
+            compiledConfiguration.compiledExpressionTreeTransformationRules.add_11rb$(substitution);
+            if (substitution.simpleAdditional) {
+              compiledConfiguration.compiledExpressionSimpleAdditionalTreeTransformationRules.add_11rb$(substitution);
+            }
+          }
+        }
+      }
+    }
+    return compiledConfiguration;
   }
   function getSubstitutionsByRulePacks(rulePacks) {
     var tmp$, tmp$_0;
@@ -1345,7 +1444,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       wellKnownFunctions = emptyList();
     }
     if (wellKnownFunctionsString === void 0)
-      wellKnownFunctionsString = '+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1';
+      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
     if (unlimitedWellKnownFunctions === void 0)
       unlimitedWellKnownFunctions = wellKnownFunctions;
     if (unlimitedWellKnownFunctionsString === void 0)
@@ -1368,32 +1467,22 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       scopeFilter = '';
     if (shortErrorDescription === void 0)
       shortErrorDescription = '0';
-    var compiledConfiguration = compiledConfigurationBySettings(wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules);
-    if (!(rulePacks.length === 0)) {
-      var expressionSubstitutions = getSubstitutionsByRulePacks(rulePacks);
-      var tmp$;
-      compiledConfiguration.compiledExpressionTreeTransformationRules.clear();
-      compiledConfiguration.compiledExpressionSimpleAdditionalTreeTransformationRules.clear();
-      var handledCodesHashSet = HashSet_init();
-      tmp$ = expressionSubstitutions.iterator();
-      while (tmp$.hasNext()) {
-        var substitution = tmp$.next();
-        if (handledCodesHashSet.contains_11rb$(substitution.code))
-          continue;
-        handledCodesHashSet.add_11rb$(substitution.code);
-        if (substitution.left.nodeType === NodeType$EMPTY_getInstance() || substitution.right.nodeType === NodeType$EMPTY_getInstance()) {
-          if (substitution.code.length > 0) {
-            compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.put_xwzc9p$(substitution.code, substitution);
-          }
-        }
-         else {
-          compiledConfiguration.compiledExpressionTreeTransformationRules.add_11rb$(substitution);
-          if (substitution.simpleAdditional) {
-            compiledConfiguration.compiledExpressionSimpleAdditionalTreeTransformationRules.add_11rb$(substitution);
-          }
-        }
-      }
-    }
+    var compiledConfiguration = createConfigurationFromRulePacksAndDetailSolutionCheckingParams(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules);
+    return checkFactsInTex(originalTexSolution, startExpressionIdentifier, endExpressionIdentifier, targetFactIdentifier, targetFactPattern, additionalFactsIdentifiers, shortErrorDescription, compiledConfiguration);
+  }
+  function checkSolutionInTexWithCompiledConfiguration(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription) {
+    if (startExpressionIdentifier === void 0)
+      startExpressionIdentifier = '';
+    if (targetFactPattern === void 0)
+      targetFactPattern = '';
+    if (additionalFactsIdentifiers === void 0)
+      additionalFactsIdentifiers = '';
+    if (endExpressionIdentifier === void 0)
+      endExpressionIdentifier = '';
+    if (targetFactIdentifier === void 0)
+      targetFactIdentifier = '';
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
     return checkFactsInTex(originalTexSolution, startExpressionIdentifier, endExpressionIdentifier, targetFactIdentifier, targetFactPattern, additionalFactsIdentifiers, shortErrorDescription, compiledConfiguration);
   }
   function BaseNumber(number) {
@@ -8800,6 +8889,22 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     var expressionValue = tmp$_2;
     return abs_0(expressionValue - matchingValue) < 1.19E-6;
   };
+  ExpressionNode.prototype.containsFunctionBesides_ywdfdh$ = function (definedFunctionNameNumberOfArgsSet) {
+    var tmp$;
+    if (this.nodeType === NodeType$FUNCTION_getInstance()) {
+      if (!definedFunctionNameNumberOfArgsSet.contains_11rb$(this.value + '_' + toString(this.children.size)) && !definedFunctionNameNumberOfArgsSet.contains_11rb$(this.value + '_-1')) {
+        return true;
+      }
+      tmp$ = this.children.iterator();
+      while (tmp$.hasNext()) {
+        var child = tmp$.next();
+        if (child.containsFunctionBesides_ywdfdh$(definedFunctionNameNumberOfArgsSet)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
   ExpressionNode.prototype.replaceNotDefinedFunctionsOnVariables_g22vlb$ = function (functionIdentifierToVariableMap, definedFunctionNameNumberOfArgsSet, expressionComporator, hasBoolFunctions) {
     if (expressionComporator === void 0)
       expressionComporator = null;
@@ -8930,8 +9035,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   }
   ExpressionNodeConstructor.prototype.construct_61zpoe$ = function (identifier) {
     var tmp$;
-    if (identifier.length === 0) {
-      return new ExpressionNode(NodeType$FUNCTION_getInstance(), '');
+    if (isBlank(identifier)) {
+      return new ExpressionNode(NodeType$ERROR_getInstance(), 'No expression found', 0, 1);
     }
     if (first_0(identifier) === 40 && last_0(identifier) === 41) {
       var endIndex = get_lastIndex_0(identifier);
@@ -14605,6 +14710,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   }
   ExpressionTreeParser.prototype.parseMathMlTagTree_0 = function () {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+    if (isBlank(this.expression)) {
+      return new ParserError(0, 'No expression found');
+    }
     var actualParent = this.bracketCompleteTagTree_0;
     var numberOfOpenBrackets = 0;
     var currentPosition = 0;
@@ -15223,6 +15331,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   ExpressionTreeParser.prototype.mathMlTreeToExpressionTree_0 = function (oldTreeActualParent, newTreeActualParent) {
     var tmp$, tmp$_0;
     var i = 0;
+    var cashedChildExpressionTreesMap = LinkedHashMap_init_0();
     loop_label: while (i < oldTreeActualParent.children.size) {
       if (equals(oldTreeActualParent.children.get_za3lpa$(i).value, '')) {
         if (i > 0 && oldTreeActualParent.children.get_za3lpa$(i - 1 | 0).type === MathMlTagTreeNode$Type$MATH_ML_FUNCTION_getInstance() && newTreeActualParent.children.size > 0 && last(newTreeActualParent.children).children.size > 0) {
@@ -15241,10 +15350,15 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             }
           }
         }
-        newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), '', oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition));
-        var res_0 = this.mathMlTreeToExpressionTree_0(oldTreeActualParent.children.get_za3lpa$(i), last(newTreeActualParent.children));
-        if (res_0 != null)
-          return res_0;
+        if (cashedChildExpressionTreesMap.get_11rb$(i) != null) {
+          newTreeActualParent.addChild_amp9w1$(ensureNotNull(cashedChildExpressionTreesMap.get_11rb$(i)));
+        }
+         else {
+          newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), '', oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition));
+          var res_0 = this.mathMlTreeToExpressionTree_0(oldTreeActualParent.children.get_za3lpa$(i), last(newTreeActualParent.children));
+          if (res_0 != null)
+            return res_0;
+        }
         i = i + 1 | 0;
         continue loop_label;
       }
@@ -15392,9 +15506,11 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           if (res_6 != null)
             return res_6;
           var functionDefinition_8 = this.functionConfiguration.findFunctionStringDefinition_7zakv9$(oldTreeActualParent.children.get_za3lpa$(i).value, StringDefinitionType$FUNCTION_getInstance(), newParentNode.children.size, this.nameForRuleDesignationsPossible);
-          if (functionDefinition_8 == null)
+          if (functionDefinition_8 == null) {
+            cashedChildExpressionTreesMap.put_xwzc9p$(i + 1 | 0, newParentNode);
             newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), oldTreeActualParent.children.get_za3lpa$(i).value, oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition));
-          else {
+          }
+           else {
             newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), functionDefinition_8.function.function, oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i + 1 | 0).endPosition, void 0, void 0, functionDefinition_8));
             var res_7 = this.mathMlTreeToExpressionTree_0(oldTreeActualParent.children.get_za3lpa$(i + 1 | 0), last(newTreeActualParent.children));
             if (res_7 != null)
@@ -28062,6 +28178,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   }
   _.createCompiledConfigurationFromExpressionSubstitutionsAndParams = createCompiledConfigurationFromExpressionSubstitutionsAndParams_JS;
   _.createConfigurationFromRulePacksAndParams = createConfigurationFromRulePacksAndParams_JS;
+  _.createConfigurationFromRulePacksAndDetailSolutionCheckingParams = createConfigurationFromRulePacksAndDetailSolutionCheckingParams_JS;
   _.getSubstitutionsByRulePacks = getSubstitutionsByRulePacks_JS;
   _.stringToExpression = stringToExpression_JS;
   _.structureStringToExpression = structureStringToExpression_JS;
@@ -28075,6 +28192,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   _.applySubstitution = applySubstitution;
   _.generateTask = generateTask;
   _.checkSolutionInTex = checkSolutionInTex_JS;
+  _.checkSolutionInTexWithCompiledConfiguration = checkSolutionInTexWithCompiledConfiguration_JS;
   _.getParsedExpressionByMathML = getParsedExpressionByMathML;
   _.checkFactsInMathML = checkFactsInMathML;
   _.getUserLogInPlainText = getUserLogInPlainText;
@@ -28086,6 +28204,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   _.compareWithoutSubstitutions = compareWithoutSubstitutions;
   var package$api = _.api || (_.api = {});
   package$api.createConfigurationFromRulePacksAndParams_79na2b$ = createConfigurationFromRulePacksAndParams;
+  package$api.createConfigurationFromRulePacksAndDetailSolutionCheckingParams_gl4kqy$ = createConfigurationFromRulePacksAndDetailSolutionCheckingParams;
   package$api.getSubstitutionsByRulePacks_kand9s$ = getSubstitutionsByRulePacks;
   package$api.getAllAlgebraSubstitutions = getAllAlgebraSubstitutions;
   package$api.getArithmeticPositiveAdditionSubstitutions = getArithmeticPositiveAdditionSubstitutions;
@@ -28141,6 +28260,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$api.applyExpressionBySubstitutionPlaceCoordinates_wumftt$ = applyExpressionBySubstitutionPlaceCoordinates;
   package$api.applyExpressionByStructureStringsSubstitutionPlaceCoordinates_wumftt$ = applyExpressionByStructureStringsSubstitutionPlaceCoordinates;
   package$api.checkSolutionInTex_1eteoc$ = checkSolutionInTex;
+  package$api.checkSolutionInTexWithCompiledConfiguration_m1goct$ = checkSolutionInTexWithCompiledConfiguration;
   var package$baseoperations = _.baseoperations || (_.baseoperations = {});
   package$baseoperations.BaseNumber = BaseNumber;
   package$baseoperations.BaseOperationDefinitionWithDomain = BaseOperationDefinitionWithDomain;
