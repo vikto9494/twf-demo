@@ -1,3 +1,4 @@
+import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { checkTex, convertMathInput } from "../utils/kotlin-lib-functions";
 import MathQuillEditor from "../components/tex-editor/tex-editor";
@@ -133,24 +134,19 @@ const MainPage = () => {
     setSolutionStartingTex(res.validatedSolution);
     await rerenderTexSolutionInput();
   };
+  const createDefaultAndDisabledClassName = (className) => {
+    if (hideDetails) {
+      return `${className} ${className}--disabled`;
+    } else {
+      return className;
+    }
+  };
 
   return (
     <div className="app">
-      <div
-        className={`app__inputs${
-          hideDetailsUrl ? " app__inputs--disabled" : ""
-        }`}
-      >
-        <div
-          className={`app__tex-inputs${
-            hideDetailsUrl ? " app__tex-inputs--disabled" : ""
-          }`}
-        >
-          <div
-            className={`app__tex-input${
-              hideDetailsUrl ? " app__tex-input--disabled" : ""
-            }`}
-          >
+      <div className="app__inputs">
+        <div className="app__tex-inputs">
+          <div className="app__tex-input">
             <h2>Prove that</h2>
             <MathQuillEditor
               showOperationTab={false}
@@ -162,11 +158,7 @@ const MainPage = () => {
               disable={hideDetailsUrl}
             />
           </div>
-          <div
-            className={`app__tex-input${
-              hideDetailsUrl ? " app__tex-input--disabled" : ""
-            }`}
-          >
+          <div className={createDefaultAndDisabledClassName("app__tex-input")}>
             <h2>equals</h2>
             <MathQuillEditor
               showOperationTab={false}
@@ -179,7 +171,7 @@ const MainPage = () => {
             />
           </div>
         </div>
-        <div className="app__add-inputs">
+        <div className={createDefaultAndDisabledClassName("app__add-inputs")}>
           {!hideDetails && (
             <div className="app__input-group">
               <label>Subject Area</label>

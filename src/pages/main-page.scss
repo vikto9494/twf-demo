@@ -63,6 +63,11 @@
     @include respond(phone) {
       margin-right: 0 !important;
     }
+    &--disabled {
+      & > :nth-child(2) {
+        margin-top: .7rem;
+      }
+    }
   }
   &__tex-solution-block {
     display: flex;
