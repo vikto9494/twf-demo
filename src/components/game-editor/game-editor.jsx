@@ -152,15 +152,14 @@ const GameEditor = ({start, end, rulePacks}) => {
                     size: substitutionSize,
                     family: 'u2000',
                     fill: defaultTextColor
-                }).x(actualShiftX + tmpWidth).y(height_inner_cont * i);
+                }).center(actualShiftX + tmpWidth, heighContOfConts + lolkek.height() / 2).x(actualShiftX + tmpWidth);
 
                 actualShiftX += substitutionPaddingBetweenParts;
                 tmpWidth = curCont.width();
 
                 let abs = (PlainPrintTree(window['twf-kotlin-lib'].structureStringToExpression(listOfValues[i][1]), substitutionSize, curCont)).x(actualShiftX + tmpWidth).y(heighContOfConts);
 
-                lolkek.center(lolkek.x() + lolkek.width() / 2, heighContOfConts + abs.height() / 2);
-                arrowRight.y(lolkek.y());
+                lolkek.center(lolkek.x() + lolkek.width() / 2, heighContOfConts + lolkek.height() / 2);
                 draw.rect(width_inner_cont, curCont.height()).radius(10)
                     .fill(defaultRulesBack).x(substitutionAreaX).y(heighContOfConts);
 

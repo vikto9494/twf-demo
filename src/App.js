@@ -23,7 +23,6 @@ function App() {
     endExpression: endExpressionUrl,
     rulePack: rulePackUrl,
     hideDetails: hideDetailsUrl,
-    correctSolution: correctSolutionUrl,
   } = Object.fromEntries(
     useLocation()
       .search.slice(1)
@@ -65,7 +64,8 @@ function App() {
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false
   );
   const [correctSolution, setCorrectSolution] = useState(
-    correctSolutionUrl ? correctSolutionUrl : null
+      (startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" && endSS === "(*(8;^(cos(x);4)))" && currentRulePack === "Trigonometry") ?
+          "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4" : null
   );
   // app deps
   const [startTex, setStartTex] = useState(
@@ -113,8 +113,7 @@ function App() {
           `&originalExpression=${startSSConverted}` +
           `&endExpression=${endSSConverted}` +
           `&rulePack=${currentRulePack}` +
-          `&hideDetails=${hideDetails}` +
-          `&correctSolution=${correctSolution ? correctSolution : ""}`
+          `&hideDetails=${hideDetails}`
       );
       setStartError(null);
       setEndError(null);
@@ -222,7 +221,7 @@ function App() {
               setSolutionInTex(value);
             }}
             big={true}
-            width={"600px"}
+            width={window.innerWidth - 100 + "px"}
           />
           {(successMsg || solutionError) && (
             <Alert
