@@ -46,6 +46,11 @@
       flex-direction: column;
       margin-right: 0;
     }
+    &--disabled {
+      justify-content: center;
+      width: 100%;
+      font-size: $md-font-size;
+    }
   }
   &__tex-input {
     align-items: center;
@@ -62,10 +67,8 @@
     }
     @include respond(phone) {
       margin-right: 0 !important;
-    }
-    &--disabled {
-      & > :nth-child(2) {
-        margin-top: .7rem;
+      &:nth-child(2) {
+        margin-top: 2rem;
       }
     }
   }

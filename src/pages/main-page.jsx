@@ -1,6 +1,11 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { checkTex, convertMathInput, checkTexWithoutCompiledConfigurationCreating, createConfigurationFromRulePacksAndDetailSolutionCheckingParams } from "../utils/kotlin-lib-functions";
+import {
+  checkTex,
+  convertMathInput,
+  checkTexWithoutCompiledConfigurationCreating,
+  createConfigurationFromRulePacksAndDetailSolutionCheckingParams,
+} from "../utils/kotlin-lib-functions";
 import MathQuillEditor from "../components/tex-editor/tex-editor";
 import { Alert, Button, Select, Switch } from "antd";
 import GameEditor from "../components/game-editor/game-editor";
@@ -55,7 +60,11 @@ const MainPage = () => {
   const [currentRulePack, setCurrentRulePack] = useState(
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
   );
-  const [compiledConfiguration, setCompiledConfiguration] = useState(createConfigurationFromRulePacksAndDetailSolutionCheckingParams(currentRulePack));
+  const [compiledConfiguration, setCompiledConfiguration] = useState(
+    createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
+      currentRulePack
+    )
+  );
   const [hideDetails, setHideDetails] = useState(
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false
   );
@@ -123,7 +132,12 @@ const MainPage = () => {
     }
   };
   const onCheckTexSolutionInput = async () => {
-    const res = checkTexWithoutCompiledConfigurationCreating(solutionInTex, startSS, endSS, compiledConfiguration);
+    const res = checkTexWithoutCompiledConfigurationCreating(
+      solutionInTex,
+      startSS,
+      endSS,
+      compiledConfiguration
+    );
     if (res.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(res.errorMessage);
@@ -145,7 +159,7 @@ const MainPage = () => {
   return (
     <div className="app">
       <div className="app__inputs">
-        <div className="app__tex-inputs">
+        <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
           <div className={createDefaultAndDisabledClassName("app__tex-input")}>
             <h2>Prove that</h2>
             <MathQuillEditor
@@ -156,6 +170,7 @@ const MainPage = () => {
                 setStartTex(value);
               }}
               disable={hideDetails}
+              fontSize={hideDetails ? "2.2rem" : undefined}
             />
           </div>
           <div className={createDefaultAndDisabledClassName("app__tex-input")}>
@@ -168,11 +183,12 @@ const MainPage = () => {
                 setEndTex(value);
               }}
               disable={hideDetails}
+              fontSize={hideDetails ? "2.2rem" : undefined}
             />
           </div>
         </div>
-        <div className="app__add-inputs">
-          {!hideDetails && (
+        {!hideDetails && (
+          <div className="app__add-inputs">
             <div className="app__input-group">
               <label>Subject Area</label>
               <Select
@@ -190,18 +206,18 @@ const MainPage = () => {
                 ))}
               </Select>
             </div>
-          )}
-          <div className="app__input-group">
-            <label>Game mode</label>
-            <Switch
-              checked={isGameMode}
-              onChange={(value) => {
-                setIsGameMode(value);
-              }}
-            />
+            <div className="app__input-group">
+              <label>Game mode</label>
+              <Switch
+                checked={isGameMode}
+                onChange={(value) => {
+                  setIsGameMode(value);
+                }}
+              />
+            </div>
+            <Button onClick={onCreateTask}>Change Task!</Button>
           </div>
-          {!hideDetails && <Button onClick={onCreateTask}>Change Task!</Button>}
-        </div>
+        )}
       </div>
       <div className="app__errors">
         {startError && (

@@ -29,6 +29,7 @@ const MathQuillEditor = ({
   onBlur,
   big = false,
   disable = false,
+  fontSize,
 }) => {
   if (inputRef && inputRef.current) {
     inputRef.current.style.display = "none";
@@ -172,7 +173,7 @@ const MathQuillEditor = ({
   return (
     <div
       className={`math-quill-editor ${big ? "math-quill-editor--big" : ""}`}
-      style={{ width }}
+      style={{ width, fontSize }}
     >
       {showOperationTab && (
         <div className="math-quill-editor__operations">
