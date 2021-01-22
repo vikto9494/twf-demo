@@ -155,6 +155,7 @@ const MainPage = () => {
       return className;
     }
   };
+  const [showSpinner, setShowSpinner] = useState(false);
 
   return (
     <div className="app">
@@ -249,6 +250,7 @@ const MainPage = () => {
             big={true}
             width={window.innerWidth - 100 + "px"}
           />
+          <ClipLoader loading={showSpinner} />
           {(successMsg || solutionError) && (
             <Alert
               message={solutionError ? solutionError : successMsg}
@@ -259,7 +261,13 @@ const MainPage = () => {
           )}
           <div className="app__tex-solution-btns">
             <Button
-              onClick={onCheckTexSolutionInput}
+              onClick={async () => {
+                setShowSpinner(true);
+                setTimeout(() => {
+                  onCheckTexSolutionInput();
+                  setShowSpinner(false);
+                }, 0);
+              }}
               style={{
                 marginTop: "10px",
               }}
