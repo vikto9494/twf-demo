@@ -88,6 +88,7 @@ const MainPage = () => {
   const [solutionStartingTex, setSolutionStartingTex] = useState(
     formSolutionStartingTex()
   );
+  const [showSpinner, setShowSpinner] = useState(false);
   // errors
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
@@ -155,7 +156,6 @@ const MainPage = () => {
       return className;
     }
   };
-  const [showSpinner, setShowSpinner] = useState(false);
 
   return (
     <div className="app">
