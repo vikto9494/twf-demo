@@ -1,22 +1,25 @@
-import React from "react";
+// hooks and libs
+import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+// lib components
+import { Alert, Button, Select, Switch } from "antd";
+import ClipLoader from "react-spinners/ClipLoader";
+// custom components
+import MathQuillEditor from "../components/tex-editor/tex-editor";
+import GameEditor from "../components/game-editor/game-editor";
+// utils
 import {
-  checkTex,
   convertMathInput,
   checkTexWithoutCompiledConfigurationCreating,
   createConfigurationFromRulePacksAndDetailSolutionCheckingParams,
 } from "../utils/kotlin-lib-functions";
-import MathQuillEditor from "../components/tex-editor/tex-editor";
-import { Alert, Button, Select, Switch } from "antd";
-import GameEditor from "../components/game-editor/game-editor";
-import { useState, useEffect } from "react";
+// styles
 import "./main-page.scss";
-import ClipLoader from "react-spinners/ClipLoader";
-const { Option } = Select;
 
 const MainPage = () => {
-  const history = useHistory();
+  const { Option } = Select;
   // getting url query params
+  const history = useHistory();
   const {
     mode: modeUrl,
     originalExpression: originalExpressionUrl,
@@ -32,9 +35,9 @@ const MainPage = () => {
       })
   );
   // local utils
-  const rerenderTexSolutionInput = async () => {
-    await setTexSolutionRerendered(false);
-    await setTexSolutionRerendered(true);
+  const rerenderTexSolutionInput = () => {
+    setTexSolutionRerendered(false);
+    setTexSolutionRerendered(true);
   };
   const formSolutionStartingTex = () => {
     return startTex + "=...=" + endTex;
@@ -43,7 +46,14 @@ const MainPage = () => {
     await setIsGameMode((prevState) => !prevState);
     await setIsGameMode((prevState) => !prevState);
   };
-  // data
+  const createDefaultAndDisabledClassName = (className) => {
+    if (hideDetails) {
+      return `${className} ${className}--disabled`;
+    } else {
+      return className;
+    }
+  };
+  // static data
   const defaultStart = originalExpressionUrl
     ? originalExpressionUrl
     : "(and(a;or(a;b)))";
@@ -54,28 +64,23 @@ const MainPage = () => {
     "Logarithm",
     "Trigonometry",
   ];
-  // demo task deps
+  // app dependencies
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
   const [currentRulePack, setCurrentRulePack] = useState(
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
   );
-  const [compiledConfiguration, setCompiledConfiguration] = useState(
-    createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
-      currentRulePack
-    )
+  const compiledConfiguration = createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
+    currentRulePack
   );
-  const [hideDetails, setHideDetails] = useState(
-    hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false
-  );
-  const [correctSolution, setCorrectSolution] = useState(
+  const hideDetails =
+    hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
+  const correctSolution =
     startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" &&
-      endSS === "(*(8;^(cos(x);4)))" &&
-      currentRulePack === "Trigonometry"
+    endSS === "(*(8;^(cos(x);4)))" &&
+    currentRulePack === "Trigonometry"
       ? "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4"
-      : null
-  );
-  // app deps
+      : null;
   const [startTex, setStartTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultStart)
   );
@@ -89,7 +94,7 @@ const MainPage = () => {
     formSolutionStartingTex()
   );
   const [showSpinner, setShowSpinner] = useState(false);
-  // errors
+  // input check messages
   const [startError, setStartError] = useState(null);
   const [endError, setEndError] = useState(null);
   const [solutionError, setSolutionError] = useState(null);
@@ -129,10 +134,10 @@ const MainPage = () => {
       setSolutionError(null);
       setSolutionStartingTex(formSolutionStartingTex());
       await reverseGameMode();
-      await rerenderTexSolutionInput();
+      rerenderTexSolutionInput();
     }
   };
-  const onCheckTexSolutionInput = async () => {
+  const onCheckTexSolutionInput = () => {
     const res = checkTexWithoutCompiledConfigurationCreating(
       solutionInTex,
       startSS,
@@ -147,14 +152,7 @@ const MainPage = () => {
       setSuccessMsg("Congratulations! Correct solution!");
     }
     setSolutionStartingTex(res.validatedSolution);
-    await rerenderTexSolutionInput();
-  };
-  const createDefaultAndDisabledClassName = (className) => {
-    if (hideDetails) {
-      return `${className} ${className}--disabled`;
-    } else {
-      return className;
-    }
+    rerenderTexSolutionInput();
   };
 
   return (
@@ -196,7 +194,6 @@ const MainPage = () => {
                 defaultValue={currentRulePack}
                 onChange={(value) => {
                   setCurrentRulePack(value);
-                  setCompiledConfiguration();
                 }}
                 style={{ width: "150px" }}
               >
