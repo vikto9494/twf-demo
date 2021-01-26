@@ -70,8 +70,10 @@ const MainPage = () => {
   const [currentRulePack, setCurrentRulePack] = useState(
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
   );
-  const compiledConfiguration = createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
-    currentRulePack
+  const [compiledConfiguration, setCompiledConfiguration] = useState(
+    createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
+      [currentRulePack]
+    )
   );
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
@@ -194,6 +196,7 @@ const MainPage = () => {
                 defaultValue={currentRulePack}
                 onChange={(value) => {
                   setCurrentRulePack(value);
+                  setCompiledConfiguration(createConfigurationFromRulePacksAndDetailSolutionCheckingParams([value]));
                 }}
                 style={{ width: "150px" }}
               >

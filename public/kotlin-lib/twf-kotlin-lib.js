@@ -120,6 +120,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var lastIndexOfAny = Kotlin.kotlin.text.lastIndexOfAny_7utkvz$;
   var removeSuffix = Kotlin.kotlin.text.removeSuffix_gsj5wt$;
   var startsWith_1 = Kotlin.kotlin.text.startsWith_li3zpu$;
+  var last_1 = Kotlin.kotlin.collections.last_7wnvza$;
   var trim = Kotlin.kotlin.text.trim_gw00vp$;
   var sum = Kotlin.kotlin.collections.sum_l63kqw$;
   var checkCountOverflow = Kotlin.kotlin.collections.checkCountOverflow_za3lpa$;
@@ -402,7 +403,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       targetFactIdentifier = '';
     if (shortErrorDescription === void 0)
       shortErrorDescription = '0';
-    return checkSolutionInTexWithCompiledConfiguration(originalTexSolution, compiledConfiguration, startExpressionIdentifier, endExpressionIdentifier, targetFactIdentifier, targetFactPattern, additionalFactsIdentifiers, shortErrorDescription);
+    return checkSolutionInTexWithCompiledConfiguration(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription);
   }
   function getParsedExpressionByMathML(mathML) {
     var expressionTreeParser = new ExpressionTreeParser(mathML);
@@ -14529,9 +14530,14 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     this.rootNotPrioritized_0 = new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), '', 0, this.originalExpression.length);
     this.rootNotPrioritizedWithMultiplications_0 = new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), '', 0, this.originalExpression.length);
     this.rootNotPrioritizedUnaries_0 = new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), '', 0, this.originalExpression.length);
+    this.rootNotPrioritizedWithComplexes_0 = new ExpressionParserNode(ExpressionParserNode$Type$FUNCTION_getInstance(), '', 0, this.originalExpression.length);
     this.root = new ExpressionNode(NodeType$FUNCTION_getInstance(), '', 0, this.originalExpression.length);
     this.currentPosition_0 = 0;
     this.completeBinarySigns_0 = listOf_0(['&amp;', '->', '-<\/mo><mo>&gt;']);
+    this.isNeedReplace_0 = true;
+    this.SorPLevelsReplaces_0 = LinkedHashMap_init_0();
+    this.lenOfComplexVar_0 = 17;
+    this.complexVar_0 = 'sys_def_i_complex';
   }
   function ExpressionTreeParser$ParserState(name, ordinal) {
     Enum.call(this);
@@ -14691,7 +14697,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     var combineUnaryError = this.combineUnary_0(this.rootNotPrioritized_0, this.rootNotPrioritizedUnaries_0);
     if (combineUnaryError != null)
       return this.normalisePositionInParseError_0(combineUnaryError);
-    var addMultiplicationsError = this.addMultiplications_0(this.rootNotPrioritizedUnaries_0, this.rootNotPrioritizedWithMultiplications_0);
+    var replaceComplexOneError = this.replaceComplexOne_0(this.rootNotPrioritizedUnaries_0, this.rootNotPrioritizedWithComplexes_0);
+    if (replaceComplexOneError != null)
+      return this.normalisePositionInParseError_0(replaceComplexOneError);
+    var addMultiplicationsError = this.addMultiplications_0(this.rootNotPrioritizedWithComplexes_0, this.rootNotPrioritizedWithMultiplications_0);
     if (addMultiplicationsError != null)
       return this.normalisePositionInParseError_0(addMultiplicationsError);
     this.resolveBinaryOperations_0(this.rootNotPrioritizedWithMultiplications_0);
@@ -15666,11 +15675,136 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return null;
   };
+  ExpressionTreeParser.prototype.replaceComplexOne_0 = function (oldTreeActualParent, newTreeActualParent, currentLevel, onlyZeroNumberOfChildInSorP) {
+    if (currentLevel === void 0)
+      currentLevel = 0;
+    if (onlyZeroNumberOfChildInSorP === void 0)
+      onlyZeroNumberOfChildInSorP = false;
+    var tmp$;
+    if (oldTreeActualParent.children.size === 0) {
+      return null;
+    }
+    var i = 0;
+    if (oldTreeActualParent.value.length > 0) {
+      if ((equals(oldTreeActualParent.value, 'P') || equals(oldTreeActualParent.value, 'S')) && oldTreeActualParent.children.size === 4) {
+        var $receiver = this.SorPLevelsReplaces_0;
+        var value = this.isNeedReplace_0;
+        $receiver.put_xwzc9p$(currentLevel, value);
+      }
+      while (i < oldTreeActualParent.children.size) {
+        if (this.isNeedReplace_0 && oldTreeActualParent.children.get_za3lpa$(i).type === ExpressionParserNode$Type$VARIABLE_getInstance()) {
+          if (equals(oldTreeActualParent.children.get_za3lpa$(i).value, 'i')) {
+            newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), this.complexVar_0, oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 | 0));
+          }
+           else {
+            if (last_0(oldTreeActualParent.children.get_za3lpa$(i).value) === 105 && !equals(oldTreeActualParent.children.get_za3lpa$(i).value, 'pi')) {
+              var tmp$_0 = ExpressionParserNode$Type$VARIABLE_getInstance();
+              var $receiver_0 = oldTreeActualParent.children.get_za3lpa$(i).value;
+              var endIndex = get_lastIndex_0(oldTreeActualParent.children.get_za3lpa$(i).value);
+              newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(tmp$_0, $receiver_0.substring(0, endIndex), oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition - 1 | 0));
+              newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), this.complexVar_0, oldTreeActualParent.children.get_za3lpa$(i).endPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition + this.lenOfComplexVar_0 | 0));
+            }
+             else {
+              if (oldTreeActualParent.children.get_za3lpa$(i).value.charCodeAt(0) === 105) {
+                newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), this.complexVar_0, oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 | 0));
+                newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), oldTreeActualParent.children.get_za3lpa$(i).value.substring(1), oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 + 1 | 0, oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 + oldTreeActualParent.children.get_za3lpa$(i).value.length | 0));
+              }
+               else {
+                newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(i).copy_i0rkrg$());
+              }
+            }
+          }
+        }
+         else {
+          newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(i).copy_i0rkrg$());
+        }
+        var tmp$_1 = oldTreeActualParent.children.get_za3lpa$(i);
+        var tmp$_2 = newTreeActualParent.children.get_za3lpa$(i);
+        var tmp$_3 = currentLevel + 1 | 0;
+        var tmp$_4 = i === 0;
+        if (tmp$_4) {
+          var tmp$_5 = onlyZeroNumberOfChildInSorP;
+          if (!tmp$_5) {
+            tmp$_5 = (!this.SorPLevelsReplaces_0.isEmpty() && currentLevel === last_1(this.SorPLevelsReplaces_0.keys));
+          }
+          tmp$_4 = tmp$_5;
+        }
+        var res = this.replaceComplexOne_0(tmp$_1, tmp$_2, tmp$_3, tmp$_4);
+        if (res != null) {
+          return res;
+        }
+        i = i + 1 | 0;
+      }
+      if (!this.SorPLevelsReplaces_0.isEmpty() && last_1(this.SorPLevelsReplaces_0.keys) === currentLevel) {
+        this.SorPLevelsReplaces_0.remove_11rb$(currentLevel);
+        if (!this.SorPLevelsReplaces_0.isEmpty()) {
+          tmp$ = ensureNotNull(this.SorPLevelsReplaces_0.get_11rb$(last_1(this.SorPLevelsReplaces_0.keys)));
+        }
+         else {
+          tmp$ = true;
+        }
+        this.isNeedReplace_0 = tmp$;
+      }
+    }
+     else {
+      var tmp$_6 = this.isNeedReplace_0 && onlyZeroNumberOfChildInSorP;
+      if (tmp$_6) {
+        tmp$_6 = !this.SorPLevelsReplaces_0.isEmpty();
+      }
+      var tmp$_7 = tmp$_6 && last_1(this.SorPLevelsReplaces_0.keys) < currentLevel;
+      if (tmp$_7) {
+        tmp$_7 = oldTreeActualParent.children.get_za3lpa$(0).value.length > 0;
+      }
+      if (tmp$_7 && equals(oldTreeActualParent.children.get_za3lpa$(0).value, 'i')) {
+        this.isNeedReplace_0 = false;
+        var $receiver_1 = this.SorPLevelsReplaces_0;
+        var key = last_1(this.SorPLevelsReplaces_0.keys);
+        $receiver_1.put_xwzc9p$(key, false);
+      }
+      if (oldTreeActualParent.children.get_za3lpa$(0).children.size !== 0) {
+        newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(0).copy_i0rkrg$());
+        var res_0 = this.replaceComplexOne_0(oldTreeActualParent.children.get_za3lpa$(0), newTreeActualParent.children.get_za3lpa$(0), currentLevel + 1 | 0, i === 0 && onlyZeroNumberOfChildInSorP);
+        if (res_0 != null)
+          return res_0;
+        i = i + 1 | 0;
+      }
+      while (i < oldTreeActualParent.children.size) {
+        if (this.isNeedReplace_0 && oldTreeActualParent.children.get_za3lpa$(i).type === ExpressionParserNode$Type$VARIABLE_getInstance()) {
+          if (equals(oldTreeActualParent.children.get_za3lpa$(i).value, 'i'))
+            newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), this.complexVar_0, oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 | 0));
+          else {
+            if (last_0(oldTreeActualParent.children.get_za3lpa$(i).value) === 105 && !equals(oldTreeActualParent.children.get_za3lpa$(i).value, 'pi')) {
+              var tmp$_8 = ExpressionParserNode$Type$VARIABLE_getInstance();
+              var $receiver_2 = oldTreeActualParent.children.get_za3lpa$(i).value;
+              var endIndex_0 = get_lastIndex_0(oldTreeActualParent.children.get_za3lpa$(i).value);
+              newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(tmp$_8, $receiver_2.substring(0, endIndex_0), oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition - 1 | 0));
+              newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), this.complexVar_0, oldTreeActualParent.children.get_za3lpa$(i).endPosition, oldTreeActualParent.children.get_za3lpa$(i).endPosition + this.lenOfComplexVar_0 | 0));
+            }
+             else {
+              if (oldTreeActualParent.children.get_za3lpa$(i).value.charCodeAt(0) === 105) {
+                newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), this.complexVar_0, oldTreeActualParent.children.get_za3lpa$(i).startPosition, oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 | 0));
+                newTreeActualParent.addChild_amp9w1$(new ExpressionParserNode(ExpressionParserNode$Type$VARIABLE_getInstance(), oldTreeActualParent.children.get_za3lpa$(i).value.substring(1), oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 + 1 | 0, oldTreeActualParent.children.get_za3lpa$(i).startPosition + this.lenOfComplexVar_0 + oldTreeActualParent.children.get_za3lpa$(i).value.length | 0));
+              }
+               else
+                newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(i).copy_i0rkrg$());
+            }
+          }
+        }
+         else
+          newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(i).copy_i0rkrg$());
+        var res_1 = this.replaceComplexOne_0(oldTreeActualParent.children.get_za3lpa$(i), last(newTreeActualParent.children), currentLevel + 1 | 0, i === 0 && onlyZeroNumberOfChildInSorP);
+        if (res_1 != null)
+          return res_1;
+        i = i + 1 | 0;
+      }
+    }
+    return null;
+  };
   ExpressionTreeParser.prototype.addMultiplications_0 = function (oldTreeActualParent, newTreeActualParent) {
     if (oldTreeActualParent.children.size === 0)
       return null;
     var i = 0;
-    if (oldTreeActualParent.value.length > 0)
+    if (oldTreeActualParent.value.length > 0) {
       while (i < oldTreeActualParent.children.size) {
         newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(i).copy_i0rkrg$());
         var res = this.addMultiplications_0(oldTreeActualParent.children.get_za3lpa$(i), newTreeActualParent.children.get_za3lpa$(i));
@@ -15678,6 +15812,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           return res;
         i = i + 1 | 0;
       }
+    }
      else {
       newTreeActualParent.addChild_amp9w1$(oldTreeActualParent.children.get_za3lpa$(0).copy_i0rkrg$());
       var res_0 = this.addMultiplications_0(oldTreeActualParent.children.get_za3lpa$(0), newTreeActualParent.children.get_za3lpa$(0));
@@ -28169,9 +28304,22 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         currentPosition = newCurrentPosition + 1 | 0;
       }
        else {
-        var startIndex_1 = currentPosition;
-        result.append_gw00v9$(string.substring(startIndex_1));
-        break;
+        var underlineIndex = findAnyOf(string, listOf('\\underline{'), currentPosition);
+        if (underlineIndex != null) {
+          var startIndex_1 = currentPosition;
+          var endIndex_0 = underlineIndex.first;
+          result.append_gw00v9$(string.substring(startIndex_1, endIndex_0));
+          currentPosition = underlineIndex.first + underlineIndex.second.length | 0;
+          var newCurrentPosition_0 = skipFromRemainingExpressionWhileClosingBracketNotFound('}', '{', string, currentPosition);
+          var startIndex_2 = currentPosition;
+          result.append_gw00v9$(string.substring(startIndex_2, newCurrentPosition_0));
+          currentPosition = newCurrentPosition_0 + 1 | 0;
+        }
+         else {
+          var startIndex_3 = currentPosition;
+          result.append_gw00v9$(string.substring(startIndex_3));
+          break;
+        }
       }
     }
     return result.toString();
