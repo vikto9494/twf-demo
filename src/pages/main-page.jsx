@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 // lib components
 import { Alert, Button, Select, Switch } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
-import { EditableMathField, StaticMathField, MathField } from "react-mathquill";
+import { EditableMathField, StaticMathField } from "react-mathquill";
 // custom components
 import GameEditor from "../components/game-editor/game-editor";
 // utils
@@ -149,18 +149,31 @@ const MainPage = () => {
   }, [showSpinner]);
 
   // tex solution commands
+  const [solutionMathField, setSolutionMathField] = useState(null);
   const actions = [
     {
       iconUrl: sumIcon,
-      latexCmd: () => setSolutionInTex((prevState) => prevState + "\\sum"),
+      latexCmd: () => {
+        if (solutionMathField) {
+          solutionMathField.cmd("\\sum");
+        }
+      },
     },
     {
       iconUrl: squareIcon,
-      latexCmd: () => setSolutionInTex((prevState) => prevState + "\\sqrt{ }"),
+      latexCmd: () => {
+        if (solutionMathField) {
+          solutionMathField.cmd("\\sqrt");
+        }
+      },
     },
     {
       iconUrl: piIcon,
-      latexCmd: () => setSolutionInTex((prevState) => prevState + "\\pi"),
+      latexCmd: () => {
+        if (solutionMathField) {
+          solutionMathField.cmd("\\pi");
+        }
+      },
     },
     // TODO: find icons and finish
     // {
@@ -306,6 +319,7 @@ const MainPage = () => {
             </div>
             <EditableMathField
               latex={solutionInTex}
+              mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
               onChange={(mathField) => {
                 setSolutionInTex(mathField.latex());
               }}
