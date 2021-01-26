@@ -111,3 +111,21 @@
   max-width: 75rem;
   margin: 1rem 1rem 0 0;
 }
+
+.tex-solution {
+  &__operations {
+    display: flex;
+    //background-color: $color-primary-light;
+    padding: 1rem;
+    //border: 1px solid $color-primary-dark;
+    border-bottom: none;
+    background-color: gray;
+  }
+  &__operation > img {
+    width: 2rem;
+    margin-right: 1rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

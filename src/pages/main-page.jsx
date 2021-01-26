@@ -1,20 +1,23 @@
 // hooks and libs
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 // lib components
 import { Alert, Button, Select, Switch } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
+import { EditableMathField, StaticMathField, MathField } from "react-mathquill";
 // custom components
-import MathQuillEditor from "../components/tex-editor/tex-editor";
 import GameEditor from "../components/game-editor/game-editor";
 // utils
-import {
-  convertMathInput,
-  checkTex,
-  createConfigurationFromRulePacksAndDetailSolutionCheckingParams,
-} from "../utils/kotlin-lib-functions";
+import { convertMathInput, checkTex } from "../utils/kotlin-lib-functions";
+import { addStyles } from "react-mathquill";
+// icons
+import sumIcon from "../assets/math-symbols/sum.svg";
+import squareIcon from "../assets/math-symbols/square-root.svg";
+import piIcon from "../assets/math-symbols/pi.svg";
 // styles
 import "./main-page.scss";
+// inserts the required mathquill css to the <head> block.
+addStyles();
 
 const MainPage = () => {
   const { Option } = Select;
@@ -35,16 +38,12 @@ const MainPage = () => {
       })
   );
   // local utils
-  const rerenderTexSolutionInput = () => {
-    setTexSolutionRerendered(false);
-    setTexSolutionRerendered(true);
-  };
   const formSolutionStartingTex = () => {
     return startTex + "=...=" + endTex;
   };
-  const reverseGameMode = async () => {
-    await setIsGameMode((prevState) => !prevState);
-    await setIsGameMode((prevState) => !prevState);
+  const reverseGameMode = () => {
+    setIsGameMode((prevState) => !prevState);
+    setIsGameMode((prevState) => !prevState);
   };
   const createDefaultAndDisabledClassName = (className) => {
     if (hideDetails) {
@@ -85,11 +84,7 @@ const MainPage = () => {
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
   const [isGameMode, setIsGameMode] = useState(!modeUrl || modeUrl === "play");
-  const [texSolutionRerendered, setTexSolutionRerendered] = useState(true);
-  const [solutionInTex, setSolutionInTex] = useState("");
-  const [solutionStartingTex, setSolutionStartingTex] = useState(
-    formSolutionStartingTex()
-  );
+  const [solutionInTex, setSolutionInTex] = useState(formSolutionStartingTex());
   const [showSpinner, setShowSpinner] = useState(false);
   // input check messages
   const [startError, setStartError] = useState(null);
@@ -129,18 +124,13 @@ const MainPage = () => {
       setEndError(null);
       setSuccessMsg(null);
       setSolutionError(null);
-      setSolutionStartingTex(formSolutionStartingTex());
-      await reverseGameMode();
-      rerenderTexSolutionInput();
+      setSolutionInTex(formSolutionStartingTex());
+      reverseGameMode();
     }
   };
+
   const onCheckTexSolutionInput = () => {
-    const res = checkTex(
-      solutionInTex,
-      startSS,
-      endSS,
-      [currentRulePack]
-    );
+    const res = checkTex(solutionInTex, startSS, endSS, [currentRulePack]);
     if (res.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(res.errorMessage);
@@ -148,9 +138,56 @@ const MainPage = () => {
       setSolutionError(null);
       setSuccessMsg("Congratulations! Correct solution!");
     }
-    setSolutionStartingTex(res.validatedSolution);
-    rerenderTexSolutionInput();
+    setSolutionInTex(res.validatedSolution);
   };
+
+  useEffect(() => {
+    if (showSpinner) {
+      onCheckTexSolutionInput();
+      setShowSpinner(false);
+    }
+  }, [showSpinner]);
+
+  // tex solution commands
+  const actions = [
+    {
+      iconUrl: sumIcon,
+      latexCmd: () => setSolutionInTex((prevState) => prevState + "\\sum"),
+    },
+    {
+      iconUrl: squareIcon,
+      latexCmd: () => setSolutionInTex((prevState) => prevState + "\\sqrt{ }"),
+    },
+    {
+      iconUrl: piIcon,
+      latexCmd: () => setSolutionInTex((prevState) => prevState + "\\pi"),
+    },
+    // TODO: find icons and finish
+    // {
+    //   iconUrl: andIcon,
+    //   latexCmd: "\\land",
+    // },
+    // {
+    //   iconUrl: orIcon,
+    //   latexCmd: "\\lor",
+    // },
+    // {
+    //   iconUrl: oplusIcon,
+    //   latexCmd: "\\oplus",
+    // },
+    // {
+    //   iconUrl: negIcon,
+    //   latexCmd: "\\neg",
+    // },
+    // {
+    //   iconUrl: impliesIcon,
+    //   latexCmd: "\\implies",
+    // },
+    // {
+    //   iconUrl: setminusIcon,
+    //   latexCmd: "\\setminus",
+    // },
+  ];
 
   return (
     <div className="app">
@@ -158,29 +195,49 @@ const MainPage = () => {
         <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
           <div className={createDefaultAndDisabledClassName("app__tex-input")}>
             <h2>Prove that</h2>
-            <MathQuillEditor
-              showOperationTab={false}
-              startingLatexExpression={startTex}
-              width={hideDetails ? undefined : "22rem"}
-              updateValue={(value) => {
-                setStartTex(value);
-              }}
-              disable={hideDetails}
-              fontSize={hideDetails ? "2.2rem" : undefined}
-            />
+            {!hideDetails ? (
+              <EditableMathField
+                latex={startTex}
+                onChange={(mathField) => {
+                  setStartTex(mathField.latex());
+                }}
+                style={{
+                  width: "22rem",
+                  fontSize: "1.6rem",
+                }}
+              />
+            ) : (
+              <StaticMathField
+                style={{
+                  fontSize: "2.2rem",
+                }}
+              >
+                {startTex}
+              </StaticMathField>
+            )}
           </div>
           <div className={createDefaultAndDisabledClassName("app__tex-input")}>
             <h2>equals</h2>
-            <MathQuillEditor
-              showOperationTab={false}
-              startingLatexExpression={endTex}
-              width={hideDetails ? undefined : "22rem"}
-              updateValue={(value) => {
-                setEndTex(value);
-              }}
-              disable={hideDetails}
-              fontSize={hideDetails ? "2.2rem" : undefined}
-            />
+            {!hideDetails ? (
+              <EditableMathField
+                latex={endTex}
+                onChange={(mathField) => {
+                  setEndTex(mathField.latex());
+                }}
+                style={{
+                  width: "22rem",
+                  fontSize: "1.6rem",
+                }}
+              />
+            ) : (
+              <StaticMathField
+                style={{
+                  fontSize: "2.2rem",
+                }}
+              >
+                {endTex}
+              </StaticMathField>
+            )}
           </div>
         </div>
         {!hideDetails && (
@@ -233,37 +290,48 @@ const MainPage = () => {
       {isGameMode && (
         <GameEditor start={startSS} end={endSS} rulePacks={currentRulePack} />
       )}
-      {!isGameMode && texSolutionRerendered && (
+      {!isGameMode && (
         <div className="app__tex-solution-block">
           <h1>Write solution instead of dots</h1>
-          <MathQuillEditor
-            startingLatexExpression={solutionStartingTex}
-            updateValue={(value) => {
-              setSolutionInTex(value);
-            }}
-            big={true}
-            width={window.innerWidth - 100 + "px"}
-          />
+          <div className="tex-solution">
+            <div className="tex-solution__operations">
+              {actions.map((action, i) => {
+                const { iconUrl, latexCmd } = action;
+                return (
+                  <div key={i} className="tex-solution__operation">
+                    <img src={iconUrl} onClick={() => latexCmd()} />
+                  </div>
+                );
+              })}
+            </div>
+            <EditableMathField
+              latex={solutionInTex}
+              onChange={(mathField) => {
+                setSolutionInTex(mathField.latex());
+              }}
+              style={{
+                maxWidth: window.innerWidth - 100 + "px",
+                fontSize: "2.2rem",
+              }}
+            />
+          </div>
           <ClipLoader loading={showSpinner} />
           {(successMsg || solutionError) && (
             <Alert
               message={solutionError ? solutionError : successMsg}
               className="alert-msg"
               type={solutionError ? "error" : "success"}
-              style={{ marginRight: "0" }}
+              style={{ marginTop: "1rem" }}
             />
           )}
           <div className="app__tex-solution-btns">
             <Button
-              onClick={async () => {
+              onClick={() => {
+                // callback is provided in useEffect
                 setShowSpinner(true);
-                setTimeout(() => {
-                  onCheckTexSolutionInput();
-                  setShowSpinner(false);
-                }, 0);
               }}
               style={{
-                marginTop: "10px",
+                marginTop: "1rem",
               }}
               type="primary"
             >
@@ -271,11 +339,8 @@ const MainPage = () => {
             </Button>
             {correctSolution && (
               <Button
-                onClick={async () => {
-                  if (correctSolution) {
-                    await setSolutionStartingTex(correctSolution);
-                    await rerenderTexSolutionInput();
-                  }
+                onClick={() => {
+                  setSolutionInTex(correctSolution);
                 }}
                 style={{
                   marginTop: "10px",
