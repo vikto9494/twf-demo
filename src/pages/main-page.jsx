@@ -10,7 +10,7 @@ import GameEditor from "../components/game-editor/game-editor";
 // utils
 import {
   convertMathInput,
-  checkTexWithoutCompiledConfigurationCreating,
+  checkTex,
   createConfigurationFromRulePacksAndDetailSolutionCheckingParams,
 } from "../utils/kotlin-lib-functions";
 // styles
@@ -69,11 +69,6 @@ const MainPage = () => {
   const [endSS, setEndSS] = useState(defaultEnd);
   const [currentRulePack, setCurrentRulePack] = useState(
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
-  );
-  const [compiledConfiguration, setCompiledConfiguration] = useState(
-    createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
-      [currentRulePack]
-    )
   );
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
@@ -140,11 +135,11 @@ const MainPage = () => {
     }
   };
   const onCheckTexSolutionInput = () => {
-    const res = checkTexWithoutCompiledConfigurationCreating(
+    const res = checkTex(
       solutionInTex,
       startSS,
       endSS,
-      compiledConfiguration
+      [currentRulePack]
     );
     if (res.errorMessage) {
       setSuccessMsg(null);
@@ -196,7 +191,6 @@ const MainPage = () => {
                 defaultValue={currentRulePack}
                 onChange={(value) => {
                   setCurrentRulePack(value);
-                  setCompiledConfiguration(createConfigurationFromRulePacksAndDetailSolutionCheckingParams([value]));
                 }}
                 style={{ width: "150px" }}
               >
