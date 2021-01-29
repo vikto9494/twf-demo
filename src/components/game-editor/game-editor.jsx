@@ -11,6 +11,7 @@ const GameEditor = ({start, end, rulePacks}) => {
 
     useEffect(() => {
         cleanDocument();
+        const gameHeight = window.innerHeight - parseFloat(getComputedStyle(document.querySelector('.app')).height.slice(0, -2)) - 10;
         const topButtonsLineHeight = 0;
         const paddingFromTopButtonsLine = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
         const centralExpressionSize = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
@@ -19,14 +20,14 @@ const GameEditor = ({start, end, rulePacks}) => {
         const substitutionAreaX = substitutionAreaPadding;
         const substitutionAreaY = topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize + substitutionAreaPadding;
         const substitutionAreaWidth = window.innerWidth - 2 * substitutionAreaPadding;
-        const substitutionAreaHeight = window.innerHeight - (topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize) - 2 * substitutionAreaPadding;
+        const substitutionAreaHeight = gameHeight - (topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize) - 2 * substitutionAreaPadding;
         const substitutionSize = (window.innerWidth > 1000) ? 50 : window.innerWidth / 20;
         const explanationsSize = (window.innerWidth > 900) ? 30 : window.innerWidth / 30;
 
-        const substitutionAreaInternalPadding = window.innerHeight / 100;
+        const substitutionAreaInternalPadding = gameHeight / 100;
         const substitutionPaddingBetweenParts = window.innerWidth / 100;
 
-        const winLabelAreaY = window.innerHeight / 5 * 2; //topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize + substitutionAreaPadding / 2;
+        const winLabelAreaY = gameHeight / 5 * 2; //topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize + substitutionAreaPadding / 2;
         const winLabelTextSize = (window.innerWidth > 800) ? 40 : window.innerWidth / 20;
         const winLabelHeight = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
         const winLabelWidth = window.innerWidth - 4 * substitutionAreaPadding;
@@ -49,12 +50,9 @@ const GameEditor = ({start, end, rulePacks}) => {
 
         compiledConfiguration = window['twf-kotlin-lib'].createConfigurationFromRulePacksAndParams(rules);
 
-        const gameHeight = window.innerHeight - parseFloat(getComputedStyle(document.querySelector('.app__inputs')).height.slice(0, -2));
-
         let app = new SVG().addTo('body').size(window.innerWidth, gameHeight);
 
         StartLevel(originalExpression);
-
 
         function StartLevel(originalExpression) {
             init(compiledConfiguration, originalExpression, PrintSubstitutions, false, []);
@@ -75,7 +73,13 @@ const GameEditor = ({start, end, rulePacks}) => {
                     family: "u2000",
                     fill: "#000000"
                 }).center((window.innerWidth) / 2, substitutionAreaY + explanationsSize);
+                app.text("Use 'Shift' or 'CapsLock' to select more than one part").font({
+                    size: explanationsSize,
+                    family: "u2000",
+                    fill: "#000000"
+                }).center((window.innerWidth) / 2, substitutionAreaY + explanationsSize + explanationsSize + substitutionAreaInternalPadding);
             }
+
         }
 
 

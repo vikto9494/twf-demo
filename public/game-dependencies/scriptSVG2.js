@@ -35,11 +35,37 @@ function changeMultipleFlag(x) {
     }
 }
 
+window.multiSelectionMode = false;
+
+function isOnWhilePresKey (key) {
+    return key === "Shift" || key === "Meta" || key === "Control"
+}
+
+function isChangeModeKey (key) {
+    return key === "CapsLock"
+}
+
+document.addEventListener("keydown", (e) => {
+    if (isOnWhilePresKey(e.key)) {
+        window.multiSelectionMode = !window.multiSelectionMode;
+    } else if (isChangeModeKey(e.key)) {
+        window.multiSelectionMode = true;
+    }
+});
+
+document.addEventListener("keyup", (e) => {
+    if (isOnWhilePresKey(e.key)) {
+        window.multiSelectionMode = !window.multiSelectionMode;
+    } else if (isChangeModeKey(e.key)) {
+        window.multiSelectionMode = false;
+    }
+});
+
 function init(_compiledConfiguration, _level, _MakeMenu, _flag) {
     compiledConfiguration = _compiledConfiguration;
     level = _level;
     multiFlag = _flag;
-    MakeMenu = _MakeMenu
+    MakeMenu = _MakeMenu;
     multiArr = [];
     multiArrCont = [];
 }
@@ -67,7 +93,8 @@ function MakeNode(node, app) {
     };
     this.cont = app.group();
     this.twfNode = node;
-    this.cont.addClass("uncolored");
+    this.cont.color = default_text_color_number;
+    this.cont.twfNodeId = this.twfNode.nodeId;
 }
 
 function MakeTree(node, app) {
@@ -78,35 +105,66 @@ function MakeTree(node, app) {
     return cur_node;
 }
 
-const default_text_color = "#254b25";
+const default_text_color_number = 0x254b25;
+const default_text_color = "#" + default_text_color_number.toString(16);
+const once_selected_text_color_number = 0x1111ff;
+const once_selected_text_color = "#" + once_selected_text_color_number.toString(16);
+const selectionColorIncrement = 0x710000;
+const selectionMaxColorLimiter = 0xbbbbff;
 
-function getColor(n) {
-    let color = new SVG.Color("#448fff").to("#1111ff");
-    return color.at(2 / (n + 2)).toHex();
-}
+// function getColor(n) {
+//     let color = new SVG.Color("#448fff").to("#1111ff");
+//     return color.at(2 / (n + 2)).toHex();
+// }
 
 function setDefaultColor(index) {
-    for (let i = index; i < multiArr.length; ++i) {
-        changeColor(multiArrCont[i], multiArrCont[i].classes()[0], `colored${multiArr[i]}`, default_text_color);
-    }
+    changeColor(multiArrCont[index], default_text_color);
+    multiArrCont[index].color = default_text_color_number;
 }
 
-function recolor(index) {
-    for (let i = index; i < multiArr.length; ++i) {
-        changeColor(multiArrCont[i], multiArrCont[i].classes()[0], `colored${multiArr[i]}`, getColor(i));
-    }
+function setOnceSelectedColor(index) {
+    changeColor(multiArrCont[index], once_selected_text_color);
+    multiArrCont[index].color = once_selected_text_color_number;
 }
 
-function changeColor(con, fromClass, toClass, toColor) {
-    con.animate(300, "<>").fill(toColor);
-    con.removeClass(fromClass);
-    con.addClass(toClass);
+function setSelectionColor (con) {
+    console.log("nodeId:" + con.twfNodeId);
+    if (con.color !== default_text_color_number && con.color < selectionMaxColorLimiter) {
+        con.color = con.color + selectionColorIncrement;
+    } else {
+        con.color = once_selected_text_color_number;
+    }
+    const toColor = "#" + con.color.toString(16);
+
     for (let item of con.children()) {
-        changeColor(item, fromClass, toClass, toColor);
+        setSelectionColor(item);
+    }
+    con.animate(300, "<>").fill(toColor);
+}
+
+function setUnselectionColor (con) {
+    if (con.color !== default_text_color_number && con.color > once_selected_text_color_number) {
+        con.color = con.color - selectionColorIncrement;
+    } else {
+        con.color = default_text_color_number;
+    }
+    const toColor = "#" + con.color.toString(16);
+
+    for (let item of con.children()) {
+        setUnselectionColor(item);
+    }
+    con.animate(300, "<>").fill(toColor);
+}
+
+function changeColor(con, toColor) {
+    con.animate(300, "<>").fill(toColor);
+    for (let item of con.children()) {
+        changeColor(item, toColor);
     }
 }
 
 function PrintTree(TWF_v, init_font_size, app) {
+
     let TreeRoot = MakeTree(TWF_v.children.toArray()[0], app);
 
     let chr_sample = SVG().text("X").font({size: init_font_size});
@@ -161,10 +219,12 @@ function PrintTree(TWF_v, init_font_size, app) {
         txt.leading(0.9);
         txt
 //            .on("dblclick", () => multipleSelectionHandling(cont, nodeId))
-            .on("mousedown", () => onePlaceSelectionHandling(cont, nodeId))
+//            .on("mousedown", () => onePlaceSelectionHandling(cont, nodeId))
+            .on("mousedown", () => mouseDownHandling(cont, nodeId))
             .on("mouseup mouseover", () => onButtonOver(cont, nodeId))
             .on("mouseout", () => onButtonOut(cont, nodeId));
         txt.addClass("uncolored");
+        txt.color = default_text_color_number;
         return txt;
     }
 
@@ -177,6 +237,7 @@ function PrintTree(TWF_v, init_font_size, app) {
             .fill(default_text_color)
             .move(a.bbox().x, a.y() + a.bbox().height);
         line.addClass("uncolored");
+        line.color = default_text_color_number;
         cont.add(line);
 
         let line_hitbox = cont.rect(width, height * 5)
@@ -184,7 +245,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         line_hitbox.css("cursor", "pointer");
         line_hitbox
 //            .on("dblclick", () => multipleSelectionHandling(cont, nodeId))
-            .on("mousedown", () => onePlaceSelectionHandling(cont, nodeId))
+            .on("mousedown", () => mouseDownHandling(cont, nodeId))
             .on("mouseup mouseover", () => onButtonOver(cont))
             .on("mouseout", () => onButtonOut(cont));
         line_hitbox.opacity(0);
@@ -203,6 +264,7 @@ function PrintTree(TWF_v, init_font_size, app) {
     function draw(cont, child, del) {
         child.dx(del);
         cont.add(child);
+        cont.color = default_text_color_number;
         return child.bbox().width;
     }
 
@@ -255,7 +317,7 @@ function PrintTree(TWF_v, init_font_size, app) {
             pow_hitbox.css("cursor", "pointer");
             pow_hitbox
 //                .on("dblclick", () => multipleSelectionHandling(cur_cont, v.twfNode.nodeId))
-                .on("mousedown", () => onePlaceSelectionHandling(cur_cont, v.twfNode.nodeId))
+                .on("mousedown", () => mouseDownHandling(cur_cont, v.twfNode.nodeId))
                 .on("mouseup mouseover", () => onButtonOver(cur_cont))
                 .on("mouseout", () => onButtonOut(cur_cont));
             pow_hitbox.opacity(0);
@@ -568,25 +630,28 @@ function PrintTree(TWF_v, init_font_size, app) {
         return [cur_cont, vert_shift];
     }
 
+    function mouseDownHandling(cont, nodeId) {
+        if (window.multiSelectionMode) {
+            multipleSelectionHandling(cont, nodeId)
+        } else {
+            onePlaceSelectionHandling(cont, nodeId)
+        }
+    }
+
     function multipleSelectionHandling(con, nodeId) {
         let index = multiArr.indexOf(nodeId);
         if (index !== -1) {
-            if (multiArrCont[index].parent().hasClass("uncolored") || multiArrCont[index].parent().classes().length === 0) {
-                changeColor(multiArrCont[index], multiArrCont[index].classes()[0], "uncolored", default_text_color);
-            } else {
-                changeColor(multiArrCont[index], multiArrCont[index].classes()[0], multiArrCont[index].parent().classes()[0], getColor(multiArrCont.indexOf(multiArrCont[index].parent())));
-            }
-            setDefaultColor(index);
+            setUnselectionColor(multiArrCont[index]);
             multiArrCont.splice(index, 1);
             multiArr.splice(index, 1);
         } else {
-            multiArr.unshift(nodeId);
-            multiArrCont.unshift(con);
-            recolor(multiArr.length - 1);
+            multiArr.push(nodeId);
+            multiArrCont.push(con);
+            setSelectionColor(multiArrCont[multiArr.length - 1]);
             /*
             multiArr.push(nodeId);
             multiArrCont.push(con);
-            recolor(multiArr.length - 1);
+            setOnceSelectedColor(multiArr.length - 1);
             */
         }
 
@@ -608,18 +673,18 @@ function PrintTree(TWF_v, init_font_size, app) {
 
     function onePlaceSelectionHandling(con, nodeId) {
         for (let i = 0; i < multiArr.length; i++) {
-            if (multiArrCont[i].parent().hasClass("uncolored") || multiArrCont[i].parent().classes().length === 0) {
-                changeColor(multiArrCont[i], multiArrCont[i].classes()[0], "uncolored", default_text_color);
-            } else {
-                changeColor(multiArrCont[i], multiArrCont[i].classes()[0], multiArrCont[i].parent().classes()[0], getColor(multiArrCont.indexOf(multiArrCont[i].parent())));
-            }
+            // if (multiArrCont[i].parent().hasClass("uncolored") || multiArrCont[i].parent().classes().length === 0) {
+            //     changeColor(multiArrCont[i], multiArrCont[i].classes()[0], "uncolored", default_text_color);
+            // } else {
+            //     changeColor(multiArrCont[i], multiArrCont[i].classes()[0], multiArrCont[i].parent().classes()[0], getColor(multiArrCont.indexOf(multiArrCont[i].parent())));
+            // }
             setDefaultColor(i);
-            multiArrCont.splice(i, 1);
-            multiArr.splice(i, 1);
         }
+        multiArrCont = [];
+        multiArr = [];
         multiArr.unshift(nodeId);
         multiArrCont.unshift(con);
-        recolor(0);
+        setOnceSelectedColor(0);
 
         let arr = [];
         if (multiArr.length !== 0) {
@@ -627,13 +692,14 @@ function PrintTree(TWF_v, init_font_size, app) {
                 this['twf-kotlin-lib'].structureStringToExpression(level),
                 multiArr,
                 compiledConfiguration, true, true).toArray();
+
+            let new_arr = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].resultExpression.toString() === "To get application result use argument 'withReadyApplicationResult' = 'true'()") continue;
+                new_arr.push([arr[i].originalExpressionChangingPart.toString(), arr[i].resultExpressionChangingPart.toString()])
+            }
+            MakeMenu(new_arr, arr);
         }
-        let new_arr = [];
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].resultExpression.toString() === "To get application result use argument 'withReadyApplicationResult' = 'true'()") continue;
-            new_arr.push([arr[i].originalExpressionChangingPart.toString(), arr[i].resultExpressionChangingPart.toString()])
-        }
-        MakeMenu(new_arr, arr);
     }
 
 

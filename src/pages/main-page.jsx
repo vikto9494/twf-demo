@@ -324,6 +324,7 @@ const MainPage = () => {
                 setSolutionInTex(mathField.latex());
               }}
               style={{
+                minWidth: "40rem",
                 maxWidth: window.innerWidth - 100 + "px",
                 fontSize: "2.2rem",
               }}
