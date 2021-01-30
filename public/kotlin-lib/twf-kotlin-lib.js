@@ -1211,12 +1211,28 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return $receiver;
   }
-  function findApplicableSubstitutionsInSelectedPlace(expression, selectedNodeIds, compiledConfiguration, simplifyNotSelectedTopArguments, withReadyApplicationResult) {
+  function findApplicableSubstitutionsInSelectedPlace(expression, selectedNodeIds, compiledConfiguration, simplifyNotSelectedTopArguments, withReadyApplicationResult, withFullExpressionChangingPart) {
     if (simplifyNotSelectedTopArguments === void 0)
       simplifyNotSelectedTopArguments = false;
     if (withReadyApplicationResult === void 0)
       withReadyApplicationResult = true;
-    return generateSubstitutionsBySelectedNodes(new SubstitutionSelectionData(expression, selectedNodeIds, compiledConfiguration), void 0, withReadyApplicationResult);
+    if (withFullExpressionChangingPart === void 0)
+      withFullExpressionChangingPart = true;
+    var $receiver = generateSubstitutionsBySelectedNodes(new SubstitutionSelectionData(expression, selectedNodeIds, compiledConfiguration), void 0, withReadyApplicationResult);
+    if (withFullExpressionChangingPart) {
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        var $receiver_0 = new ExpressionNode(NodeType$FUNCTION_getInstance(), '');
+        $receiver_0.addChild_6718cy$(element.originalExpressionChangingPart);
+        element.originalExpressionChangingPart = $receiver_0;
+        var $receiver_1 = new ExpressionNode(NodeType$FUNCTION_getInstance(), '');
+        $receiver_1.addChild_6718cy$(element.resultExpressionChangingPart);
+        element.resultExpressionChangingPart = $receiver_1;
+      }
+    }
+    return $receiver;
   }
   function applySubstitutionInSelectedPlace(expression, selectedNodeIds, substitution, compiledConfiguration, simplifyNotSelectedTopArguments) {
     if (simplifyNotSelectedTopArguments === void 0)
@@ -28636,7 +28652,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$api.findSubstitutionPlacesInExpression_333i8d$ = findSubstitutionPlacesInExpression_0;
   package$api.applySubstitution_g1mkoe$ = applySubstitution_0;
   package$api.createCompiledConfigurationFromExpressionSubstitutionsAndParams_aatmta$ = createCompiledConfigurationFromExpressionSubstitutionsAndParams;
-  package$api.findApplicableSubstitutionsInSelectedPlace_fe1uu9$ = findApplicableSubstitutionsInSelectedPlace;
+  package$api.findApplicableSubstitutionsInSelectedPlace_6tp454$ = findApplicableSubstitutionsInSelectedPlace;
   package$api.applySubstitutionInSelectedPlace_m5nb0p$ = applySubstitutionInSelectedPlace;
   package$api.findLowestSubtreeTopOfSelectedNodesInExpression_3skgjp$ = findLowestSubtreeTopOfSelectedNodesInExpression;
   package$api.SubstitutionPlaceOfflineData = SubstitutionPlaceOfflineData;

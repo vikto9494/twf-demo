@@ -107,22 +107,6 @@ const GameEditor = ({start, end, rulePacks}) => {
             }
         }
 
-        // function wheel(event) {
-        //   let delta;
-        //   event = event || window.event;
-        //   if (event.wheelDelta) {
-        //     delta = event.wheelDelta / 120;
-        //     if (window.opera) delta = -delta;
-        //   } else if (event.detail) {
-        //     delta = -event.detail / 3;
-        //   }
-        //   if (event.preventDefault) event.preventDefault();
-        //   event.returnValue = false;
-        //   if (ins(cont, event.pageX, event.pageY)) {
-        //     contOfCont.fire('scroll', {some: delta})
-        //   }
-        // }
-
 
         function PrintSubstitutions(listOfValues, arrSubs) {
             let extensionBorderPadding = 20;
@@ -147,7 +131,7 @@ const GameEditor = ({start, end, rulePacks}) => {
                 let curCont = draw.group();
 
                 let actualShiftX = substitutionAreaInternalPadding + substitutionAreaX;
-                let lolkek = (PlainPrintTree(window['twf-kotlin-lib'].structureStringToExpression(listOfValues[i][0]), substitutionSize, curCont)).x(actualShiftX).y(heighContOfConts);
+                let lolkek = (PlainPrintTree(listOfValues[i][0], substitutionSize, curCont)).x(actualShiftX).y(heighContOfConts);
                 actualShiftX += substitutionPaddingBetweenParts;
 
                 let tmpWidth = curCont.width();
@@ -161,7 +145,7 @@ const GameEditor = ({start, end, rulePacks}) => {
                 actualShiftX += substitutionPaddingBetweenParts;
                 tmpWidth = curCont.width();
 
-                let abs = (PlainPrintTree(window['twf-kotlin-lib'].structureStringToExpression(listOfValues[i][1]), substitutionSize, curCont)).x(actualShiftX + tmpWidth).y(heighContOfConts);
+                let abs = (PlainPrintTree(listOfValues[i][1], substitutionSize, curCont)).x(actualShiftX + tmpWidth).y(heighContOfConts);
 
                 lolkek.center(lolkek.x() + lolkek.width() / 2, heighContOfConts + lolkek.height() / 2);
                 draw.rect(width_inner_cont, curCont.height()).radius(10)
@@ -169,9 +153,9 @@ const GameEditor = ({start, end, rulePacks}) => {
 
 
                 let realWidth = curCont.width() - substitutionAreaX;
-                if (realWidth >= width_inner_cont - 100) {
-                    let scaleCoef = (width_inner_cont - 100) / realWidth;
-                    curCont.x(substitutionAreaX - (realWidth - (width_inner_cont - 100)) / 2).scale(scaleCoef);
+                if (realWidth >= width_inner_cont - 150) {
+                    let scaleCoef = (width_inner_cont - 150) / realWidth;
+                    curCont.x(substitutionAreaX - (realWidth - (width_inner_cont - 150)) / 2).scale(scaleCoef);
                 }
                 draw.add(curCont);
 
@@ -185,26 +169,6 @@ const GameEditor = ({start, end, rulePacks}) => {
 
             }
 
-            // function moveScrollUp(con, tmp) {
-            //   con.animate(300, '<>')
-            //       .dy(tmp * 2);
-            // }
-            //
-            // function moveScrollDown(con, tmp) {
-            //   con.animate(300, '<>')
-            //       .dy(tmp * 2);
-            // }
-            //
-            // rulesContainer.on('scroll', function (e) {
-            //   let tmp = e.detail.some;
-            //     console.log("scrol: " + tmp);
-            //   if (tmp > 0) {
-            //     moveScrollUp(rulesContainer, tmp);
-            //   } else {
-            //     moveScrollDown(rulesContainer, tmp);
-            //   }
-            // });
-
             function addHandler(object, event, handler) {
                 if (object.addEventListener) {
                     object.addEventListener(event, handler, false, {passive: false});
@@ -212,8 +176,6 @@ const GameEditor = ({start, end, rulePacks}) => {
                     object.attachEvent('on' + event, handler, {passive: false});
                 } else alert("Обработчик не поддерживается");
             }
-
-//      addHandler(document, 'mousewheel', wheel);
 
 
             function onButtonDownButton1(con, f = false, index = -1) {
