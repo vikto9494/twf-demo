@@ -13,14 +13,14 @@ const GameEditor = ({start, end, rulePacks}) => {
         cleanDocument();
         const gameHeight = window.innerHeight - parseFloat(getComputedStyle(document.querySelector('.app')).height.slice(0, -2)) - 10;
         const topButtonsLineHeight = 0;
-        const paddingFromTopButtonsLine = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
+        const paddingFromTopButtonsLine = (window.innerWidth > 500) ? 50 : window.innerWidth / 10;
         const centralExpressionSize = (window.innerWidth > 800) ? 80 : window.innerWidth / 10;
 
-        const substitutionAreaPadding = (window.innerWidth > 1200) ? 120 : window.innerWidth / 10;
+        const substitutionAreaPadding = (window.innerWidth > 400) ? 40 : window.innerWidth / 10;
         const substitutionAreaX = substitutionAreaPadding;
         const substitutionAreaY = topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize + substitutionAreaPadding;
         const substitutionAreaWidth = window.innerWidth - 2 * substitutionAreaPadding;
-        const substitutionAreaHeight = gameHeight - (topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize) - 2 * substitutionAreaPadding;
+        const substitutionAreaHeight = gameHeight - (topButtonsLineHeight + paddingFromTopButtonsLine + centralExpressionSize * 1.5) - 2 * substitutionAreaPadding;
         const substitutionSize = (window.innerWidth > 1000) ? 50 : window.innerWidth / 20;
         const explanationsSize = (window.innerWidth > 900) ? 30 : window.innerWidth / 30;
 

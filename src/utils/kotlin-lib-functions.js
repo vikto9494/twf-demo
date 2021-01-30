@@ -110,3 +110,7 @@ export const checkTex = (fullExpression, start, end, rulePacks) => {
     undefined
   );
 };
+
+export const decodeUrlSymbols = (string) => {
+  return twfKotlinLibrary.decodeUrlSymbols(string);
+};

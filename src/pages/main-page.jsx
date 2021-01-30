@@ -8,7 +8,7 @@ import { EditableMathField, StaticMathField } from "react-mathquill";
 // custom components
 import GameEditor from "../components/game-editor/game-editor";
 // utils
-import { convertMathInput, checkTex } from "../utils/kotlin-lib-functions";
+import { convertMathInput, checkTex, decodeUrlSymbols } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 // icons
 import sumIcon from "../assets/math-symbols/sum.svg";
@@ -54,9 +54,9 @@ const MainPage = () => {
   };
   // static data
   const defaultStart = originalExpressionUrl
-    ? originalExpressionUrl
+    ? decodeUrlSymbols(originalExpressionUrl)
     : "(and(a;or(a;b)))";
-  const defaultEnd = endExpressionUrl ? endExpressionUrl : "(a)";
+  const defaultEnd = endExpressionUrl ? decodeUrlSymbols(endExpressionUrl) : "(a)";
   const rulePacks = [
     "Logic",
     "ShortMultiplication",
@@ -305,7 +305,7 @@ const MainPage = () => {
       )}
       {!isGameMode && (
         <div className="app__tex-solution-block">
-          <h1>Write solution instead of dots</h1>
+          <h1>Write solution instead of dots (in TeX)</h1>
           <div className="tex-solution">
             <div className="tex-solution__operations">
               {actions.map((action, i) => {
