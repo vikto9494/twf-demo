@@ -83,6 +83,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init_pdl1vj$;
   var throwUPAE = Kotlin.throwUPAE;
+  var toList = Kotlin.kotlin.collections.toList_7wnvza$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var isNaN_0 = Kotlin.kotlin.isNaN_yrwdxr$;
   var isFinite = Kotlin.kotlin.isFinite_yrwdxr$;
@@ -100,7 +101,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var get_lastIndex_1 = Kotlin.kotlin.collections.get_lastIndex_m7z4lg$;
   var firstOrNull_0 = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var Unit = Kotlin.kotlin.Unit;
-  var toList = Kotlin.kotlin.collections.toList_us0mfu$;
+  var toList_0 = Kotlin.kotlin.collections.toList_us0mfu$;
   var toMutableList_0 = Kotlin.kotlin.collections.toMutableList_us0mfu$;
   var indexOf = Kotlin.kotlin.collections.indexOf_bv23uc$;
   var reverse = Kotlin.kotlin.collections.reverse_vvxzk3$;
@@ -693,10 +694,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     return plus(getTrigonometrySubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(a);-(ctg(b)))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(*(ctg(a);ctg(b));1);+(ctg(a);-(ctg(b)))))', '(ctg(+(a;-(b))))', false, false, false, false, 30, '')]));
   }
   function getLogicBaseSubstitutions() {
-    return mutableListOf([expressionSubstitutionFromStructureStrings('(not(and(A;B)))', '(or(not(A);not(B)))', false, false, false, false, 15, ''), expressionSubstitutionFromStructureStrings('(or(not(A);not(B)))', '(not(and(A;B)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(not(or(A;B)))', '(and(not(A);not(B)))', false, false, false, false, 15, ''), expressionSubstitutionFromStructureStrings('(and(not(A);not(B)))', '(not(or(A;B)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(not(not(a)))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(not(not(a)))', false, false, false, true, 89, ''), expressionSubstitutionFromStructureStrings('(or(a;a))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(or(a;a))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(and(a;a))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(and(a;a))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(and(a;b))', '(and(b;a))', false, false, false, true, 40, ''), expressionSubstitutionFromStructureStrings('(or(a;b))', '(or(b;a))', false, false, false, true, 40, ''), expressionSubstitutionFromStructureStrings('(a)', '(and(a;1))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(a)', '(or(a;0))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(or(A;not(A)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(not(A);A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(A;1))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(1;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(0;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(not(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(not(1))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'SimpleComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'ZeroComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 92, 'SetComplicatingExtension'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'ParentBracketsExpansion'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsSwap'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsPermutation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'OpeningBrackets'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 41, 'ArgumentsPermutationInOriginalOrder'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceArithmetic'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'TwoSidesArithmeticReduce'), expressionSubstitutionFromStructureStrings('(or(not(A);B))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(or(B;not(A)))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(implic(A;B))', '(or(not(A);B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(and(A;not(B)))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(and(not(B);A))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;B))', '(and(A;not(B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;B))', '(not(implic(A;B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(not(implic(A;B)))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(implic(A;B))', '(not(set-(A;B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(not(set-(A;B)))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(A;1))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(1;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(0;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(A;1))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(A;0))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(A)', '(set-(A;0))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(A)', '(implic(1;A))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(xor(A;B))', '(or(and(not(A);B);and(A;not(B))))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(or(and(not(A);B);and(A;not(B))))', '(xor(A;B))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(alleq(A;B))', '(or(and(A;B);and(not(A);not(B))))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(or(and(A;B);and(not(A);not(B))))', '(alleq(A;B))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(xor(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(A;1))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(0;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(1;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(0;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(A;0))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(A)', '(xor(A;0))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(A)', '(alleq(1;A))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(not(A))', '(xor(A;1))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(not(A))', '(alleq(0;A))', false, false, false, true, 91, '')]);
+    return mutableListOf([expressionSubstitutionFromStructureStrings('(not(and(A;B)))', '(or(not(A);not(B)))', false, false, false, false, 15, ''), expressionSubstitutionFromStructureStrings('(or(not(A);not(B)))', '(not(and(A;B)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(not(or(A;B)))', '(and(not(A);not(B)))', false, false, false, false, 15, ''), expressionSubstitutionFromStructureStrings('(and(not(A);not(B)))', '(not(or(A;B)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(not(not(a)))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(not(not(a)))', false, false, false, true, 89, ''), expressionSubstitutionFromStructureStrings('(or(a;a))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(or(a;a))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(and(a;a))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(and(a;a))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(and(a;b))', '(and(b;a))', false, false, false, true, 40, ''), expressionSubstitutionFromStructureStrings('(or(a;b))', '(or(b;a))', false, false, false, true, 40, ''), expressionSubstitutionFromStructureStrings('(a)', '(and(a;1))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(a)', '(or(a;0))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(or(A;not(A)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(not(A);A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(A;1))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(1;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(0;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(not(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(not(1))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'SimpleComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'ZeroComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'ParentBracketsExpansion'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsSwap'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsPermutation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'OpeningBrackets'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 41, 'ArgumentsPermutationInOriginalOrder'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceArithmetic'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'TwoSidesArithmeticReduce'), expressionSubstitutionFromStructureStrings('(or(not(A);B))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(or(B;not(A)))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(implic(A;B))', '(or(not(A);B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(and(A;not(B)))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(and(not(B);A))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;B))', '(and(A;not(B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;B))', '(not(implic(A;B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(not(implic(A;B)))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(implic(A;B))', '(not(set-(A;B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(not(set-(A;B)))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(A;1))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(1;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(0;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(A;1))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(A;0))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(A)', '(set-(A;0))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(A)', '(implic(1;A))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(xor(A;B))', '(or(and(not(A);B);and(A;not(B))))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(or(and(not(A);B);and(A;not(B))))', '(xor(A;B))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(alleq(A;B))', '(or(and(A;B);and(not(A);not(B))))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(or(and(A;B);and(not(A);not(B))))', '(alleq(A;B))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(xor(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(A;1))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(0;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(1;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(0;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(A;0))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(A)', '(xor(A;0))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(A)', '(alleq(1;A))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(not(A))', '(xor(A;1))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(not(A))', '(alleq(0;A))', false, false, false, true, 91, '')]);
   }
   function getLogicAbsorptionLawSubstitutions() {
-    return plus(getLogicBaseSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(and(A;or(A;B)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(A;and(A;B)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(and(A;or(B;A)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(A;and(B;A)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(and(or(A;B);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(and(A;B);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(and(or(B;A);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(and(B;A);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(A)', '(and(A;or(A;B)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(A)', '(or(A;and(A;B)))', false, false, false, true, 90, '')]));
+    return plus(getLogicBaseSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(and(A;or(A;B)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(A;and(A;B)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(and(A;or(B;A)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(A;and(B;A)))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(and(or(A;B);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(and(A;B);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(and(or(B;A);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(or(and(B;A);A))', '(A)', false, false, false, false, 6, ''), expressionSubstitutionFromStructureStrings('(A)', '(and(A;or(A;B)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(A)', '(or(A;and(A;B)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 92, 'SetComplicatingExtension')]));
   }
   function getLogicResolutionSubstitutions() {
     return plus(getLogicBaseSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(and(not(A);A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A)))', '(and(X;or(A;X);not(A)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X)))', '(and(X;not(A);or(A;X)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A))', '(and(X;or(not(A);X);A))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X)))', '(and(X;A;or(not(A);X)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y)))', '(and(or(X;Y);or(A;X);or(not(A);Y)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y)))', '(and(or(X;Y);or(not(A);X);or(A;Y)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C))', '(and(X;or(A;X);not(A);C))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C))', '(and(X;not(A);or(A;X);C))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C))', '(and(X;or(not(A);X);A;C))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C))', '(and(X;A;or(not(A);X);C))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C))', '(and(or(X;Y);or(A;X);or(not(A);Y);C))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C))', '(and(or(X;Y);or(not(A);X);or(A;Y);C))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C;D))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C;D))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C;D))', '(and(X;or(A;X);not(A);C;D))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C;D))', '(and(X;not(A);or(A;X);C;D))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C;D))', '(and(X;or(not(A);X);A;C;D))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C;D))', '(and(X;A;or(not(A);X);C;D))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C;D))', '(and(or(X;Y);or(A;X);or(not(A);Y);C;D))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C;D))', '(and(or(X;Y);or(not(A);X);or(A;Y);C;D))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C;D;E))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C;D;E))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C;D;E))', '(and(X;or(A;X);not(A);C;D;E))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C;D;E))', '(and(X;not(A);or(A;X);C;D;E))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C;D;E))', '(and(X;or(not(A);X);A;C;D;E))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C;D;E))', '(and(X;A;or(not(A);X);C;D;E))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C;D;E))', '(and(or(X;Y);or(A;X);or(not(A);Y);C;D;E))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C;D;E))', '(and(or(X;Y);or(not(A);X);or(A;Y);C;D;E))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C;D;E;F))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C;D;E;F))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C;D;E;F))', '(and(X;or(A;X);not(A);C;D;E;F))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C;D;E;F))', '(and(X;not(A);or(A;X);C;D;E;F))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C;D;E;F))', '(and(X;or(not(A);X);A;C;D;E;F))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C;D;E;F))', '(and(X;A;or(not(A);X);C;D;E;F))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C;D;E;F))', '(and(or(X;Y);or(A;X);or(not(A);Y);C;D;E;F))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C;D;E;F))', '(and(or(X;Y);or(not(A);X);or(A;Y);C;D;E;F))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C;D;E;F;G))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C;D;E;F;G))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C;D;E;F;G))', '(and(X;or(A;X);not(A);C;D;E;F;G))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C;D;E;F;G))', '(and(X;not(A);or(A;X);C;D;E;F;G))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C;D;E;F;G))', '(and(X;or(not(A);X);A;C;D;E;F;G))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C;D;E;F;G))', '(and(X;A;or(not(A);X);C;D;E;F;G))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C;D;E;F;G))', '(and(or(X;Y);or(A;X);or(not(A);Y);C;D;E;F;G))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C;D;E;F;G))', '(and(or(X;Y);or(not(A);X);or(A;Y);C;D;E;F;G))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C;D;E;F;G;H))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C;D;E;F;G;H))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C;D;E;F;G;H))', '(and(X;or(A;X);not(A);C;D;E;F;G;H))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C;D;E;F;G;H))', '(and(X;not(A);or(A;X);C;D;E;F;G;H))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C;D;E;F;G;H))', '(and(X;or(not(A);X);A;C;D;E;F;G;H))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C;D;E;F;G;H))', '(and(X;A;or(not(A);X);C;D;E;F;G;H))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C;D;E;F;G;H))', '(and(or(X;Y);or(A;X);or(not(A);Y);C;D;E;F;G;H))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C;D;E;F;G;H))', '(and(or(X;Y);or(not(A);X);or(A;Y);C;D;E;F;G;H))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A;C;D;E;F;G;H;I))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A);C;D;E;F;G;H;I))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);not(A);C;D;E;F;G;H;I))', '(and(X;or(A;X);not(A);C;D;E;F;G;H;I))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(not(A);or(A;X);C;D;E;F;G;H;I))', '(and(X;not(A);or(A;X);C;D;E;F;G;H;I))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);A;C;D;E;F;G;H;I))', '(and(X;or(not(A);X);A;C;D;E;F;G;H;I))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(A;or(not(A);X);C;D;E;F;G;H;I))', '(and(X;A;or(not(A);X);C;D;E;F;G;H;I))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(A;X);or(not(A);Y);C;D;E;F;G;H;I))', '(and(or(X;Y);or(A;X);or(not(A);Y);C;D;E;F;G;H;I))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(and(or(not(A);X);or(A;Y);C;D;E;F;G;H;I))', '(and(or(X;Y);or(not(A);X);or(A;Y);C;D;E;F;G;H;I))', false, false, false, false, 10, '')]));
@@ -4944,6 +4945,19 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
   }
   ComparisonType.valueOf_61zpoe$ = ComparisonType$valueOf;
+  function reverse_0($receiver) {
+    switch ($receiver.name) {
+      case 'LEFT_MORE_OR_EQUAL':
+        return ComparisonType$LEFT_LESS_OR_EQUAL_getInstance();
+      case 'LEFT_LESS_OR_EQUAL':
+        return ComparisonType$LEFT_MORE_OR_EQUAL_getInstance();
+      case 'LEFT_MORE':
+        return ComparisonType$LEFT_LESS_getInstance();
+      case 'LEFT_LESS':
+        return ComparisonType$LEFT_MORE_getInstance();
+      default:return $receiver;
+    }
+  }
   function strictComparison(comp) {
     return comp === ComparisonType$LEFT_LESS_getInstance() || comp === ComparisonType$LEFT_MORE_getInstance();
   }
@@ -6893,12 +6907,20 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   GeneralError.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.description, other.description))));
   };
-  function ExpressionComporator(baseOperationsDefinitions) {
+  function ExpressionComporator(baseOperationsDefinitions, baseOperationsComputationDouble, baseOperationsComputationComplex) {
     if (baseOperationsDefinitions === void 0)
       baseOperationsDefinitions = new BaseOperationsDefinitions();
+    if (baseOperationsComputationDouble === void 0)
+      baseOperationsComputationDouble = new BaseOperationsComputation(ComputationType$DOUBLE_getInstance());
+    if (baseOperationsComputationComplex === void 0)
+      baseOperationsComputationComplex = new BaseOperationsComputation(ComputationType$COMPLEX_getInstance());
     this.baseOperationsDefinitions = baseOperationsDefinitions;
+    this.baseOperationsComputationDouble = baseOperationsComputationDouble;
+    this.baseOperationsComputationComplex = baseOperationsComputationComplex;
     this.compiledConfiguration_h7im45$_0 = this.compiledConfiguration_h7im45$_0;
     this.definedFunctionNameNumberOfArgsSet_cdkc0l$_0 = this.definedFunctionNameNumberOfArgsSet_cdkc0l$_0;
+    this.algebraAutoCheckingFunctionsSet = setOf_0(['_0', '_1', '+_-1', '-_-1', '*_-1', '/_-1', '^_-1', 'sin_1', 'cos_1', 'sh_1', 'ch_1', 'th_1', 'tg_1', 'asin_1', 'acos_1', 'atg_1', 'exp_1', 'ln_1', 'abs_1']);
+    this.setAutoCheckingFunctionsSet = setOf_0(['_0', '_1', 'and_-1', 'or_-1', 'xor_-1', 'alleq_-1', 'not_1']);
   }
   Object.defineProperty(ExpressionComporator.prototype, 'compiledConfiguration', {
     get: function () {
@@ -6948,6 +6970,80 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     rUnified.normalizeSubTree_f8z7ch$(void 0, void 0, true);
     return lUnified.isNodeSubtreeEquals_7j5kvs$(rUnified, nameArgsMap);
   };
+  ExpressionComporator.prototype.logicFullSearchComparison_qe5wwd$ = function (leftOrigin, rightOrigin, comparisonType, maxBustCount) {
+    if (comparisonType === void 0)
+      comparisonType = this.compiledConfiguration.comparisonSettings.defaultComparisonType;
+    if (maxBustCount === void 0)
+      maxBustCount = this.compiledConfiguration.comparisonSettings.maxExpressionBustCount;
+    var normalized = normalizeExpressionsForComparison(leftOrigin, rightOrigin);
+    var left = normalized.first;
+    var right = normalized.second;
+    if (this.compareAsIs_98xwbf$(left, right)) {
+      return !strictComparison(comparisonType);
+    }
+    if (right.children.isEmpty() || left.children.isEmpty()) {
+      return false;
+    }
+    this.baseOperationsDefinitions.computeExpressionTree_6718cy$(left.children.get_za3lpa$(0));
+    this.baseOperationsDefinitions.computeExpressionTree_6718cy$(right.children.get_za3lpa$(0));
+    var variablesNamesSet = LinkedHashSet_init();
+    variablesNamesSet.addAll_brywnq$(left.getVariableNames());
+    variablesNamesSet.addAll_brywnq$(right.getVariableNames());
+    var variables = toList(variablesNamesSet);
+    if (variables.size > maxBustCount) {
+      return true;
+    }
+    var destination = ArrayList_init_0(collectionSizeOrDefault(variables, 10));
+    var tmp$;
+    tmp$ = variables.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(new Pair(item, '0'));
+    }
+    var variableValues = toMutableMap(toMap(destination));
+    return this.logicFullSearchComparisonRecursive_5tebyg$(variables, variableValues, left, right, comparisonType, 0);
+  };
+  ExpressionComporator.prototype.logicFullSearchComparisonRecursive_5tebyg$ = function (variables, variableValues, left, right, comparisonType, currentIndex) {
+    var tmp$, tmp$_0;
+    if (currentIndex === variables.size) {
+      var l = typeof (tmp$ = this.baseOperationsComputationDouble.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(variableValues, false))) === 'number' ? tmp$ : throwCCE();
+      var r = typeof (tmp$_0 = this.baseOperationsComputationDouble.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(variableValues, false))) === 'number' ? tmp$_0 : throwCCE();
+      switch (comparisonType.name) {
+        case 'LEFT_MORE_OR_EQUAL':
+          if (l < r)
+            return false;
+          break;
+        case 'LEFT_MORE':
+          if (l <= r)
+            return false;
+          break;
+        case 'LEFT_LESS_OR_EQUAL':
+          if (l > r)
+            return false;
+          break;
+        case 'LEFT_LESS':
+          if (l >= r)
+            return false;
+          break;
+        default:if (!this.baseOperationsDefinitions.additivelyEqual_lu1900$(l, r))
+            return false;
+          break;
+      }
+    }
+     else {
+      var key = variables.get_za3lpa$(currentIndex);
+      variableValues.put_xwzc9p$(key, '0');
+      if (!this.logicFullSearchComparisonRecursive_5tebyg$(variables, variableValues, left, right, comparisonType, currentIndex + 1 | 0)) {
+        return false;
+      }
+      var key_0 = variables.get_za3lpa$(currentIndex);
+      variableValues.put_xwzc9p$(key_0, '1');
+      if (!this.logicFullSearchComparisonRecursive_5tebyg$(variables, variableValues, left, right, comparisonType, currentIndex + 1 | 0)) {
+        return false;
+      }
+    }
+    return true;
+  };
   ExpressionComporator.prototype.probabilityTestComparison_3fo6fu$ = function (leftOrigin, rightOrigin, comparisonType, justInDomainsIntersection, maxMinNumberOfPointsForEquality, allowedPartOfErrorTests, testWithUndefinedResultIncreasingCoef, useCleverDomain, useGradientDescentComparison) {
     if (comparisonType === void 0)
       comparisonType = this.compiledConfiguration.comparisonSettings.defaultComparisonType;
@@ -6978,8 +7074,6 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     var numberOfRemainingTests = left.getCountOfNodes() + right.getCountOfNodes() | 0;
     if (comparisonType === ComparisonType$EQUAL_getInstance()) {
       var domain = new PointGenerator(this.baseOperationsDefinitions, arrayListOf([left, right]));
-      var baseOperationsComputationComplex = new BaseOperationsComputation(ComputationType$COMPLEX_getInstance());
-      var baseOperationsComputationDouble = new BaseOperationsComputation(ComputationType$DOUBLE_getInstance());
       var totalTests = numberOfRemainingTests;
       var passedTests = 0.0;
       var a = left.getMaxMinNumberOfPointsForEquality();
@@ -6988,14 +7082,14 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var minNumberOfPointsForEquality = Math_0.max(a_0, maxMinNumberOfPointsForEquality);
       while ((tmp$ = numberOfRemainingTests, numberOfRemainingTests = tmp$ - 1, tmp$) > 0) {
         var pointI = domain.generateNewPoint();
-        var lDouble = typeof (tmp$_0 = baseOperationsComputationDouble.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false))) === 'number' ? tmp$_0 : throwCCE();
-        var rDouble = typeof (tmp$_1 = baseOperationsComputationDouble.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false))) === 'number' ? tmp$_1 : throwCCE();
+        var lDouble = typeof (tmp$_0 = this.baseOperationsComputationDouble.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false))) === 'number' ? tmp$_0 : throwCCE();
+        var rDouble = typeof (tmp$_1 = this.baseOperationsComputationDouble.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false))) === 'number' ? tmp$_1 : throwCCE();
         if (isNaN_0(lDouble) || isNaN_0(rDouble)) {
           if (isNaN_0(lDouble) !== isNaN_0(rDouble) && justInDomainsIntersection) {
             return false;
           }
-          var lComplex = Kotlin.isType(tmp$_2 = baseOperationsComputationComplex.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_2 : throwCCE();
-          var rComplex = Kotlin.isType(tmp$_3 = baseOperationsComputationComplex.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_3 : throwCCE();
+          var lComplex = Kotlin.isType(tmp$_2 = this.baseOperationsComputationComplex.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_2 : throwCCE();
+          var rComplex = Kotlin.isType(tmp$_3 = this.baseOperationsComputationComplex.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_3 : throwCCE();
           if (lComplex.equals_i6s3kk$(rComplex)) {
             tmp$_4 = passedTests, passedTests = tmp$_4 + 1;
           }
@@ -7127,13 +7221,48 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     applyAllSubstitutions(right, this.compiledConfiguration.compiledFunctionDefinitions);
     left.normalizeSubTree_f8z7ch$(void 0, void 0, true);
     right.normalizeSubTree_f8z7ch$(void 0, void 0, true);
-    if (this.compiledConfiguration.comparisonSettings.compareExpressionsWithProbabilityRulesWhenComparingExpressions && !left.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions) && !left.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions)) {
+    if (this.compiledConfiguration.comparisonSettings.compareExpressionsWithProbabilityRulesWhenComparingExpressions && !left.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions) && !right.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions)) {
       var functionIdentifierToVariableMap = LinkedHashMap_init_0();
       left.replaceNotDefinedFunctionsOnVariables_g22vlb$(functionIdentifierToVariableMap, definedFunctionNameNumberOfArgs, this);
       right.replaceNotDefinedFunctionsOnVariables_g22vlb$(functionIdentifierToVariableMap, definedFunctionNameNumberOfArgs, this);
       return this.probabilityTestComparison_3fo6fu$(left, right, comparisonType, justInDomainsIntersection);
     }
     return this.compareAsIs_98xwbf$(left.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_xcc95t$(this.compiledConfiguration), right.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_xcc95t$(this.compiledConfiguration), void 0, true);
+  };
+  ExpressionComporator.prototype.checkOpeningBracketsSubstitutions_c3m35x$ = function (expressionToTransform, otherExpression, expressionChainComparisonType) {
+    var tmp$;
+    var openingBracketsTransformationResults = computeResultsOfOpeningBracketsSubstitutions(expressionToTransform, this.compiledConfiguration);
+    tmp$ = openingBracketsTransformationResults.iterator();
+    while (tmp$.hasNext()) {
+      var expression = tmp$.next();
+      if (this.compareWithoutSubstitutions_15tjed$(expression, otherExpression, expressionChainComparisonType)) {
+        return true;
+      }
+    }
+    return false;
+  };
+  ExpressionComporator.prototype.fastProbabilityCheckOnIncorrectTransformation_qe5wwd$ = function (l, r, comparisonType, maxBustCount) {
+    if (comparisonType === void 0)
+      comparisonType = this.compiledConfiguration.comparisonSettings.defaultComparisonType;
+    if (maxBustCount === void 0)
+      maxBustCount = this.compiledConfiguration.comparisonSettings.maxExpressionBustCount;
+    var left = l.clone();
+    var right = r.clone();
+    applyAllImmediateSubstitutions(left, this.compiledConfiguration);
+    applyAllImmediateSubstitutions(right, this.compiledConfiguration);
+    applyAllSubstitutions(left, this.compiledConfiguration.compiledFunctionDefinitions);
+    applyAllSubstitutions(right, this.compiledConfiguration.compiledFunctionDefinitions);
+    if (!left.containsFunctionBesides_ywdfdh$(this.algebraAutoCheckingFunctionsSet) && !right.containsFunctionBesides_ywdfdh$(this.algebraAutoCheckingFunctionsSet)) {
+      if (!this.probabilityTestComparison_3fo6fu$(left, right, comparisonType, this.compiledConfiguration.comparisonSettings.justInDomainsIntersection)) {
+        return false;
+      }
+    }
+     else if (!left.containsFunctionBesides_ywdfdh$(this.setAutoCheckingFunctionsSet) && !right.containsFunctionBesides_ywdfdh$(this.setAutoCheckingFunctionsSet)) {
+      if (!this.logicFullSearchComparison_qe5wwd$(left, right, comparisonType, maxBustCount)) {
+        return false;
+      }
+    }
+    return true;
   };
   ExpressionComporator.prototype.compareWithTreeTransformationRules_ob15jn$ = function (leftOriginal, rightOriginal, transformations, maxTransformationWeight, maxBustCount, minTransformationWeight, expressionChainComparisonType, maxDistBetweenDiffSteps) {
     var tmp$, tmp$_0;
@@ -7168,6 +7297,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       expressionChainComparisonType = ComparisonType$EQUAL_getInstance();
     if (maxDistBetweenDiffSteps === void 0)
       maxDistBetweenDiffSteps = 1.0;
+    this.fastProbabilityCheckOnIncorrectTransformation_qe5wwd$(leftOriginal, rightOriginal, expressionChainComparisonType, maxBustCount);
     var resultForOperandsInOriginalOrder = this.compareWithTreeTransformationRulesInternal_pe5b20$(leftOriginal, rightOriginal, transformations, maxTransformationWeight, maxBustCount, minTransformationWeight, expressionChainComparisonType, false, maxDistBetweenDiffSteps);
     if (resultForOperandsInOriginalOrder) {
       return true;
@@ -7245,6 +7375,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       if (Math_0.abs(x) < maxDistBetweenDiffSteps && this.compareWithoutSubstitutions_15tjed$(leftDiff, rightDiff, expressionChainComparisonType)) {
         return true;
       }
+    }
+    if (this.checkOpeningBracketsSubstitutions_c3m35x$(left, right, expressionChainComparisonType) || this.checkOpeningBracketsSubstitutions_c3m35x$(right, left, reverse_0(expressionChainComparisonType))) {
+      return true;
     }
     var functionsInExpression = plus_0(left.getContainedFunctions(), right.getContainedFunctions());
     var destination = ArrayList_init();
@@ -9535,61 +9668,6 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   SubstitutionSelectionData.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.originalExpression, other.originalExpression) && Kotlin.equals(this.selectedNodeIds, other.selectedNodeIds) && Kotlin.equals(this.compiledConfiguration, other.compiledConfiguration) && Kotlin.equals(this.expressionToTransform, other.expressionToTransform) && Kotlin.equals(this.isMoving, other.isMoving) && Kotlin.equals(this.selectedNodeIdsMap, other.selectedNodeIdsMap) && Kotlin.equals(this.selectedNodes, other.selectedNodes) && Kotlin.equals(this.topOfSelection, other.topOfSelection) && Kotlin.equals(this.topOfSelectionParent, other.topOfSelectionParent) && Kotlin.equals(this.topOfSelectionIndex, other.topOfSelectionIndex) && Kotlin.equals(this.lowestSubtree, other.lowestSubtree) && Kotlin.equals(this.lowestSubtreeHigh, other.lowestSubtreeHigh) && Kotlin.equals(this.notSelectedSubtreeTopOriginalTree, other.notSelectedSubtreeTopOriginalTree) && Kotlin.equals(this.notSelectedSubtreeTopArguments, other.notSelectedSubtreeTopArguments) && Kotlin.equals(this.selectedSubtreeTopArguments, other.selectedSubtreeTopArguments) && Kotlin.equals(this.selectedSubtreeTopArgumentsInSelectionOrder, other.selectedSubtreeTopArgumentsInSelectionOrder) && Kotlin.equals(this.nestedNodesInSelection, other.nestedNodesInSelection)))));
   };
-  function SubstitutionApplication(expressionSubstitution, originalExpression, originalExpressionChangingPart, resultExpression, resultExpressionChangingPart, substitutionType, priority) {
-    this.expressionSubstitution = expressionSubstitution;
-    this.originalExpression = originalExpression;
-    this.originalExpressionChangingPart = originalExpressionChangingPart;
-    this.resultExpression = resultExpression;
-    this.resultExpressionChangingPart = resultExpressionChangingPart;
-    this.substitutionType = substitutionType;
-    this.priority = priority;
-  }
-  SubstitutionApplication.prototype.toString = function () {
-    return '' + ("result: '" + this.resultExpression.toPlainTextView_odr8sm$() + "'" + '\n') + ("expressionSubstitution.left: '" + this.expressionSubstitution.left.toString() + "'" + '\n') + ("expressionSubstitution.right: '" + this.expressionSubstitution.right.toString() + "'" + '\n') + ("originalExpression: '" + this.originalExpression.toString() + "'" + '\n') + ("originalExpressionChangingPart: '" + this.originalExpressionChangingPart.toString() + "'" + '\n') + ("resultExpression: '" + this.resultExpression.toString() + "'" + '\n') + ("resultExpressionChangingPart: '" + this.resultExpressionChangingPart.toString() + "'" + '\n') + ("substitutionType: '" + this.substitutionType + "'" + '\n') + ("priority: '" + this.priority + "'");
-  };
-  SubstitutionApplication.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'SubstitutionApplication',
-    interfaces: []
-  };
-  SubstitutionApplication.prototype.component1 = function () {
-    return this.expressionSubstitution;
-  };
-  SubstitutionApplication.prototype.component2 = function () {
-    return this.originalExpression;
-  };
-  SubstitutionApplication.prototype.component3 = function () {
-    return this.originalExpressionChangingPart;
-  };
-  SubstitutionApplication.prototype.component4 = function () {
-    return this.resultExpression;
-  };
-  SubstitutionApplication.prototype.component5 = function () {
-    return this.resultExpressionChangingPart;
-  };
-  SubstitutionApplication.prototype.component6 = function () {
-    return this.substitutionType;
-  };
-  SubstitutionApplication.prototype.component7 = function () {
-    return this.priority;
-  };
-  SubstitutionApplication.prototype.copy_p6ff07$ = function (expressionSubstitution, originalExpression, originalExpressionChangingPart, resultExpression, resultExpressionChangingPart, substitutionType, priority) {
-    return new SubstitutionApplication(expressionSubstitution === void 0 ? this.expressionSubstitution : expressionSubstitution, originalExpression === void 0 ? this.originalExpression : originalExpression, originalExpressionChangingPart === void 0 ? this.originalExpressionChangingPart : originalExpressionChangingPart, resultExpression === void 0 ? this.resultExpression : resultExpression, resultExpressionChangingPart === void 0 ? this.resultExpressionChangingPart : resultExpressionChangingPart, substitutionType === void 0 ? this.substitutionType : substitutionType, priority === void 0 ? this.priority : priority);
-  };
-  SubstitutionApplication.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.expressionSubstitution) | 0;
-    result = result * 31 + Kotlin.hashCode(this.originalExpression) | 0;
-    result = result * 31 + Kotlin.hashCode(this.originalExpressionChangingPart) | 0;
-    result = result * 31 + Kotlin.hashCode(this.resultExpression) | 0;
-    result = result * 31 + Kotlin.hashCode(this.resultExpressionChangingPart) | 0;
-    result = result * 31 + Kotlin.hashCode(this.substitutionType) | 0;
-    result = result * 31 + Kotlin.hashCode(this.priority) | 0;
-    return result;
-  };
-  SubstitutionApplication.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.expressionSubstitution, other.expressionSubstitution) && Kotlin.equals(this.originalExpression, other.originalExpression) && Kotlin.equals(this.originalExpressionChangingPart, other.originalExpressionChangingPart) && Kotlin.equals(this.resultExpression, other.resultExpression) && Kotlin.equals(this.resultExpressionChangingPart, other.resultExpressionChangingPart) && Kotlin.equals(this.substitutionType, other.substitutionType) && Kotlin.equals(this.priority, other.priority)))));
-  };
   function simpleCommutativeOperationSelectionHandling(substitutionSelectionData) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     if (substitutionSelectionData.selectedNodeIds.length > 1 && substitutionSelectionData.lowestSubtreeHigh != null) {
@@ -9609,7 +9687,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             var item = tmp$_5.next();
             destination.add_11rb$(item.nodeId);
           }
-          tmp$_4 = destination.containsAll_brywnq$(toList(substitutionSelectionData.selectedNodeIds));
+          tmp$_4 = destination.containsAll_brywnq$(toList_0(substitutionSelectionData.selectedNodeIds));
         }
         tmp$_3 = (tmp$_4 && equals(ensureNotNull(substitutionSelectionData.lowestSubtreeHigh).value, '/'));
       }
@@ -10827,29 +10905,6 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return result;
   }
-  function plusOperationByDot(dotOperation) {
-    switch (dotOperation) {
-      case '*':
-      case '/':
-        return '+';
-      case 'and':
-        return 'or';
-      case 'or':
-        return 'and';
-      default:return '';
-    }
-  }
-  function dotOperationByPlus(plusOperation) {
-    switch (plusOperation) {
-      case '+':
-        return '*';
-      case 'and':
-        return 'or';
-      case 'or':
-        return 'and';
-      default:return '';
-    }
-  }
   function generateOpeningBracketsSubstitutions(substitutionSelectionData, simplifyNotSelectedTopArguments, withReadyApplicationResult, fastestAppropriateVersion) {
     if (simplifyNotSelectedTopArguments === void 0)
       simplifyNotSelectedTopArguments = false;
@@ -10857,26 +10912,26 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       withReadyApplicationResult = false;
     if (fastestAppropriateVersion === void 0)
       fastestAppropriateVersion = false;
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
     var result = ArrayList_init();
     if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('OpeningBrackets')) {
       var subst = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('OpeningBrackets'));
-      var tmp$_14 = ((tmp$_1 = (tmp$_0 = (tmp$ = substitutionSelectionData.topOfSelection) != null ? tmp$.functionStringDefinition : null) != null ? tmp$_0.function : null) != null ? tmp$_1.isCommutativeWithNullWeight : null) === true;
-      if (tmp$_14) {
-        var tmp$_15;
+      var tmp$_11 = ((tmp$_1 = (tmp$_0 = (tmp$ = substitutionSelectionData.topOfSelection) != null ? tmp$.functionStringDefinition : null) != null ? tmp$_0.function : null) != null ? tmp$_1.isCommutativeWithNullWeight : null) === true;
+      if (tmp$_11) {
+        var tmp$_12;
         if ((tmp$_3 = (tmp$_2 = substitutionSelectionData.topOfSelection) != null ? tmp$_2.children : null) != null) {
           var any$result;
           any$break: do {
-            var tmp$_16;
+            var tmp$_13;
             if (Kotlin.isType(tmp$_3, Collection) && tmp$_3.isEmpty()) {
               any$result = false;
               break any$break;
             }
-            tmp$_16 = tmp$_3.iterator();
-            while (tmp$_16.hasNext()) {
-              var element = tmp$_16.next();
-              var tmp$_17;
-              if (equals(element.value, (tmp$_17 = substitutionSelectionData.topOfSelection) != null ? tmp$_17.value : null)) {
+            tmp$_13 = tmp$_3.iterator();
+            while (tmp$_13.hasNext()) {
+              var element = tmp$_13.next();
+              var tmp$_14;
+              if (equals(element.value, (tmp$_14 = substitutionSelectionData.topOfSelection) != null ? tmp$_14.value : null)) {
                 any$result = true;
                 break any$break;
               }
@@ -10884,13 +10939,13 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             any$result = false;
           }
            while (false);
-          tmp$_15 = any$result;
+          tmp$_12 = any$result;
         }
          else
-          tmp$_15 = null;
-        tmp$_14 = tmp$_15 === true;
+          tmp$_12 = null;
+        tmp$_11 = tmp$_12 === true;
       }
-      if (tmp$_14) {
+      if (tmp$_11) {
         var topOperationChildren = ensureNotNull(substitutionSelectionData.topOfSelection).getChildNodesWhileOperation_mhpeer$(listOf(ensureNotNull(substitutionSelectionData.topOfSelection).value));
         if (topOperationChildren.size > 1) {
           var topNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$(ensureNotNull(substitutionSelectionData.topOfSelection).value, -1);
@@ -10910,57 +10965,24 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         }
       }
       if (substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder != null && ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children.size === 2) {
-        var dotOperation = ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value;
-        var plusOperation = plusOperationByDot(dotOperation);
-        if (!isBlank(plusOperation)) {
-          if (!equals(dotOperation, '/') && equals(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, plusOperation) && last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.size > 1) {
-            var sumNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$(plusOperation, -1);
-            if (equals(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, plusOperation)) {
-              tmp$_7 = first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children;
-            }
-             else {
-              tmp$_7 = listOf(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children));
-            }
-            var lChildren = tmp$_7;
-            if (equals(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, plusOperation)) {
-              tmp$_8 = last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children;
-            }
-             else {
-              tmp$_8 = listOf(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children));
-            }
-            var rChildren = tmp$_8;
-            addSumOpeningBracketsResult(lChildren, rChildren, substitutionSelectionData, sumNode, simplifyNotSelectedTopArguments, result);
-          }
-          if (equals(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, plusOperation) && first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.size > 1) {
-            var sumNode_0 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$(plusOperation, -1);
-            if (equals(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, plusOperation)) {
-              tmp$_9 = first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children;
-            }
-             else {
-              tmp$_9 = listOf(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children));
-            }
-            var lChildren_0 = tmp$_9;
-            var rChildren_0 = listOf(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children));
-            addSumOpeningBracketsResult(lChildren_0, rChildren_0, substitutionSelectionData, sumNode_0, simplifyNotSelectedTopArguments, result);
-          }
-        }
+        result.addAll_brywnq$(generalOpeningBracketsSubstitutions(substitutionSelectionData.originalExpression, substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder, substitutionSelectionData.topOfSelectionParent, substitutionSelectionData.topOfSelectionIndex, substitutionSelectionData.compiledConfiguration, substitutionSelectionData.expressionToTransform, substitutionSelectionData.notSelectedSubtreeTopArguments, substitutionSelectionData.notSelectedSubtreeTopOriginalTree, substitutionSelectionData.topOfSelection, simplifyNotSelectedTopArguments));
         if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '^') && equals(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, '*') && first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.size > 1) {
           var prodNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$('*', -1);
-          tmp$_10 = first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.iterator();
-          while (tmp$_10.hasNext()) {
-            var lChild = tmp$_10.next();
+          tmp$_7 = first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.iterator();
+          while (tmp$_7.hasNext()) {
+            var lChild = tmp$_7.next();
             var powNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$('^', -1);
             powNode.addChild_6718cy$(lChild.clone());
             powNode.addChild_6718cy$(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).clone());
             prodNode.addChild_6718cy$(powNode);
           }
-          addApplicationToResults(true, substitutionSelectionData, simplifyNotSelectedTopArguments, prodNode, result, new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).clone()), addRootNodeToExpression(prodNode), void 0, void 0, subst.code, subst.nameEn, subst.nameRu), 'OpeningBrackets', (tmp$_11 = subst.priority) != null ? tmp$_11 : 20);
+          addApplicationToResults(true, substitutionSelectionData, simplifyNotSelectedTopArguments, prodNode, result, new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).clone()), addRootNodeToExpression(prodNode), void 0, void 0, subst.code, subst.nameEn, subst.nameRu), 'OpeningBrackets', (tmp$_8 = subst.priority) != null ? tmp$_8 : 20);
         }
         if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '^') && equals(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, '+') && last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.size > 1) {
           var prodNode_0 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$('*', -1);
-          tmp$_12 = last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.iterator();
-          while (tmp$_12.hasNext()) {
-            var rChild = tmp$_12.next();
+          tmp$_9 = last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.iterator();
+          while (tmp$_9.hasNext()) {
+            var rChild = tmp$_9.next();
             var powNode_0 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$('^', -1);
             powNode_0.addChild_6718cy$(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).clone());
             if (equals(rChild.value, '-')) {
@@ -10972,52 +10994,11 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             }
             prodNode_0.addChild_6718cy$(powNode_0);
           }
-          addApplicationToResults(true, substitutionSelectionData, simplifyNotSelectedTopArguments, prodNode_0, result, new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).clone()), addRootNodeToExpression(prodNode_0), void 0, void 0, subst.code, subst.nameEn, subst.nameRu), 'OpeningBrackets', (tmp$_13 = subst.priority) != null ? tmp$_13 : 20);
+          addApplicationToResults(true, substitutionSelectionData, simplifyNotSelectedTopArguments, prodNode_0, result, new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).clone()), addRootNodeToExpression(prodNode_0), void 0, void 0, subst.code, subst.nameEn, subst.nameRu), 'OpeningBrackets', (tmp$_10 = subst.priority) != null ? tmp$_10 : 20);
         }
       }
     }
     return result;
-  }
-  function addSumOpeningBracketsResult(lChildren, rChildren, substitutionSelectionData, sumNode, simplifyNotSelectedTopArguments, result) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-    if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('OpeningBrackets')) {
-      var subst = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('OpeningBrackets'));
-      tmp$ = lChildren.iterator();
-      while (tmp$.hasNext()) {
-        var lChild = tmp$.next();
-        tmp$_0 = rChildren.iterator();
-        while (tmp$_0.hasNext()) {
-          var rChild = tmp$_0.next();
-          var productionNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, -1);
-          var needMinus = false;
-          if (equals(lChild.value, '-')) {
-            needMinus = needMinus ^ true;
-            tmp$_1 = first(lChild.children);
-          }
-           else
-            tmp$_1 = lChild;
-          var lMul = tmp$_1;
-          if (equals(rChild.value, '-')) {
-            needMinus = needMinus ^ true;
-            tmp$_2 = first(rChild.children);
-          }
-           else
-            tmp$_2 = rChild;
-          var rMul = tmp$_2;
-          productionNode.addChild_6718cy$(lMul.clone());
-          productionNode.addChild_6718cy$(rMul.clone());
-          if (needMinus) {
-            var minusNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$('-', -1);
-            minusNode.addChild_6718cy$(productionNode);
-            sumNode.addChild_6718cy$(minusNode);
-          }
-           else {
-            sumNode.addChild_6718cy$(productionNode);
-          }
-        }
-      }
-      addApplicationToResults(true, substitutionSelectionData, simplifyNotSelectedTopArguments, sumNode, result, new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).clone()), addRootNodeToExpression(sumNode), void 0, void 0, subst.code, subst.nameEn, subst.nameRu), 'OpeningBrackets', (tmp$_3 = subst.priority) != null ? tmp$_3 : 20);
-    }
   }
   function generateSimpleComputationSubstitutions(substitutionSelectionData, simplifyNotSelectedTopArguments, withReadyApplicationResult, fastestAppropriateVersion) {
     if (simplifyNotSelectedTopArguments === void 0)
@@ -13974,6 +13955,61 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     $receiver.variableReplacement_y0zsll$(compiledConfiguration.compiledImmediateVariableReplacements);
     applyAllSubstitutions($receiver, compiledConfiguration.compiledImmediateTreeTransformationRules);
   }
+  function SubstitutionApplication(expressionSubstitution, originalExpression, originalExpressionChangingPart, resultExpression, resultExpressionChangingPart, substitutionType, priority) {
+    this.expressionSubstitution = expressionSubstitution;
+    this.originalExpression = originalExpression;
+    this.originalExpressionChangingPart = originalExpressionChangingPart;
+    this.resultExpression = resultExpression;
+    this.resultExpressionChangingPart = resultExpressionChangingPart;
+    this.substitutionType = substitutionType;
+    this.priority = priority;
+  }
+  SubstitutionApplication.prototype.toString = function () {
+    return '' + ("result: '" + this.resultExpression.toPlainTextView_odr8sm$() + "'" + '\n') + ("expressionSubstitution.left: '" + this.expressionSubstitution.left.toString() + "'" + '\n') + ("expressionSubstitution.right: '" + this.expressionSubstitution.right.toString() + "'" + '\n') + ("originalExpression: '" + this.originalExpression.toString() + "'" + '\n') + ("originalExpressionChangingPart: '" + this.originalExpressionChangingPart.toString() + "'" + '\n') + ("resultExpression: '" + this.resultExpression.toString() + "'" + '\n') + ("resultExpressionChangingPart: '" + this.resultExpressionChangingPart.toString() + "'" + '\n') + ("substitutionType: '" + this.substitutionType + "'" + '\n') + ("priority: '" + this.priority + "'");
+  };
+  SubstitutionApplication.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SubstitutionApplication',
+    interfaces: []
+  };
+  SubstitutionApplication.prototype.component1 = function () {
+    return this.expressionSubstitution;
+  };
+  SubstitutionApplication.prototype.component2 = function () {
+    return this.originalExpression;
+  };
+  SubstitutionApplication.prototype.component3 = function () {
+    return this.originalExpressionChangingPart;
+  };
+  SubstitutionApplication.prototype.component4 = function () {
+    return this.resultExpression;
+  };
+  SubstitutionApplication.prototype.component5 = function () {
+    return this.resultExpressionChangingPart;
+  };
+  SubstitutionApplication.prototype.component6 = function () {
+    return this.substitutionType;
+  };
+  SubstitutionApplication.prototype.component7 = function () {
+    return this.priority;
+  };
+  SubstitutionApplication.prototype.copy_p6ff07$ = function (expressionSubstitution, originalExpression, originalExpressionChangingPart, resultExpression, resultExpressionChangingPart, substitutionType, priority) {
+    return new SubstitutionApplication(expressionSubstitution === void 0 ? this.expressionSubstitution : expressionSubstitution, originalExpression === void 0 ? this.originalExpression : originalExpression, originalExpressionChangingPart === void 0 ? this.originalExpressionChangingPart : originalExpressionChangingPart, resultExpression === void 0 ? this.resultExpression : resultExpression, resultExpressionChangingPart === void 0 ? this.resultExpressionChangingPart : resultExpressionChangingPart, substitutionType === void 0 ? this.substitutionType : substitutionType, priority === void 0 ? this.priority : priority);
+  };
+  SubstitutionApplication.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.expressionSubstitution) | 0;
+    result = result * 31 + Kotlin.hashCode(this.originalExpression) | 0;
+    result = result * 31 + Kotlin.hashCode(this.originalExpressionChangingPart) | 0;
+    result = result * 31 + Kotlin.hashCode(this.resultExpression) | 0;
+    result = result * 31 + Kotlin.hashCode(this.resultExpressionChangingPart) | 0;
+    result = result * 31 + Kotlin.hashCode(this.substitutionType) | 0;
+    result = result * 31 + Kotlin.hashCode(this.priority) | 0;
+    return result;
+  };
+  SubstitutionApplication.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.expressionSubstitution, other.expressionSubstitution) && Kotlin.equals(this.originalExpression, other.originalExpression) && Kotlin.equals(this.originalExpressionChangingPart, other.originalExpressionChangingPart) && Kotlin.equals(this.resultExpression, other.resultExpression) && Kotlin.equals(this.resultExpressionChangingPart, other.resultExpressionChangingPart) && Kotlin.equals(this.substitutionType, other.substitutionType) && Kotlin.equals(this.priority, other.priority)))));
+  };
   function ExpressionTask(originalExpression, finalExpression, requiredSubstitutions, allSubstitutions) {
     this.originalExpression = originalExpression;
     this.finalExpression = finalExpression;
@@ -16507,6 +16543,207 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         return false;
     }
     return true;
+  }
+  function generalOpeningBracketsSubstitutions(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, compiledConfiguration, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, simplifyNotSelectedTopArguments) {
+    if (expressionToTransform === void 0)
+      expressionToTransform = originalExpression;
+    if (notSelectedSubtreeTopArguments === void 0)
+      notSelectedSubtreeTopArguments = null;
+    if (notSelectedSubtreeTopOriginalTree === void 0)
+      notSelectedSubtreeTopOriginalTree = null;
+    if (fullTransformationNode === void 0)
+      fullTransformationNode = transformationNode;
+    if (simplifyNotSelectedTopArguments === void 0)
+      simplifyNotSelectedTopArguments = false;
+    var tmp$, tmp$_0, tmp$_1;
+    var result = ArrayList_init();
+    if (compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('OpeningBrackets')) {
+      var subst = ensureNotNull(compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('OpeningBrackets'));
+      var dotOperation = ensureNotNull(transformationNode).value;
+      var plusOperation = plusOperationByDot(dotOperation);
+      if (!isBlank(plusOperation)) {
+        if (!equals(dotOperation, '/') && equals(last(ensureNotNull(transformationNode).children).value, plusOperation) && last(ensureNotNull(transformationNode).children).children.size > 1) {
+          var sumNode = compiledConfiguration.createExpressionFunctionNode_bm4lxs$(plusOperation, -1);
+          if (equals(first(ensureNotNull(transformationNode).children).value, plusOperation)) {
+            tmp$ = first(ensureNotNull(transformationNode).children).children;
+          }
+           else {
+            tmp$ = listOf(first(ensureNotNull(transformationNode).children));
+          }
+          var lChildren = tmp$;
+          if (equals(last(ensureNotNull(transformationNode).children).value, plusOperation)) {
+            tmp$_0 = last(ensureNotNull(transformationNode).children).children;
+          }
+           else {
+            tmp$_0 = listOf(last(ensureNotNull(transformationNode).children));
+          }
+          var rChildren = tmp$_0;
+          addSumOpeningBracketsResult(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, lChildren, rChildren, compiledConfiguration, sumNode, simplifyNotSelectedTopArguments, result);
+        }
+        if (equals(first(ensureNotNull(transformationNode).children).value, plusOperation) && first(ensureNotNull(transformationNode).children).children.size > 1) {
+          var sumNode_0 = compiledConfiguration.createExpressionFunctionNode_bm4lxs$(plusOperation, -1);
+          if (equals(first(ensureNotNull(transformationNode).children).value, plusOperation)) {
+            tmp$_1 = first(ensureNotNull(transformationNode).children).children;
+          }
+           else {
+            tmp$_1 = listOf(first(ensureNotNull(transformationNode).children));
+          }
+          var lChildren_0 = tmp$_1;
+          var rChildren_0 = listOf(last(ensureNotNull(transformationNode).children));
+          addSumOpeningBracketsResult(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, lChildren_0, rChildren_0, compiledConfiguration, sumNode_0, simplifyNotSelectedTopArguments, result);
+        }
+      }
+    }
+    return result;
+  }
+  function plusOperationByDot(dotOperation) {
+    switch (dotOperation) {
+      case '*':
+      case '/':
+        return '+';
+      case 'and':
+        return 'or';
+      case 'or':
+        return 'and';
+      default:return '';
+    }
+  }
+  function dotOperationByPlus(plusOperation) {
+    switch (plusOperation) {
+      case '+':
+        return '*';
+      case 'and':
+        return 'or';
+      case 'or':
+        return 'and';
+      default:return '';
+    }
+  }
+  function addSumOpeningBracketsResult(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, lChildren, rChildren, compiledConfiguration, sumNode, simplifyNotSelectedTopArguments, result) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    if (compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('OpeningBrackets')) {
+      var subst = ensureNotNull(compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('OpeningBrackets'));
+      tmp$ = lChildren.iterator();
+      while (tmp$.hasNext()) {
+        var lChild = tmp$.next();
+        tmp$_0 = rChildren.iterator();
+        while (tmp$_0.hasNext()) {
+          var rChild = tmp$_0.next();
+          var productionNode = compiledConfiguration.createExpressionFunctionNode_bm4lxs$(ensureNotNull(transformationNode).value, -1);
+          var needMinus = false;
+          if (equals(lChild.value, '-')) {
+            needMinus = needMinus ^ true;
+            tmp$_1 = first(lChild.children);
+          }
+           else
+            tmp$_1 = lChild;
+          var lMul = tmp$_1;
+          if (equals(rChild.value, '-')) {
+            needMinus = needMinus ^ true;
+            tmp$_2 = first(rChild.children);
+          }
+           else
+            tmp$_2 = rChild;
+          var rMul = tmp$_2;
+          productionNode.addChild_6718cy$(lMul.clone());
+          productionNode.addChild_6718cy$(rMul.clone());
+          if (needMinus) {
+            var minusNode = compiledConfiguration.createExpressionFunctionNode_bm4lxs$('-', -1);
+            minusNode.addChild_6718cy$(productionNode);
+            sumNode.addChild_6718cy$(minusNode);
+          }
+           else {
+            sumNode.addChild_6718cy$(productionNode);
+          }
+        }
+      }
+      addApplicationToResults_0(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, true, compiledConfiguration, simplifyNotSelectedTopArguments, sumNode, result, new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(transformationNode).clone()), addRootNodeToExpression(sumNode), void 0, void 0, subst.code, subst.nameEn, subst.nameRu), 'OpeningBrackets', (tmp$_3 = subst.priority) != null ? tmp$_3 : 20);
+    }
+  }
+  function addApplicationToResults_0(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, withReadyApplicationResult, compiledConfiguration, simplifyNotSelectedTopArguments, applicationToSelectedPartResult, result, transformation, substitutionType, priority, onSameBracketLevel) {
+    if (onSameBracketLevel === void 0)
+      onSameBracketLevel = false;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var originalExpression_0 = originalExpression.clone();
+    if (withReadyApplicationResult) {
+      if (notSelectedSubtreeTopArguments != null) {
+        if (onSameBracketLevel && equals(ensureNotNull(notSelectedSubtreeTopArguments).value, applicationToSelectedPartResult.value)) {
+          var $receiver = applicationToSelectedPartResult.clone();
+          var tmp$_3, tmp$_4;
+          if (simplifyNotSelectedTopArguments) {
+            tmp$_3 = get_lastIndex(ensureNotNull(notSelectedSubtreeTopArguments).children);
+            for (var i = 1; i <= tmp$_3; i++) {
+              $receiver.addChild_6718cy$(ensureNotNull(notSelectedSubtreeTopArguments).children.get_za3lpa$(i));
+            }
+          }
+           else {
+            tmp$_4 = ensureNotNull(notSelectedSubtreeTopOriginalTree).children.iterator();
+            while (tmp$_4.hasNext()) {
+              var child = tmp$_4.next();
+              $receiver.addChild_6718cy$(child);
+            }
+          }
+          tmp$_0 = $receiver;
+        }
+         else if (simplifyNotSelectedTopArguments) {
+          var $receiver_0 = ensureNotNull(notSelectedSubtreeTopArguments);
+          $receiver_0.setChildOnPosition_tvfpvg$(applicationToSelectedPartResult, 0);
+          tmp$_0 = $receiver_0;
+        }
+         else {
+          var commutativeOperationNode = ensureNotNull(notSelectedSubtreeTopArguments).copy_uq8prj$();
+          commutativeOperationNode.addChild_6718cy$(applicationToSelectedPartResult);
+          tmp$ = ensureNotNull(notSelectedSubtreeTopOriginalTree).children.iterator();
+          while (tmp$.hasNext()) {
+            var child_0 = tmp$.next();
+            commutativeOperationNode.addChild_6718cy$(child_0);
+          }
+          tmp$_0 = commutativeOperationNode;
+        }
+        var applicationResultNode = tmp$_0;
+        if (transformationNodeParent != null) {
+          ensureNotNull(transformationNodeParent).setChildOnPosition_tvfpvg$(applicationResultNode, transformationNodeIndex);
+        }
+      }
+       else {
+        if (transformationNodeParent != null) {
+          ensureNotNull(transformationNodeParent).setChildOnPosition_tvfpvg$(applicationToSelectedPartResult, transformationNodeIndex);
+        }
+      }
+    }
+    tmp$_1 = ensureNotNull(transformationNode);
+    if (withReadyApplicationResult) {
+      var $receiver_1 = expressionToTransform.clone();
+      normalizeExpressionToUsualForm($receiver_1, compiledConfiguration);
+      tmp$_2 = $receiver_1;
+    }
+     else {
+      tmp$_2 = new ExpressionNode(NodeType$EMPTY_getInstance(), "To get application result use argument 'withReadyApplicationResult' = 'true'");
+    }
+    result.add_11rb$(new SubstitutionApplication(transformation, originalExpression_0, tmp$_1, tmp$_2, applicationToSelectedPartResult, substitutionType, priority));
+    ensureNotNull(transformationNodeParent).setChildOnPosition_tvfpvg$(ensureNotNull(fullTransformationNode), transformationNodeIndex);
+  }
+  function computeResultsOfOpeningBracketsSubstitutions($receiver, compiledConfiguration, originalExpression) {
+    if (originalExpression === void 0)
+      originalExpression = $receiver;
+    var tmp$;
+    var result = ArrayList_init();
+    tmp$ = get_lastIndex($receiver.children);
+    for (var i = 0; i <= tmp$; i++) {
+      if (!compiledConfiguration.definedFunctionNameNumberOfArgsSet.contains_11rb$($receiver.children.get_za3lpa$(i).value + '_' + $receiver.children.get_za3lpa$(i).children.size) && !compiledConfiguration.definedFunctionNameNumberOfArgsSet.contains_11rb$($receiver.children.get_za3lpa$(i).value + '_-1')) {
+        var $receiver_0 = generalOpeningBracketsSubstitutions(originalExpression, $receiver.children.get_za3lpa$(i), $receiver, i, compiledConfiguration);
+        var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+        var tmp$_0;
+        tmp$_0 = $receiver_0.iterator();
+        while (tmp$_0.hasNext()) {
+          var item = tmp$_0.next();
+          destination.add_11rb$(item.resultExpression);
+        }
+        result.addAll_brywnq$(destination);
+      }
+      result.addAll_brywnq$(computeResultsOfOpeningBracketsSubstitutions($receiver.children.get_za3lpa$(i), compiledConfiguration, originalExpression));
+    }
+    return result;
   }
   var TREE_COMPUTATION_RULES_PRIORITY;
   var TREE_COMPUTATION_DEFAULT;
@@ -28485,6 +28722,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     get: ComparisonType$LEFT_LESS_getInstance
   });
   package$config.ComparisonType = ComparisonType;
+  package$config.reverse_lw8xcw$ = reverse_0;
   package$config.strictComparison_ohxo0h$ = strictComparison;
   package$config.valueOfComparisonType_61zpoe$ = valueOfComparisonType;
   package$config.valueFromMathMLString_61zpoe$ = valueFromMathMLString;
@@ -28594,7 +28832,6 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$expressiontree.findLowestSubtreeWithNodes_yr6xck$ = findLowestSubtreeWithNodes;
   package$expressiontree.cloneWithoutSelectedNodes_kdwlv0$ = cloneWithoutSelectedNodes;
   package$expressiontree.SubstitutionSelectionData = SubstitutionSelectionData;
-  package$expressiontree.SubstitutionApplication = SubstitutionApplication;
   package$expressiontree.simpleCommutativeOperationSelectionHandling_9330xr$ = simpleCommutativeOperationSelectionHandling;
   package$expressiontree.fillSubstitutionSelectionData_9330xr$ = fillSubstitutionSelectionData;
   package$expressiontree.findConfiguredSubstitutionsApplications_cdlxsa$ = findConfiguredSubstitutionsApplications;
@@ -28668,6 +28905,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$expressiontree.applyAllFunctionSubstitutions_eeptyd$ = applyAllFunctionSubstitutions;
   package$expressiontree.applyAllSubstitutions_ueg7ax$ = applyAllSubstitutions;
   package$expressiontree.applyAllImmediateSubstitutions_w5a5qi$ = applyAllImmediateSubstitutions;
+  package$expressiontree.SubstitutionApplication = SubstitutionApplication;
   package$expressiontree.ExpressionTask = ExpressionTask;
   package$expressiontree.generateExpressionTask_ufm96r$ = generateExpressionTask;
   Object.defineProperty(MathMlTagTreeNode$Type, 'EXPRESSION_PART_STRING', {
@@ -28746,6 +28984,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$expressiontree.ratio_jv1oz7$ = ratio;
   package$expressiontree.alwaysPositive_4hv65v$ = alwaysPositive;
   package$expressiontree.gradientDescentComparison_pufmpq$ = gradientDescentComparison;
+  package$expressiontree.generalOpeningBracketsSubstitutions_9jywoz$ = generalOpeningBracketsSubstitutions;
+  package$expressiontree.plusOperationByDot_61zpoe$ = plusOperationByDot;
+  package$expressiontree.dotOperationByPlus_61zpoe$ = dotOperationByPlus;
+  package$expressiontree.computeResultsOfOpeningBracketsSubstitutions_ioan8k$ = computeResultsOfOpeningBracketsSubstitutions;
   Object.defineProperty(package$expressiontree, 'TREE_COMPUTATION_RULES_PRIORITY', {
     get: function () {
       return TREE_COMPUTATION_RULES_PRIORITY;
