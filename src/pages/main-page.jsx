@@ -19,6 +19,8 @@ import "./main-page.scss";
 // inserts the required mathquill css to the <head> block.
 addStyles();
 
+let alertCount = 0; //To avoid alert duplicates. TODO: make something normal
+
 const MainPage = () => {
   const { Option } = Select;
   // getting url query params
@@ -52,11 +54,29 @@ const MainPage = () => {
       return className;
     }
   };
+
+  const checkExpressionUrl = (expressionUrl, type) => {
+    if (expressionUrl) {
+      try {
+        convertMathInput("STRUCTURE_STRING", "TEX", decodeUrlSymbols(expressionUrl))
+      } catch (e) {
+        if (alertCount === 0) {
+          console.log(alertCount);
+          alert("Error in the " + type + " expressioin: '" + e.message + "'. Default value will be used")
+          alertCount = alertCount + 1;
+        }
+        return false
+      }
+      return true
+    } else return false
+  };
   // static data
-  const defaultStart = originalExpressionUrl
+  const defaultStart = checkExpressionUrl(originalExpressionUrl, "start")
     ? decodeUrlSymbols(originalExpressionUrl)
     : "(and(a;or(a;b)))";
-  const defaultEnd = endExpressionUrl ? decodeUrlSymbols(endExpressionUrl) : "(a)";
+  const defaultEnd = checkExpressionUrl(endExpressionUrl, "end")
+      ? decodeUrlSymbols(endExpressionUrl)
+      : "(a)";
   const rulePacks = [
     "Logic",
     "ShortMultiplication",
