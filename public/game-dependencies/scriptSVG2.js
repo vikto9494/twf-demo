@@ -117,13 +117,11 @@ const selectionMaxColorLimiter = 0xbbbbff;
 // }
 
 function setDefaultColor(index) {
-    changeColor(multiArrCont[index], default_text_color);
-    multiArrCont[index].color = default_text_color_number;
+    changeColor(multiArrCont[index], default_text_color_number);
 }
 
 function setOnceSelectedColor(index) {
-    changeColor(multiArrCont[index], once_selected_text_color);
-    multiArrCont[index].color = once_selected_text_color_number;
+    changeColor(multiArrCont[index], once_selected_text_color_number);
 }
 
 function setSelectionColor (con) {
@@ -156,7 +154,8 @@ function setUnselectionColor (con) {
 }
 
 function changeColor(con, toColor) {
-    con.animate(300, "<>").fill(toColor);
+    con.animate(300, "<>").fill("#" + toColor.toString(16));
+    con.color = toColor;
     for (let item of con.children()) {
         changeColor(item, toColor);
     }
