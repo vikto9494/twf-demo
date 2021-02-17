@@ -67,6 +67,10 @@ const GameEditor = ({start, end, rulePacks}) => {
                 expr.scale((window.innerWidth - paddingFromTopButtonsLine) / expr.width());
             }
 
+            if (expr.height() >= centralExpressionSize + paddingFromTopButtonsLine*2 / 3) {
+                expr.scale((centralExpressionSize + paddingFromTopButtonsLine*2 / 3) / expr.height());
+            }
+
             if (!CheckAndHandleWin(originalExpression, expr.height() - centralExpressionSize)) {
                 app.text("Click a part of the expression to transform it").font({
                     size: explanationsSize,
