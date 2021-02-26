@@ -8,7 +8,11 @@ import { EditableMathField, StaticMathField } from "react-mathquill";
 // custom components
 import GameEditor from "../components/game-editor/game-editor";
 // utils
-import { convertMathInput, checkTex, decodeUrlSymbols } from "../utils/kotlin-lib-functions";
+import {
+  convertMathInput,
+  checkTex,
+  decodeUrlSymbols,
+} from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 // icons
 import sumIcon from "../assets/math-symbols/sum.svg";
@@ -39,9 +43,12 @@ const MainPage = () => {
         return queryStr.split("=");
       })
   );
+  const [selectedEqualitySign, setSelectedEqualitySign] = useState("=");
   // local utils
   const formSolutionStartingTex = () => {
-    return startTex + "=...=" + endTex;
+    return (
+      startTex + selectedEqualitySign + "..." + selectedEqualitySign + endTex
+    );
   };
   const reverseGameMode = () => {
     setIsGameMode((prevState) => !prevState);
@@ -58,31 +65,41 @@ const MainPage = () => {
   const checkExpressionUrl = (expressionUrl, type) => {
     if (expressionUrl) {
       try {
-        convertMathInput("STRUCTURE_STRING", "TEX", decodeUrlSymbols(expressionUrl))
+        convertMathInput(
+          "STRUCTURE_STRING",
+          "TEX",
+          decodeUrlSymbols(expressionUrl)
+        );
       } catch (e) {
         if (alertCount === 0) {
-          console.log(alertCount);
-          alert("Error in the " + type + " expressioin: '" + e.message + "'. Default value will be used")
+          alert(
+            "Error in the " +
+              type +
+              " expressioin: '" +
+              e.message +
+              "'. Default value will be used"
+          );
           alertCount = alertCount + 1;
         }
-        return false
+        return false;
       }
-      return true
-    } else return false
+      return true;
+    } else return false;
   };
   // static data
   const defaultStart = checkExpressionUrl(originalExpressionUrl, "start")
     ? decodeUrlSymbols(originalExpressionUrl)
     : "(and(a;or(a;b)))";
   const defaultEnd = checkExpressionUrl(endExpressionUrl, "end")
-      ? decodeUrlSymbols(endExpressionUrl)
-      : "(a)";
+    ? decodeUrlSymbols(endExpressionUrl)
+    : "(a)";
   const rulePacks = [
     "Logic",
     "ShortMultiplication",
     "Logarithm",
     "Trigonometry",
   ];
+  const possibleEqualitySigns = ["=", ">=", ">", "<", "<="];
   // app dependencies
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
@@ -168,6 +185,12 @@ const MainPage = () => {
     }
   }, [showSpinner]);
 
+  useEffect(() => {
+    if (selectedEqualitySign !== "=") {
+      setIsGameMode(false);
+    }
+  }, [selectedEqualitySign]);
+
   // tex solution commands
   const [solutionMathField, setSolutionMathField] = useState(null);
   const actions = [
@@ -250,7 +273,28 @@ const MainPage = () => {
             )}
           </div>
           <div className={createDefaultAndDisabledClassName("app__tex-input")}>
-            <h2>equals</h2>
+            {isGameMode ? (
+              <h2 style={{ marginRight: "1rem" }}>Equals</h2>
+            ) : (
+              <Select
+                showSearch={true}
+                defaultValue={selectedEqualitySign}
+                onChange={(value) => {
+                  setSelectedEqualitySign(value);
+                }}
+                style={{
+                  width: "7rem",
+                  marginTop: "-0.2rem",
+                  marginRight: "1rem",
+                }}
+              >
+                {possibleEqualitySigns.map((sign) => (
+                  <Option key={sign} value={sign}>
+                    {sign}
+                  </Option>
+                ))}
+              </Select>
+            )}
             {!hideDetails ? (
               <EditableMathField
                 latex={endTex}
@@ -291,15 +335,17 @@ const MainPage = () => {
                 ))}
               </Select>
             </div>
-            <div className="app__input-group">
-              <label>Game mode</label>
-              <Switch
-                checked={isGameMode}
-                onChange={(value) => {
-                  setIsGameMode(value);
-                }}
-              />
-            </div>
+            {selectedEqualitySign === "=" && (
+              <div className="app__input-group">
+                <label>Game mode</label>
+                <Switch
+                  checked={isGameMode}
+                  onChange={(value) => {
+                    setIsGameMode(value);
+                  }}
+                />
+              </div>
+            )}
             <Button onClick={onCreateTask}>Change Task!</Button>
           </div>
         )}
