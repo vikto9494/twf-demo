@@ -29,12 +29,25 @@ const MainPage = () => {
   const { Option } = Select;
   // getting url query params
   const history = useHistory();
+  const possibleEqualitySigns = ["=", ">=", ">", "<", "<="];
+  const urlSignToPlainSign = (urlSign) => {
+    if (urlSign === "ge") {
+      return ">=";
+    } else if (urlSign === "le") {
+      return "<=";
+    } else if (urlSign === "gt") {
+      return ">";
+    } else if (urlSign === "lt") {
+      return "<";
+    } else return "=";
+  };
   const {
     mode: modeUrl,
     originalExpression: originalExpressionUrl,
     endExpression: endExpressionUrl,
     rulePack: rulePackUrl,
     hideDetails: hideDetailsUrl,
+    comparisonType: comparisonTypeUrl,
   } = Object.fromEntries(
     useLocation()
       .search.slice(1)
@@ -43,11 +56,17 @@ const MainPage = () => {
         return queryStr.split("=");
       })
   );
-  const [selectedEqualitySign, setSelectedEqualitySign] = useState("=");
+  const [selectedEqualitySign, setSelectedEqualitySign] = useState((comparisonTypeUrl !== undefined) ? urlSignToPlainSign(comparisonTypeUrl) : "=");
   // local utils
   const formSolutionStartingTex = () => {
+    var solutionSignView = selectedEqualitySign;
+    if (selectedEqualitySign === ">=") {
+      solutionSignView = "\\ge"
+    } else if (selectedEqualitySign === "<=") {
+      solutionSignView = "\\le"
+    }
     return (
-      startTex + selectedEqualitySign + "..." + selectedEqualitySign + endTex
+      startTex + solutionSignView + "..." + solutionSignView + endTex
     );
   };
   const reverseGameMode = () => {
@@ -99,7 +118,6 @@ const MainPage = () => {
     "Logarithm",
     "Trigonometry",
   ];
-  const possibleEqualitySigns = ["=", ">=", ">", "<", "<="];
   // app dependencies
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
@@ -109,11 +127,11 @@ const MainPage = () => {
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
   const correctSolution =
-    startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" &&
-    endSS === "(*(8;^(cos(x);4)))" &&
-    currentRulePack === "Trigonometry"
+      (startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" && endSS === "(*(8;^(cos(x);4)))" && currentRulePack === "Trigonometry" && selectedEqualitySign === "=")
       ? "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4"
-      : null;
+      : ((startSS === "(+(2;*(4;cos(*(2;x)));cos(*(4;x))))" && endSS === "(*(8;^(cos(x);4)))" && currentRulePack === "Trigonometry" && selectedEqualitySign === "<=")
+          ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
+          : null);
   const [startTex, setStartTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultStart)
   );
@@ -167,7 +185,13 @@ const MainPage = () => {
   };
 
   const onCheckTexSolutionInput = () => {
-    const res = checkTex(solutionInTex, startSS, endSS, [currentRulePack]);
+    console.log(solutionInTex);
+    console.log(startSS);
+    console.log(endSS);
+    console.log(selectedEqualitySign);
+    console.log(currentRulePack);
+    const res = checkTex(solutionInTex, startSS, endSS, selectedEqualitySign, [currentRulePack]);
+    console.log(res);
     if (res.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(res.errorMessage);
