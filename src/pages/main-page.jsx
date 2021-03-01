@@ -41,6 +41,20 @@ const MainPage = () => {
       return "<";
     } else return "=";
   };
+  const plainSignToUrlSign = (plainSign) => {
+    switch (plainSign) {
+      case ">=":
+        return "ge";
+      case "<=":
+        return "le";
+      case ">":
+        return "gt";
+      case "<":
+        return "lt";
+      default:
+        return "=";
+    }
+  };
   const {
     mode: modeUrl,
     originalExpression: originalExpressionUrl,
@@ -56,18 +70,24 @@ const MainPage = () => {
         return queryStr.split("=");
       })
   );
-  const [selectedEqualitySign, setSelectedEqualitySign] = useState((comparisonTypeUrl !== undefined) ? urlSignToPlainSign(comparisonTypeUrl) : "=");
+  const [selectedEqualitySign, setSelectedEqualitySign] = useState(
+    comparisonTypeUrl !== undefined
+      ? urlSignToPlainSign(comparisonTypeUrl)
+      : "="
+  );
   // local utils
   const formSolutionStartingTex = () => {
-    var solutionSignView = selectedEqualitySign;
+    let solutionSignView = selectedEqualitySign;
     if (selectedEqualitySign === ">=") {
-      solutionSignView = "\\ge"
+      solutionSignView = " \\ge ";
     } else if (selectedEqualitySign === "<=") {
-      solutionSignView = "\\le"
+      solutionSignView = " \\le ";
+    } else if (selectedEqualitySign === "<") {
+      solutionSignView = " \\lt ";
+    } else if (selectedEqualitySign === ">") {
+      solutionSignView = " \\gt ";
     }
-    return (
-      startTex + solutionSignView + "..." + solutionSignView + endTex
-    );
+    return startTex + solutionSignView + "..." + solutionSignView + endTex;
   };
   const reverseGameMode = () => {
     setIsGameMode((prevState) => !prevState);
@@ -127,11 +147,17 @@ const MainPage = () => {
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
   const correctSolution =
-      (startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" && endSS === "(*(8;^(cos(x);4)))" && currentRulePack === "Trigonometry" && selectedEqualitySign === "=")
+    startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" &&
+    endSS === "(*(8;^(cos(x);4)))" &&
+    currentRulePack === "Trigonometry" &&
+    selectedEqualitySign === "="
       ? "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4"
-      : ((startSS === "(+(2;*(4;cos(*(2;x)));cos(*(4;x))))" && endSS === "(*(8;^(cos(x);4)))" && currentRulePack === "Trigonometry" && selectedEqualitySign === "<=")
-          ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
-          : null);
+      : startSS === "(+(2;*(4;cos(*(2;x)));cos(*(4;x))))" &&
+        endSS === "(*(8;^(cos(x);4)))" &&
+        currentRulePack === "Trigonometry" &&
+        selectedEqualitySign === "<="
+      ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
+      : null;
   const [startTex, setStartTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultStart)
   );
@@ -173,7 +199,8 @@ const MainPage = () => {
           `&originalExpression=${startSSConverted}` +
           `&endExpression=${endSSConverted}` +
           `&rulePack=${currentRulePack}` +
-          `&hideDetails=${hideDetails}`
+          `&hideDetails=${hideDetails}` +
+          `&comparisonType=${plainSignToUrlSign(selectedEqualitySign)}`
       );
       setStartError(null);
       setEndError(null);
@@ -190,7 +217,9 @@ const MainPage = () => {
     console.log(endSS);
     console.log(selectedEqualitySign);
     console.log(currentRulePack);
-    const res = checkTex(solutionInTex, startSS, endSS, selectedEqualitySign, [currentRulePack]);
+    const res = checkTex(solutionInTex, startSS, endSS, selectedEqualitySign, [
+      currentRulePack,
+    ]);
     console.log(res);
     if (res.errorMessage) {
       setSuccessMsg(null);
