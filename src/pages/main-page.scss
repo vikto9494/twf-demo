@@ -1,6 +1,8 @@
 @import "../styles/abstracts/variables";
 @import "../styles/abstracts/mixins";
-
+body {
+  background-color: #FFFFFF !important;
+}
 .app {
   padding: 2rem;
   font-size: $sm-font-size;
@@ -105,6 +107,35 @@
       align-items: flex-end;
     }
   }
+  &__tabs {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  &__tab {
+    background-color: $primary-color-light;
+    padding: 1rem;
+    border: 1px solid $primary-color-dark;
+    &:first-child {
+      border-radius: 5px 0 0 0;
+      border-right: none;
+    }
+    &:nth-child(3) {
+      border-radius: 0 5px 0 0;
+      border-left: none;
+    }
+    font-weight: bold;
+    color: $primary-text-color;
+    cursor: pointer;
+    &--selected {
+      border-bottom: none;
+      color: $primary-color-dark;
+      background-color: white;
+    }
+    &--bottom-line {
+      flex-grow: 1;
+      border-bottom: 1px solid $primary-color-dark;
+    }
+  }
 }
 
 .alert-msg {
@@ -118,14 +149,22 @@
     //background-color: $color-primary-light;
     padding: 1rem;
     //border: 1px solid $color-primary-dark;
+    background-color: $primary-color-light;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid $primary-color-dark;
     border-bottom: none;
-    background-color: gray;
   }
-  &__operation > img {
-    width: 2rem;
-    margin-right: 1rem;
-    &:hover {
-      cursor: pointer;
+  &__operation {
+    &:last-child {
+      margin-left: auto;
+    }
+    & > img {
+      @include click-scaling;
+      width: 2rem;
+      margin-right: 1rem;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

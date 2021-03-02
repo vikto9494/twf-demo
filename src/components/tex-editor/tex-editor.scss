@@ -1,3 +1,5 @@
+@import "../../styles/abstracts/variables";
+
 .math-quill-editor {
   //min-width: 17rem;
   font-size: 15px;
@@ -10,7 +12,7 @@
     padding: 10px;
     //border: 1px solid $color-primary-dark;
     border-bottom: none;
-    background-color: gray;
+    background-color: $primary-color;
   }
   &__operation > img {
     width: 15px;

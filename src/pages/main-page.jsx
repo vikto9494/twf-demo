@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 // lib components
-import { Alert, Button, Select, Switch } from "antd";
+import { Alert, Button, Select, Tooltip } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
 import { EditableMathField, StaticMathField } from "react-mathquill";
 // custom components
@@ -14,10 +14,12 @@ import {
   decodeUrlSymbols,
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
+import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
 // icons
 import sumIcon from "../assets/math-symbols/sum.svg";
 import squareIcon from "../assets/math-symbols/square-root.svg";
 import piIcon from "../assets/math-symbols/pi.svg";
+import backSpaceOutlineIcon from "../assets/icons/backspace-outline.svg";
 // styles
 import "./main-page.scss";
 // inserts the required mathquill css to the <head> block.
@@ -30,31 +32,6 @@ const MainPage = () => {
   // getting url query params
   const history = useHistory();
   const possibleEqualitySigns = ["=", ">=", ">", "<", "<="];
-  const urlSignToPlainSign = (urlSign) => {
-    if (urlSign === "ge") {
-      return ">=";
-    } else if (urlSign === "le") {
-      return "<=";
-    } else if (urlSign === "gt") {
-      return ">";
-    } else if (urlSign === "lt") {
-      return "<";
-    } else return "=";
-  };
-  const plainSignToUrlSign = (plainSign) => {
-    switch (plainSign) {
-      case ">=":
-        return "ge";
-      case "<=":
-        return "le";
-      case ">":
-        return "gt";
-      case "<":
-        return "lt";
-      default:
-        return "=";
-    }
-  };
   const {
     mode: modeUrl,
     originalExpression: originalExpressionUrl,
@@ -89,10 +66,10 @@ const MainPage = () => {
     }
     return startTex + solutionSignView + "..." + solutionSignView + endTex;
   };
-  const reverseGameMode = () => {
-    setIsGameMode((prevState) => !prevState);
-    setIsGameMode((prevState) => !prevState);
-  };
+  // const reverseGameMode = () => {
+  //   setCurrentMode("Solve");
+  //   setCurrentMode("Play");
+  // };
   const createDefaultAndDisabledClassName = (className) => {
     if (hideDetails) {
       return `${className} ${className}--disabled`;
@@ -138,6 +115,7 @@ const MainPage = () => {
     "Logarithm",
     "Trigonometry",
   ];
+  const modes = ["Play", "Solve", "Check Statement"];
   // app dependencies
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
@@ -164,7 +142,9 @@ const MainPage = () => {
   const [endTex, setEndTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
-  const [isGameMode, setIsGameMode] = useState(!modeUrl || modeUrl === "play");
+  const [currentMode, setCurrentMode] = useState(
+    modes.includes(modeUrl) ? modeUrl : "Play"
+  );
   const [solutionInTex, setSolutionInTex] = useState(formSolutionStartingTex());
   const [showSpinner, setShowSpinner] = useState(false);
   // input check messages
@@ -195,7 +175,7 @@ const MainPage = () => {
     if (!isError) {
       history.push(
         `/?` +
-          `mode=${isGameMode ? "play" : "solve"}` +
+          `mode=${currentMode}` +
           `&originalExpression=${startSSConverted}` +
           `&endExpression=${endSSConverted}` +
           `&rulePack=${currentRulePack}` +
@@ -207,7 +187,7 @@ const MainPage = () => {
       setSuccessMsg(null);
       setSolutionError(null);
       setSolutionInTex(formSolutionStartingTex());
-      reverseGameMode();
+      // reverseGameMode();
     }
   };
 
@@ -238,12 +218,6 @@ const MainPage = () => {
     }
   }, [showSpinner]);
 
-  useEffect(() => {
-    if (selectedEqualitySign !== "=") {
-      setIsGameMode(false);
-    }
-  }, [selectedEqualitySign]);
-
   // tex solution commands
   const [solutionMathField, setSolutionMathField] = useState(null);
   const actions = [
@@ -270,6 +244,15 @@ const MainPage = () => {
           solutionMathField.cmd("\\pi");
         }
       },
+    },
+    {
+      iconUrl: backSpaceOutlineIcon,
+      latexCmd: () => {
+        if (solutionMathField) {
+          setSolutionInTex("");
+        }
+      },
+      tooltip: "Clear input",
     },
     // TODO: find icons and finish
     // {
@@ -300,109 +283,124 @@ const MainPage = () => {
 
   return (
     <div className="app">
-      <div className="app__inputs">
-        <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
-          <div className={createDefaultAndDisabledClassName("app__tex-input")}>
-            <h2>Prove that</h2>
-            {!hideDetails ? (
-              <EditableMathField
-                latex={startTex}
-                onChange={(mathField) => {
-                  setStartTex(mathField.latex());
-                }}
-                style={{
-                  width: "22rem",
-                  fontSize: "1.6rem",
-                }}
-              />
-            ) : (
-              <StaticMathField
-                style={{
-                  fontSize: "2.2rem",
-                }}
-              >
-                {startTex}
-              </StaticMathField>
-            )}
-          </div>
-          <div className={createDefaultAndDisabledClassName("app__tex-input")}>
-            {isGameMode ? (
-              <h2 style={{ marginRight: "1rem" }}>Equals</h2>
-            ) : (
-              <Select
-                showSearch={true}
-                defaultValue={selectedEqualitySign}
-                onChange={(value) => {
-                  setSelectedEqualitySign(value);
-                }}
-                style={{
-                  width: "7rem",
-                  marginTop: "-0.2rem",
-                  marginRight: "1rem",
-                }}
-              >
-                {possibleEqualitySigns.map((sign) => (
-                  <Option key={sign} value={sign}>
-                    {sign}
-                  </Option>
-                ))}
-              </Select>
-            )}
-            {!hideDetails ? (
-              <EditableMathField
-                latex={endTex}
-                onChange={(mathField) => {
-                  setEndTex(mathField.latex());
-                }}
-                style={{
-                  width: "22rem",
-                  fontSize: "1.6rem",
-                }}
-              />
-            ) : (
-              <StaticMathField
-                style={{
-                  fontSize: "2.2rem",
-                }}
-              >
-                {endTex}
-              </StaticMathField>
-            )}
-          </div>
-        </div>
-        {!hideDetails && (
-          <div className="app__add-inputs">
-            <div className="app__input-group">
-              <label>Subject Area</label>
-              <Select
-                defaultValue={currentRulePack}
-                onChange={(value) => {
-                  setCurrentRulePack(value);
-                }}
-                style={{ width: "150px" }}
-              >
-                {rulePacks.map((option) => (
-                  <Option key={option} value={option}>
-                    {option}
-                  </Option>
-                ))}
-              </Select>
+      <div className="app__tabs">
+        {modes.map((mode) => {
+          return (
+            <div
+              key={mode}
+              onClick={() => {
+                setCurrentMode(mode);
+              }}
+              className={`app__tab ${
+                currentMode === mode ? "app__tab--selected" : ""
+              }`}
+            >
+              {mode}
             </div>
-            {selectedEqualitySign === "=" && (
-              <div className="app__input-group">
-                <label>Game mode</label>
-                <Switch
-                  checked={isGameMode}
-                  onChange={(value) => {
-                    setIsGameMode(value);
+          );
+        })}
+        <div className="app__tab--bottom-line" />
+      </div>
+      {currentMode !== "Check Statement" && (
+        <div className="app__inputs">
+          <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
+            <div
+              className={createDefaultAndDisabledClassName("app__tex-input")}
+            >
+              <h2>Prove that</h2>
+              {!hideDetails ? (
+                <EditableMathField
+                  latex={startTex}
+                  onChange={(mathField) => {
+                    setStartTex(mathField.latex());
+                  }}
+                  style={{
+                    width: "22rem",
+                    fontSize: "1.6rem",
                   }}
                 />
-              </div>
-            )}
-            <Button onClick={onCreateTask}>Change Task!</Button>
+              ) : (
+                <StaticMathField
+                  style={{
+                    fontSize: "2.2rem",
+                  }}
+                >
+                  {startTex}
+                </StaticMathField>
+              )}
+            </div>
+            <div
+              className={createDefaultAndDisabledClassName("app__tex-input")}
+            >
+              {currentMode === "Play" ? (
+                <h2 style={{ marginRight: "1rem" }}>Equals</h2>
+              ) : (
+                <Select
+                  showSearch={true}
+                  defaultValue={selectedEqualitySign}
+                  onChange={(value) => {
+                    setSelectedEqualitySign(value);
+                  }}
+                  style={{
+                    width: "7rem",
+                    marginTop: "-0.2rem",
+                    marginRight: "1rem",
+                  }}
+                >
+                  {possibleEqualitySigns.map((sign) => (
+                    <Option key={sign} value={sign}>
+                      {sign}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+              {!hideDetails ? (
+                <EditableMathField
+                  latex={endTex}
+                  onChange={(mathField) => {
+                    setEndTex(mathField.latex());
+                  }}
+                  style={{
+                    width: "22rem",
+                    fontSize: "1.6rem",
+                  }}
+                />
+              ) : (
+                <StaticMathField
+                  style={{
+                    fontSize: "2.2rem",
+                  }}
+                >
+                  {endTex}
+                </StaticMathField>
+              )}
+            </div>
           </div>
-        )}
-      </div>
+          {!hideDetails && (
+            <div className="app__add-inputs">
+              <div className="app__input-group">
+                <label>Subject Area</label>
+                <Select
+                  defaultValue={currentRulePack}
+                  onChange={(value) => {
+                    setCurrentRulePack(value);
+                  }}
+                  style={{ width: "150px" }}
+                >
+                  {rulePacks.map((option) => (
+                    <Option key={option} value={option}>
+                      {option}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+              <Button type="primary" onClick={onCreateTask}>
+                Change Task!
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
       <div className="app__errors">
         {startError && (
           <Alert
@@ -419,19 +417,30 @@ const MainPage = () => {
           />
         )}
       </div>
-      {isGameMode && (
+      {currentMode === "Play" && (
         <GameEditor start={startSS} end={endSS} rulePacks={currentRulePack} />
       )}
-      {!isGameMode && (
+      {currentMode !== "Play" && (
         <div className="app__tex-solution-block">
-          <h1>Write solution instead of dots (in TeX)</h1>
+          {currentMode === "Solve" && (
+            <h1>Write solution instead of dots (in TeX)</h1>
+          )}
+          {currentMode === "Check Statement" && (
+            <h1>Write statement and check if it's correct (in TeX)</h1>
+          )}
           <div className="tex-solution">
             <div className="tex-solution__operations">
               {actions.map((action, i) => {
-                const { iconUrl, latexCmd } = action;
+                const { iconUrl, latexCmd, tooltip } = action;
                 return (
                   <div key={i} className="tex-solution__operation">
-                    <img src={iconUrl} onClick={() => latexCmd()} />
+                    {tooltip ? (
+                      <Tooltip title={tooltip} placement="bottom">
+                        <img src={iconUrl} onClick={() => latexCmd()} />
+                      </Tooltip>
+                    ) : (
+                      <img src={iconUrl} onClick={() => latexCmd()} />
+                    )}
                   </div>
                 );
               })}

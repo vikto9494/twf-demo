@@ -18,6 +18,11 @@ h6 {
   color: inherit;
 }
 
+.ant-btn-primary {
+  background-color: $primary-color !important;
+  border-color: $primary-color-dark !important;
+}
+
 // override mathquill
 .mq-editable-field.mq-math-mode {
   // add scroll

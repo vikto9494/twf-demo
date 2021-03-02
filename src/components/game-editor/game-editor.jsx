@@ -59,7 +59,7 @@ const GameEditor = ({ start, end, rulePacks }) => {
 
     const backgroundColour = "#ffffff";
     //        const backgroundColour = "#efefef";
-    const defaultTextColor = "#254b25";
+    const defaultTextColor = "#ff5722";
     const defaultRulesBack = "#cfd8dc";
     const highlightedRulesBack = "#bfc8cc";
     const selectedRuleBack = "#ffbf00";
