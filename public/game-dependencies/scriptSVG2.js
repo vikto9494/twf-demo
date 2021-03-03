@@ -103,9 +103,9 @@ function MakeTree(node, app) {
   return cur_node;
 }
 
-const default_text_color_number = 0x1976d2;
+const default_text_color_number = 0x254b25;
 const default_text_color = "#" + default_text_color_number.toString(16);
-const once_selected_text_color_number = 0xff5722;
+const once_selected_text_color_number = 0x1111ff;
 const once_selected_text_color =
   "#" + once_selected_text_color_number.toString(16);
 const selectionColorIncrement = 0x710000;

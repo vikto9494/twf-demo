@@ -22,6 +22,20 @@ h6 {
   background-color: $primary-color !important;
   border-color: $primary-color-dark !important;
 }
+// select styles
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: $primary-color;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-color: $primary-color-dark !important;;
+  -webkit-box-shadow: 0 0 0 2px rgba($primary-color-dark, 0.2);
+  box-shadow: 0 0 0 2px rgba($primary-color-dark, 0.2);
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: $primary-color-light;
+}
 
 // override mathquill
 .mq-editable-field.mq-math-mode {
@@ -39,5 +53,17 @@ h6 {
       box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
     }
   }
+}
+
+.mq-editable-field, .mq-math-mode .mq-editable-field {
+  border: 1px solid #d9d9d9;
+}
+
+.mq-editable-field.mq-focused, .mq-math-mode .mq-editable-field.mq-focused {
+  border-color: $primary-color-dark !important;
+  //-webkit-box-shadow: 0 0 0 2px rgba($primary-color-dark, 0.2);
+  //box-shadow: 0 0 0 2px rgba($primary-color-dark, 0.2);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
