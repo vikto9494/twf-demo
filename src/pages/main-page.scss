@@ -155,9 +155,6 @@ body {
     border-bottom: none;
   }
   &__operation {
-    &:last-child {
-      margin-left: auto;
-    }
     & > img {
       @include click-scaling;
       width: 2rem;

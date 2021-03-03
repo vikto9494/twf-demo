@@ -19,7 +19,6 @@ import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
 import sumIcon from "../assets/math-symbols/sum.svg";
 import squareIcon from "../assets/math-symbols/square-root.svg";
 import piIcon from "../assets/math-symbols/pi.svg";
-import backSpaceOutlineIcon from "../assets/icons/backspace-outline.svg";
 // styles
 import "./main-page.scss";
 // inserts the required mathquill css to the <head> block.
@@ -180,7 +179,9 @@ const MainPage = () => {
           `&endExpression=${endSSConverted}` +
           `&rulePack=${currentRulePack}` +
           `&hideDetails=${hideDetails}` +
-          `&comparisonType=${plainSignToUrlSign(selectedEqualitySign)}`
+          (plainSignToUrlSign(selectedEqualitySign) !== "="
+            ? `&comparisonType=${plainSignToUrlSign(selectedEqualitySign)}`
+            : "")
       );
       setStartError(null);
       setEndError(null);
@@ -244,15 +245,6 @@ const MainPage = () => {
           solutionMathField.cmd("\\pi");
         }
       },
-    },
-    {
-      iconUrl: backSpaceOutlineIcon,
-      latexCmd: () => {
-        if (solutionMathField) {
-          setSolutionInTex("");
-        }
-      },
-      tooltip: "Clear input",
     },
     // TODO: find icons and finish
     // {

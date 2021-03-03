@@ -8,7 +8,7 @@
 @import "base/animations";
 
 
-// override antdesign style
+// override antd core styles
 h1,
 h2,
 h3,
@@ -18,11 +18,13 @@ h6 {
   color: inherit;
 }
 
+// override antd button styles
 .ant-btn-primary {
   background-color: $primary-color !important;
   border-color: $primary-color-dark !important;
 }
-// select styles
+
+// override antd select styles
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
   border-color: $primary-color;
 }
@@ -61,8 +63,6 @@ h6 {
 
 .mq-editable-field.mq-focused, .mq-math-mode .mq-editable-field.mq-focused {
   border-color: $primary-color-dark !important;
-  //-webkit-box-shadow: 0 0 0 2px rgba($primary-color-dark, 0.2);
-  //box-shadow: 0 0 0 2px rgba($primary-color-dark, 0.2);
   -webkit-box-shadow: none;
   box-shadow: none;
 }

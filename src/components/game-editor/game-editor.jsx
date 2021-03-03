@@ -1,6 +1,6 @@
 /* eslint-disable */
-
 import React, { useEffect } from "react";
+import { detectIsSafari } from "../../utils/utils";
 
 const GameEditor = ({ start, end, rulePacks }) => {
   console.log(document.getElementsByTagName("svg"));
@@ -134,7 +134,11 @@ const GameEditor = ({ start, end, rulePacks }) => {
           })
           .center(window.innerWidth / 2, substitutionAreaY + explanationsSize);
         app
-          .text("Use 'Shift' or 'CapsLock' to select more than one part")
+          .text(
+            `Use ${
+              detectIsSafari() ? "" : "'Shift' or "
+            }'CapsLock' to select more than one part`
+          )
           .font({
             size: explanationsSize,
             family: "u2000",

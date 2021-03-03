@@ -9,6 +9,7 @@ export const urlSignToPlainSign = (urlSign) => {
     return "<";
   } else return "=";
 };
+
 export const plainSignToUrlSign = (plainSign) => {
   switch (plainSign) {
     case ">=":
