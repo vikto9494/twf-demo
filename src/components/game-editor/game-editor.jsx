@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { detectIsSafari } from "../../utils/utils";
 
 const GameEditor = ({ start, end, rulePacks }) => {
-  console.log(document.getElementsByTagName("svg"));
   const cleanDocument = () => {
     document.getElementsByTagName("svg").forEach((svg) => {
       if (svg.ariaHidden !== "true") {

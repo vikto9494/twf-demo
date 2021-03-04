@@ -12,6 +12,7 @@ import {
   convertMathInput,
   checkTex,
   decodeUrlSymbols,
+  checkStatement,
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
@@ -30,7 +31,7 @@ const MainPage = () => {
   const { Option } = Select;
   // getting url query params
   const history = useHistory();
-  const possibleEqualitySigns = ["=", ">=", ">", "<", "<="];
+  const possibleComparisonSigns = ["=", ">=", ">", "<", "<="];
   const {
     mode: modeUrl,
     originalExpression: originalExpressionUrl,
@@ -46,21 +47,21 @@ const MainPage = () => {
         return queryStr.split("=");
       })
   );
-  const [selectedEqualitySign, setSelectedEqualitySign] = useState(
+  const [selectedComparisonSign, setSelectedComparisonSign] = useState(
     comparisonTypeUrl !== undefined
       ? urlSignToPlainSign(comparisonTypeUrl)
       : "="
   );
   // local utils
   const formSolutionStartingTex = () => {
-    let solutionSignView = selectedEqualitySign;
-    if (selectedEqualitySign === ">=") {
+    let solutionSignView = selectedComparisonSign;
+    if (selectedComparisonSign === ">=") {
       solutionSignView = " \\ge ";
-    } else if (selectedEqualitySign === "<=") {
+    } else if (selectedComparisonSign === "<=") {
       solutionSignView = " \\le ";
-    } else if (selectedEqualitySign === "<") {
+    } else if (selectedComparisonSign === "<") {
       solutionSignView = " \\lt ";
-    } else if (selectedEqualitySign === ">") {
+    } else if (selectedComparisonSign === ">") {
       solutionSignView = " \\gt ";
     }
     return startTex + solutionSignView + "..." + solutionSignView + endTex;
@@ -127,12 +128,12 @@ const MainPage = () => {
     startSS === "(+(3;*(4;cos(*(2;x)));cos(*(4;x))))" &&
     endSS === "(*(8;^(cos(x);4)))" &&
     currentRulePack === "Trigonometry" &&
-    selectedEqualitySign === "="
+    selectedComparisonSign === "="
       ? "3+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)=3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1=8\\cdot \\cos \\left(x\\right)^4"
       : startSS === "(+(2;*(4;cos(*(2;x)));cos(*(4;x))))" &&
         endSS === "(*(8;^(cos(x);4)))" &&
         currentRulePack === "Trigonometry" &&
-        selectedEqualitySign === "<="
+        selectedComparisonSign === "<="
       ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
       : null;
   const [startTex, setStartTex] = useState(
@@ -179,8 +180,8 @@ const MainPage = () => {
           `&endExpression=${endSSConverted}` +
           `&rulePack=${currentRulePack}` +
           `&hideDetails=${hideDetails}` +
-          (plainSignToUrlSign(selectedEqualitySign) !== "="
-            ? `&comparisonType=${plainSignToUrlSign(selectedEqualitySign)}`
+          (plainSignToUrlSign(selectedComparisonSign) !== "="
+            ? `&comparisonType=${plainSignToUrlSign(selectedComparisonSign)}`
             : "")
       );
       setStartError(null);
@@ -193,15 +194,13 @@ const MainPage = () => {
   };
 
   const onCheckTexSolutionInput = () => {
-    console.log(solutionInTex);
-    console.log(startSS);
-    console.log(endSS);
-    console.log(selectedEqualitySign);
-    console.log(currentRulePack);
-    const res = checkTex(solutionInTex, startSS, endSS, selectedEqualitySign, [
-      currentRulePack,
-    ]);
-    console.log(res);
+    const res = checkTex(
+      solutionInTex,
+      startSS,
+      endSS,
+      selectedComparisonSign,
+      [currentRulePack]
+    );
     if (res.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(res.errorMessage);
@@ -212,11 +211,34 @@ const MainPage = () => {
     setSolutionInTex(res.validatedSolution);
   };
 
-  useEffect(() => {
-    if (showSpinner) {
-      onCheckTexSolutionInput();
-      setShowSpinner(false);
+  const onCheckStatement = () => {
+    const {
+      res,
+      startExpression,
+      endExpression,
+      comparisonSign,
+      // TODO: add rulePacks
+    } = checkStatement(solutionInTex, []);
+    if (res.errorMessage) {
+      setSuccessMsg(null);
+      setSolutionError(res.errorMessage);
+    } else {
+      setSolutionError(null);
+      setSuccessMsg("Correct!");
     }
+    setStartTex(startExpression);
+    setEndTex(endExpression);
+    setSelectedComparisonSign(urlSignToPlainSign(comparisonSign));
+    setSolutionInTex(res.validatedSolution);
+  };
+
+  useEffect(() => {
+    if (showSpinner && currentMode === "Solve") {
+      onCheckTexSolutionInput();
+    } else if (showSpinner && currentMode === "Check Statement") {
+      onCheckStatement();
+    }
+    setShowSpinner(false);
   }, [showSpinner]);
 
   // tex solution commands
@@ -329,9 +351,9 @@ const MainPage = () => {
               ) : (
                 <Select
                   showSearch={true}
-                  defaultValue={selectedEqualitySign}
+                  defaultValue={selectedComparisonSign}
                   onChange={(value) => {
-                    setSelectedEqualitySign(value);
+                    setSelectedComparisonSign(value);
                   }}
                   style={{
                     width: "7rem",
@@ -339,7 +361,7 @@ const MainPage = () => {
                     marginRight: "1rem",
                   }}
                 >
-                  {possibleEqualitySigns.map((sign) => (
+                  {possibleComparisonSigns.map((sign) => (
                     <Option key={sign} value={sign}>
                       {sign}
                     </Option>
