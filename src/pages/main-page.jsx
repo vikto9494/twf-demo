@@ -66,10 +66,10 @@ const MainPage = () => {
     }
     return startTex + solutionSignView + "..." + solutionSignView + endTex;
   };
-  // const reverseGameMode = () => {
-  //   setCurrentMode("Solve");
-  //   setCurrentMode("Play");
-  // };
+  const reverseGameMode = async () => {
+    await setCurrentMode("Solve");
+    await setCurrentMode("Play");
+  };
   const createDefaultAndDisabledClassName = (className) => {
     if (hideDetails) {
       return `${className} ${className}--disabled`;
@@ -189,7 +189,7 @@ const MainPage = () => {
       setSuccessMsg(null);
       setSolutionError(null);
       setSolutionInTex(formSolutionStartingTex());
-      // reverseGameMode();
+      await reverseGameMode();
     }
   };
 
