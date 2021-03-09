@@ -189,7 +189,9 @@ const MainPage = () => {
       setSuccessMsg(null);
       setSolutionError(null);
       setSolutionInTex(formSolutionStartingTex());
-      await reverseGameMode();
+      if (currentMode === "Play") {
+        await reverseGameMode();
+      }
     }
   };
 
