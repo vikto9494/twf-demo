@@ -216,9 +216,9 @@ const MainPage = () => {
   const onCheckStatement = () => {
     const {
       res,
-      startExpression,
-      endExpression,
-      comparisonSign,
+      // startExpression,
+      // endExpression,
+      // comparisonSign,
       // TODO: add rulePacks
     } = checkStatement(solutionInTex, []);
     if (res.errorMessage) {
@@ -228,9 +228,9 @@ const MainPage = () => {
       setSolutionError(null);
       setSuccessMsg("Correct!");
     }
-    setStartTex(startExpression);
-    setEndTex(endExpression);
-    setSelectedComparisonSign(urlSignToPlainSign(comparisonSign));
+    // setStartTex(startExpression);
+    // setEndTex(endExpression);
+    // setSelectedComparisonSign(urlSignToPlainSign(comparisonSign));
     setSolutionInTex(res.validatedSolution);
   };
 

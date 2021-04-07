@@ -13,6 +13,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var copyToArray = Kotlin.kotlin.collections.copyToArray;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
+  var Pair = Kotlin.kotlin.Pair;
+  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var mutableListOf = Kotlin.kotlin.collections.mutableListOf_i5x0yv$;
   var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
@@ -27,7 +29,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var subtract = Kotlin.kotlin.collections.subtract_q4559j$;
   var to = Kotlin.kotlin.to_ujzrz7$;
-  var mapOf = Kotlin.kotlin.collections.mapOf_x2b85n$;
+  var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
   var toDoubleOrNull = Kotlin.kotlin.text.toDoubleOrNull_pdl1vz$;
   var numberToInt = Kotlin.numberToInt;
   var Math_0 = Math;
@@ -42,9 +44,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   var throwCCE = Kotlin.throwCCE;
-  var Pair = Kotlin.kotlin.Pair;
   var mutableMapOf = Kotlin.kotlin.collections.mutableMapOf_qfcya0$;
-  var mapOf_0 = Kotlin.kotlin.collections.mapOf_qfcya0$;
   var removeAll = Kotlin.kotlin.collections.removeAll_qafx1e$;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var math = Kotlin.kotlin.math;
@@ -172,6 +172,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   NumberIntervalType.prototype.constructor = NumberIntervalType;
   SubstitutionInstanceVarType.prototype = Object.create(Enum.prototype);
   SubstitutionInstanceVarType.prototype.constructor = SubstitutionInstanceVarType;
+  ExpressionSubstitutionNormType.prototype = Object.create(Enum.prototype);
+  ExpressionSubstitutionNormType.prototype.constructor = ExpressionSubstitutionNormType;
   MathMlTagTreeNode$Type.prototype = Object.create(Enum.prototype);
   MathMlTagTreeNode$Type.prototype.constructor = MathMlTagTreeNode$Type;
   MathMlTagTreeNode$TexArgumentType.prototype = Object.create(Enum.prototype);
@@ -414,20 +416,38 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     var root = expressionTreeParser.root;
     return root.toString();
   }
-  function checkFactsInMathML(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, additionalFactsIdentifiers, maxExpressionTransformationWeight) {
+  function checkFactsInMathML(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter) {
     if (wellKnownFunctions === void 0)
-      wellKnownFunctions = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
+      wellKnownFunctions = '+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1';
     if (expressionTransformationRules === void 0)
       expressionTransformationRules = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
     if (targetFactIdentifier === void 0)
       targetFactIdentifier = '';
     if (targetVariablesNames === void 0)
       targetVariablesNames = '';
+    if (minNumberOfMultipliersInAnswer === void 0)
+      minNumberOfMultipliersInAnswer = '';
+    if (maxNumberOfDivisionsInAnswer === void 0)
+      maxNumberOfDivisionsInAnswer = '';
     if (additionalFactsIdentifiers === void 0)
       additionalFactsIdentifiers = '';
     if (maxExpressionTransformationWeight === void 0)
       maxExpressionTransformationWeight = '1.0';
-    return checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, additionalFactsIdentifiers, maxExpressionTransformationWeight);
+    if (unlimitedWellKnownFunctions === void 0)
+      unlimitedWellKnownFunctions = wellKnownFunctions;
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
+    if (taskContextExpressionTransformationRules === void 0)
+      taskContextExpressionTransformationRules = '';
+    if (allowedVariablesNames === void 0)
+      allowedVariablesNames = '';
+    if (maxDistBetweenDiffSteps === void 0)
+      maxDistBetweenDiffSteps = '';
+    if (forbiddenFunctions === void 0)
+      forbiddenFunctions = '';
+    if (scopeFilter === void 0)
+      scopeFilter = '';
+    return checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter);
   }
   function getUserLogInPlainText() {
     return log_1.getLogInPlainText_ouivre$(MessageType$USER_getInstance());
@@ -450,16 +470,23 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   function decodeUrlSymbols_JS(string) {
     return decodeUrlSymbols(string);
   }
-  function compareWithoutSubstitutions(left, right, scope, notChangesOnVariablesFunction, functionConfiguration, compiledConfiguration) {
+  function compareWithoutSubstitutions(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, compiledConfiguration) {
     if (scope === void 0)
       scope = setOf('');
     if (notChangesOnVariablesFunction === void 0)
       notChangesOnVariablesFunction = setOf_0(['+', '-', '*', '/', '^']);
+    if (maxExpressionBustCount === void 0)
+      maxExpressionBustCount = 4096;
     if (functionConfiguration === void 0)
       functionConfiguration = new FunctionConfiguration(scope, notChangesOnVariablesFunction);
+    if (comparisonSettings === void 0) {
+      var $receiver = new ComparisonSettings();
+      $receiver.maxExpressionBustCount = maxExpressionBustCount;
+      comparisonSettings = $receiver;
+    }
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, functionConfiguration, compiledConfiguration);
+    return compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, compiledConfiguration);
   }
   function createConfigurationFromRulePacksAndParams(rulePacks, additionalParamsMap) {
     if (rulePacks === void 0) {
@@ -566,85 +593,13 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return compiledConfiguration;
   }
+  var rulePacksMap;
   function getSubstitutionsByRulePacks(rulePacks) {
     var tmp$, tmp$_0;
     var result = ArrayList_init();
     for (tmp$ = 0; tmp$ !== rulePacks.length; ++tmp$) {
       var rulePack = rulePacks[tmp$];
-      switch (rulePack) {
-        case 'Algebra':
-          tmp$_0 = getAllAlgebraSubstitutions();
-          break;
-        case 'ArithmeticPositiveAddition':
-          tmp$_0 = getArithmeticPositiveAdditionSubstitutions();
-          break;
-        case 'ArithmeticAddition':
-          tmp$_0 = getArithmeticAdditionSubstitutions();
-          break;
-        case 'ArithmeticMultiplication':
-          tmp$_0 = getArithmeticMultiplicationSubstitutions();
-          break;
-        case 'ArithmeticDivision':
-          tmp$_0 = getArithmeticDivisionSubstitutions();
-          break;
-        case 'ArithmeticPow':
-          tmp$_0 = getArithmeticPowSubstitutions();
-          break;
-        case 'ArithmeticPowExtension':
-          tmp$_0 = getArithmeticPowExtensionSubstitutions();
-          break;
-        case 'ShortMultiplication':
-          tmp$_0 = getShortMultiplicationSubstitutions();
-          break;
-        case 'Logarithm':
-          tmp$_0 = getLogarithmSubstitutions();
-          break;
-        case 'FactorialRecurrent':
-          tmp$_0 = getFactorialSubstitutions();
-          break;
-        case 'Combinatorics':
-          tmp$_0 = getCombinatoricsSubstitutions();
-          break;
-        case 'Trigonometry':
-          tmp$_0 = getTrigonometrySubstitutions();
-          break;
-        case 'Complexes':
-          tmp$_0 = getComplexesSubstitutions();
-          break;
-        case 'TrigonometryZk':
-          tmp$_0 = getTrigonometryZkSubstitutions();
-          break;
-        case 'TrigonometryCompleteTgCtg':
-          tmp$_0 = getTrigonometryCompleteTgCtgSubstitutions();
-          break;
-        case 'Logic':
-          tmp$_0 = getLogicBaseSubstitutions();
-          break;
-        case 'LogicAbsorption':
-          tmp$_0 = getLogicAbsorptionLawSubstitutions();
-          break;
-        case 'LogicResolution':
-          tmp$_0 = getLogicResolutionSubstitutions();
-          break;
-        case 'PhysicsSimpleMoving':
-          tmp$_0 = getPhysicsSimpleMovingSubstitutions();
-          break;
-        case 'PhysicsCircleMoving':
-          tmp$_0 = getPhysicsCircleMovingSubstitutions();
-          break;
-        case 'PhysicsNuclear':
-          tmp$_0 = getPhysicsNuclearSubstitutions();
-          break;
-        case 'PhysicsMolecular':
-          tmp$_0 = getPhysicsMolecularSubstitutions();
-          break;
-        case 'PhysicsElectrodynamics':
-          tmp$_0 = getPhysicsElectrodynamicsSubstitutions();
-          break;
-        default:tmp$_0 = emptyList();
-          break;
-      }
-      var newRules = tmp$_0;
+      var newRules = (tmp$_0 = rulePacksMap.get_11rb$(rulePack)) != null ? tmp$_0 : emptyList();
       addAll(result, newRules);
     }
     var tmp$_1;
@@ -669,10 +624,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     return mutableListOf([expressionSubstitutionFromStructureStrings('(+(a))', '(a)', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(+(a;b))', '(+(b;a))', false, false, false, true, 20, ''), expressionSubstitutionFromStructureStrings('(a)', '(+(a;0))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(+(-(+(-(a)))))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(-(+(-(a))))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(-(-(a)))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(a)', '(-(+(-(a))))', false, false, false, true, 95, ''), expressionSubstitutionFromStructureStrings('(+(a;-(a)))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(+(-(a);a))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(+(a;+(-(a))))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(+(+(-(a));a))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'SimpleComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'ZeroComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 20, 'NumberPlusMinus1'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 31, 'MinusInOutBrackets'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'ParentBracketsExpansion'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsSwap'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsPermutation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 41, 'ArgumentsPermutationInOriginalOrder'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 92, 'AdditiveComplicatingExtension')]);
   }
   function getArithmeticMultiplicationSubstitutions() {
-    return plus(getArithmeticAdditionSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(*(a;0))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(*(0;a))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(0)', '(*(a;0))', false, false, false, true, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;1))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(*(1;a))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(a)', '(*(a;1))', false, false, false, true, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;b))', '(*(b;a))', false, false, false, true, 20, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'OpeningBrackets'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceArithmetic'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'TwoSidesArithmeticReduce'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 15, 'MultiplicationFactorization'), expressionSubstitutionFromStructureStrings('(+(a;a))', '(*(2;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(a;+(a)))', '(*(2;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(+(a);a))', '(*(2;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(2;a))', '(+(a;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(a;*(a;n)))', '(*(a;+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;+(n;1)))', '(+(a;*(a;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(*(a;n);a))', '(*(a;+(1;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;+(1;n)))', '(+(*(a;n);a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(*(A;C)))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(-(A);C))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(*(A;C)))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;-(C)))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;-(C)))', '(*(+(-(A);C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(-(A);C))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(*(A;C))))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(+(-(A));C))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(*(A;C))))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;+(-(C))))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;+(-(C))))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(+(-(A));C))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(-(A);-(B)))', '(*(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;B))', '(*(+(-(A));+(-(B))))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(*(+(-(A));+(-(B))))', '(*(A;B))', false, false, false, false, 35, '')]));
+    return plus(getArithmeticAdditionSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(*(a;0))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(*(0;a))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(0)', '(*(a;0))', false, false, false, true, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;1))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(*(1;a))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(a)', '(*(a;1))', false, false, false, true, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;b))', '(*(b;a))', false, false, false, true, 20, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'OpeningBrackets'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceArithmetic'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'TwoSidesArithmeticReduce'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 15, 'MultiplicationFactorization'), expressionSubstitutionFromStructureStrings('(+(a;a))', '(*(2;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(a;+(a)))', '(*(2;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(+(a);a))', '(*(2;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(2;a))', '(+(a;a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(a;*(a;n)))', '(*(a;+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;+(n;1)))', '(+(a;*(a;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(*(a;n);a))', '(*(a;+(1;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;+(1;n)))', '(+(*(a;n);a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(*(A;C)))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(-(A);C))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(*(A;C)))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;-(C)))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;-(C)))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(-(A);C))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(*(A;C))))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(+(-(A));C))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(*(A;C))))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;+(-(C))))', '(+(-(*(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;+(-(C))))', '(*(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(+(-(A));C))', '(*(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(-(A);-(B)))', '(*(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;B))', '(*(+(-(A));+(-(B))))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(*(+(-(A));+(-(B))))', '(*(A;B))', false, false, false, false, 35, '')]));
   }
   function getArithmeticDivisionSubstitutions() {
-    return plus(getArithmeticMultiplicationSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(/(0;a))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(/(a;1))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(/(a;a))', '(1)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(*(/(1;a);a))', '(1)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(/(1;/(1;a)))', '(a)', false, true, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(a)', '(/(1;/(1;a)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(0.5)', '(/(1;2))', false, false, true, false, 15, ''), expressionSubstitutionFromStructureStrings('(/(1;2))', '(0.5)', false, false, true, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(a;b))', '(/(*(a;b);*(b;b)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 92, 'MultiplicativeComplicatingExtension'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceFraction'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 15, 'DecimalToFraction'), expressionSubstitutionFromStructureStrings('(/(*(a;n);a))', '(*(a;+(n;-(1))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(a;+(n;-(1))))', '(/(*(a;n);a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(/(A;C)))', '(/(+(-(A);C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(-(A);C))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(/(A;C)))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;-(C)))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;-(C)))', '(/(+(-(A);C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(-(A);C))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(/(A;C))))', '(/(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(+(-(A));C))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(/(A;C))))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;+(-(C))))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;+(-(C))))', '(/(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(+(-(A));C))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(-(A);-(B)))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;B))', '(/(+(-(A));+(-(B))))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(+(-(A));+(-(B))))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(/(B;C);/(A;D)))', '(/(+(*(B;D);*(C;A));*(C;D)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(/(B;C);-(/(A;D))))', '(/(+(*(B;D);-(*(C;A)));*(C;D)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;/(B;A)))', '(B)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(B;A);A))', '(B)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;/(B;C)))', '(/(*(A;B);C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(B;C);A))', '(/(*(A;B);C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(B;C);A))', '(*(/(B;A);C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;B))', '(/(1;/(B;A)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(1;/(B;A)))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(A;B);C))', '(*(A;/(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(/(B;C);A))', '(/(B;*(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(B;*(A;C)))', '(/(/(B;C);A))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;/(B;C)))', '(/(*(A;C);B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(A;C);B))', '(/(A;/(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;*(B;C)))', '(*(/(A;B);/(1;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;*(B;C)))', '(*(/(1;B);/(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(A;B);/(1;C)))', '(/(A;*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(1;B);/(A;C)))', '(/(A;*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(D;B);/(A;C)))', '(/(*(D;A);*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);*(B;C)))', '(*(/(D;B);/(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);*(B;A)))', '(/(D;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);*(D;C)))', '(/(A;C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);D))', '(A)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(A;D);D))', '(A)', false, false, false, false, 35, '')]));
+    return plus(getArithmeticMultiplicationSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(/(0;a))', '(0)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(/(a;1))', '(a)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(/(a;a))', '(1)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(*(/(1;a);a))', '(1)', false, false, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(/(1;/(1;a)))', '(a)', false, true, false, false, 4, ''), expressionSubstitutionFromStructureStrings('(a)', '(/(1;/(1;a)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(0.5)', '(/(1;2))', false, false, true, false, 15, ''), expressionSubstitutionFromStructureStrings('(/(1;2))', '(0.5)', false, false, true, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(a;b))', '(/(*(a;b);*(b;b)))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 92, 'MultiplicativeComplicatingExtension'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceFraction'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 15, 'DecimalToFraction'), expressionSubstitutionFromStructureStrings('(-(/(A;C)))', '(/(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(-(A);C))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(-(/(A;C)))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;-(C)))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;-(C)))', '(/(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(-(A);C))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(/(A;C))))', '(/(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(+(-(A));C))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(-(/(A;C))))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;+(-(C))))', '(+(-(/(A;C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;+(-(C))))', '(/(+(-(A));C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(+(-(A));C))', '(/(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(-(A);-(B)))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;B))', '(/(+(-(A));+(-(B))))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(+(-(A));+(-(B))))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(/(B;C);/(A;D)))', '(/(+(*(B;D);*(C;A));*(C;D)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(/(B;C);-(/(A;D))))', '(/(+(*(B;D);-(*(C;A)));*(C;D)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;/(B;A)))', '(B)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(B;A);A))', '(B)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(A;/(B;C)))', '(/(*(A;B);C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(B;C);A))', '(/(*(A;B);C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;B))', '(/(1;/(B;A)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(1;/(B;A)))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(A;B);C))', '(*(A;/(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(/(B;C);A))', '(/(B;*(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(B;*(A;C)))', '(/(/(B;C);A))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;/(B;C)))', '(/(*(A;C);B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(A;C);B))', '(/(A;/(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;*(B;C)))', '(*(/(A;B);/(1;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;*(B;C)))', '(*(/(1;B);/(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(A;B);/(1;C)))', '(/(A;*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(1;B);/(A;C)))', '(/(A;*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(/(D;B);/(A;C)))', '(/(*(D;A);*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);*(B;C)))', '(*(/(D;B);/(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);*(B;A)))', '(/(D;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);*(D;C)))', '(/(A;C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(D;A);D))', '(A)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(*(A;D);D))', '(A)', false, false, false, false, 35, '')]));
   }
   function getArithmeticPowSubstitutions() {
     return plus(getArithmeticDivisionSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(a)', '(^(a;1))', false, false, true, true, 95, ''), expressionSubstitutionFromStructureStrings('(1)', '(^(1;2))', false, false, true, true, 95, ''), expressionSubstitutionFromStructureStrings('(1)', '(^(1;3))', false, false, true, true, 95, ''), expressionSubstitutionFromStructureStrings('(/(1;a))', '(^(a;+(-(1))))', false, false, false, false, 80, ''), expressionSubstitutionFromStructureStrings('(^(a;+(-(1))))', '(/(1;a))', false, false, false, false, 40, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 15, 'PowFactorization'), expressionSubstitutionFromStructureStrings('(^(a;+(b;-(c))))', '(/(^(a;b);^(a;c)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(^(a;b);^(a;c)))', '(^(a;+(b;-(c))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(B;^(A;C)))', '(*(B;^(A;+(-(C)))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(B;^(A;+(-(C)))))', '(/(B;^(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(1;^(A;C)))', '(^(A;+(-(C))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(A;+(-(C))))', '(/(1;^(A;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(A;B))', '(^(/(B;A);+(-(1))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(/(B;A);+(-(1))))', '(/(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(A;0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(^(1;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(^(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(^(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(*(a;a))', '(^(a;2))', false, false, true, false, 40, ''), expressionSubstitutionFromStructureStrings('(^(a;2))', '(*(a;a))', false, false, true, false, 40, ''), expressionSubstitutionFromStructureStrings('(*(a;^(a;n)))', '(^(a;+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(a;+(n;1)))', '(*(a;^(a;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(^(a;n);a))', '(^(a;+(1;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(a;+(1;n)))', '(*(^(a;n);a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(^(a;n);a))', '(^(a;+(n;-(1))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(a;+(n;-(1))))', '(/(^(a;n);a))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(A;*(B;C)))', '(^(^(A;B);C))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(^(A;B);C))', '(^(A;*(B;C)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(/(B;C);A))', '(/(^(B;A);^(C;A)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(^(B;A);^(C;A)))', '(^(/(B;C);A))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(-(A);*(2;n)))', '(^(A;*(2;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(-(A);2))', '(^(A;2))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(+(-(A));2))', '(^(A;2))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(a;*(2;n)))', '(^(+(-(a));*(2;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(a;2))', '(^(+(-(a));2))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(^(a;b);/(1;b)))', '(a)', false, false, false, false, 5, '')]));
@@ -681,28 +636,28 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     return plus(getArithmeticPowSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(a)', '(^(^(a;2);/(1;2)))', false, false, false, false, 96, ''), expressionSubstitutionFromStructureStrings('(a)', '(^(^(a;/(1;2));2))', false, false, false, false, 96, ''), expressionSubstitutionFromStructureStrings('(a)', '(^(^(a;3);/(1;3)))', false, false, false, false, 96, ''), expressionSubstitutionFromStructureStrings('(a)', '(^(^(a;/(1;3));3))', false, false, false, false, 96, '')]));
   }
   function getShortMultiplicationSubstitutions() {
-    return plus(getArithmeticPowSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(+(^(a;2);-(^(b;2))))', '(*(+(a;-(b));+(a;b)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(+(a;-(b));+(a;b)))', '(+(^(a;2);-(^(b;2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(+(a;b);2))', '(+(^(a;2);*(2;a;b);^(b;2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;2);*(2;a;b);^(b;2)))', '(^(+(a;b);2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;2);*(2;a);1))', '(^(+(a;1);2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(+(a;-(b));2))', '(+(^(a;2);-(*(2;a;b));^(b;2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;2);-(*(2;a;b));^(b;2)))', '(^(+(a;-(b));2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;2);-(*(2;a));1))', '(^(+(a;-(1));2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(+(a;b);3))', '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', '(^(+(a;b);3))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;3);*(3;^(a;2));*(3;a);1))', '(^(+(a;1);3))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(+(a;-(b));3))', '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', '(^(+(a;-(b));3))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;3);-(*(3;^(a;2)));*(3;a);-(1)))', '(^(+(a;-(1));3))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;3);-(^(b;3))))', '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', '(+(^(a;3);-(^(b;3))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(+(a;-(1));+(^(a;2);a;1)))', '(+(^(a;3);-(^(1;3))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(^(a;3);^(b;3)))', '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', '(+(^(a;3);^(b;3)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(+(a;1);+(^(a;2);-(a);1)))', '(+(^(a;3);^(1;3)))', false, true, false, false, 25, '')]));
+    return plus(getArithmeticPowSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(+(^(a;2);-(^(b;2))))', '(*(+(a;-(b));+(a;b)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(+(a;-(b));+(a;b)))', '(+(^(a;2);-(^(b;2))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(+(a;b);2))', '(+(^(a;2);*(2;a;b);^(b;2)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;2);*(2;a;b);^(b;2)))', '(^(+(a;b);2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;2);*(2;a);1))', '(^(+(a;1);2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(+(a;-(b));2))', '(+(^(a;2);-(*(2;a;b));^(b;2)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;2);-(*(2;a;b));^(b;2)))', '(^(+(a;-(b));2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;2);-(*(2;a));1))', '(^(+(a;-(1));2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(+(a;b);3))', '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', '(^(+(a;b);3))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;3);*(3;^(a;2));*(3;a);1))', '(^(+(a;1);3))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(+(a;-(b));3))', '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', '(^(+(a;-(b));3))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;3);-(*(3;^(a;2)));*(3;a);-(1)))', '(^(+(a;-(1));3))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;3);-(^(b;3))))', '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', '(+(^(a;3);-(^(b;3))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(+(a;-(1));+(^(a;2);a;1)))', '(+(^(a;3);-(^(1;3))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(a;3);^(b;3)))', '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', '(+(^(a;3);^(b;3)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(+(a;1);+(^(a;2);-(a);1)))', '(+(^(a;3);^(1;3)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance())]));
   }
   function getLogarithmSubstitutions() {
     return plus(getShortMultiplicationSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(^(a;log(b;a)))', '(b)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(log(1;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(log(A;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(log(*(b;c);a))', '(+(log(b;a);log(c;a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(log(b;a);log(c;a)))', '(log(*(b;c);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(*(b;c;d);a))', '(+(log(b;a);log(c;a);log(d;a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(log(b;a);log(c;a);log(d;a)))', '(log(*(b;c;d);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(*(b;c;d;e);a))', '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(log(b;a);log(c;a);log(d;a);log(e;a)))', '(log(*(b;c;d;e);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(log(b;a);-(log(c;a))))', '(log(/(b;c);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(^(b;c);a))', '(*(c;log(b;a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(c;log(b;a)))', '(log(^(b;c);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(log(b;a);c))', '(log(^(b;c);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(b;^(a;k)))', '(/(log(b;a);k))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(log(b;a);k))', '(log(b;^(a;k)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;log(b;a)))', '(log(a;b))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(a;b))', '(/(1;log(b;a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(log(c;a);log(b;a)))', '(log(c;b))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(/(b;c);a))', '(+(-(log(/(c;b);a))))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(-(log(/(c;b);a))))', '(log(/(b;c);a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(b;a))', '(+(-(log(/(1;b);a))))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(-(log(/(1;b);a))))', '(log(b;a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(log(/(1;b);a))', '(+(-(log(b;a))))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(-(log(b;a))))', '(log(/(1;b);a))', false, false, false, false, 25, '')]));
   }
   function getFactorialSubstitutions() {
-    return plus(getArithmeticPowSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(factorial(+(n;1)))', '(*(factorial(n);+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(n);+(n;1)))', '(factorial(+(n;1)))', false, true, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(n;1));+(n;1)))', '(factorial(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(/(factorial(+(n;1));+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(n;1));factorial(n)))', '(+(n;1))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(n;1))', '(/(factorial(+(n;1));factorial(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(*(factorial(+(n;-(1)));n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(+(n;-(1)));n))', '(factorial(n))', false, true, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(n);n))', '(factorial(+(n;-(1))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(+(n;-(1))))', '(/(factorial(n);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(n);factorial(+(n;-(1)))))', '(n)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(n)', '(/(factorial(n);factorial(+(n;-(1)))))', false, false, false, true, 85, '')]));
+    return plus(getArithmeticPowSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(factorial(+(n;1)))', '(*(factorial(n);+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(n);+(n;1)))', '(factorial(+(n;1)))', false, true, false, false, 35, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(factorial(+(n;1));+(n;1)))', '(factorial(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(/(factorial(+(n;1));+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(n;1));factorial(n)))', '(+(n;1))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(n;1))', '(/(factorial(+(n;1));factorial(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(*(factorial(+(n;-(1)));n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(+(n;-(1)));n))', '(factorial(n))', false, true, false, false, 35, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(factorial(n);n))', '(factorial(+(n;-(1))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(+(n;-(1))))', '(/(factorial(n);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(n);factorial(+(n;-(1)))))', '(n)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(n)', '(/(factorial(n);factorial(+(n;-(1)))))', false, false, false, true, 85, '')]));
   }
   function getCombinatoricsSubstitutions() {
-    return plus(getFactorialSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(U(m;n))', '(^(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(m;n))', '(U(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(P(n))', '(factorial(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(P(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(A(n;n))', '(P(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(P(n))', '(A(n;n))', false, false, false, true, 70, ''), expressionSubstitutionFromStructureStrings('(*(C(m;n);P(n)))', '(A(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(A(m;n))', '(*(C(m;n);P(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(A(m;n);P(n)))', '(C(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(m;n))', '(/(A(m;n);P(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(A(m;n);C(m;n)))', '(P(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(P(n))', '(/(A(m;n);C(m;n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(V(+(m;1);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));*(factorial(m);factorial(n))))', '(V(+(m;1);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(+(m;n)))', '(*(V(+(m;1);n);*(factorial(m);factorial(n))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(V(+(m;1);n);*(factorial(m);factorial(n))))', '(factorial(+(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(m);factorial(n)))', '(/(factorial(+(m;n));V(+(m;1);n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));V(+(m;1);n)))', '(*(factorial(m);factorial(n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(+(m;n);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(+(m;n);n))', '(V(+(m;1);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(V(+(m;1);n))', '(C(+(m;n);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(A(+(m;n);n))', '(/(factorial(+(m;n));factorial(m)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));factorial(m)))', '(A(+(m;n);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(+(m;n)))', '(*(A(+(m;n);n);factorial(m)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(*(A(+(m;n);n);factorial(m)))', '(factorial(+(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(m);A(+(m;n);n)))', '(factorial(+(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(m))', '(/(factorial(+(m;n));A(+(m;n);n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));A(+(m;n);n)))', '(factorial(m))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S1(m;n))', '(*(factorial(n);S2(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(n);S2(m;n)))', '(S1(m;n))', false, true, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(/(S1(m;n);S2(m;n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(S1(m;n);S2(m;n)))', '(factorial(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S2(m;n))', '(/(S1(m;n);factorial(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(S1(m;n);factorial(n)))', '(S2(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S2(+(m;1);+(n;1)))', '(+(S2(m;n);*(n;S2(m;+(n;1)))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(S2(m;n);*(n;S2(m;+(n;1)))))', '(S2(+(m;1);+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S2(m;m))', '(1)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(1)', '(S2(m;n))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(C(*(2;n);n))', '(*(C(n);+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(C(n);+(n;1)))', '(C(*(2;n);n))', false, true, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(n))', '(/(C(*(2;n);n);+(n;1)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(C(*(2;n);n);+(n;1)))', '(C(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(n;1))', '(/(C(*(2;n);n);C(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(C(*(2;n);n);C(n)))', '(+(n;1))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(C(0))', false, false, false, true, 90, '')]));
+    return plus(getFactorialSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(U(m;n))', '(^(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(^(m;n))', '(U(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(P(n))', '(factorial(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(n))', '(P(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(A(n;n))', '(P(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(P(n))', '(A(n;n))', false, false, false, true, 70, ''), expressionSubstitutionFromStructureStrings('(*(C(m;n);P(n)))', '(A(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(A(m;n))', '(*(C(m;n);P(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(A(m;n);P(n)))', '(C(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(m;n))', '(/(A(m;n);P(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(A(m;n);C(m;n)))', '(P(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(P(n))', '(/(A(m;n);C(m;n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(V(+(m;1);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));*(factorial(m);factorial(n))))', '(V(+(m;1);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(+(m;n)))', '(*(V(+(m;1);n);*(factorial(m);factorial(n))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(V(+(m;1);n);*(factorial(m);factorial(n))))', '(factorial(+(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(m);factorial(n)))', '(/(factorial(+(m;n));V(+(m;1);n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));V(+(m;1);n)))', '(*(factorial(m);factorial(n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(+(m;n);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(+(m;n);n))', '(V(+(m;1);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(V(+(m;1);n))', '(C(+(m;n);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(A(+(m;n);n))', '(/(factorial(+(m;n));factorial(m)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));factorial(m)))', '(A(+(m;n);n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(+(m;n)))', '(*(A(+(m;n);n);factorial(m)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(*(A(+(m;n);n);factorial(m)))', '(factorial(+(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(m);A(+(m;n);n)))', '(factorial(+(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(factorial(m))', '(/(factorial(+(m;n));A(+(m;n);n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(factorial(+(m;n));A(+(m;n);n)))', '(factorial(m))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S1(m;n))', '(*(factorial(n);S2(m;n)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(factorial(n);S2(m;n)))', '(S1(m;n))', false, true, false, false, 35, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(factorial(n))', '(/(S1(m;n);S2(m;n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(S1(m;n);S2(m;n)))', '(factorial(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S2(m;n))', '(/(S1(m;n);factorial(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(S1(m;n);factorial(n)))', '(S2(m;n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S2(+(m;1);+(n;1)))', '(+(S2(m;n);*(n;S2(m;+(n;1)))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(S2(m;n);*(n;S2(m;+(n;1)))))', '(S2(+(m;1);+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(S2(m;m))', '(1)', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(1)', '(S2(m;n))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(C(*(2;n);n))', '(*(C(n);+(n;1)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(*(C(n);+(n;1)))', '(C(*(2;n);n))', false, true, false, false, 35, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(C(n))', '(/(C(*(2;n);n);+(n;1)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(C(*(2;n);n);+(n;1)))', '(C(n))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(+(n;1))', '(/(C(*(2;n);n);C(n)))', false, false, false, true, 80, ''), expressionSubstitutionFromStructureStrings('(/(C(*(2;n);n);C(n)))', '(+(n;1))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(C(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(C(0))', false, false, false, true, 90, '')]));
   }
   function getTrigonometrySubstitutions() {
-    return plus(getShortMultiplicationSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(+(^(sin(a);2);^(cos(a);2)))', '(1)', false, true, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(tg(a);ctg(a)))', '(1)', false, true, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(sin(a);cos(a)))', '(tg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(tg(a))', '(/(sin(a);cos(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(cos(a);sin(a)))', '(ctg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(ctg(a))', '(/(cos(a);sin(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;ctg(a)))', '(tg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(tg(a))', '(/(1;ctg(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;tg(a)))', '(ctg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(ctg(a))', '(/(1;tg(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', false, true, false, false, 24, ''), expressionSubstitutionFromStructureStrings('(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(+(cos(a);-(cos(b))))', '(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', false, true, false, false, 23, ''), expressionSubstitutionFromStructureStrings('(sin(+(-(a))))', '(+(-(sin(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(+(-(sin(a))))', '(sin(+(-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(-(sin(a)))', '(sin(+(-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(+(-(a))))', '(cos(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(cos(+(-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(cos(+(\u03C0;a)))', '(+(-(cos(-(a)))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(+(-(cos(a))))', '(cos(+(\u03C0;-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(-(cos(a)))', '(cos(+(\u03C0;-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(sin(+(\u03C0;a)))', '(sin(+(-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(sin(+(\u03C0;-(a))))', '(sin(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(sin(+(\u03C0;-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(sin(+(/(\u03C0;2);a)))', '(cos(+(-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(+(/(\u03C0;2);a)))', '(sin(+(-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(sin(+(-(a))))', '(+(-(sin(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(sin(-(a)))', '(+(-(sin(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(+(-(sin(a))))', '(sin(+(-(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(-(sin(a)))', '(sin(+(-(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(+(-(a))))', '(cos(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(-(a)))', '(cos(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(cos(+(-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(cos(+(a;-(b))))', '(cos(+(b;-(a))))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(sin(0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(sin(0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(\u03C0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(sin(\u03C0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;2)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(sin(/(\u03C0;2)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(cos(0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(\u03C0))', '(+(-(1)))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(+(-(1)))', '(cos(\u03C0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(-(1))', '(cos(\u03C0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;2)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(cos(/(\u03C0;2)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;6)))', '(/(1;2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0.5)', '(sin(/(\u03C0;6)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;3)))', '(/(1;2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0.5)', '(cos(/(\u03C0;3)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(tg(/(\u03C0;4)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(tg(/(\u03C0;4)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(ctg(/(\u03C0;4)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(ctg(/(\u03C0;4)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(tg(0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(tg(0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(ctg(/(\u03C0;2)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(ctg(/(\u03C0;2)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(+(-(sin(+(a;\u03C0)))))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(+(-(sin(+(a;-(\u03C0))))))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(+(-(cos(+(a;\u03C0)))))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(+(-(cos(+(a;-(\u03C0))))))', false, false, false, false, 89, '')]));
+    return plus(getShortMultiplicationSubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(+(^(sin(a);2);^(cos(a);2)))', '(1)', false, true, false, false, 5, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', false, true, false, false, 25, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', false, true, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(*(tg(a);ctg(a)))', '(1)', false, true, false, false, 5, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(sin(a);cos(a)))', '(tg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(tg(a))', '(/(sin(a);cos(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(cos(a);sin(a)))', '(ctg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(ctg(a))', '(/(cos(a);sin(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;ctg(a)))', '(tg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(tg(a))', '(/(1;ctg(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(/(1;tg(a)))', '(ctg(a))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(ctg(a))', '(/(1;tg(a)))', false, false, false, false, 25, ''), expressionSubstitutionFromStructureStrings('(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', false, true, false, false, 24, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(cos(a);-(cos(b))))', '(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', false, true, false, false, 23, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(+(-(a))))', '(+(-(sin(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(-(sin(a))))', '(sin(+(-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(-(sin(a)))', '(sin(+(-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(-(a))))', '(cos(a))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(a))', '(cos(+(-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(cos(+(\u03C0;a)))', '(+(-(cos(-(a)))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(-(cos(a))))', '(cos(+(\u03C0;-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(-(cos(a)))', '(cos(+(\u03C0;-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(sin(+(\u03C0;a)))', '(sin(+(-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(+(\u03C0;-(a))))', '(sin(a))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(a))', '(sin(+(\u03C0;-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(+(/(\u03C0;2);a)))', '(cos(+(-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(/(\u03C0;2);a)))', '(sin(+(-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(sin(+(-(a))))', '(+(-(sin(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(sin(-(a)))', '(+(-(sin(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(+(-(sin(a))))', '(sin(+(-(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(-(sin(a)))', '(sin(+(-(a))))', false, false, false, false, 17, ''), expressionSubstitutionFromStructureStrings('(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(-(a))))', '(cos(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(-(a)))', '(cos(a))', false, false, false, false, 14, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(cos(+(-(a))))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(cos(+(a;-(b))))', '(cos(+(b;-(a))))', false, false, false, false, 14, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(sin(0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(sin(0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(\u03C0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(sin(\u03C0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;2)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(sin(/(\u03C0;2)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(cos(0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(\u03C0))', '(+(-(1)))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(+(-(1)))', '(cos(\u03C0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(-(1))', '(cos(\u03C0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;2)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(cos(/(\u03C0;2)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;6)))', '(/(1;2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0.5)', '(sin(/(\u03C0;6)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;3)))', '(/(1;2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0.5)', '(cos(/(\u03C0;3)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', false, false, false, false, 13, ''), expressionSubstitutionFromStructureStrings('(tg(/(\u03C0;4)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(tg(/(\u03C0;4)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(ctg(/(\u03C0;4)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(1)', '(ctg(/(\u03C0;4)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(tg(0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(tg(0))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(ctg(/(\u03C0;2)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(0)', '(ctg(/(\u03C0;2)))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(+(-(sin(+(a;\u03C0)))))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(sin(a))', '(+(-(sin(+(a;-(\u03C0))))))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(+(-(cos(+(a;\u03C0)))))', false, false, false, false, 89, ''), expressionSubstitutionFromStructureStrings('(cos(a))', '(+(-(cos(+(a;-(\u03C0))))))', false, false, false, false, 89, '')]));
   }
   function getTrigonometryZkSubstitutions() {
-    return plus(getTrigonometrySubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', false, false, false, false, 30, '')]));
+    return plus(getTrigonometrySubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance())]));
   }
   function getComplexesSubstitutions() {
-    return plus(plus(mutableListOf([expressionSubstitutionFromStructureStrings('(*(sys_def_i_complex;sys_def_i_complex))', '(+(-(1)))', true, false, false, false, 100, ''), expressionSubstitutionFromStructureStrings('(^(sys_def_i_complex;2))', '(+(-(1)))', true, false, false, false, 100, ''), expressionSubstitutionFromStructureStrings('(abs(+(x;*(y;sys_def_i_complex))))', '(sqrt(+(^(x;2);^(y;2))))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(abs(+(x;*(y;sys_def_i_complex))))', '(^(+(^(x;2);^(y;2));0.5))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(exp(+(x;*(y;sys_def_i_complex))))', '(*(exp(x);+(cos(y);*(sys_def_i_complex;sin(y)))))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(exp(ln(a)))', '(a)', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(cos(z))', '(/(+(exp(*(sys_def_i_complex;z));exp(+(-(*(sys_def_i_complex;z)))));2))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(sin(z))', '(/(+(exp(*(sys_def_i_complex;z));-(exp(+(-(*(sys_def_i_complex;z))))));*(2;sys_def_i_complex)))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(^(e;ln(a))', '(a)', false, false, false, false, 30, '')]), getTrigonometryZkSubstitutions()), getArithmeticMultiplicationSubstitutions());
+    return plus(plus(mutableListOf([expressionSubstitutionFromStructureStrings('(*(sys_def_i_complex;sys_def_i_complex))', '(+(-(1)))', true, false, false, false, 100, ''), expressionSubstitutionFromStructureStrings('(^(sys_def_i_complex;2))', '(+(-(1)))', true, false, false, false, 100, ''), expressionSubstitutionFromStructureStrings('(abs(+(x;*(y;sys_def_i_complex))))', '(sqrt(+(^(x;2);^(y;2))))', false, true, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance()), expressionSubstitutionFromStructureStrings('(abs(+(x;*(y;sys_def_i_complex))))', '(^(+(^(x;2);^(y;2));0.5))', false, true, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance()), expressionSubstitutionFromStructureStrings('(exp(+(x;*(y;sys_def_i_complex))))', '(*(exp(x);+(cos(y);*(sys_def_i_complex;sin(y)))))', false, true, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance()), expressionSubstitutionFromStructureStrings('(exp(ln(a)))', '(a)', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(cos(z))', '(/(+(exp(*(sys_def_i_complex;z));exp(+(-(*(sys_def_i_complex;z)))));2))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(sin(z))', '(/(+(exp(*(sys_def_i_complex;z));-(exp(+(-(*(sys_def_i_complex;z))))));*(2;sys_def_i_complex)))', false, true, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(^(e;ln(a)))', '(a)', false, false, false, false, 30, '')]), getTrigonometryZkSubstitutions()), getArithmeticMultiplicationSubstitutions());
   }
   function getTrigonometryCompleteTgCtgSubstitutions() {
-    return plus(getTrigonometrySubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(a);-(ctg(b)))))', false, false, false, false, 30, ''), expressionSubstitutionFromStructureStrings('(/(+(*(ctg(a);ctg(b));1);+(ctg(a);-(ctg(b)))))', '(ctg(+(a;-(b))))', false, false, false, false, 30, '')]));
+    return plus(getTrigonometrySubstitutions(), mutableListOf([expressionSubstitutionFromStructureStrings('(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(a);-(ctg(b)))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance()), expressionSubstitutionFromStructureStrings('(/(+(*(ctg(a);ctg(b));1);+(ctg(a);-(ctg(b)))))', '(ctg(+(a;-(b))))', false, false, false, false, 30, '', void 0, void 0, ExpressionSubstitutionNormType$SORTED_getInstance())]));
   }
   function getLogicBaseSubstitutions() {
     return mutableListOf([expressionSubstitutionFromStructureStrings('(not(and(A;B)))', '(or(not(A);not(B)))', false, false, false, false, 15, ''), expressionSubstitutionFromStructureStrings('(or(not(A);not(B)))', '(not(and(A;B)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(not(or(A;B)))', '(and(not(A);not(B)))', false, false, false, false, 15, ''), expressionSubstitutionFromStructureStrings('(and(not(A);not(B)))', '(not(or(A;B)))', false, false, false, false, 10, ''), expressionSubstitutionFromStructureStrings('(not(not(a)))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(not(not(a)))', false, false, false, true, 89, ''), expressionSubstitutionFromStructureStrings('(or(a;a))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(or(a;a))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(and(a;a))', '(a)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(a)', '(and(a;a))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(and(a;b))', '(and(b;a))', false, false, false, true, 40, ''), expressionSubstitutionFromStructureStrings('(or(a;b))', '(or(b;a))', false, false, false, true, 40, ''), expressionSubstitutionFromStructureStrings('(a)', '(and(a;1))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(a)', '(or(a;0))', false, false, false, true, 90, ''), expressionSubstitutionFromStructureStrings('(or(A;not(A)))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(not(A);A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;not(A)))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(not(A);A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(A;1))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(1;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(or(0;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(A;0))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(and(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(not(0))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(not(1))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'SimpleComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 5, 'ZeroComputation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'ParentBracketsExpansion'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsSwap'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 40, 'ArgumentsPermutation'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 30, 'OpeningBrackets'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 41, 'ArgumentsPermutationInOriginalOrder'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'ReduceArithmetic'), expressionSubstitutionFromStructureStrings('', '', false, false, false, false, 10, 'TwoSidesArithmeticReduce'), expressionSubstitutionFromStructureStrings('(or(not(A);B))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(or(B;not(A)))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(implic(A;B))', '(or(not(A);B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(and(A;not(B)))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(and(not(B);A))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;B))', '(and(A;not(B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;B))', '(not(implic(A;B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(not(implic(A;B)))', '(set-(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(implic(A;B))', '(not(set-(A;B)))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(not(set-(A;B)))', '(implic(A;B))', false, false, false, false, 35, ''), expressionSubstitutionFromStructureStrings('(set-(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(A;1))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(0;A))', '(0)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(set-(1;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(0;A))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(A;1))', '(1)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(A;0))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(implic(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(A)', '(set-(A;0))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(A)', '(implic(1;A))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(xor(A;B))', '(or(and(not(A);B);and(A;not(B))))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(or(and(not(A);B);and(A;not(B))))', '(xor(A;B))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(alleq(A;B))', '(or(and(A;B);and(not(A);not(B))))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(or(and(A;B);and(not(A);not(B))))', '(alleq(A;B))', false, false, false, true, 30, ''), expressionSubstitutionFromStructureStrings('(xor(A;0))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(A;1))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(0;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(xor(1;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(0;A))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(A;1))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(A;0))', '(not(A))', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(alleq(1;A))', '(A)', false, false, false, false, 5, ''), expressionSubstitutionFromStructureStrings('(A)', '(xor(A;0))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(A)', '(alleq(1;A))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(not(A))', '(xor(A;1))', false, false, false, true, 91, ''), expressionSubstitutionFromStructureStrings('(not(A))', '(alleq(0;A))', false, false, false, true, 91, '')]);
@@ -740,25 +695,34 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     topExpressionNode.normalizeFunctionStringDefinitions_hee78y$(compiledConfiguration.functionConfiguration);
     topExpressionNode.computeIdentifier_t6ztn0$();
   }
-  function compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, functionConfiguration, compiledConfiguration) {
+  function compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, compiledConfiguration) {
     if (scope === void 0)
       scope = setOf('');
     if (notChangesOnVariablesFunction === void 0)
       notChangesOnVariablesFunction = setOf_0(['+', '-', '*', '/', '^']);
+    if (maxExpressionBustCount === void 0)
+      maxExpressionBustCount = 4096;
     if (functionConfiguration === void 0)
       functionConfiguration = new FunctionConfiguration(scope, notChangesOnVariablesFunction);
+    if (comparisonSettings === void 0) {
+      var $receiver = new ComparisonSettings();
+      $receiver.maxExpressionBustCount = maxExpressionBustCount;
+      comparisonSettings = $receiver;
+    }
     if (compiledConfiguration === void 0)
-      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return compiledConfiguration.factComporator.expressionComporator.compareWithoutSubstitutions_15tjed$(left, right);
+      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration, comparisonSettings);
+    return compiledConfiguration.factComporator.expressionComporator.compareWithoutSubstitutions_s2g4rn$(left, right);
   }
   function compareByPattern(expression, pattern) {
     return checkExpressionStructure(expression, pattern);
   }
-  function compareWithoutSubstitutions_1(left, right, scope, notChangesOnVariablesFunction, functionConfiguration, compiledConfiguration) {
+  function compareWithoutSubstitutions_1(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, compiledConfiguration) {
     if (scope === void 0)
       scope = '';
     if (notChangesOnVariablesFunction === void 0)
       notChangesOnVariablesFunction = '+;-;*;/;^';
+    if (maxExpressionBustCount === void 0)
+      maxExpressionBustCount = 4096;
     if (functionConfiguration === void 0) {
       var $receiver = split(scope, [';']);
       var destination = ArrayList_init();
@@ -781,9 +745,14 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       }
       functionConfiguration = new FunctionConfiguration(tmp$_0, toSet(destination_0));
     }
+    if (comparisonSettings === void 0) {
+      var $receiver_1 = new ComparisonSettings();
+      $receiver_1.maxExpressionBustCount = maxExpressionBustCount;
+      comparisonSettings = $receiver_1;
+    }
     if (compiledConfiguration === void 0)
-      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return compareWithoutSubstitutions_0(stringToExpression(left, void 0, void 0, void 0, compiledConfiguration), stringToExpression(right, void 0, void 0, void 0, compiledConfiguration), void 0, void 0, void 0, compiledConfiguration);
+      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration, comparisonSettings);
+    return compareWithoutSubstitutions_0(stringToExpression(left, void 0, void 0, void 0, compiledConfiguration), stringToExpression(right, void 0, void 0, void 0, compiledConfiguration), void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
   }
   function compareByPattern_0(expression, pattern, scope, notChangesOnVariablesFunction, functionConfiguration, compiledConfiguration) {
     if (scope === void 0)
@@ -845,7 +814,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return compareWithoutSubstitutions_0(structureStringToExpression(leftStructureString), structureStringToExpression(rightStructureString), void 0, void 0, void 0, compiledConfiguration);
+    return compareWithoutSubstitutions_0(structureStringToExpression(leftStructureString), structureStringToExpression(rightStructureString), void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
   }
   function stringToExpression(string, scope, isMathMl, functionConfiguration, compiledConfiguration) {
     if (scope === void 0)
@@ -1058,7 +1027,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       return result;
     }
     var expressionPart = expressionPartOriginal.clone();
-    expressionPart.variableReplacement_y0zsll$(mapOf(to('\u03C0', '3.1415926535897932384626433832795')));
+    expressionPart.variableReplacement_y0zsll$(mapOf_0(to('\u03C0', '3.1415926535897932384626433832795')));
     if (expressionPart.getContainedVariables().isEmpty()) {
       if (!expressionPart.children.isEmpty()) {
         tmp$ = computeNodeIfSimple(expressionPart, simpleComputationRuleParams);
@@ -1135,7 +1104,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
     return new ExpressionSubstitution(!isBlank(left) ? stringToExpression(left, void 0, void 0, void 0, compiledConfiguration) : new ExpressionNode(NodeType$EMPTY_getInstance(), ''), !isBlank(right) ? stringToExpression(right, void 0, void 0, void 0, compiledConfiguration) : new ExpressionNode(NodeType$EMPTY_getInstance(), ''), void 0, basedOnTaskContext, !isBlank(code) ? code : "'" + stringToStructureString(left, void 0, void 0, void 0, compiledConfiguration) + "'->'" + stringToStructureString(right, void 0, void 0, void 0, compiledConfiguration) + "'", nameEn, nameRu, void 0, void 0, matchJumbledAndNested, priority);
   }
-  function expressionSubstitutionFromStructureStrings(leftStructureString, rightStructureString, basedOnTaskContext, matchJumbledAndNested, simpleAdditional, isExtending, priority, code, nameEn, nameRu) {
+  function expressionSubstitutionFromStructureStrings(leftStructureString, rightStructureString, basedOnTaskContext, matchJumbledAndNested, simpleAdditional, isExtending, priority, code, nameEn, nameRu, normalizationType) {
     if (leftStructureString === void 0)
       leftStructureString = '';
     if (rightStructureString === void 0)
@@ -1156,26 +1125,32 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       nameEn = '';
     if (nameRu === void 0)
       nameRu = '';
-    return new ExpressionSubstitution(!isBlank(leftStructureString) ? structureStringToExpression(leftStructureString) : new ExpressionNode(NodeType$EMPTY_getInstance(), ''), !isBlank(rightStructureString) ? structureStringToExpression(rightStructureString) : new ExpressionNode(NodeType$EMPTY_getInstance(), ''), void 0, basedOnTaskContext, !isBlank(code) ? code : "'" + leftStructureString + "'->'" + rightStructureString + "'", nameEn, nameRu, void 0, void 0, matchJumbledAndNested, priority, void 0, simpleAdditional, isExtending);
+    if (normalizationType === void 0)
+      normalizationType = ExpressionSubstitutionNormType$ORIGINAL_getInstance();
+    return new ExpressionSubstitution(!isBlank(leftStructureString) ? structureStringToExpression(leftStructureString) : new ExpressionNode(NodeType$EMPTY_getInstance(), ''), !isBlank(rightStructureString) ? structureStringToExpression(rightStructureString) : new ExpressionNode(NodeType$EMPTY_getInstance(), ''), void 0, basedOnTaskContext, !isBlank(code) ? code : "'" + leftStructureString + "'->'" + rightStructureString + "'", nameEn, nameRu, void 0, void 0, matchJumbledAndNested, priority, void 0, simpleAdditional, isExtending, normalizationType);
   }
-  function findSubstitutionPlacesInExpression_0(expression, substitution) {
+  function findSubstitutionPlacesInExpression_0(expression, substitution, compiledConfiguration) {
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration();
     if (!substitution.leftFunctions.isEmpty() && intersect(substitution.leftFunctions, expression.getContainedFunctions()).isEmpty() && intersect(substitution.left.getContainedVariables(), expression.getContainedVariables()).isEmpty()) {
       return ArrayList_init();
     }
     var expr = expression;
-    var result = substitution.findAllPossibleSubstitutionPlaces_6718cy$(expression);
+    var result = substitution.findAllPossibleSubstitutionPlaces_nxx8g1$(expression, compiledConfiguration.factComporator.expressionComporator);
     if (result.isEmpty() && substitution.matchJumbledAndNested && expression.containsNestedSameFunctions()) {
       expr = expression.cloneWithExpandingNestedSameFunctions();
-      result = substitution.findAllPossibleSubstitutionPlaces_6718cy$(expr);
+      result = substitution.findAllPossibleSubstitutionPlaces_nxx8g1$(expr, compiledConfiguration.factComporator.expressionComporator);
     }
     if (result.isEmpty()) {
       expr = expr.cloneAndSimplifyByComputeSimplePlaces_ky12w7$();
-      result = substitution.findAllPossibleSubstitutionPlaces_6718cy$(expr);
+      result = substitution.findAllPossibleSubstitutionPlaces_nxx8g1$(expr, compiledConfiguration.factComporator.expressionComporator);
     }
     return result;
   }
-  function applySubstitution_0(expression, substitution, substitutionPlaces) {
-    substitution.applySubstitution_55nkop$(substitutionPlaces);
+  function applySubstitution_0(expression, substitution, substitutionPlaces, compiledConfiguration) {
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration();
+    substitution.applySubstitution_qhavsq$(substitutionPlaces, compiledConfiguration.factComporator.expressionComporator);
     expression.getTopNode().reduceExtraSigns_9jge9g$(setOf('+'), setOf('-'));
     expression.getTopNode().normilizeSubtructions_hee78y$(new FunctionConfiguration());
     expression.getTopNode().computeNodeIdsAsNumbersInDirectTraversalAndDistancesToRoot_ydzd23$();
@@ -1612,9 +1587,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   function BaseOperationsComputation(computationType) {
     BaseOperationsComputation$Companion_getInstance();
     this.computationType_0 = computationType;
-    this.baseComputationOperations_0 = mapOf_0([to(ComputationType$COMPLEX_getInstance(), mapOf_0([to('', BaseOperationsComputation$baseComputationOperations$lambda(this)), to('+', BaseOperationsComputation$baseComputationOperations$lambda_0(this)), to('*', BaseOperationsComputation$baseComputationOperations$lambda_1(this)), to('-', BaseOperationsComputation$baseComputationOperations$lambda_2(this)), to('/', BaseOperationsComputation$baseComputationOperations$lambda_3(this)), to('^', BaseOperationsComputation$baseComputationOperations$lambda_4(this)), to('mod', BaseOperationsComputation$baseComputationOperations$lambda_5(this)), to('and', BaseOperationsComputation$baseComputationOperations$lambda_6(this)), to('or', BaseOperationsComputation$baseComputationOperations$lambda_7(this)), to('xor', BaseOperationsComputation$baseComputationOperations$lambda_8(this)), to('alleq', BaseOperationsComputation$baseComputationOperations$lambda_9(this)), to('not', BaseOperationsComputation$baseComputationOperations$lambda_10(this)), to('sin', BaseOperationsComputation$baseComputationOperations$lambda_11(this)), to('cos', BaseOperationsComputation$baseComputationOperations$lambda_12(this)), to('tg', BaseOperationsComputation$baseComputationOperations$lambda_13(this)), to('sh', BaseOperationsComputation$baseComputationOperations$lambda_14(this)), to('ch', BaseOperationsComputation$baseComputationOperations$lambda_15(this)), to('th', BaseOperationsComputation$baseComputationOperations$lambda_16(this)), to('asin', BaseOperationsComputation$baseComputationOperations$lambda_17(this)), to('acos', BaseOperationsComputation$baseComputationOperations$lambda_18(this)), to('atg', BaseOperationsComputation$baseComputationOperations$lambda_19(this)), to('actg', BaseOperationsComputation$baseComputationOperations$lambda_20(this)), to('pow', BaseOperationsComputation$baseComputationOperations$lambda_21(this)), to('ln', BaseOperationsComputation$baseComputationOperations$lambda_22(this)), to('exp', BaseOperationsComputation$baseComputationOperations$lambda_23(this)), to('abs', BaseOperationsComputation$baseComputationOperations$lambda_24(this)), to('sqrt', BaseOperationsComputation$baseComputationOperations$lambda_25(this))])), to(ComputationType$DOUBLE_getInstance(), mapOf_0([to('', BaseOperationsComputation$baseComputationOperations$lambda_26(this)), to('+', BaseOperationsComputation$baseComputationOperations$lambda_27(this)), to('*', BaseOperationsComputation$baseComputationOperations$lambda_28(this)), to('-', BaseOperationsComputation$baseComputationOperations$lambda_29(this)), to('/', BaseOperationsComputation$baseComputationOperations$lambda_30(this)), to('^', BaseOperationsComputation$baseComputationOperations$lambda_31(this)), to('mod', BaseOperationsComputation$baseComputationOperations$lambda_32(this)), to('and', BaseOperationsComputation$baseComputationOperations$lambda_33(this)), to('or', BaseOperationsComputation$baseComputationOperations$lambda_34(this)), to('xor', BaseOperationsComputation$baseComputationOperations$lambda_35(this)), to('alleq', BaseOperationsComputation$baseComputationOperations$lambda_36(this)), to('not', BaseOperationsComputation$baseComputationOperations$lambda_37(this)), to('sin', BaseOperationsComputation$baseComputationOperations$lambda_38(this)), to('cos', BaseOperationsComputation$baseComputationOperations$lambda_39(this)), to('tg', BaseOperationsComputation$baseComputationOperations$lambda_40(this)), to('sh', BaseOperationsComputation$baseComputationOperations$lambda_41(this)), to('ch', BaseOperationsComputation$baseComputationOperations$lambda_42(this)), to('th', BaseOperationsComputation$baseComputationOperations$lambda_43(this)), to('asin', BaseOperationsComputation$baseComputationOperations$lambda_44(this)), to('acos', BaseOperationsComputation$baseComputationOperations$lambda_45(this)), to('atg', BaseOperationsComputation$baseComputationOperations$lambda_46(this)), to('actg', BaseOperationsComputation$baseComputationOperations$lambda_47(this)), to('pow', BaseOperationsComputation$baseComputationOperations$lambda_48(this)), to('ln', BaseOperationsComputation$baseComputationOperations$lambda_49(this)), to('exp', BaseOperationsComputation$baseComputationOperations$lambda_50(this)), to('abs', BaseOperationsComputation$baseComputationOperations$lambda_51(this)), to('sqrt', BaseOperationsComputation$baseComputationOperations$lambda_52(this))]))]);
-    this.baseComputationComplex = mapOf_0([to('+', BaseOperationsComputation$baseComputationComplex$lambda), to('*', BaseOperationsComputation$baseComputationComplex$lambda_0), to('-', BaseOperationsComputation$baseComputationComplex$lambda_1), to('/', BaseOperationsComputation$baseComputationComplex$lambda_2), to('^', BaseOperationsComputation$baseComputationComplex$lambda_3), to('mod', BaseOperationsComputation$baseComputationComplex$lambda_4), to('and', BaseOperationsComputation$baseComputationComplex$lambda_5), to('or', BaseOperationsComputation$baseComputationComplex$lambda_6), to('xor', BaseOperationsComputation$baseComputationComplex$lambda_7), to('alleq', BaseOperationsComputation$baseComputationComplex$lambda_8), to('not', BaseOperationsComputation$baseComputationComplex$lambda_9), to('sin', BaseOperationsComputation$baseComputationComplex$lambda_10), to('cos', BaseOperationsComputation$baseComputationComplex$lambda_11), to('tg', BaseOperationsComputation$baseComputationComplex$lambda_12), to('sh', BaseOperationsComputation$baseComputationComplex$lambda_13), to('ch', BaseOperationsComputation$baseComputationComplex$lambda_14), to('th', BaseOperationsComputation$baseComputationComplex$lambda_15), to('asin', BaseOperationsComputation$baseComputationComplex$lambda_16), to('acos', BaseOperationsComputation$baseComputationComplex$lambda_17), to('atg', BaseOperationsComputation$baseComputationComplex$lambda_18), to('actg', BaseOperationsComputation$baseComputationComplex$lambda_19), to('pow', BaseOperationsComputation$baseComputationComplex$lambda_20), to('ln', BaseOperationsComputation$baseComputationComplex$lambda_21), to('exp', BaseOperationsComputation$baseComputationComplex$lambda_22), to('abs', BaseOperationsComputation$baseComputationComplex$lambda_23), to('sqrt', BaseOperationsComputation$baseComputationComplex$lambda_24)]);
-    this.baseComputationDouble = mapOf_0([to('+', BaseOperationsComputation$baseComputationDouble$lambda), to('*', BaseOperationsComputation$baseComputationDouble$lambda_0), to('-', BaseOperationsComputation$baseComputationDouble$lambda_1), to('/', BaseOperationsComputation$baseComputationDouble$lambda_2), to('^', BaseOperationsComputation$baseComputationDouble$lambda_3), to('mod', BaseOperationsComputation$baseComputationDouble$lambda_4), to('and', BaseOperationsComputation$baseComputationDouble$lambda_5), to('or', BaseOperationsComputation$baseComputationDouble$lambda_6), to('xor', BaseOperationsComputation$baseComputationDouble$lambda_7), to('alleq', BaseOperationsComputation$baseComputationDouble$lambda_8), to('not', BaseOperationsComputation$baseComputationDouble$lambda_9), to('sin', BaseOperationsComputation$baseComputationDouble$lambda_10), to('cos', BaseOperationsComputation$baseComputationDouble$lambda_11), to('tg', BaseOperationsComputation$baseComputationDouble$lambda_12), to('sh', BaseOperationsComputation$baseComputationDouble$lambda_13), to('ch', BaseOperationsComputation$baseComputationDouble$lambda_14), to('th', BaseOperationsComputation$baseComputationDouble$lambda_15), to('asin', BaseOperationsComputation$baseComputationDouble$lambda_16), to('acos', BaseOperationsComputation$baseComputationDouble$lambda_17), to('atg', BaseOperationsComputation$baseComputationDouble$lambda_18), to('actg', BaseOperationsComputation$baseComputationDouble$lambda_19), to('pow', BaseOperationsComputation$baseComputationDouble$lambda_20), to('ln', BaseOperationsComputation$baseComputationDouble$lambda_21), to('exp', BaseOperationsComputation$baseComputationDouble$lambda_22), to('abs', BaseOperationsComputation$baseComputationDouble$lambda_23), to('sqrt', BaseOperationsComputation$baseComputationDouble$lambda_24)]);
+    this.baseComputationOperations_0 = mapOf([to(ComputationType$COMPLEX_getInstance(), mapOf([to('', BaseOperationsComputation$baseComputationOperations$lambda(this)), to('+', BaseOperationsComputation$baseComputationOperations$lambda_0(this)), to('*', BaseOperationsComputation$baseComputationOperations$lambda_1(this)), to('-', BaseOperationsComputation$baseComputationOperations$lambda_2(this)), to('/', BaseOperationsComputation$baseComputationOperations$lambda_3(this)), to('^', BaseOperationsComputation$baseComputationOperations$lambda_4(this)), to('mod', BaseOperationsComputation$baseComputationOperations$lambda_5(this)), to('and', BaseOperationsComputation$baseComputationOperations$lambda_6(this)), to('or', BaseOperationsComputation$baseComputationOperations$lambda_7(this)), to('xor', BaseOperationsComputation$baseComputationOperations$lambda_8(this)), to('alleq', BaseOperationsComputation$baseComputationOperations$lambda_9(this)), to('not', BaseOperationsComputation$baseComputationOperations$lambda_10(this)), to('sin', BaseOperationsComputation$baseComputationOperations$lambda_11(this)), to('cos', BaseOperationsComputation$baseComputationOperations$lambda_12(this)), to('tg', BaseOperationsComputation$baseComputationOperations$lambda_13(this)), to('sh', BaseOperationsComputation$baseComputationOperations$lambda_14(this)), to('ch', BaseOperationsComputation$baseComputationOperations$lambda_15(this)), to('th', BaseOperationsComputation$baseComputationOperations$lambda_16(this)), to('asin', BaseOperationsComputation$baseComputationOperations$lambda_17(this)), to('acos', BaseOperationsComputation$baseComputationOperations$lambda_18(this)), to('atg', BaseOperationsComputation$baseComputationOperations$lambda_19(this)), to('actg', BaseOperationsComputation$baseComputationOperations$lambda_20(this)), to('pow', BaseOperationsComputation$baseComputationOperations$lambda_21(this)), to('ln', BaseOperationsComputation$baseComputationOperations$lambda_22(this)), to('exp', BaseOperationsComputation$baseComputationOperations$lambda_23(this)), to('abs', BaseOperationsComputation$baseComputationOperations$lambda_24(this)), to('sqrt', BaseOperationsComputation$baseComputationOperations$lambda_25(this))])), to(ComputationType$DOUBLE_getInstance(), mapOf([to('', BaseOperationsComputation$baseComputationOperations$lambda_26(this)), to('+', BaseOperationsComputation$baseComputationOperations$lambda_27(this)), to('*', BaseOperationsComputation$baseComputationOperations$lambda_28(this)), to('-', BaseOperationsComputation$baseComputationOperations$lambda_29(this)), to('/', BaseOperationsComputation$baseComputationOperations$lambda_30(this)), to('^', BaseOperationsComputation$baseComputationOperations$lambda_31(this)), to('mod', BaseOperationsComputation$baseComputationOperations$lambda_32(this)), to('and', BaseOperationsComputation$baseComputationOperations$lambda_33(this)), to('or', BaseOperationsComputation$baseComputationOperations$lambda_34(this)), to('xor', BaseOperationsComputation$baseComputationOperations$lambda_35(this)), to('alleq', BaseOperationsComputation$baseComputationOperations$lambda_36(this)), to('not', BaseOperationsComputation$baseComputationOperations$lambda_37(this)), to('sin', BaseOperationsComputation$baseComputationOperations$lambda_38(this)), to('cos', BaseOperationsComputation$baseComputationOperations$lambda_39(this)), to('tg', BaseOperationsComputation$baseComputationOperations$lambda_40(this)), to('sh', BaseOperationsComputation$baseComputationOperations$lambda_41(this)), to('ch', BaseOperationsComputation$baseComputationOperations$lambda_42(this)), to('th', BaseOperationsComputation$baseComputationOperations$lambda_43(this)), to('asin', BaseOperationsComputation$baseComputationOperations$lambda_44(this)), to('acos', BaseOperationsComputation$baseComputationOperations$lambda_45(this)), to('atg', BaseOperationsComputation$baseComputationOperations$lambda_46(this)), to('actg', BaseOperationsComputation$baseComputationOperations$lambda_47(this)), to('pow', BaseOperationsComputation$baseComputationOperations$lambda_48(this)), to('ln', BaseOperationsComputation$baseComputationOperations$lambda_49(this)), to('exp', BaseOperationsComputation$baseComputationOperations$lambda_50(this)), to('abs', BaseOperationsComputation$baseComputationOperations$lambda_51(this)), to('sqrt', BaseOperationsComputation$baseComputationOperations$lambda_52(this))]))]);
+    this.baseComputationComplex = mapOf([to('+', BaseOperationsComputation$baseComputationComplex$lambda), to('*', BaseOperationsComputation$baseComputationComplex$lambda_0), to('-', BaseOperationsComputation$baseComputationComplex$lambda_1), to('/', BaseOperationsComputation$baseComputationComplex$lambda_2), to('^', BaseOperationsComputation$baseComputationComplex$lambda_3), to('mod', BaseOperationsComputation$baseComputationComplex$lambda_4), to('and', BaseOperationsComputation$baseComputationComplex$lambda_5), to('or', BaseOperationsComputation$baseComputationComplex$lambda_6), to('xor', BaseOperationsComputation$baseComputationComplex$lambda_7), to('alleq', BaseOperationsComputation$baseComputationComplex$lambda_8), to('not', BaseOperationsComputation$baseComputationComplex$lambda_9), to('sin', BaseOperationsComputation$baseComputationComplex$lambda_10), to('cos', BaseOperationsComputation$baseComputationComplex$lambda_11), to('tg', BaseOperationsComputation$baseComputationComplex$lambda_12), to('sh', BaseOperationsComputation$baseComputationComplex$lambda_13), to('ch', BaseOperationsComputation$baseComputationComplex$lambda_14), to('th', BaseOperationsComputation$baseComputationComplex$lambda_15), to('asin', BaseOperationsComputation$baseComputationComplex$lambda_16), to('acos', BaseOperationsComputation$baseComputationComplex$lambda_17), to('atg', BaseOperationsComputation$baseComputationComplex$lambda_18), to('actg', BaseOperationsComputation$baseComputationComplex$lambda_19), to('pow', BaseOperationsComputation$baseComputationComplex$lambda_20), to('ln', BaseOperationsComputation$baseComputationComplex$lambda_21), to('exp', BaseOperationsComputation$baseComputationComplex$lambda_22), to('abs', BaseOperationsComputation$baseComputationComplex$lambda_23), to('sqrt', BaseOperationsComputation$baseComputationComplex$lambda_24)]);
+    this.baseComputationDouble = mapOf([to('+', BaseOperationsComputation$baseComputationDouble$lambda), to('*', BaseOperationsComputation$baseComputationDouble$lambda_0), to('-', BaseOperationsComputation$baseComputationDouble$lambda_1), to('/', BaseOperationsComputation$baseComputationDouble$lambda_2), to('^', BaseOperationsComputation$baseComputationDouble$lambda_3), to('mod', BaseOperationsComputation$baseComputationDouble$lambda_4), to('and', BaseOperationsComputation$baseComputationDouble$lambda_5), to('or', BaseOperationsComputation$baseComputationDouble$lambda_6), to('xor', BaseOperationsComputation$baseComputationDouble$lambda_7), to('alleq', BaseOperationsComputation$baseComputationDouble$lambda_8), to('not', BaseOperationsComputation$baseComputationDouble$lambda_9), to('sin', BaseOperationsComputation$baseComputationDouble$lambda_10), to('cos', BaseOperationsComputation$baseComputationDouble$lambda_11), to('tg', BaseOperationsComputation$baseComputationDouble$lambda_12), to('sh', BaseOperationsComputation$baseComputationDouble$lambda_13), to('ch', BaseOperationsComputation$baseComputationDouble$lambda_14), to('th', BaseOperationsComputation$baseComputationDouble$lambda_15), to('asin', BaseOperationsComputation$baseComputationDouble$lambda_16), to('acos', BaseOperationsComputation$baseComputationDouble$lambda_17), to('atg', BaseOperationsComputation$baseComputationDouble$lambda_18), to('actg', BaseOperationsComputation$baseComputationDouble$lambda_19), to('pow', BaseOperationsComputation$baseComputationDouble$lambda_20), to('ln', BaseOperationsComputation$baseComputationDouble$lambda_21), to('exp', BaseOperationsComputation$baseComputationDouble$lambda_22), to('abs', BaseOperationsComputation$baseComputationDouble$lambda_23), to('sqrt', BaseOperationsComputation$baseComputationDouble$lambda_24)]);
   }
   function BaseOperationsComputation$FoldedExpression(nameOfZVariable, from, to, expression) {
     this.nameOfZVariable = nameOfZVariable;
@@ -2753,7 +2728,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         continue;
       var argValue = toDoubleOrNull(argNode.value);
       if (argValue != null) {
-        this.addMod2_38ydlf$(result, argValue);
+        result = this.addMod2_38ydlf$(result, argValue);
         argNode.nodeType = NodeType$EMPTY_getInstance();
       }
     }
@@ -2764,8 +2739,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       if (argsParentNode.children.size === 1)
         argsParentNode.setNode_6718cy$(argsParentNode.children.get_za3lpa$(0));
     }
-     else if (startSize > argsParentNode.children.size)
+     else {
       argsParentNode.addChild_6718cy$(new ExpressionNode(NodeType$VARIABLE_getInstance(), result.toString()));
+    }
     return argsParentNode;
   };
   function BaseOperationsDefinitions$alleq$lambda(it) {
@@ -2794,13 +2770,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     removeAll(argsParentNode.children, BaseOperationsDefinitions$alleq$lambda);
     if (argsParentNode.children.size === 0)
-      argsParentNode.setVariable_61zpoe$(result.toString());
-    else if (this.additivelyEqualToZero_0(result)) {
-      if (argsParentNode.children.size === 1)
-        argsParentNode.setNode_6718cy$(argsParentNode.children.get_za3lpa$(0));
-    }
-     else if (startSize > argsParentNode.children.size)
+      argsParentNode.setVariable_61zpoe$('1.0');
+    else if (result !== 0.5) {
       argsParentNode.addChild_6718cy$(new ExpressionNode(NodeType$VARIABLE_getInstance(), result.toString()));
+    }
     return argsParentNode;
   };
   BaseOperationsDefinitions.prototype.addMod2_38ydlf$ = function ($receiver, arg) {
@@ -3257,7 +3230,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   };
   function BaseSimpleNumbersComputation() {
     BaseSimpleNumbersComputation$Companion_getInstance();
-    this.baseComputationOperations_0 = mapOf_0([to('', BaseSimpleNumbersComputation$baseComputationOperations$lambda(this)), to('+', BaseSimpleNumbersComputation$baseComputationOperations$lambda_0(this)), to('*', BaseSimpleNumbersComputation$baseComputationOperations$lambda_1(this)), to('-', BaseSimpleNumbersComputation$baseComputationOperations$lambda_2(this)), to('/', BaseSimpleNumbersComputation$baseComputationOperations$lambda_3(this)), to('^', BaseSimpleNumbersComputation$baseComputationOperations$lambda_4(this)), to('mod', BaseSimpleNumbersComputation$baseComputationOperations$lambda_5(this)), to('and', BaseSimpleNumbersComputation$baseComputationOperations$lambda_6(this)), to('or', BaseSimpleNumbersComputation$baseComputationOperations$lambda_7(this)), to('xor', BaseSimpleNumbersComputation$baseComputationOperations$lambda_8(this)), to('alleq', BaseSimpleNumbersComputation$baseComputationOperations$lambda_9(this)), to('not', BaseSimpleNumbersComputation$baseComputationOperations$lambda_10(this)), to('sin', BaseSimpleNumbersComputation$baseComputationOperations$lambda_11(this)), to('cos', BaseSimpleNumbersComputation$baseComputationOperations$lambda_12(this)), to('tg', BaseSimpleNumbersComputation$baseComputationOperations$lambda_13(this)), to('sh', BaseSimpleNumbersComputation$baseComputationOperations$lambda_14(this)), to('ch', BaseSimpleNumbersComputation$baseComputationOperations$lambda_15(this)), to('th', BaseSimpleNumbersComputation$baseComputationOperations$lambda_16(this)), to('asin', BaseSimpleNumbersComputation$baseComputationOperations$lambda_17(this)), to('acos', BaseSimpleNumbersComputation$baseComputationOperations$lambda_18(this)), to('atg', BaseSimpleNumbersComputation$baseComputationOperations$lambda_19(this)), to('actg', BaseSimpleNumbersComputation$baseComputationOperations$lambda_20(this)), to('pow', BaseSimpleNumbersComputation$baseComputationOperations$lambda_21(this)), to('ln', BaseSimpleNumbersComputation$baseComputationOperations$lambda_22(this)), to('exp', BaseSimpleNumbersComputation$baseComputationOperations$lambda_23(this)), to('abs', BaseSimpleNumbersComputation$baseComputationOperations$lambda_24(this)), to('sqrt', BaseSimpleNumbersComputation$baseComputationOperations$lambda_25(this))]);
+    this.baseComputationOperations_0 = mapOf([to('', BaseSimpleNumbersComputation$baseComputationOperations$lambda(this)), to('+', BaseSimpleNumbersComputation$baseComputationOperations$lambda_0(this)), to('*', BaseSimpleNumbersComputation$baseComputationOperations$lambda_1(this)), to('-', BaseSimpleNumbersComputation$baseComputationOperations$lambda_2(this)), to('/', BaseSimpleNumbersComputation$baseComputationOperations$lambda_3(this)), to('^', BaseSimpleNumbersComputation$baseComputationOperations$lambda_4(this)), to('mod', BaseSimpleNumbersComputation$baseComputationOperations$lambda_5(this)), to('and', BaseSimpleNumbersComputation$baseComputationOperations$lambda_6(this)), to('or', BaseSimpleNumbersComputation$baseComputationOperations$lambda_7(this)), to('xor', BaseSimpleNumbersComputation$baseComputationOperations$lambda_8(this)), to('alleq', BaseSimpleNumbersComputation$baseComputationOperations$lambda_9(this)), to('not', BaseSimpleNumbersComputation$baseComputationOperations$lambda_10(this)), to('sin', BaseSimpleNumbersComputation$baseComputationOperations$lambda_11(this)), to('cos', BaseSimpleNumbersComputation$baseComputationOperations$lambda_12(this)), to('tg', BaseSimpleNumbersComputation$baseComputationOperations$lambda_13(this)), to('sh', BaseSimpleNumbersComputation$baseComputationOperations$lambda_14(this)), to('ch', BaseSimpleNumbersComputation$baseComputationOperations$lambda_15(this)), to('th', BaseSimpleNumbersComputation$baseComputationOperations$lambda_16(this)), to('asin', BaseSimpleNumbersComputation$baseComputationOperations$lambda_17(this)), to('acos', BaseSimpleNumbersComputation$baseComputationOperations$lambda_18(this)), to('atg', BaseSimpleNumbersComputation$baseComputationOperations$lambda_19(this)), to('actg', BaseSimpleNumbersComputation$baseComputationOperations$lambda_20(this)), to('pow', BaseSimpleNumbersComputation$baseComputationOperations$lambda_21(this)), to('ln', BaseSimpleNumbersComputation$baseComputationOperations$lambda_22(this)), to('exp', BaseSimpleNumbersComputation$baseComputationOperations$lambda_23(this)), to('abs', BaseSimpleNumbersComputation$baseComputationOperations$lambda_24(this)), to('sqrt', BaseSimpleNumbersComputation$baseComputationOperations$lambda_25(this))]);
   }
   function BaseSimpleNumbersComputation$FoldedExpression(nameOfZVariable, from, to, expression) {
     this.nameOfZVariable = nameOfZVariable;
@@ -5302,7 +5275,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var item = tmp$.next();
       destination.add_11rb$(new Pair(item.left, item.right));
     }
-    this.compiledImmediateVariableReplacements = mapOf_0(copyToArray(destination).slice());
+    this.compiledImmediateVariableReplacements = mapOf(copyToArray(destination).slice());
     this.compiledExpressionTreeTransformationRules = ArrayList_init();
     this.compiledExpressionSimpleAdditionalTreeTransformationRules = ArrayList_init();
     this.expressionTreeAutogeneratedTransformationRuleIdentifiers = LinkedHashMap_init_0();
@@ -5466,6 +5439,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       last(plusNode.children).addChild_6718cy$(new ExpressionNode(NodeType$VARIABLE_getInstance(), toShortString(-value)));
       return plusNode;
     }
+  };
+  CompiledConfiguration.prototype.createExpressionVariableNode_61zpoe$ = function (value) {
+    return new ExpressionNode(NodeType$VARIABLE_getInstance(), value);
   };
   CompiledConfiguration.$metadata$ = {
     kind: Kind_CLASS,
@@ -7040,11 +7016,13 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     rUnified.normalizeSubTree_f8z7ch$(void 0, void 0, true);
     return lUnified.isNodeSubtreeEquals_7j5kvs$(rUnified, nameArgsMap);
   };
-  ExpressionComporator.prototype.logicFullSearchComparison_qe5wwd$ = function (leftOrigin, rightOrigin, comparisonType, maxBustCount) {
+  ExpressionComporator.prototype.logicFullSearchComparison_ah0x8s$ = function (leftOrigin, rightOrigin, comparisonType, maxBustCount, resultIfVariablesCountMoreMaxBust) {
     if (comparisonType === void 0)
       comparisonType = this.compiledConfiguration.comparisonSettings.defaultComparisonType;
     if (maxBustCount === void 0)
       maxBustCount = this.compiledConfiguration.comparisonSettings.maxExpressionBustCount;
+    if (resultIfVariablesCountMoreMaxBust === void 0)
+      resultIfVariablesCountMoreMaxBust = false;
     var normalized = normalizeExpressionsForComparison(leftOrigin, rightOrigin);
     var left = normalized.first;
     var right = normalized.second;
@@ -7060,8 +7038,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     variablesNamesSet.addAll_brywnq$(left.getVariableNames());
     variablesNamesSet.addAll_brywnq$(right.getVariableNames());
     var variables = toList(variablesNamesSet);
-    if (variables.size > maxBustCount) {
-      return true;
+    if (1 << variables.size > maxBustCount) {
+      return resultIfVariablesCountMoreMaxBust;
     }
     var destination = ArrayList_init_0(collectionSizeOrDefault(variables, 10));
     var tmp$;
@@ -7103,8 +7081,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           }
 
           break;
-        default:if (!this.baseOperationsDefinitions.additivelyEqual_lu1900$(l, r))
+        default:if (!this.baseOperationsDefinitions.additivelyEqual_lu1900$(l, r)) {
             return false;
+          }
+
           break;
       }
     }
@@ -7135,7 +7115,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       testWithUndefinedResultIncreasingCoef = this.compiledConfiguration.comparisonSettings.testWithUndefinedResultIncreasingCoef;
     if (useGradientDescentComparison === void 0)
       useGradientDescentComparison = false;
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13;
     var normalized = normalizeExpressionsForComparison(leftOrigin, rightOrigin);
     var left = normalized.first;
     var right = normalized.second;
@@ -7157,26 +7137,36 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var a_0 = Math_0.max(a, b);
       var minNumberOfPointsForEquality = Math_0.max(a_0, maxMinNumberOfPointsForEquality);
       var isHaveComplexNode = left.haveComplexNode() || right.haveComplexNode();
-      while ((tmp$ = numberOfRemainingTests, numberOfRemainingTests = tmp$ - 1, tmp$) > 0) {
-        var pointI = domain.generateNewPoint();
+      if (domain.variablesSet.isEmpty()) {
         if (isHaveComplexNode) {
-          var lComplex = Kotlin.isType(tmp$_0 = this.baseOperationsComputationComplex.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_0 : throwCCE();
-          var rComplex = Kotlin.isType(tmp$_1 = this.baseOperationsComputationComplex.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_1 : throwCCE();
+          return (Kotlin.isType(tmp$ = this.baseOperationsComputationComplex.compute_6718cy$(left), Complex) ? tmp$ : throwCCE()).equals_i6s3kk$(Kotlin.isType(tmp$_0 = this.baseOperationsComputationComplex.compute_6718cy$(right), Complex) ? tmp$_0 : throwCCE());
+        }
+         else {
+          return this.baseOperationsDefinitions.additivelyEqual_lu1900$(typeof (tmp$_1 = this.baseOperationsComputationDouble.compute_6718cy$(left)) === 'number' ? tmp$_1 : throwCCE(), typeof (tmp$_2 = this.baseOperationsComputationDouble.compute_6718cy$(right)) === 'number' ? tmp$_2 : throwCCE());
+        }
+      }
+      while ((tmp$_3 = numberOfRemainingTests, numberOfRemainingTests = tmp$_3 - 1, tmp$_3) > 0) {
+        var pointI = domain.generateNewPoint();
+        var leftInPoint = left.cloneWithNormalization_1g1bdl$(pointI, false);
+        var rightInPoint = right.cloneWithNormalization_1g1bdl$(pointI, false);
+        if (isHaveComplexNode) {
+          var lComplex = Kotlin.isType(tmp$_4 = this.baseOperationsComputationComplex.compute_6718cy$(leftInPoint), Complex) ? tmp$_4 : throwCCE();
+          var rComplex = Kotlin.isType(tmp$_5 = this.baseOperationsComputationComplex.compute_6718cy$(rightInPoint), Complex) ? tmp$_5 : throwCCE();
           if (lComplex.equals_i6s3kk$(rComplex)) {
-            tmp$_2 = passedTests, passedTests = tmp$_2 + 1;
+            tmp$_6 = passedTests, passedTests = tmp$_6 + 1;
           }
         }
          else {
-          var lDouble = typeof (tmp$_3 = this.baseOperationsComputationDouble.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false))) === 'number' ? tmp$_3 : throwCCE();
-          var rDouble = typeof (tmp$_4 = this.baseOperationsComputationDouble.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false))) === 'number' ? tmp$_4 : throwCCE();
+          var lDouble = typeof (tmp$_7 = this.baseOperationsComputationDouble.compute_6718cy$(leftInPoint)) === 'number' ? tmp$_7 : throwCCE();
+          var rDouble = typeof (tmp$_8 = this.baseOperationsComputationDouble.compute_6718cy$(rightInPoint)) === 'number' ? tmp$_8 : throwCCE();
           if (isNaN_0(lDouble) || isNaN_0(rDouble)) {
             if (isNaN_0(lDouble) !== isNaN_0(rDouble) && justInDomainsIntersection) {
               return false;
             }
-            var lComplex_0 = Kotlin.isType(tmp$_5 = this.baseOperationsComputationComplex.compute_6718cy$(left.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_5 : throwCCE();
-            var rComplex_0 = Kotlin.isType(tmp$_6 = this.baseOperationsComputationComplex.compute_6718cy$(right.cloneWithNormalization_1g1bdl$(pointI, false)), Complex) ? tmp$_6 : throwCCE();
+            var lComplex_0 = Kotlin.isType(tmp$_9 = this.baseOperationsComputationComplex.compute_6718cy$(leftInPoint), Complex) ? tmp$_9 : throwCCE();
+            var rComplex_0 = Kotlin.isType(tmp$_10 = this.baseOperationsComputationComplex.compute_6718cy$(rightInPoint), Complex) ? tmp$_10 : throwCCE();
             if (lComplex_0.equals_i6s3kk$(rComplex_0)) {
-              tmp$_7 = passedTests, passedTests = tmp$_7 + 1;
+              tmp$_11 = passedTests, passedTests = tmp$_11 + 1;
             }
           }
            else {
@@ -7186,8 +7176,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
              else if (this.baseOperationsDefinitions.additivelyEqual_lu1900$(lDouble, rDouble)) {
               passedTests = passedTests + 1;
             }
-             else
+             else {
               return false;
+            }
           }
         }
         if (passedTests >= minNumberOfPointsForEquality) {
@@ -7203,15 +7194,18 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
      else {
       var domain_0 = new DomainPointGenerator(arrayListOf([left, right]), this.baseOperationsDefinitions);
+      if (!domain_0.hasVariables()) {
+        return this.compareInequalityInPoint_0(left, LinkedHashMap_init_0(), right, justInDomainsIntersection, comparisonType);
+      }
       var points = domain_0.generateSimplePoints();
-      tmp$_8 = points.iterator();
-      while (tmp$_8.hasNext()) {
-        var pointI_0 = tmp$_8.next();
+      tmp$_12 = points.iterator();
+      while (tmp$_12.hasNext()) {
+        var pointI_0 = tmp$_12.next();
         if (!this.compareInequalityInPoint_0(left, pointI_0, right, justInDomainsIntersection, comparisonType)) {
           return false;
         }
       }
-      while ((tmp$_9 = numberOfRemainingTests, numberOfRemainingTests = tmp$_9 - 1, tmp$_9) > 0) {
+      while ((tmp$_13 = numberOfRemainingTests, numberOfRemainingTests = tmp$_13 - 1, tmp$_13) > 0) {
         var pointI_1 = domain_0.generateNewPoint_mqu1mq$();
         if (!this.compareInequalityInPoint_0(left, pointI_1, right, justInDomainsIntersection, comparisonType)) {
           return false;
@@ -7262,13 +7256,15 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return true;
   };
-  ExpressionComporator.prototype.compareWithoutSubstitutions_15tjed$ = function (l, r, comparisonType, definedFunctionNameNumberOfArgs, justInDomainsIntersection) {
+  ExpressionComporator.prototype.compareWithoutSubstitutions_s2g4rn$ = function (l, r, comparisonType, definedFunctionNameNumberOfArgs, justInDomainsIntersection, maxBustCount) {
     if (comparisonType === void 0)
       comparisonType = this.compiledConfiguration.comparisonSettings.defaultComparisonType;
     if (definedFunctionNameNumberOfArgs === void 0)
       definedFunctionNameNumberOfArgs = this.definedFunctionNameNumberOfArgsSet;
     if (justInDomainsIntersection === void 0)
       justInDomainsIntersection = this.compiledConfiguration.comparisonSettings.justInDomainsIntersection;
+    if (maxBustCount === void 0)
+      maxBustCount = this.compiledConfiguration.comparisonSettings.maxExpressionBustCount;
     if (this.compareAsIs_98xwbf$(l, r, void 0, false))
       return true;
     var left = l.clone();
@@ -7281,13 +7277,22 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     right.variableReplacement_y0zsll$(this.compiledConfiguration.variableConfiguration.variableImmediateReplacementMap);
     left.normalizeSubTree_f8z7ch$(void 0, void 0, true);
     right.normalizeSubTree_f8z7ch$(void 0, void 0, true);
-    if (this.compiledConfiguration.comparisonSettings.compareExpressionsWithProbabilityRulesWhenComparingExpressions && !left.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions) && !right.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions)) {
-      var functionIdentifierToVariableMap = LinkedHashMap_init_0();
-      left.replaceNotDefinedFunctionsOnVariables_g22vlb$(functionIdentifierToVariableMap, definedFunctionNameNumberOfArgs, this);
-      right.replaceNotDefinedFunctionsOnVariables_g22vlb$(functionIdentifierToVariableMap, definedFunctionNameNumberOfArgs, this);
-      return this.probabilityTestComparison_zfhhb$(left, right, comparisonType, justInDomainsIntersection);
+    if (this.compareAsIs_98xwbf$(left.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_xcc95t$(this.compiledConfiguration), right.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_xcc95t$(this.compiledConfiguration), void 0, true)) {
+      return true;
     }
-    return this.compareAsIs_98xwbf$(left.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_xcc95t$(this.compiledConfiguration), right.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_xcc95t$(this.compiledConfiguration), void 0, true);
+    if (this.compiledConfiguration.comparisonSettings.compareExpressionsWithProbabilityRulesWhenComparingExpressions) {
+      var needBooleanComparison = left.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions) || right.isBoolExpression_ywdfdh$(this.compiledConfiguration.functionConfiguration.boolFunctions);
+      var functionIdentifierToVariableMap = LinkedHashMap_init_0();
+      left.replaceNotDefinedFunctionsOnVariables_g22vlb$(functionIdentifierToVariableMap, definedFunctionNameNumberOfArgs, this, needBooleanComparison);
+      right.replaceNotDefinedFunctionsOnVariables_g22vlb$(functionIdentifierToVariableMap, definedFunctionNameNumberOfArgs, this, needBooleanComparison);
+      if (!needBooleanComparison) {
+        return this.probabilityTestComparison_zfhhb$(left, right, comparisonType, justInDomainsIntersection);
+      }
+       else {
+        return this.logicFullSearchComparison_ah0x8s$(left, right, comparisonType, maxBustCount - 1 | 0, false);
+      }
+    }
+    return false;
   };
   ExpressionComporator.prototype.checkOpeningBracketsSubstitutions_c3m35x$ = function (expressionToTransform, otherExpression, expressionChainComparisonType) {
     var tmp$;
@@ -7295,7 +7300,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     tmp$ = openingBracketsTransformationResults.iterator();
     while (tmp$.hasNext()) {
       var expression = tmp$.next();
-      if (this.compareWithoutSubstitutions_15tjed$(expression, otherExpression, expressionChainComparisonType)) {
+      if (this.compareWithoutSubstitutions_s2g4rn$(expression, otherExpression, expressionChainComparisonType)) {
         return true;
       }
     }
@@ -7312,17 +7317,24 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     applyAllImmediateSubstitutions(right, this.compiledConfiguration);
     applyAllSubstitutions(left, this.compiledConfiguration.compiledFunctionDefinitions);
     applyAllSubstitutions(right, this.compiledConfiguration.compiledFunctionDefinitions);
+    left.variableReplacement_y0zsll$(this.compiledConfiguration.variableConfiguration.variableImmediateReplacementMap);
+    right.variableReplacement_y0zsll$(this.compiledConfiguration.variableConfiguration.variableImmediateReplacementMap);
     if (!left.containsFunctionBesides_ywdfdh$(this.algebraAutoCheckingFunctionsSet) && !right.containsFunctionBesides_ywdfdh$(this.algebraAutoCheckingFunctionsSet)) {
       if (!this.probabilityTestComparison_zfhhb$(left, right, comparisonType, this.compiledConfiguration.comparisonSettings.justInDomainsIntersection)) {
         return false;
       }
     }
      else if (!left.containsFunctionBesides_ywdfdh$(this.setAutoCheckingFunctionsSet) && !right.containsFunctionBesides_ywdfdh$(this.setAutoCheckingFunctionsSet)) {
-      if (!this.logicFullSearchComparison_qe5wwd$(left, right, comparisonType, maxBustCount)) {
+      if (!this.logicFullSearchComparison_ah0x8s$(left, right, comparisonType, maxBustCount, true)) {
         return false;
       }
     }
     return true;
+  };
+  ExpressionComporator.prototype.fastProbabilityCheckOnZero_6718cy$ = function (expression) {
+    var $receiver = new ExpressionNode(NodeType$FUNCTION_getInstance(), '');
+    $receiver.addChild_6718cy$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
+    return this.fastProbabilityCheckOnIncorrectTransformation_qe5wwd$(expression, $receiver, ComparisonType$EQUAL_getInstance());
   };
   ExpressionComporator.prototype.compareWithTreeTransformationRules_ob15jn$ = function (leftOriginal, rightOriginal, transformations, maxTransformationWeight, maxBustCount, minTransformationWeight, expressionChainComparisonType, maxDistBetweenDiffSteps) {
     var tmp$, tmp$_0;
@@ -7431,6 +7443,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       sortOperands = false;
     if (maxDistBetweenDiffSteps === void 0)
       maxDistBetweenDiffSteps = 1.0;
+    var normFormsOfExpressionNode = LinkedHashMap_init_0();
     var left = sortOperands ? leftOriginal.cloneWithSortingChildrenForExpressionSubstitutionComparison() : leftOriginal.clone();
     var right = sortOperands ? rightOriginal.cloneWithSortingChildrenForExpressionSubstitutionComparison() : rightOriginal.clone();
     applyAllImmediateSubstitutions(left, this.compiledConfiguration);
@@ -7442,7 +7455,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       tmp$_1 = this.compiledConfiguration.definedFunctionNameNumberOfArgsSet;
     }
     this.definedFunctionNameNumberOfArgsSet = tmp$_1;
-    if (this.compareWithoutSubstitutions_15tjed$(left, right, expressionChainComparisonType))
+    if (this.compareWithoutSubstitutions_s2g4rn$(left, right, expressionChainComparisonType))
       return true;
     if (maxTransformationWeight < minTransformationWeight)
       return false;
@@ -7452,7 +7465,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var leftDiff = diff(left, leftDiffWeight, this.compiledConfiguration);
       var rightDiff = diff(right, rightDiffWeight, this.compiledConfiguration);
       var x = leftDiffWeight.get_za3lpa$(0) - rightDiffWeight.get_za3lpa$(0);
-      if (Math_0.abs(x) < maxDistBetweenDiffSteps && this.compareWithoutSubstitutions_15tjed$(leftDiff, rightDiff, expressionChainComparisonType)) {
+      if (Math_0.abs(x) < maxDistBetweenDiffSteps && this.compareWithoutSubstitutions_s2g4rn$(leftDiff, rightDiff, expressionChainComparisonType)) {
         return true;
       }
     }
@@ -7479,26 +7492,52 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         continue;
       }
       if (sortOperands) {
-        tmp$_3 = new ExpressionSubstitution(originalTransformation.left.cloneWithSortingChildrenForExpressionSubstitutionComparison(), originalTransformation.right.cloneWithSortingChildrenForExpressionSubstitutionComparison(), originalTransformation.weight, originalTransformation.basedOnTaskContext, originalTransformation.code, originalTransformation.nameEn, originalTransformation.nameRu, originalTransformation.comparisonType, originalTransformation.leftFunctions, originalTransformation.matchJumbledAndNested, originalTransformation.priority, originalTransformation.changeOnlyOrder, originalTransformation.simpleAdditional, originalTransformation.isExtending);
+        tmp$_3 = new ExpressionSubstitution(originalTransformation.left.cloneWithSortingChildrenForExpressionSubstitutionComparison(), originalTransformation.right.cloneWithSortingChildrenForExpressionSubstitutionComparison(), originalTransformation.weight, originalTransformation.basedOnTaskContext, originalTransformation.code, originalTransformation.nameEn, originalTransformation.nameRu, originalTransformation.comparisonType, originalTransformation.leftFunctions, originalTransformation.matchJumbledAndNested, originalTransformation.priority, originalTransformation.changeOnlyOrder, originalTransformation.simpleAdditional, originalTransformation.isExtending, originalTransformation.normalizationType);
       }
        else {
         tmp$_3 = originalTransformation;
       }
       var transformation = tmp$_3;
-      var l = sortOperands ? left.cloneWithSortingChildrenForExpressionSubstitutionComparison() : left.clone();
-      var r = sortOperands ? right.cloneWithSortingChildrenForExpressionSubstitutionComparison() : right.clone();
+      if (!normFormsOfExpressionNode.containsKey_11rb$(transformation.normalizationType)) {
+        var l = sortOperands ? left.cloneWithSortingChildrenForExpressionSubstitutionComparison() : left.clone();
+        var r = sortOperands ? right.cloneWithSortingChildrenForExpressionSubstitutionComparison() : right.clone();
+        switch (transformation.normalizationType.name) {
+          case 'ORIGINAL':
+            var key = transformation.normalizationType;
+            var value = new Pair(l, r);
+            normFormsOfExpressionNode.put_xwzc9p$(key, value);
+            break;
+          case 'SORTED':
+            var key_0 = transformation.normalizationType;
+            var value_0 = new Pair(left.cloneWithSortingChildrenForExpressionSubstitutionComparison(), right.cloneWithSortingChildrenForExpressionSubstitutionComparison());
+            normFormsOfExpressionNode.put_xwzc9p$(key_0, value_0);
+            break;
+          case 'I_MULTIPLICATED':
+            var key_1 = transformation.normalizationType;
+            var value_1 = new Pair(left.cloneWithIMultipleNorm(), right.clone());
+            normFormsOfExpressionNode.put_xwzc9p$(key_1, value_1);
+            break;
+          case 'SORTED_AND_I_MULTIPLICATED':
+            var key_2 = transformation.normalizationType;
+            var value_2 = new Pair(left.cloneWithSortingChildrenForExpressionSubstitutionComparison().iMultiplicativeNormForm(), right.cloneWithSortingChildrenForExpressionSubstitutionComparison());
+            normFormsOfExpressionNode.put_xwzc9p$(key_2, value_2);
+            break;
+        }
+      }
+      var l_0 = ensureNotNull(normFormsOfExpressionNode.get_11rb$(transformation.normalizationType)).first.clone();
+      var r_0 = ensureNotNull(normFormsOfExpressionNode.get_11rb$(transformation.normalizationType)).second.clone();
       var direction = getComparingDirection(expressionChainComparisonType, transformation.comparisonType);
       if (direction == null) {
         log_1.add_gqvic5$(expressionChainComparisonType.string, transformation.comparisonType.string, ExpressionComporator$compareWithTreeTransformationRulesInternal$lambda, ExpressionComporator$compareWithTreeTransformationRulesInternal$lambda_0, ExpressionComporator$compareWithTreeTransformationRulesInternal$lambda_1, void 0, void 0, MessageType$USER_getInstance());
       }
       if (!equals(direction, SubstitutionDirection$RIGHT_TO_LEFT_getInstance())) {
-        tmp$_4 = transformation.findAllPossibleSubstitutionPlaces_6718cy$(l);
+        tmp$_4 = transformation.findAllPossibleSubstitutionPlaces_nxx8g1$(l_0, this);
       }
        else {
         tmp$_4 = emptyList();
       }
       if (!equals(direction, SubstitutionDirection$LEFT_TO_RIGHT_getInstance())) {
-        tmp$_5 = transformation.findAllPossibleSubstitutionPlaces_6718cy$(r);
+        tmp$_5 = transformation.findAllPossibleSubstitutionPlaces_nxx8g1$(r_0, this);
       }
        else {
         tmp$_5 = emptyList();
@@ -7506,14 +7545,14 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var substitutionPlaces = plus(tmp$_4, tmp$_5);
       var bitMaskCount = 1 << substitutionPlaces.size;
       if (Kotlin.imul(bitMaskCount, transformations.size) > maxBustCount) {
-        transformation.applySubstitution_55nkop$(substitutionPlaces);
-        if (this.compareWithTreeTransformationRulesInternal_pe5b20$(l, r, transformations, maxTransformationWeight - transformation.weight, maxBustCount, minTransformationWeight, expressionChainComparisonType, sortOperands))
+        transformation.applySubstitution_qhavsq$(substitutionPlaces, this);
+        if (this.compareWithTreeTransformationRulesInternal_pe5b20$(l_0, r_0, transformations, maxTransformationWeight - transformation.weight, maxBustCount, minTransformationWeight, expressionChainComparisonType, sortOperands))
           return true;
       }
        else {
         for (var bitMask = 1; bitMask < bitMaskCount; bitMask++) {
           transformation.applySubstitutionByBitMask_eqestx$(substitutionPlaces, bitMask);
-          if (this.compareWithTreeTransformationRulesInternal_pe5b20$(l.clone(), r.clone(), transformations, maxTransformationWeight - transformation.weight, maxBustCount, minTransformationWeight, expressionChainComparisonType, sortOperands))
+          if (this.compareWithTreeTransformationRulesInternal_pe5b20$(l_0.clone(), r_0.clone(), transformations, maxTransformationWeight - transformation.weight, maxBustCount, minTransformationWeight, expressionChainComparisonType, sortOperands))
             return true;
         }
       }
@@ -7534,7 +7573,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         return true;
     }
      else {
-      if (this.compareWithoutSubstitutions_15tjed$(left, right))
+      if (this.compareWithoutSubstitutions_s2g4rn$(left, right))
         return true;
     }
     return false;
@@ -8630,6 +8669,19 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return result;
   };
+  ExpressionNode.prototype.getNonZeroVariables = function () {
+    var tmp$;
+    var result = LinkedHashSet_init();
+    if (equals(this.value, '/') && this.children.size === 2 && last(this.children).nodeType === NodeType$VARIABLE_getInstance() && !equals(last(this.children).value, '') && toDoubleOrNull(last(this.children).value) == null && !equals(last(this.children).value, 'sys_def_i_complex')) {
+      result.add_11rb$(last(this.children).value);
+    }
+    tmp$ = this.children.iterator();
+    while (tmp$.hasNext()) {
+      var child = tmp$.next();
+      result.addAll_brywnq$(child.getNonZeroVariables());
+    }
+    return result;
+  };
   ExpressionNode.prototype.containsFunctions = function () {
     var tmp$;
     if (this.nodeType === NodeType$FUNCTION_getInstance() && !equals(this.value, '')) {
@@ -9193,6 +9245,75 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         this.setVariable_61zpoe$(variableName);
       }
     }
+  };
+  ExpressionNode.prototype.checkAndDeleteIifExistsInMultiplicationContext = function () {
+    var tmp$;
+    if (equals(this.value, '*')) {
+      tmp$ = get_lastIndex(this.children);
+      for (var idx = 0; idx <= tmp$; idx++) {
+        if (equals(this.children.get_za3lpa$(idx).value, 'sys_def_i_complex')) {
+          if (this.children.size === 1) {
+            this.children.get_za3lpa$(0).value = '1';
+          }
+           else {
+            this.children.removeAt_za3lpa$(idx);
+          }
+          return true;
+        }
+         else {
+          if (this.children.get_za3lpa$(idx).checkAndDeleteIifExistsInMultiplicationContext() === true) {
+            return true;
+          }
+        }
+      }
+    }
+     else if (equals(this.value, '/')) {
+      if (equals(this.children.get_za3lpa$(0).value, 'sys_def_i_complex')) {
+        this.children.get_za3lpa$(0).value = '1';
+        return true;
+      }
+       else {
+        if (this.children.get_za3lpa$(0).checkAndDeleteIifExistsInMultiplicationContext() === true) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  ExpressionNode.prototype.normalizeMultiplicativeTreeWithI = function () {
+    var tmp$;
+    tmp$ = get_lastIndex(this.children);
+    for (var i = 0; i <= tmp$; i++) {
+      var containsI = this.children.get_za3lpa$(i).checkAndDeleteIifExistsInMultiplicationContext();
+      if (containsI) {
+        if (equals(this.children.get_za3lpa$(i).value, '*')) {
+          this.children.get_za3lpa$(i).addChild_6718cy$(new ExpressionNode(NodeType$VARIABLE_getInstance(), 'sys_def_i_complex'));
+        }
+         else {
+          var newChild = new ExpressionNode(NodeType$FUNCTION_getInstance(), '*');
+          newChild.addChild_6718cy$(this.children.get_za3lpa$(i));
+          newChild.addChild_6718cy$(new ExpressionNode(NodeType$VARIABLE_getInstance(), 'sys_def_i_complex'));
+          this.setChildOnPosition_tvfpvg$(newChild, i);
+        }
+      }
+    }
+  };
+  ExpressionNode.prototype.iMultiplicativeNormForm = function () {
+    var tmp$;
+    tmp$ = this.children.iterator();
+    while (tmp$.hasNext()) {
+      var child = tmp$.next();
+      if (equals(child.value, '*') || equals(child.value, '/')) {
+        this.normalizeMultiplicativeTreeWithI();
+      }
+       else {
+        child.iMultiplicativeNormForm();
+      }
+    }
+    return this;
+  };
+  ExpressionNode.prototype.cloneWithIMultipleNorm = function () {
+    return this.clone().iMultiplicativeNormForm();
   };
   ExpressionNode.$metadata$ = {
     kind: Kind_CLASS,
@@ -10491,7 +10612,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
          while (false);
         tmp$_8 = all$result;
       }
-      if (tmp$_8) {
+      if (tmp$_8 && !substitutionSelectionData.compiledConfiguration.factComporator.expressionComporator.fastProbabilityCheckOnZero_6718cy$(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children))) {
         var originalExpression = substitutionSelectionData.originalExpression.clone();
         ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).fillStructureStringIdentifiers_t6ztn0$();
         var numerator = first(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children).children);
@@ -10929,7 +11050,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       withReadyApplicationResult = false;
     if (fastestAppropriateVersion === void 0)
       fastestAppropriateVersion = false;
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13, tmp$_14, tmp$_15, tmp$_16, tmp$_17, tmp$_18, tmp$_19, tmp$_20, tmp$_21, tmp$_22, tmp$_23, tmp$_24;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13, tmp$_14, tmp$_15, tmp$_16, tmp$_17, tmp$_18;
     var result = ArrayList_init();
     if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('ZeroComputation')) {
       var subst = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('ZeroComputation'));
@@ -10939,7 +11060,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         tmp$_5 = ensureNotNull(substitutionSelectionData.topOfSelection).children.iterator();
         while (tmp$_5.hasNext()) {
           var child = tmp$_5.next();
-          if (equals(child.value, (tmp$_8 = (tmp$_7 = (tmp$_6 = substitutionSelectionData.topOfSelection) != null ? tmp$_6.functionStringDefinition : null) != null ? tmp$_7.function : null) != null ? tmp$_8.fieldAddZero : null) || (equals(ensureNotNull(substitutionSelectionData.topOfSelection).value, '+') && equals(child.value, '-') && equals((tmp$_9 = firstOrNull_0(child.children)) != null ? tmp$_9.value : null, (tmp$_12 = (tmp$_11 = (tmp$_10 = substitutionSelectionData.topOfSelection) != null ? tmp$_10.functionStringDefinition : null) != null ? tmp$_11.function : null) != null ? tmp$_12.fieldAddZero : null))) {
+          if (equals(child.value, ensureNotNull(ensureNotNull(ensureNotNull(substitutionSelectionData.topOfSelection).functionStringDefinition).function.fieldAddZero)) || (equals(ensureNotNull(substitutionSelectionData.topOfSelection).value, '+') && equals(child.value, '-') && equals((tmp$_6 = firstOrNull_0(child.children)) != null ? tmp$_6.value : null, ensureNotNull(ensureNotNull(ensureNotNull(substitutionSelectionData.topOfSelection).functionStringDefinition).function.fieldAddZero)))) {
             zeroElementFound = true;
           }
            else {
@@ -10947,32 +11068,35 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           }
         }
         if (zeroElementFound) {
+          if (topNode.children.isEmpty()) {
+            topNode = substitutionSelectionData.compiledConfiguration.createExpressionVariableNode_61zpoe$(ensureNotNull(ensureNotNull(ensureNotNull(substitutionSelectionData.topOfSelection).functionStringDefinition).function.fieldAddZero));
+          }
           var zeroComputationSubstitution = new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.topOfSelection).clone()), addRootNodeToExpression(topNode), void 0, void 0, subst.code, subst.nameEn, subst.nameRu, void 0, void 0, void 0, subst.priority);
           var originalExpression = substitutionSelectionData.originalExpression.clone();
           ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_tvfpvg$(topNode, substitutionSelectionData.topOfSelectionIndex);
-          tmp$_13 = ensureNotNull(substitutionSelectionData.topOfSelection);
+          tmp$_7 = ensureNotNull(substitutionSelectionData.topOfSelection);
           var $receiver = substitutionSelectionData.expressionToTransform.clone();
           normalizeExpressionToUsualForm($receiver, substitutionSelectionData.compiledConfiguration);
-          result.add_11rb$(new SubstitutionApplication(zeroComputationSubstitution, originalExpression, tmp$_13, $receiver, topNode, 'ZeroComputation', (tmp$_14 = subst.priority) != null ? tmp$_14 : 10));
+          result.add_11rb$(new SubstitutionApplication(zeroComputationSubstitution, originalExpression, tmp$_7, $receiver, topNode, 'ZeroComputation', (tmp$_8 = subst.priority) != null ? tmp$_8 : 10));
           ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_tvfpvg$(ensureNotNull(substitutionSelectionData.topOfSelection), substitutionSelectionData.topOfSelectionIndex);
         }
       }
-      var tmp$_25 = ((tmp$_17 = (tmp$_16 = (tmp$_15 = substitutionSelectionData.topOfSelection) != null ? tmp$_15.functionStringDefinition : null) != null ? tmp$_16.function : null) != null ? tmp$_17.isCommutativeWithNullWeight : null) === true && ((tmp$_20 = (tmp$_19 = (tmp$_18 = substitutionSelectionData.topOfSelection) != null ? tmp$_18.functionStringDefinition : null) != null ? tmp$_19.function : null) != null ? tmp$_20.fieldMulZero : null) != null;
-      if (tmp$_25) {
-        var tmp$_26;
-        if ((tmp$_22 = (tmp$_21 = substitutionSelectionData.topOfSelection) != null ? tmp$_21.children : null) != null) {
+      var tmp$_19 = ((tmp$_11 = (tmp$_10 = (tmp$_9 = substitutionSelectionData.topOfSelection) != null ? tmp$_9.functionStringDefinition : null) != null ? tmp$_10.function : null) != null ? tmp$_11.isCommutativeWithNullWeight : null) === true && ((tmp$_14 = (tmp$_13 = (tmp$_12 = substitutionSelectionData.topOfSelection) != null ? tmp$_12.functionStringDefinition : null) != null ? tmp$_13.function : null) != null ? tmp$_14.fieldMulZero : null) != null;
+      if (tmp$_19) {
+        var tmp$_20;
+        if ((tmp$_16 = (tmp$_15 = substitutionSelectionData.topOfSelection) != null ? tmp$_15.children : null) != null) {
           var any$result;
           any$break: do {
-            var tmp$_27;
-            if (Kotlin.isType(tmp$_22, Collection) && tmp$_22.isEmpty()) {
+            var tmp$_21;
+            if (Kotlin.isType(tmp$_16, Collection) && tmp$_16.isEmpty()) {
               any$result = false;
               break any$break;
             }
-            tmp$_27 = tmp$_22.iterator();
-            while (tmp$_27.hasNext()) {
-              var element = tmp$_27.next();
-              var tmp$_28, tmp$_29, tmp$_30;
-              if (equals(element.value, (tmp$_30 = (tmp$_29 = (tmp$_28 = substitutionSelectionData.topOfSelection) != null ? tmp$_28.functionStringDefinition : null) != null ? tmp$_29.function : null) != null ? tmp$_30.fieldMulZero : null)) {
+            tmp$_21 = tmp$_16.iterator();
+            while (tmp$_21.hasNext()) {
+              var element = tmp$_21.next();
+              var tmp$_22, tmp$_23, tmp$_24;
+              if (equals(element.value, (tmp$_24 = (tmp$_23 = (tmp$_22 = substitutionSelectionData.topOfSelection) != null ? tmp$_22.functionStringDefinition : null) != null ? tmp$_23.function : null) != null ? tmp$_24.fieldMulZero : null)) {
                 any$result = true;
                 break any$break;
               }
@@ -10980,21 +11104,21 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             any$result = false;
           }
            while (false);
-          tmp$_26 = any$result;
+          tmp$_20 = any$result;
         }
          else
-          tmp$_26 = null;
-        tmp$_25 = tmp$_26 === true;
+          tmp$_20 = null;
+        tmp$_19 = tmp$_20 === true;
       }
-      if (tmp$_25) {
+      if (tmp$_19) {
         var topNode_0 = new ExpressionNode(NodeType$VARIABLE_getInstance(), ensureNotNull(ensureNotNull(ensureNotNull(substitutionSelectionData.topOfSelection).functionStringDefinition).function.fieldMulZero));
         var zeroComputationSubstitution_0 = new ExpressionSubstitution(addRootNodeToExpression(ensureNotNull(substitutionSelectionData.topOfSelection).clone()), addRootNodeToExpression(topNode_0), void 0, void 0, subst.code, subst.nameEn, subst.nameRu, void 0, void 0, void 0, subst.priority);
         var originalExpression_0 = substitutionSelectionData.originalExpression.clone();
         ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_tvfpvg$(topNode_0, substitutionSelectionData.topOfSelectionIndex);
-        tmp$_23 = ensureNotNull(substitutionSelectionData.topOfSelection);
+        tmp$_17 = ensureNotNull(substitutionSelectionData.topOfSelection);
         var $receiver_0 = substitutionSelectionData.expressionToTransform.clone();
         normalizeExpressionToUsualForm($receiver_0, substitutionSelectionData.compiledConfiguration);
-        result.add_11rb$(new SubstitutionApplication(zeroComputationSubstitution_0, originalExpression_0, tmp$_23, $receiver_0, topNode_0, 'ZeroComputation', (tmp$_24 = subst.priority) != null ? tmp$_24 : 10));
+        result.add_11rb$(new SubstitutionApplication(zeroComputationSubstitution_0, originalExpression_0, tmp$_17, $receiver_0, topNode_0, 'ZeroComputation', (tmp$_18 = subst.priority) != null ? tmp$_18 : 10));
         ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_tvfpvg$(ensureNotNull(substitutionSelectionData.topOfSelection), substitutionSelectionData.topOfSelectionIndex);
       }
     }
@@ -11210,7 +11334,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       withReadyApplicationResult = false;
     if (fastestAppropriateVersion === void 0)
       fastestAppropriateVersion = false;
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     var result = ArrayList_init();
     if (substitutionSelectionData.selectedNodes.size === 2) {
       var applicationPlace = first(substitutionSelectionData.selectedNodes);
@@ -11236,7 +11360,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         result.add_11rb$(new SubstitutionApplication(additiveSubstitution, originalExpression, applicationPlace, $receiver, additiveTreeNode, 'ComplicatingExtension', (tmp$_0 = subst.priority) != null ? tmp$_0 : 60));
         applicationPlaceParent.setChildOnPosition_tvfpvg$(applicationPlace, applicationPlaceIndex);
       }
-      if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('MultiplicativeComplicatingExtension') ? !substitutionSelectionData.compiledConfiguration.factComporator.expressionComporator.baseOperationsDefinitions.additivelyEqual_lu1900$((tmp$_1 = computeNodeIfPossible(applicationObject)) != null ? tmp$_1 : 1.0, 0.0) : false) {
+      if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('MultiplicativeComplicatingExtension') && !substitutionSelectionData.compiledConfiguration.factComporator.expressionComporator.fastProbabilityCheckOnZero_6718cy$(applicationObject)) {
         var subst_0 = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('MultiplicativeComplicatingExtension'));
         var multiplicativeTreeNode = new ExpressionNode(NodeType$FUNCTION_getInstance(), '/');
         multiplicativeTreeNode.addChild_6718cy$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '*'));
@@ -11247,7 +11371,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         applicationPlaceParent.setChildOnPosition_tvfpvg$(multiplicativeTreeNode, applicationPlaceIndex);
         var $receiver_0 = substitutionSelectionData.expressionToTransform.clone();
         normalizeExpressionToUsualForm($receiver_0, substitutionSelectionData.compiledConfiguration);
-        result.add_11rb$(new SubstitutionApplication(multiplicativeSubstitution, originalExpression, applicationPlace, $receiver_0, multiplicativeTreeNode, 'ComplicatingExtension', (tmp$_2 = subst_0.priority) != null ? tmp$_2 : 60));
+        result.add_11rb$(new SubstitutionApplication(multiplicativeSubstitution, originalExpression, applicationPlace, $receiver_0, multiplicativeTreeNode, 'ComplicatingExtension', (tmp$_1 = subst_0.priority) != null ? tmp$_1 : 60));
         applicationPlaceParent.setChildOnPosition_tvfpvg$(applicationPlace, applicationPlaceIndex);
       }
       if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('SetComplicatingExtension')) {
@@ -11261,7 +11385,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         applicationPlaceParent.setChildOnPosition_tvfpvg$(andOrTreeNode, applicationPlaceIndex);
         var $receiver_1 = substitutionSelectionData.expressionToTransform.clone();
         normalizeExpressionToUsualForm($receiver_1, substitutionSelectionData.compiledConfiguration);
-        result.add_11rb$(new SubstitutionApplication(andOrSubstitution, originalExpression, applicationPlace, $receiver_1, andOrTreeNode, 'ComplicatingExtension', (tmp$_3 = subst_1.priority) != null ? tmp$_3 : 60));
+        result.add_11rb$(new SubstitutionApplication(andOrSubstitution, originalExpression, applicationPlace, $receiver_1, andOrTreeNode, 'ComplicatingExtension', (tmp$_2 = subst_1.priority) != null ? tmp$_2 : 60));
         applicationPlaceParent.setChildOnPosition_tvfpvg$(applicationPlace, applicationPlaceIndex);
         var orAndTreeNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_bm4lxs$('or', -1);
         orAndTreeNode.addChild_6718cy$(applicationPlace.clone());
@@ -11272,7 +11396,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         applicationPlaceParent.setChildOnPosition_tvfpvg$(orAndTreeNode, applicationPlaceIndex);
         var $receiver_2 = substitutionSelectionData.expressionToTransform.clone();
         normalizeExpressionToUsualForm($receiver_2, substitutionSelectionData.compiledConfiguration);
-        result.add_11rb$(new SubstitutionApplication(orAndSubstitution, originalExpression, applicationPlace, $receiver_2, orAndTreeNode, 'ComplicatingExtension', (tmp$_4 = subst_1.priority) != null ? tmp$_4 : 60));
+        result.add_11rb$(new SubstitutionApplication(orAndSubstitution, originalExpression, applicationPlace, $receiver_2, orAndTreeNode, 'ComplicatingExtension', (tmp$_3 = subst_1.priority) != null ? tmp$_3 : 60));
         applicationPlaceParent.setChildOnPosition_tvfpvg$(applicationPlace, applicationPlaceIndex);
       }
     }
@@ -11304,7 +11428,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       fastestAppropriateVersion = true;
     var tmp$, tmp$_0;
     if (substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder != null && !expressionSubstitution.changeOnlyOrder) {
-      tmp$ = tryToGenerateApplicationSubstitutionInstance(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder), expressionSubstitution);
+      tmp$ = tryToGenerateApplicationSubstitutionInstance(substitutionSelectionData, ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder), expressionSubstitution);
     }
      else
       tmp$ = null;
@@ -11314,15 +11438,15 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       if (tmp$_0 == null) {
         return null;
       }
-      substitutionInstance = tryToGenerateApplicationSubstitutionInstance(tmp$_0, expressionSubstitution);
+      substitutionInstance = tryToGenerateApplicationSubstitutionInstance(substitutionSelectionData, tmp$_0, expressionSubstitution);
     }
     return substitutionInstance;
   }
-  function tryToGenerateApplicationSubstitutionInstance(expression, substitution) {
-    var result = substitution.checkLeftCondition_6718cy$(expression);
+  function tryToGenerateApplicationSubstitutionInstance(substitutionSelectionData, expression, substitution) {
+    var result = substitution.checkLeftCondition_nxx8g1$(expression, substitutionSelectionData.compiledConfiguration.factComporator.expressionComporator);
     if (!result.isApplicable && substitution.matchJumbledAndNested) {
       var simplifiedExpression = expression.cloneWithExpandingNestedSameFunctions();
-      result = substitution.checkLeftCondition_6718cy$(simplifiedExpression);
+      result = substitution.checkLeftCondition_nxx8g1$(simplifiedExpression, substitutionSelectionData.compiledConfiguration.factComporator.expressionComporator);
     }
     return result;
   }
@@ -11532,7 +11656,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             }
             var selectedNodeParent = tmp$_1;
             var selectedNodeIndex = selectedNodeParent.children.indexOf_11rb$(selectedNode);
-            var applicationResult = rule.checkAndApply_6718cy$(selectedNode);
+            var applicationResult = rule.checkAndApply_nxx8g1$(selectedNode, substitutionSelectionData.compiledConfiguration.factComporator.expressionComporator);
             if (applicationResult != null) {
               selectedNodeParent.setChildOnPosition_tvfpvg$(applicationResult, selectedNodeIndex);
               happenedReplacementsCount = happenedReplacementsCount + 1 | 0;
@@ -13315,6 +13439,62 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
   }
   SubstitutionInstanceVarType.valueOf_61zpoe$ = SubstitutionInstanceVarType$valueOf;
+  function ExpressionSubstitutionNormType(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function ExpressionSubstitutionNormType_initFields() {
+    ExpressionSubstitutionNormType_initFields = function () {
+    };
+    ExpressionSubstitutionNormType$ORIGINAL_instance = new ExpressionSubstitutionNormType('ORIGINAL', 0);
+    ExpressionSubstitutionNormType$SORTED_instance = new ExpressionSubstitutionNormType('SORTED', 1);
+    ExpressionSubstitutionNormType$I_MULTIPLICATED_instance = new ExpressionSubstitutionNormType('I_MULTIPLICATED', 2);
+    ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_instance = new ExpressionSubstitutionNormType('SORTED_AND_I_MULTIPLICATED', 3);
+  }
+  var ExpressionSubstitutionNormType$ORIGINAL_instance;
+  function ExpressionSubstitutionNormType$ORIGINAL_getInstance() {
+    ExpressionSubstitutionNormType_initFields();
+    return ExpressionSubstitutionNormType$ORIGINAL_instance;
+  }
+  var ExpressionSubstitutionNormType$SORTED_instance;
+  function ExpressionSubstitutionNormType$SORTED_getInstance() {
+    ExpressionSubstitutionNormType_initFields();
+    return ExpressionSubstitutionNormType$SORTED_instance;
+  }
+  var ExpressionSubstitutionNormType$I_MULTIPLICATED_instance;
+  function ExpressionSubstitutionNormType$I_MULTIPLICATED_getInstance() {
+    ExpressionSubstitutionNormType_initFields();
+    return ExpressionSubstitutionNormType$I_MULTIPLICATED_instance;
+  }
+  var ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_instance;
+  function ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance() {
+    ExpressionSubstitutionNormType_initFields();
+    return ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_instance;
+  }
+  ExpressionSubstitutionNormType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ExpressionSubstitutionNormType',
+    interfaces: [Enum]
+  };
+  function ExpressionSubstitutionNormType$values() {
+    return [ExpressionSubstitutionNormType$ORIGINAL_getInstance(), ExpressionSubstitutionNormType$SORTED_getInstance(), ExpressionSubstitutionNormType$I_MULTIPLICATED_getInstance(), ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance()];
+  }
+  ExpressionSubstitutionNormType.values = ExpressionSubstitutionNormType$values;
+  function ExpressionSubstitutionNormType$valueOf(name) {
+    switch (name) {
+      case 'ORIGINAL':
+        return ExpressionSubstitutionNormType$ORIGINAL_getInstance();
+      case 'SORTED':
+        return ExpressionSubstitutionNormType$SORTED_getInstance();
+      case 'I_MULTIPLICATED':
+        return ExpressionSubstitutionNormType$I_MULTIPLICATED_getInstance();
+      case 'SORTED_AND_I_MULTIPLICATED':
+        return ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance();
+      default:throwISE('No enum constant expressiontree.ExpressionSubstitutionNormType.' + name);
+    }
+  }
+  ExpressionSubstitutionNormType.valueOf_61zpoe$ = ExpressionSubstitutionNormType$valueOf;
   function SubstitutionInstanceVar(name, type, time) {
     this.name = name;
     this.type = type;
@@ -13633,7 +13813,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   SubstitutionPlace.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.nodeParent, other.nodeParent) && Kotlin.equals(this.nodeChildIndex, other.nodeChildIndex) && Kotlin.equals(this.substitutionInstance, other.substitutionInstance) && Kotlin.equals(this.originalValue, other.originalValue) && Kotlin.equals(this.originalExpression, other.originalExpression)))));
   };
-  function ExpressionSubstitution(left, right, weight, basedOnTaskContext, code, nameEn, nameRu, comparisonType, leftFunctions, matchJumbledAndNested, priority, changeOnlyOrder, simpleAdditional, isExtending) {
+  function ExpressionSubstitution(left, right, weight, basedOnTaskContext, code, nameEn, nameRu, comparisonType, leftFunctions, matchJumbledAndNested, priority, changeOnlyOrder, simpleAdditional, isExtending, normalizationType) {
     ExpressionSubstitution$Companion_getInstance();
     if (weight === void 0)
       weight = 1.0;
@@ -13659,6 +13839,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       simpleAdditional = false;
     if (isExtending === void 0)
       isExtending = false;
+    if (normalizationType === void 0)
+      normalizationType = ExpressionSubstitutionNormType$ORIGINAL_getInstance();
     this.left = left;
     this.right = right;
     this.weight = weight;
@@ -13673,6 +13855,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     this.changeOnlyOrder = changeOnlyOrder;
     this.simpleAdditional = simpleAdditional;
     this.isExtending = isExtending;
+    this.normalizationType = normalizationType;
     if (!this.changeOnlyOrder) {
       var $receiver = this.left.clone();
       $receiver.normalizeSubTree_f8z7ch$(void 0, void 0, true);
@@ -13690,11 +13873,26 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return this.identifier;
   };
-  ExpressionSubstitution.prototype.checkCondition_vs93k4$ = function (expressionNode, conditionNode, substitutionInstance, nameArgsMap) {
+  ExpressionSubstitution.prototype.checkCondition_nwkprx$ = function (expressionNode, conditionNode, substitutionInstance, expressionComporator, nameArgsMap) {
     if (nameArgsMap === void 0) {
       nameArgsMap = LinkedHashMap_init_0();
     }
+    var tmp$;
     ExpressionSubstitution$Companion_getInstance().checkConditionCompanion_5w3lm6$(expressionNode, conditionNode, substitutionInstance, nameArgsMap, this.basedOnTaskContext, this.matchJumbledAndNested);
+    if (substitutionInstance.isApplicable && expressionComporator != null) {
+      var nonZeroVariables = this.right.getNonZeroVariables();
+      tmp$ = nonZeroVariables.iterator();
+      while (tmp$.hasNext()) {
+        var nonZeroVariable = tmp$.next();
+        var nonZeroVariableValue = substitutionInstance.getExprVar_61zpoe$(nonZeroVariable);
+        if (nonZeroVariableValue == null) {
+          return;
+        }
+        if (expressionComporator.fastProbabilityCheckOnZero_6718cy$(nonZeroVariableValue)) {
+          substitutionInstance.isApplicable = false;
+        }
+      }
+    }
   };
   function ExpressionSubstitution$Companion() {
     ExpressionSubstitution$Companion_instance = this;
@@ -13952,33 +14150,37 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return ExpressionSubstitution$Companion_instance;
   }
-  ExpressionSubstitution.prototype.checkLeftCondition_6718cy$ = function (expressionNode) {
+  ExpressionSubstitution.prototype.checkLeftCondition_nxx8g1$ = function (expressionNode, expressionComporator) {
+    if (expressionComporator === void 0)
+      expressionComporator = null;
     var substitutionInstance = new SubstitutionInstance();
-    this.checkCondition_vs93k4$(expressionNode, this.left.children.get_za3lpa$(0), substitutionInstance);
+    this.checkCondition_nwkprx$(expressionNode, this.left.children.get_za3lpa$(0), substitutionInstance, expressionComporator);
     return substitutionInstance;
   };
-  ExpressionSubstitution.prototype.findAllPossibleSubstitutionPlaces_0 = function (root, originalExpression, result) {
+  ExpressionSubstitution.prototype.findAllPossibleSubstitutionPlaces_0 = function (root, originalExpression, expressionComporator, result) {
     var tmp$;
     tmp$ = root.children.size;
     for (var i = 0; i < tmp$; i++) {
-      this.findAllPossibleSubstitutionPlaces_0(root.children.get_za3lpa$(i), originalExpression, result);
-      var substitutionInstance = this.checkLeftCondition_6718cy$(root.children.get_za3lpa$(i));
+      this.findAllPossibleSubstitutionPlaces_0(root.children.get_za3lpa$(i), originalExpression, expressionComporator, result);
+      var substitutionInstance = this.checkLeftCondition_nxx8g1$(root.children.get_za3lpa$(i), expressionComporator);
       if (substitutionInstance.isApplicable) {
         result.add_11rb$(new SubstitutionPlace(root, i, substitutionInstance, root.children.get_za3lpa$(i), originalExpression));
       }
     }
   };
-  ExpressionSubstitution.prototype.findAllPossibleSubstitutionPlaces_6718cy$ = function (root) {
+  ExpressionSubstitution.prototype.findAllPossibleSubstitutionPlaces_nxx8g1$ = function (root, expressionComporator) {
     var result = ArrayList_init();
-    this.findAllPossibleSubstitutionPlaces_0(root, root, result);
+    this.findAllPossibleSubstitutionPlaces_0(root, root, expressionComporator, result);
     return result;
   };
-  ExpressionSubstitution.prototype.applySubstitution_55nkop$ = function (substitutionPlaces) {
+  ExpressionSubstitution.prototype.applySubstitution_qhavsq$ = function (substitutionPlaces, expressionComporator) {
+    if (expressionComporator === void 0)
+      expressionComporator = null;
     var tmp$;
     tmp$ = substitutionPlaces.iterator();
     while (tmp$.hasNext()) {
       var substitutionPlace = tmp$.next();
-      var newValue = this.checkAndApply_6718cy$(substitutionPlace.nodeParent.children.get_za3lpa$(substitutionPlace.nodeChildIndex));
+      var newValue = this.checkAndApply_nxx8g1$(substitutionPlace.nodeParent.children.get_za3lpa$(substitutionPlace.nodeChildIndex), expressionComporator);
       if (newValue != null) {
         substitutionPlace.nodeParent.children.set_wxm5ur$(substitutionPlace.nodeChildIndex, newValue);
         substitutionPlace.nodeParent.normalizeParentLinks();
@@ -14019,8 +14221,10 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       tmp$_0 = null;
     return tmp$_0;
   };
-  ExpressionSubstitution.prototype.checkAndApply_6718cy$ = function (expressionNode) {
-    var substitutionInstance = this.checkLeftCondition_6718cy$(expressionNode);
+  ExpressionSubstitution.prototype.checkAndApply_nxx8g1$ = function (expressionNode, expressionComporator) {
+    if (expressionComporator === void 0)
+      expressionComporator = null;
+    var substitutionInstance = this.checkLeftCondition_nxx8g1$(expressionNode, expressionComporator);
     if (substitutionInstance.isApplicable) {
       return this.applyRight_7o4uji$(substitutionInstance, void 0, expressionNode.nodeId);
     }
@@ -14039,7 +14243,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       applyAllFunctionSubstitutions($receiver.children.get_za3lpa$(i), compiledSubstitutions);
       var substitution = compiledSubstitutions.get_11rb$($receiver.children.get_za3lpa$(i).value + '_' + toString($receiver.children.get_za3lpa$(i).children.size));
       if (substitution != null) {
-        $receiver.children.set_wxm5ur$(i, (tmp$ = substitution.checkAndApply_6718cy$($receiver.children.get_za3lpa$(i))) != null ? tmp$ : $receiver.children.get_za3lpa$(i));
+        $receiver.children.set_wxm5ur$(i, (tmp$ = substitution.checkAndApply_nxx8g1$($receiver.children.get_za3lpa$(i), null)) != null ? tmp$ : $receiver.children.get_za3lpa$(i));
       }
       i = i + 1 | 0;
     }
@@ -14050,8 +14254,8 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     tmp$ = expressionSubstitutions.iterator();
     while (tmp$.hasNext()) {
       var substitution = tmp$.next();
-      var substitutionPlaces = substitution.findAllPossibleSubstitutionPlaces_6718cy$($receiver);
-      substitution.applySubstitution_55nkop$(substitutionPlaces);
+      var substitutionPlaces = substitution.findAllPossibleSubstitutionPlaces_nxx8g1$($receiver, null);
+      substitution.applySubstitution_qhavsq$(substitutionPlaces, null);
     }
     $receiver.normalizeParentLinks();
   }
@@ -14125,7 +14329,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     simpleName: 'ExpressionTask',
     interfaces: []
   };
-  function generateExpressionTask(expressionSubstitutions, stepsCount, originalExpressions) {
+  function generateExpressionTask(expressionSubstitutions, stepsCount, originalExpressions, compiledConfiguration) {
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration();
     var tmp$;
     var originalExpression = originalExpressions.size === 1 ? first(originalExpressions) : originalExpressions.get_za3lpa$(randomInt(0, get_lastIndex(originalExpressions)));
     var currentExpression = originalExpression.clone();
@@ -14138,7 +14344,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
         var expressionSubstitution = tmp$.next();
         var tmp$_0 = !intersect(expressionSubstitution.leftFunctions, functionsInExpression).isEmpty();
         if (tmp$_0) {
-          tmp$_0 = !expressionSubstitution.findAllPossibleSubstitutionPlaces_6718cy$(currentExpression).isEmpty();
+          tmp$_0 = !expressionSubstitution.findAllPossibleSubstitutionPlaces_nxx8g1$(currentExpression, compiledConfiguration.factComporator.expressionComporator).isEmpty();
         }
         if (tmp$_0) {
           appropriateSubstitutions.add_11rb$(expressionSubstitution);
@@ -14163,14 +14369,14 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       }
       var selectedSubstitution = appropriateSubstitutions.get_za3lpa$(currentSubstitutionIndex);
       requiredSubstitutions.add_11rb$(new ExpressionSubstitution(selectedSubstitution.left, selectedSubstitution.right));
-      var places = selectedSubstitution.findAllPossibleSubstitutionPlaces_6718cy$(currentExpression);
+      var places = selectedSubstitution.findAllPossibleSubstitutionPlaces_nxx8g1$(currentExpression, compiledConfiguration.factComporator.expressionComporator);
       if (places.size === 1) {
-        selectedSubstitution.applySubstitution_55nkop$(places);
+        selectedSubstitution.applySubstitution_qhavsq$(places, compiledConfiguration.factComporator.expressionComporator);
       }
        else {
         var partSize = selectedSubstitution.weight / places.size;
         var index = numberToInt(selector / partSize);
-        selectedSubstitution.applySubstitution_55nkop$(places.subList_vux9f0$(index, index + 1 | 0));
+        selectedSubstitution.applySubstitution_qhavsq$(places.subList_vux9f0$(index, index + 1 | 0), compiledConfiguration.factComporator.expressionComporator);
       }
     }
     return new ExpressionTask(originalExpression, currentExpression, requiredSubstitutions, expressionSubstitutions);
@@ -15837,7 +16043,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     if (tmp$_0) {
       tmp$_0 = oldTreeActualParent.children.get_za3lpa$(0).value.length > 0;
     }
-    if (tmp$_0 && equals(oldTreeActualParent.children.get_za3lpa$(0).value, 'i')) {
+    if (tmp$_0 && (oldTreeActualParent.children.get_za3lpa$(0).value.charCodeAt(0) === 105 || last_0(oldTreeActualParent.children.get_za3lpa$(0).value) === 105)) {
       this.isNeedReplace_0 = false;
       var $receiver_0 = this.SorPLevelsReplaces_0;
       var key = last_1(this.SorPLevelsReplaces_0.keys);
@@ -16065,7 +16271,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   function ExpressionTreeAnalyzer(analyzingExpression) {
     this.analyzingExpression_0 = analyzingExpression;
     this.expressionDimension_0 = this.analyzingExpression_0.getVariableNames().size;
-    this.functionByName_0 = mapOf_0([to('', ExpressionTreeAnalyzer$functionByName$lambda(this)), to('+', ExpressionTreeAnalyzer$functionByName$lambda_0(this)), to('*', ExpressionTreeAnalyzer$functionByName$lambda_1(this)), to('-', ExpressionTreeAnalyzer$functionByName$lambda_2(this)), to('/', ExpressionTreeAnalyzer$functionByName$lambda_3(this)), to('^', ExpressionTreeAnalyzer$functionByName$lambda_4(this)), to('mod', ExpressionTreeAnalyzer$functionByName$lambda_5(this)), to('S', ExpressionTreeAnalyzer$functionByName$lambda_6(this)), to('P', ExpressionTreeAnalyzer$functionByName$lambda_7(this)), to('and', ExpressionTreeAnalyzer$functionByName$lambda_8(this)), to('or', ExpressionTreeAnalyzer$functionByName$lambda_9(this)), to('xor', ExpressionTreeAnalyzer$functionByName$lambda_10(this)), to('alleq', ExpressionTreeAnalyzer$functionByName$lambda_11(this)), to('not', ExpressionTreeAnalyzer$functionByName$lambda_12(this)), to('sin', ExpressionTreeAnalyzer$functionByName$lambda_13(this)), to('cos', ExpressionTreeAnalyzer$functionByName$lambda_14(this)), to('sh', ExpressionTreeAnalyzer$functionByName$lambda_15(this)), to('ch', ExpressionTreeAnalyzer$functionByName$lambda_16(this)), to('tg', ExpressionTreeAnalyzer$functionByName$lambda_17(this)), to('th', ExpressionTreeAnalyzer$functionByName$lambda_18(this)), to('asin', ExpressionTreeAnalyzer$functionByName$lambda_19(this)), to('acos', ExpressionTreeAnalyzer$functionByName$lambda_20(this)), to('atg', ExpressionTreeAnalyzer$functionByName$lambda_21(this)), to('exp', ExpressionTreeAnalyzer$functionByName$lambda_22(this)), to('ln', ExpressionTreeAnalyzer$functionByName$lambda_23(this)), to('abs', ExpressionTreeAnalyzer$functionByName$lambda_24(this))]);
+    this.functionByName_0 = mapOf([to('', ExpressionTreeAnalyzer$functionByName$lambda(this)), to('+', ExpressionTreeAnalyzer$functionByName$lambda_0(this)), to('*', ExpressionTreeAnalyzer$functionByName$lambda_1(this)), to('-', ExpressionTreeAnalyzer$functionByName$lambda_2(this)), to('/', ExpressionTreeAnalyzer$functionByName$lambda_3(this)), to('^', ExpressionTreeAnalyzer$functionByName$lambda_4(this)), to('mod', ExpressionTreeAnalyzer$functionByName$lambda_5(this)), to('S', ExpressionTreeAnalyzer$functionByName$lambda_6(this)), to('P', ExpressionTreeAnalyzer$functionByName$lambda_7(this)), to('and', ExpressionTreeAnalyzer$functionByName$lambda_8(this)), to('or', ExpressionTreeAnalyzer$functionByName$lambda_9(this)), to('xor', ExpressionTreeAnalyzer$functionByName$lambda_10(this)), to('alleq', ExpressionTreeAnalyzer$functionByName$lambda_11(this)), to('not', ExpressionTreeAnalyzer$functionByName$lambda_12(this)), to('sin', ExpressionTreeAnalyzer$functionByName$lambda_13(this)), to('cos', ExpressionTreeAnalyzer$functionByName$lambda_14(this)), to('sh', ExpressionTreeAnalyzer$functionByName$lambda_15(this)), to('ch', ExpressionTreeAnalyzer$functionByName$lambda_16(this)), to('tg', ExpressionTreeAnalyzer$functionByName$lambda_17(this)), to('th', ExpressionTreeAnalyzer$functionByName$lambda_18(this)), to('asin', ExpressionTreeAnalyzer$functionByName$lambda_19(this)), to('acos', ExpressionTreeAnalyzer$functionByName$lambda_20(this)), to('atg', ExpressionTreeAnalyzer$functionByName$lambda_21(this)), to('exp', ExpressionTreeAnalyzer$functionByName$lambda_22(this)), to('ln', ExpressionTreeAnalyzer$functionByName$lambda_23(this)), to('abs', ExpressionTreeAnalyzer$functionByName$lambda_24(this))]);
   }
   ExpressionTreeAnalyzer.prototype.findDomain = function () {
     return this.findDomain_0(this.analyzingExpression_0, LineSegmentHolder$Companion_getInstance().fullSegment);
@@ -16855,7 +17061,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     this.maxLogBaseRounded = maxLogBaseRounded;
     this.maxResRounded = maxResRounded;
     this.operationsMap = operationsMap;
-    this.operationsMap = mapOf_0([to('+', SimpleComputationRuleParams_init$lambda(this)), to('-', SimpleComputationRuleParams_init$lambda_0(this)), to('*', SimpleComputationRuleParams_init$lambda_1(this)), to('/', SimpleComputationRuleParams_init$lambda_2(this)), to('^', SimpleComputationRuleParams_init$lambda_3(this)), to('log', SimpleComputationRuleParams_init$lambda_4(this))]);
+    this.operationsMap = mapOf([to('+', SimpleComputationRuleParams_init$lambda(this)), to('-', SimpleComputationRuleParams_init$lambda_0(this)), to('*', SimpleComputationRuleParams_init$lambda_1(this)), to('/', SimpleComputationRuleParams_init$lambda_2(this)), to('^', SimpleComputationRuleParams_init$lambda_3(this)), to('log', SimpleComputationRuleParams_init$lambda_4(this))]);
     if (!this.ruleCodes.isEmpty()) {
       if (this.ruleCodes.contains_11rb$('SimpleComputationBeforeSchool')) {
         this.maxCalcComplexity = 2;
@@ -17552,7 +17758,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var item = tmp$_3.next();
       destination.add_11rb$(item.getIdentifier());
     }
-    var comparisonResult = tmp$_0.compareWithoutSubstitutions_15tjed$(tmp$_1, targetExpression, tmp$_2, toSet(destination));
+    var comparisonResult = tmp$_0.compareWithoutSubstitutions_s2g4rn$(tmp$_1, targetExpression, tmp$_2, toSet(destination));
     if (!comparisonResult) {
       return new GeneralError('Answer not equal to original expression');
     }
@@ -17592,7 +17798,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var item = tmp$_2.next();
       destination.add_11rb$(item.getIdentifier());
     }
-    var comparisonResult = tmp$.compareWithoutSubstitutions_15tjed$(tmp$_0, targetExpression, tmp$_1, toSet(destination));
+    var comparisonResult = tmp$.compareWithoutSubstitutions_s2g4rn$(tmp$_0, targetExpression, tmp$_1, toSet(destination));
     if (!comparisonResult) {
       return new GeneralError('Answer not equal to original expression');
     }
@@ -17730,7 +17936,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var item = tmp$.next();
       destination.add_11rb$(new Pair(item.left, item.right));
     }
-    var expressionTreeParser = new ExpressionTreeParser(string, true, functionConfiguration, mapOf_0(copyToArray(destination).slice()));
+    var expressionTreeParser = new ExpressionTreeParser(string, true, functionConfiguration, mapOf(copyToArray(destination).slice()));
     var error = expressionTreeParser.parse();
     return new Expression(0, 0, expressionTreeParser.root, void 0, parent);
   };
@@ -19266,7 +19472,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
             log_1.addMessage_bda5c9$(MainChain$check$lambda_25, MessageType$USER_getInstance(), currentLogLevel.v);
             var leftSubtraction = subtractionTree(leftExpressionComparison.leftExpression.data, leftExpressionComparison.rightExpression.data);
             var rightSubtraction = subtractionTree(rightExpressionComparison.leftExpression.data, rightExpressionComparison.rightExpression.data);
-            var subtractionResult = factComporator.expressionComporator.compareWithoutSubstitutions_15tjed$(leftSubtraction, rightSubtraction, ComparisonType$EQUAL_getInstance());
+            var subtractionResult = factComporator.expressionComporator.compareWithoutSubstitutions_s2g4rn$(leftSubtraction, rightSubtraction, ComparisonType$EQUAL_getInstance());
             if (subtractionResult) {
               transformationVerified = log_1.assignAndLog_746w4o$(true, currentLogLevel.v, MainChain$check$lambda_26);
               log_1.addMessage_bda5c9$(MainChain$check$lambda_27, MessageType$USER_getInstance(), currentLogLevel.v);
@@ -19300,7 +19506,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
                   if (!transformationVerified) {
                     var leftDivision = divisionTree(leftExpressionComparison.leftExpression.data, leftExpressionComparison.rightExpression.data);
                     var rightDivision = divisionTree(rightExpressionComparison.leftExpression.data, rightExpressionComparison.rightExpression.data);
-                    var divisionResult = factComporator.expressionComporator.compareWithoutSubstitutions_15tjed$(leftDivision, rightDivision, ComparisonType$EQUAL_getInstance(), void 0, true);
+                    var divisionResult = factComporator.expressionComporator.compareWithoutSubstitutions_s2g4rn$(leftDivision, rightDivision, ComparisonType$EQUAL_getInstance(), void 0, true);
                     if (divisionResult) {
                       transformationVerified = log_1.assignAndLog_746w4o$(true, currentLogLevel.v, MainChain$check$lambda_42);
                       log_1.addMessage_bda5c9$(MainChain$check$lambda_43, MessageType$USER_getInstance(), currentLogLevel.v);
@@ -24569,7 +24775,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   function checkFactsInMathML$lambda_12() {
     return 'Answer checked successfully';
   }
-  function checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter) {
+  function checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts) {
     if (wellKnownFunctions === void 0)
       wellKnownFunctions = '+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1';
     if (expressionTransformationRules === void 0)
@@ -24600,7 +24806,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       forbiddenFunctions = '';
     if (scopeFilter === void 0)
       scopeFilter = '';
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    if (makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts === void 0)
+      makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts = '0';
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
     log_1.clear();
     var compiledConfiguration = compiledConfigurationBySettings(wellKnownFunctions, expressionTransformationRules, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter);
     log_1.factConstructorViewer = new FactConstructorViewer(compiledConfiguration);
@@ -24627,7 +24835,15 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       var factComporator = compiledConfiguration.factComporator;
       var solutionRoot = combineSolutionRoot(targetFactIdentifier, transformationChainParser, compiledConfiguration);
       log_1.addMessage_bda5c9$(checkFactsInMathML$lambda_4, MessageType$USER_getInstance(), 0);
-      var checkingResult = solutionRoot.check_l8pk6u$(factComporator, false, emptyList(), emptyList(), additionalFactsFromItsIdentifiers(log_1.factConstructorViewer, additionalFactsIdentifiers));
+      tmp$ = emptyList();
+      tmp$_0 = emptyList();
+      tmp$_2 = additionalFactsFromItsIdentifiers(log_1.factConstructorViewer, additionalFactsIdentifiers);
+      if (equals(makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts, '1')) {
+        tmp$_1 = getListOfExpressionComparisonFactsFromFirstSystem(solutionRoot);
+      }
+       else
+        tmp$_1 = emptyList();
+      var checkingResult = solutionRoot.check_l8pk6u$(factComporator, false, tmp$, tmp$_0, plus(tmp$_2, tmp$_1));
       log_1.addMessage_bda5c9$(checkFactsInMathML$lambda_5(checkingResult), MessageType$USER_getInstance(), 0);
       var resultWithColoredTasks = brushMathMl(transformationChainParser.originalTransformationChain, checkingResult.coloringTasks);
       var result = setBackgroundColorMathMl(resultWithColoredTasks, compiledConfiguration.checkedFactAccentuation.checkedFactColor.checkedFactBackgroundColor);
@@ -24637,25 +24853,25 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           return errorPrefix + ': ' + checkingResult.description;
         }
         if (equals(shortErrorDescription, '1')) {
-          tmp$ = addErrorStringToMathMLSolution(result, 'Unclear transformation or incomplete solution. Try to fix errors or to write more details.', errorPrefix);
+          tmp$_3 = addErrorStringToMathMLSolution(result, 'Unclear transformation or incomplete solution. Try to fix errors or to write more details.', errorPrefix);
         }
          else
-          tmp$ = addErrorStringToMathMLSolution(result, checkingResult.description, errorPrefix);
-        return tmp$;
+          tmp$_3 = addErrorStringToMathMLSolution(result, checkingResult.description, errorPrefix);
+        return tmp$_3;
       }
       if (!isBlank(minNumberOfMultipliersInAnswer)) {
         var minNumberOfMultipliers = toInt(minNumberOfMultipliersInAnswer);
         var $receiver = split(targetVariablesNames, [configSeparator]);
         var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
-        var tmp$_5;
-        tmp$_5 = $receiver.iterator();
-        while (tmp$_5.hasNext()) {
-          var item = tmp$_5.next();
-          var tmp$_6;
-          destination.add_11rb$(trim(Kotlin.isCharSequence(tmp$_6 = item) ? tmp$_6 : throwCCE()).toString());
+        var tmp$_9;
+        tmp$_9 = $receiver.iterator();
+        while (tmp$_9.hasNext()) {
+          var item = tmp$_9.next();
+          var tmp$_10;
+          destination.add_11rb$(trim(Kotlin.isCharSequence(tmp$_10 = item) ? tmp$_10 : throwCCE()).toString());
         }
         var targetVariables = toSet(destination);
-        var targetExpression = (Kotlin.isType(tmp$_0 = log_1.factConstructorViewer.constructFactByIdentifier_7q4i4t$(targetFactIdentifier), Expression) ? tmp$_0 : throwCCE()).data;
+        var targetExpression = (Kotlin.isType(tmp$_4 = log_1.factConstructorViewer.constructFactByIdentifier_7q4i4t$(targetFactIdentifier), Expression) ? tmp$_4 : throwCCE()).data;
         var error_0 = solutionRoot.isFactorizationForVariables_3b7jn6$(minNumberOfMultipliers, targetVariables, targetExpression, factComporator);
         if (error_0 != null) {
           log_1.addMessage_bda5c9$(checkFactsInMathML$lambda_7(error_0), MessageType$USER_getInstance(), 0);
@@ -24665,7 +24881,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
        else {
         if (!isBlank(maxNumberOfDivisionsInAnswer)) {
           var maxNumberOfDivisions = toInt(maxNumberOfDivisionsInAnswer);
-          var targetExpression_0 = (Kotlin.isType(tmp$_1 = log_1.factConstructorViewer.constructFactByIdentifier_7q4i4t$(targetFactIdentifier), Expression) ? tmp$_1 : throwCCE()).data;
+          var targetExpression_0 = (Kotlin.isType(tmp$_5 = log_1.factConstructorViewer.constructFactByIdentifier_7q4i4t$(targetFactIdentifier), Expression) ? tmp$_5 : throwCCE()).data;
           var error_1 = solutionRoot.hasNoFractions_5ah4l7$(maxNumberOfDivisions, targetExpression_0, factComporator);
           if (error_1 != null) {
             log_1.addMessage_bda5c9$(checkFactsInMathML$lambda_8(error_1), MessageType$USER_getInstance(), 0);
@@ -24676,36 +24892,36 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           if (!isBlank(targetVariablesNames)) {
             var $receiver_0 = split(targetVariablesNames, [configSeparator]);
             var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
-            var tmp$_7;
-            tmp$_7 = $receiver_0.iterator();
-            while (tmp$_7.hasNext()) {
-              var item_0 = tmp$_7.next();
-              var tmp$_8;
-              destination_0.add_11rb$(new Pair(trim(Kotlin.isCharSequence(tmp$_8 = item_0) ? tmp$_8 : throwCCE()).toString(), false));
+            var tmp$_11;
+            tmp$_11 = $receiver_0.iterator();
+            while (tmp$_11.hasNext()) {
+              var item_0 = tmp$_11.next();
+              var tmp$_12;
+              destination_0.add_11rb$(new Pair(trim(Kotlin.isCharSequence(tmp$_12 = item_0) ? tmp$_12 : throwCCE()).toString(), false));
             }
             var targetVariables_0 = toMutableMap(toMap(destination_0));
             if (!equals(allowedVariablesNames, '')) {
               var $receiver_1 = split(allowedVariablesNames, [configSeparator]);
               var destination_1 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
-              var tmp$_9;
-              tmp$_9 = $receiver_1.iterator();
-              while (tmp$_9.hasNext()) {
-                var item_1 = tmp$_9.next();
-                var tmp$_10;
-                destination_1.add_11rb$(trim(Kotlin.isCharSequence(tmp$_10 = item_1) ? tmp$_10 : throwCCE()).toString());
+              var tmp$_13;
+              tmp$_13 = $receiver_1.iterator();
+              while (tmp$_13.hasNext()) {
+                var item_1 = tmp$_13.next();
+                var tmp$_14;
+                destination_1.add_11rb$(trim(Kotlin.isCharSequence(tmp$_14 = item_1) ? tmp$_14 : throwCCE()).toString());
               }
-              tmp$_2 = toSet(destination_1);
+              tmp$_6 = toSet(destination_1);
             }
              else {
-              tmp$_2 = emptySet();
+              tmp$_6 = emptySet();
             }
-            var allowedVariables = tmp$_2;
+            var allowedVariables = tmp$_6;
             var error_2 = solutionRoot.isSolutionForVariables_axkv0l$(targetVariables_0, void 0, allowedVariables);
-            tmp$_3 = targetVariables_0.entries.iterator();
-            while (tmp$_3.hasNext()) {
-              var tmp$_11 = tmp$_3.next();
-              var variable = tmp$_11.key;
-              var expressed = tmp$_11.value;
+            tmp$_7 = targetVariables_0.entries.iterator();
+            while (tmp$_7.hasNext()) {
+              var tmp$_15 = tmp$_7.next();
+              var variable = tmp$_15.key;
+              var expressed = tmp$_15.value;
               if (!expressed) {
                 log_1.addMessage_bda5c9$(checkFactsInMathML$lambda_9(variable), MessageType$USER_getInstance(), 0);
                 return addErrorStringToMathMLSolution(result, "variable '" + variable + "' is not expressed", errorPrefix);
@@ -24718,7 +24934,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
           }
           if (!isBlank(forbiddenFunctions)) {
             var forbidden = pairsStringIntFromString(forbiddenFunctions);
-            var targetExpression_1 = (Kotlin.isType(tmp$_4 = log_1.factConstructorViewer.constructFactByIdentifier_7q4i4t$(targetFactIdentifier), Expression) ? tmp$_4 : throwCCE()).data;
+            var targetExpression_1 = (Kotlin.isType(tmp$_8 = log_1.factConstructorViewer.constructFactByIdentifier_7q4i4t$(targetFactIdentifier), Expression) ? tmp$_8 : throwCCE()).data;
             var error_3 = solutionRoot.isSolutionWithoutFunctions_cbql57$(forbidden, targetExpression_1, factComporator);
             if (error_3 != null) {
               log_1.addMessage_bda5c9$(checkFactsInMathML$lambda_11(error_3), MessageType$USER_getInstance(), 0);
@@ -24878,6 +25094,27 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
       }
     }
     return mathML;
+  }
+  function getListOfExpressionComparisonFactsFromFirstSystem(solutionRoot) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$_1 = (tmp$_0 = (tmp$ = firstOrNull_0(solutionRoot.factTransformationChains)) != null ? tmp$.chain : null) != null ? firstOrNull_0(tmp$_0) : null;
+    if (tmp$_1 == null) {
+      return emptyList();
+    }
+    var firstInputSystem = tmp$_1;
+    if (Kotlin.isType(firstInputSystem, MainLineAndNode)) {
+      var result = ArrayList_init();
+      tmp$_2 = firstInputSystem.factTransformationChains.iterator();
+      while (tmp$_2.hasNext()) {
+        var factTransformationChain = tmp$_2.next();
+        if (factTransformationChain.chain.size === 1 && Kotlin.isType(first(factTransformationChain.chain), ExpressionComparison)) {
+          var fact = Kotlin.isType(tmp$_3 = first(factTransformationChain.chain), ExpressionComparison) ? tmp$_3 : throwCCE();
+          result.add_11rb$(fact);
+        }
+      }
+      return result;
+    }
+    return emptyList();
   }
   var unsupportedTagListMathML;
   var underliningStartMathML;
@@ -27360,6 +27597,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
     return result;
   };
+  DomainPointGenerator.prototype.hasVariables = function () {
+    return this.variablesList_0.size > 0;
+  };
   DomainPointGenerator.prototype.generateSimplePoints = function () {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
     var points = ArrayList_init();
@@ -27761,15 +28001,26 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   }
   function isNumberValuesEqual(l, r) {
     var tmp$, tmp$_0;
+    var l_copy = l;
+    var r_copy = r;
     if (equals(r, l)) {
       return true;
     }
-    tmp$ = toDoubleOrNull(l);
+     else {
+      var confVar = new VariableConfiguration();
+      if (confVar.variableImmediateReplacementMap.containsKey_11rb$(l)) {
+        l_copy = ensureNotNull(confVar.variableImmediateReplacementMap.get_11rb$(l));
+      }
+      if (confVar.variableImmediateReplacementMap.containsKey_11rb$(r)) {
+        r_copy = ensureNotNull(confVar.variableImmediateReplacementMap.get_11rb$(r));
+      }
+    }
+    tmp$ = toDoubleOrNull(l_copy);
     if (tmp$ == null) {
       return false;
     }
     var lValue = tmp$;
-    tmp$_0 = toDoubleOrNull(r);
+    tmp$_0 = toDoubleOrNull(r_copy);
     if (tmp$_0 == null) {
       return false;
     }
@@ -28838,6 +29089,11 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   var package$api = _.api || (_.api = {});
   package$api.createConfigurationFromRulePacksAndParams_79na2b$ = createConfigurationFromRulePacksAndParams;
   package$api.createConfigurationFromRulePacksAndDetailSolutionCheckingParams_gl4kqy$ = createConfigurationFromRulePacksAndDetailSolutionCheckingParams;
+  Object.defineProperty(package$api, 'rulePacksMap', {
+    get: function () {
+      return rulePacksMap;
+    }
+  });
   package$api.getSubstitutionsByRulePacks_kand9s$ = getSubstitutionsByRulePacks;
   package$api.getAllAlgebraSubstitutions = getAllAlgebraSubstitutions;
   package$api.getArithmeticPositiveAdditionSubstitutions = getArithmeticPositiveAdditionSubstitutions;
@@ -28863,9 +29119,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$api.getPhysicsSimpleMovingSubstitutions = getPhysicsSimpleMovingSubstitutions;
   package$api.getPhysicsElectrodynamicsSubstitutions = getPhysicsElectrodynamicsSubstitutions;
   package$api.normalizeExpressionToUsualForm_4hv65v$ = normalizeExpressionToUsualForm;
-  package$api.compareWithoutSubstitutions_ic33gh$ = compareWithoutSubstitutions_0;
+  package$api.compareWithoutSubstitutions_uxzv7z$ = compareWithoutSubstitutions_0;
   package$api.compareByPattern_fxceps$ = compareByPattern;
-  package$api.compareWithoutSubstitutions_atx8px$ = compareWithoutSubstitutions_1;
+  package$api.compareWithoutSubstitutions_j4xzcb$ = compareWithoutSubstitutions_1;
   package$api.compareByPattern_atx8px$ = compareByPattern_0;
   package$api.compareWithoutSubstitutionsStructureStrings_atx8px$ = compareWithoutSubstitutionsStructureStrings;
   package$api.stringToExpression_y630ta$ = stringToExpression;
@@ -28882,9 +29138,9 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$api.generateTaskByStructureStringsSubstitutionsInJSON_ny8vwh$ = generateTaskByStructureStringsSubstitutionsInJSON;
   package$api.optGenerateSimpleComputationRule_8b70w7$ = optGenerateSimpleComputationRule;
   package$api.expressionSubstitutionFromStrings_9cao15$ = expressionSubstitutionFromStrings_0;
-  package$api.expressionSubstitutionFromStructureStrings_aiibik$ = expressionSubstitutionFromStructureStrings;
-  package$api.findSubstitutionPlacesInExpression_333i8d$ = findSubstitutionPlacesInExpression_0;
-  package$api.applySubstitution_g1mkoe$ = applySubstitution_0;
+  package$api.expressionSubstitutionFromStructureStrings_1i9xh1$ = expressionSubstitutionFromStructureStrings;
+  package$api.findSubstitutionPlacesInExpression_x61b66$ = findSubstitutionPlacesInExpression_0;
+  package$api.applySubstitution_65u5al$ = applySubstitution_0;
   package$api.createCompiledConfigurationFromExpressionSubstitutionsAndParams_aatmta$ = createCompiledConfigurationFromExpressionSubstitutionsAndParams;
   package$api.findApplicableSubstitutionsInSelectedPlace_6tp454$ = findApplicableSubstitutionsInSelectedPlace;
   package$api.applySubstitutionInSelectedPlace_m5nb0p$ = applySubstitutionInSelectedPlace;
@@ -29143,6 +29399,19 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     get: SubstitutionInstanceVarType$INFO_getInstance
   });
   package$expressiontree.SubstitutionInstanceVarType = SubstitutionInstanceVarType;
+  Object.defineProperty(ExpressionSubstitutionNormType, 'ORIGINAL', {
+    get: ExpressionSubstitutionNormType$ORIGINAL_getInstance
+  });
+  Object.defineProperty(ExpressionSubstitutionNormType, 'SORTED', {
+    get: ExpressionSubstitutionNormType$SORTED_getInstance
+  });
+  Object.defineProperty(ExpressionSubstitutionNormType, 'I_MULTIPLICATED', {
+    get: ExpressionSubstitutionNormType$I_MULTIPLICATED_getInstance
+  });
+  Object.defineProperty(ExpressionSubstitutionNormType, 'SORTED_AND_I_MULTIPLICATED', {
+    get: ExpressionSubstitutionNormType$SORTED_AND_I_MULTIPLICATED_getInstance
+  });
+  package$expressiontree.ExpressionSubstitutionNormType = ExpressionSubstitutionNormType;
   package$expressiontree.SubstitutionInstanceVar = SubstitutionInstanceVar;
   package$expressiontree.VarNamesTimeStorage = VarNamesTimeStorage;
   package$expressiontree.MatchedNode = MatchedNode;
@@ -29157,7 +29426,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$expressiontree.applyAllImmediateSubstitutions_w5a5qi$ = applyAllImmediateSubstitutions;
   package$expressiontree.SubstitutionApplication = SubstitutionApplication;
   package$expressiontree.ExpressionTask = ExpressionTask;
-  package$expressiontree.generateExpressionTask_ufm96r$ = generateExpressionTask;
+  package$expressiontree.generateExpressionTask_7gw4tk$ = generateExpressionTask;
   Object.defineProperty(MathMlTagTreeNode$Type, 'EXPRESSION_PART_STRING', {
     get: MathMlTagTreeNode$Type$EXPRESSION_PART_STRING_getInstance
   });
@@ -29358,7 +29627,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
     }
   });
   var package$mainpoints = _.mainpoints || (_.mainpoints = {});
-  package$mainpoints.checkFactsInMathML_flvft8$ = checkFactsInMathML_0;
+  package$mainpoints.checkFactsInMathML_ahi09q$ = checkFactsInMathML_0;
   package$mainpoints.replaceSpaceMathMLAliases_61zpoe$ = replaceSpaceMathMLAliases;
   Object.defineProperty(package$mainpoints, 'spaceRegex', {
     get: function () {
@@ -29370,6 +29639,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   package$mainpoints.specificMathMlSystemReplacements_61zpoe$ = specificMathMlSystemReplacements;
   package$mainpoints.addErrorStringToMathMLSolution_6hosri$ = addErrorStringToMathMLSolution;
   package$mainpoints.deleteErrorStringFromMathMLSolution_kwv3np$ = deleteErrorStringFromMathMLSolution;
+  package$mainpoints.getListOfExpressionComparisonFactsFromFirstSystem_hiko73$ = getListOfExpressionComparisonFactsFromFirstSystem;
   Object.defineProperty(package$mainpoints, 'unsupportedTagListMathML', {
     get: function () {
       return unsupportedTagListMathML;
@@ -29611,6 +29881,7 @@ this['twf-kotlin-lib'] = function (_, Kotlin) {
   MainLineAndNode.prototype.isSolutionForVariables_axkv0l$ = MainLineNode.prototype.isSolutionForVariables_axkv0l$;
   MainLineOrNode.prototype.isEmpty = MainLineNode.prototype.isEmpty;
   MainLineOrNode.prototype.isSolutionForVariables_axkv0l$ = MainLineNode.prototype.isSolutionForVariables_axkv0l$;
+  rulePacksMap = mapOf([new Pair('Algebra', getAllAlgebraSubstitutions()), new Pair('ArithmeticPositiveAddition', getArithmeticPositiveAdditionSubstitutions()), new Pair('ArithmeticAddition', getArithmeticAdditionSubstitutions()), new Pair('ArithmeticMultiplication', getArithmeticMultiplicationSubstitutions()), new Pair('ArithmeticDivision', getArithmeticDivisionSubstitutions()), new Pair('ArithmeticPow', getArithmeticPowSubstitutions()), new Pair('ArithmeticPowExtension', getArithmeticPowExtensionSubstitutions()), new Pair('ShortMultiplication', getShortMultiplicationSubstitutions()), new Pair('Logarithm', getLogarithmSubstitutions()), new Pair('FactorialRecurrent', getFactorialSubstitutions()), new Pair('Combinatorics', getCombinatoricsSubstitutions()), new Pair('Trigonometry', getTrigonometrySubstitutions()), new Pair('Complexes', getComplexesSubstitutions()), new Pair('TrigonometryZk', getTrigonometryZkSubstitutions()), new Pair('TrigonometryCompleteTgCtg', getTrigonometryCompleteTgCtgSubstitutions()), new Pair('Logic', getLogicBaseSubstitutions()), new Pair('LogicAbsorption', getLogicAbsorptionLawSubstitutions()), new Pair('LogicResolution', getLogicResolutionSubstitutions()), new Pair('PhysicsSimpleMoving', getPhysicsSimpleMovingSubstitutions()), new Pair('PhysicsCircleMoving', getPhysicsCircleMovingSubstitutions()), new Pair('PhysicsNuclear', getPhysicsNuclearSubstitutions()), new Pair('PhysicsMolecular', getPhysicsMolecularSubstitutions()), new Pair('PhysicsElectrodynamics', getPhysicsElectrodynamicsSubstitutions())]);
   DomainAll = new DefinitionDomain(emptySet(), void 0, setOf(DomainSegment$Companion_getInstance().inclusive_lu1900$(kotlin_js_internal_DoubleCompanionObject.NEGATIVE_INFINITY, kotlin_js_internal_DoubleCompanionObject.POSITIVE_INFINITY)));
   DomainNil = new DefinitionDomain(emptySet(), void 0, emptySet());
   unlimitedWeight = 10000.0;

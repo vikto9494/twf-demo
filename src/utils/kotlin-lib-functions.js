@@ -130,11 +130,26 @@ export const checkTex = (
 
 export const checkStatement = (fullExpression, rulePacks) => {
   return {
-    res: {},
-    startExpression: "2+2",
-    endExpression: "4",
-    // TODO: add sign in Tex/url format
-    comparisonSign: "=",
+    res: twfKotlinLibrary.checkSolutionInTex(
+        fullExpression,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        undefined,
+        "",
+        undefined,
+        undefined,
+        undefined,
+        " ",
+        undefined,
+        rulePacks,
+        undefined,
+        undefined,
+        undefined
+    ),
   };
 };
 
