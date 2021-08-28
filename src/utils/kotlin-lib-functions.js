@@ -1,19 +1,15 @@
-const twfKotlinLibrary = window["twf-kotlin-lib"];
+const twf_js = window["twf_js"];
 
 // LIB API FUNCTIONS
 // format -> expression
-export const stringToExpression =
-  twfKotlinLibrary.api.stringToExpression_y630ta$;
-const structureStringToExpression =
-  twfKotlinLibrary.api.structureStringToExpression_69c2cy$;
-const texToExpression = twfKotlinLibrary.api.stringToExpression_y630ta$;
+export const stringToExpression = twf_js.stringToExpression;
+const structureStringToExpression = twf_js.structureStringToExpression;
+const texToExpression = twf_js.stringToExpression;
 
 // expression -> format
-const expressionToTexString =
-  twfKotlinLibrary.api.expressionToTexString_tvfpvg$;
-const expressionToStructureString =
-  twfKotlinLibrary.api.expressionToStructureString_6718cy$;
-const expressionToString = twfKotlinLibrary.api.expressionToString_tvfpvg$;
+const expressionToTexString = twf_js.expressionToTexString;
+const expressionToStructureString = twf_js.expressionToStructureString;
+const expressionToString = twf_js.expressionToString;
 
 class MathInputConvertingError extends Error {
   constructor(message) {
@@ -64,7 +60,7 @@ export const getErrorFromMathInput = (format, expression) => {
 export const createConfigurationFromRulePacksAndDetailSolutionCheckingParams = (
   rulePacks
 ) => {
-  return twfKotlinLibrary.createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
+  return twf_js.createConfigurationFromRulePacksAndDetailSolutionCheckingParams(
     rulePacks,
     undefined,
     undefined,
@@ -86,7 +82,7 @@ export const checkTexWithoutCompiledConfigurationCreating = (
   comparisonSign,
   compiledConfiguration
 ) => {
-  return twfKotlinLibrary.checkSolutionInTexWithCompiledConfiguration(
+  return twf_js.checkSolutionInTexWithCompiledConfiguration(
     fullExpression,
     compiledConfiguration,
     start,
@@ -106,7 +102,7 @@ export const checkTex = (
   comparisonSign,
   rulePacks
 ) => {
-  return twfKotlinLibrary.checkSolutionInTex(
+  return twf_js.checkSolutionInTex(
     fullExpression,
     start,
     undefined,
@@ -130,7 +126,7 @@ export const checkTex = (
 
 export const checkStatement = (fullExpression, rulePacks) => {
   return {
-    res: twfKotlinLibrary.checkSolutionInTex(
+    res: twf_js.checkSolutionInTex(
         fullExpression,
         "",
         "",
@@ -154,5 +150,5 @@ export const checkStatement = (fullExpression, rulePacks) => {
 };
 
 export const decodeUrlSymbols = (string) => {
-  return twfKotlinLibrary.decodeUrlSymbols(string);
+  return twf_js.decodeUrlSymbols(string);
 };

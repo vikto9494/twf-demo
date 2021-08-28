@@ -72,9 +72,7 @@ const GameEditor = ({ start, end, rulePacks }) => {
     const endExpression = end ? end : "(a)";
     const rules = rulePacks ? [rulePacks] : ["Logic"];
 
-    compiledConfiguration = window[
-      "twf-kotlin-lib"
-    ].createConfigurationFromRulePacksAndParams(rules);
+    compiledConfiguration = window["twf_js"].createConfigurationFromRulePacksAndParams(rules);
 
     let app = new SVG().addTo("body").size(window.innerWidth, gameHeight);
 
@@ -91,7 +89,7 @@ const GameEditor = ({ start, end, rulePacks }) => {
       app.viewbox(0, 0, window.innerWidth, gameHeight);
       app.rect(window.innerWidth, gameHeight).fill(backgroundColour);
 
-      let NewTreeRoot = window["twf-kotlin-lib"].structureStringToExpression(
+      let NewTreeRoot = window["twf_js"].structureStringToExpression(
         originalExpression
       );
       let expr = PrintTree(NewTreeRoot, centralExpressionSize, app);
@@ -159,7 +157,7 @@ const GameEditor = ({ start, end, rulePacks }) => {
     function CheckAndHandleWin(currentExpression, shift) {
       let y = shift < 50 ? winLabelAreaY : (gameHeight / 5) * 2;
       if (currentExpression === endExpression) {
-        //        if (window['twf-kotlin-lib'].compareWithoutSubstitutions(currentExpression, endExpression)) {
+        //        if (window['twf_js'].compareWithoutSubstitutions(currentExpression, endExpression)) {
         app
           .rect(winLabelWidth, winLabelHeight)
           .fill(winLabelColor)
