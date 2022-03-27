@@ -124,6 +124,22 @@ export const checkTex = (
   );
 };
 
+export const generateTasks = (
+  area,
+  startExpression,
+  rulepacks,
+  additionalParamsMap
+) => {
+  let tasks = twf_js.generateTasks(
+    area,
+    startExpression,
+    rulepacks,
+    additionalParamsMap
+  );
+  console.log(tasks);
+  return tasks;
+};
+
 export const checkStatement = (fullExpression, rulePacks) => {
   return {
     res: twf_js.checkSolutionInTex(

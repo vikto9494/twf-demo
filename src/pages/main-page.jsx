@@ -11,6 +11,7 @@ import GameEditor from "../components/game-editor/game-editor";
 import {
   convertMathInput,
   checkTex,
+  generateTasks,
   decodeUrlSymbols,
   checkStatement,
 } from "../utils/kotlin-lib-functions";
@@ -54,6 +55,9 @@ const MainPage = () => {
   );
   // local utils
   const formSolutionStartingTex = () => {
+    if (currentMode === "Generate tasks") {
+      return "";
+    }
     let solutionSignView = selectedComparisonSign;
     if (selectedComparisonSign === ">=") {
       solutionSignView = " \\ge ";
@@ -105,23 +109,26 @@ const MainPage = () => {
   // static data
   const defaultStart = checkExpressionUrl(originalExpressionUrl, "start")
     ? decodeUrlSymbols(originalExpressionUrl)
-    : "(and(a;or(a;b)))";
+    : "(sin(*(2;x)))";
   const defaultEnd = checkExpressionUrl(endExpressionUrl, "end")
     ? decodeUrlSymbols(endExpressionUrl)
-    : "(a)";
+    : "(*(2;sin(x);cos(x)))";
   const rulePacks = [
     "Logic",
     "ShortMultiplication",
     "Logarithm",
     "Trigonometry",
   ];
-  const modes = ["Play", "Solve", "Check Statement"];
+  const modes = ["Play", "Solve", "Check Statement", "Generate tasks"];
   // app dependencies
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
   const [currentRulePack, setCurrentRulePack] = useState(
-    rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
+    rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Trigonometry"
   );
+  const [currentTasks, setCurrentTasks] = useState([]);
+  const [currentTaskIndex, setCurrentTasksIndex] = useState(null);
+
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
   const correctSolution =
@@ -143,7 +150,7 @@ const MainPage = () => {
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
   const [currentMode, setCurrentMode] = useState(
-    modes.includes(modeUrl) ? modeUrl : "Play"
+    modes.includes(modeUrl) ? modeUrl : "Generate tasks"
   );
   const [solutionInTex, setSolutionInTex] = useState(formSolutionStartingTex());
   const [showSpinner, setShowSpinner] = useState(false);
@@ -213,6 +220,82 @@ const MainPage = () => {
     setSolutionInTex(res.validatedSolution);
   };
 
+  const onPrevTaskClick = () => {
+    if (currentTasks.length === 0) {
+      return;
+    }
+    let updatedIndex = currentTaskIndex;
+    if (currentTaskIndex > 0) {
+      updatedIndex = currentTaskIndex - 1;
+    } else {
+      updatedIndex = currentTasks.length - 1;
+    }
+    setCurrentTasksIndex(updatedIndex);
+    let task = currentTasks[updatedIndex];
+    setSolutionInTex(task['goalExpressionPlainText']);
+  }
+
+  const onNextTaskClick = () => {
+    if (currentTasks.length === 0) {
+      return;
+    }
+    let updatedIndex = currentTaskIndex;
+    if (currentTaskIndex < currentTasks.length - 1) {
+      updatedIndex = currentTaskIndex + 1;
+    } else {
+      updatedIndex = 0;
+    }
+    setCurrentTasksIndex(updatedIndex)
+    let task = currentTasks[updatedIndex];
+    setSolutionInTex(task['goalExpressionPlainText']);
+  }
+
+  function getCurrentTask() {
+    if (currentTasks.length === 0) {
+      return [];
+    }
+    return currentTasks[currentTaskIndex]
+  }
+  
+  const onSwitchToSolveMode = () => {
+    let task = getCurrentTask();
+    setCurrentMode("Solve");
+    setStartTex(task['goalExpressionPlainText']);
+    setEndTex(task['originalExpressionPlainText']);
+    setSolutionInTex(task['goalExpressionPlainText'] + "= ... =" + task['originalExpressionPlainText']);
+    setSuccessMsg(null);
+  }
+
+  const onGenerateTasksInput = () => {
+    let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTex);
+    let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
+
+    const tasks = generateTasks(
+      area,
+      startExpression,
+      [],
+      {complexity: 0.0}
+    );
+
+    if (tasks.errorMessage) {
+      setSuccessMsg(null);
+      setSolutionError(tasks.errorMessage);
+    } else {
+      setSolutionError(null);
+      setSuccessMsg("Tasks generated total: " + tasks.length);
+    }
+
+    if (tasks.length > 0) {
+      let task = tasks[0]
+      setSolutionInTex(task['goalExpressionPlainText']);
+    } else {
+      setSolutionInTex("");
+    }
+
+    setCurrentTasks(tasks);
+    setCurrentTasksIndex(0);
+  };
+
   const onCheckStatement = () => {
     const {
       res,
@@ -235,7 +318,9 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    if (showSpinner && currentMode === "Solve") {
+    if (showSpinner && currentMode === "Generate tasks") {
+      onGenerateTasksInput();
+    } else if (showSpinner && currentMode === "Solve") {
       onCheckTexSolutionInput();
     } else if (showSpinner && currentMode === "Check Statement") {
       onCheckStatement();
@@ -317,7 +402,7 @@ const MainPage = () => {
         })}
         <div className="app__tab--bottom-line" />
       </div>
-      {currentMode !== "Check Statement" && (
+      {currentMode !== "Check Statement" && currentMode !== "Generate tasks" && (
         <div className="app__inputs">
           <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
             <div
@@ -417,6 +502,66 @@ const MainPage = () => {
           )}
         </div>
       )}
+
+      {currentMode === "Generate tasks" && (
+        <div className="app__inputs">
+          <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
+            <div
+              className={createDefaultAndDisabledClassName("app__tex-input")}
+            >
+              <h2>Start expression: </h2>
+              {!hideDetails ? (
+                <EditableMathField
+                  latex={startTex}
+                  onChange={(mathField) => {
+                    setStartTex(mathField.latex());
+                  }}
+                  style={{
+                    width: "22rem",
+                    margin: "10px",
+                    fontSize: "1.6rem",
+                  }}
+                />
+              ) : (
+                <StaticMathField
+                  style={{
+                    fontSize: "2.2rem",
+                  }}
+                >
+                  {startTex}
+                </StaticMathField>
+              )}
+              <Button type="primary" onClick={onGenerateTasksInput}>
+                Generate tasks!
+              </Button>
+            </div>
+            <div
+              className={createDefaultAndDisabledClassName("app__tex-input")}
+            >
+            </div>
+          </div>
+          {!hideDetails && (
+            <div className="app__add-inputs">
+              <div className="app__input-group">
+                <label>Subject Area</label>
+                <Select
+                  defaultValue={currentRulePack}
+                  onChange={(value) => {
+                    setCurrentRulePack(value);
+                  }}
+                  style={{ width: "150px" }}
+                >
+                  {rulePacks.map((option) => (
+                    <Option key={option} value={option}>
+                      {option}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
       <div className="app__errors">
         {startError && (
           <Alert
@@ -484,18 +629,23 @@ const MainPage = () => {
             />
           )}
           <div className="app__tex-solution-btns">
-            <Button
-              onClick={() => {
-                // callback is provided in useEffect
-                setShowSpinner(true);
-              }}
-              style={{
-                marginTop: "1rem",
-              }}
-              type="primary"
-            >
-              Check
-            </Button>
+
+
+            {currentMode !== "Generate tasks" &&
+              <Button
+                onClick={() => {
+                  // callback is provided in useEffect
+                  setShowSpinner(true);
+                }}
+                style={{
+                  marginTop: "1rem",
+                }}
+                type="primary"
+              >
+                Check
+              </Button>
+            }
+
             {correctSolution && (
               <Button
                 onClick={() => {
@@ -509,6 +659,42 @@ const MainPage = () => {
                 Get correct solution
               </Button>
             )}
+
+            {currentMode === "Generate tasks" &&
+              <Button
+                onClick={onPrevTaskClick}
+                style={{
+                  marginTop: "1rem",
+                }}
+                type="primary"
+              >
+                ◄
+              </Button>
+            }
+
+            {currentMode === "Generate tasks" &&
+              <Button
+                onClick={onNextTaskClick}
+                style={{
+                  marginTop: "1rem",
+                }}
+                type="primary"
+              >
+                ►
+              </Button>
+            }
+
+            {currentMode === "Generate tasks" &&
+              <Button
+                onClick={onSwitchToSolveMode}
+                style={{
+                  marginTop: "1rem",
+                }}
+                type="primary"
+              >
+              Solve
+              </Button>
+            }
           </div>
         </div>
       )}
