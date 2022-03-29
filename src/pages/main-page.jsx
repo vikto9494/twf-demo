@@ -220,36 +220,6 @@ const MainPage = () => {
     setSolutionInTex(res.validatedSolution);
   };
 
-  const onPrevTaskClick = () => {
-    if (currentTasks.length === 0) {
-      return;
-    }
-    let updatedIndex = currentTaskIndex;
-    if (currentTaskIndex > 0) {
-      updatedIndex = currentTaskIndex - 1;
-    } else {
-      updatedIndex = currentTasks.length - 1;
-    }
-    setCurrentTasksIndex(updatedIndex);
-    let task = currentTasks[updatedIndex];
-    setSolutionInTex(task['goalExpressionPlainText']);
-  }
-
-  const onNextTaskClick = () => {
-    if (currentTasks.length === 0) {
-      return;
-    }
-    let updatedIndex = currentTaskIndex;
-    if (currentTaskIndex < currentTasks.length - 1) {
-      updatedIndex = currentTaskIndex + 1;
-    } else {
-      updatedIndex = 0;
-    }
-    setCurrentTasksIndex(updatedIndex)
-    let task = currentTasks[updatedIndex];
-    setSolutionInTex(task['goalExpressionPlainText']);
-  }
-
   function getCurrentTask() {
     if (currentTasks.length === 0) {
       return [];
@@ -260,10 +230,13 @@ const MainPage = () => {
   const onSwitchToSolveMode = () => {
     let task = getCurrentTask();
     setCurrentMode("Solve");
-    setStartTex(task['goalExpressionPlainText']);
-    setEndTex(task['originalExpressionPlainText']);
-    setSolutionInTex(task['goalExpressionPlainText'] + "= ... =" + task['originalExpressionPlainText']);
+    let startExpression = task['goalExpressionPlainText'].replaceAll('*', ' \\cdot ');
+    let goalExpression = task['originalExpressionPlainText'].replaceAll('*', ' \\cdot ');
+    setStartTex(startExpression);
+    setEndTex(goalExpression);
+    setSolutionInTex(startExpression + "= ... =" + goalExpression);
     setSuccessMsg(null);
+    setCurrentTasks([]);
   }
 
   const onGenerateTasksInput = () => {
@@ -294,6 +267,52 @@ const MainPage = () => {
 
     setCurrentTasks(tasks);
     setCurrentTasksIndex(0);
+  };
+
+  const getMathQuillNotebook = () => {
+    return [<div>
+    <EditableMathField
+      latex={solutionInTex}
+      mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
+      onChange={(mathField) => {
+        setSolutionInTex(mathField.latex());
+      }}
+      style={{
+        minWidth: "40rem",
+        maxWidth: window.innerWidth - 100 + "px",
+        fontSize: "2.2rem",
+      }}
+  />
+  </div>]
+  }
+
+  const getMathQuillNotebooks = () => {
+    if (currentMode !== 'Generate tasks') {
+      return getMathQuillNotebook();
+    }
+    let content = [];
+    let notebookCount = currentTasks.length;
+    for (let i = 0; i < notebookCount; i++) {
+      let task = currentTasks[i];
+      let taskText = task['goalExpressionPlainText'].replaceAll('*', ' \\cdot ');
+      content.push(
+        <div>
+          <EditableMathField
+            latex={taskText}
+            onClick={(mathField) => {
+              setCurrentTasksIndex(i);
+            }}
+            style={{
+              backgroundColor: 'white',
+              minWidth: "60rem",
+              maxWidth: window.innerWidth - 50 + "px",
+              fontSize: "2.2rem",
+            }}
+          />
+        </div>
+      );
+    }
+    return content;
   };
 
   const onCheckStatement = () => {
@@ -590,6 +609,7 @@ const MainPage = () => {
             <h1>Write statement and check if it's correct (in TeX)</h1>
           )}
           <div className="tex-solution">
+          {currentMode !== "Generate tasks" && (
             <div className="tex-solution__operations">
               {actions.map((action, i) => {
                 const { iconUrl, latexCmd, tooltip } = action;
@@ -606,18 +626,15 @@ const MainPage = () => {
                 );
               })}
             </div>
-            <EditableMathField
-              latex={solutionInTex}
-              mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
-              onChange={(mathField) => {
-                setSolutionInTex(mathField.latex());
-              }}
-              style={{
-                minWidth: "40rem",
-                maxWidth: window.innerWidth - 100 + "px",
-                fontSize: "2.2rem",
-              }}
-            />
+            )}
+            {currentMode === "Generate tasks" && currentTasks.length == 0 && (
+              <h2>
+                1. Click 'Generate tasks' button
+                <br></br>
+                2. Select task and click 'Solve' button
+              </h2>
+            )}
+            {getMathQuillNotebooks()}    
           </div>
           <ClipLoader loading={showSpinner} />
           {(successMsg || solutionError) && (
@@ -659,30 +676,6 @@ const MainPage = () => {
                 Get correct solution
               </Button>
             )}
-
-            {currentMode === "Generate tasks" &&
-              <Button
-                onClick={onPrevTaskClick}
-                style={{
-                  marginTop: "1rem",
-                }}
-                type="primary"
-              >
-                ◄
-              </Button>
-            }
-
-            {currentMode === "Generate tasks" &&
-              <Button
-                onClick={onNextTaskClick}
-                style={{
-                  marginTop: "1rem",
-                }}
-                type="primary"
-              >
-                ►
-              </Button>
-            }
 
             {currentMode === "Generate tasks" &&
               <Button

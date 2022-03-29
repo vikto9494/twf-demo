@@ -121,6 +121,7 @@ var twf_js = function (_, Kotlin) {
   var firstOrNull_1 = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var Unit = Kotlin.kotlin.Unit;
   var toMutableList_0 = Kotlin.kotlin.collections.toMutableList_us0mfu$;
+  var indexOf = Kotlin.kotlin.collections.indexOf_bv23uc$;
   var reverse = Kotlin.kotlin.collections.reverse_vvxzk3$;
   var contains_2 = Kotlin.kotlin.text.contains_li3zpu$;
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
@@ -165,7 +166,7 @@ var twf_js = function (_, Kotlin) {
   var CharRange = Kotlin.kotlin.ranges.CharRange;
   var substringAfter_0 = Kotlin.kotlin.text.substringAfter_8cymmc$;
   var split_0 = Kotlin.kotlin.text.split_o64adg$;
-  var indexOf = Kotlin.kotlin.text.indexOf_l5u8uk$;
+  var indexOf_0 = Kotlin.kotlin.text.indexOf_l5u8uk$;
   var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var average = Kotlin.kotlin.collections.average_l63kqw$;
   var sum_0 = Kotlin.kotlin.collections.sum_plj8ka$;
@@ -1898,13 +1899,14 @@ var twf_js = function (_, Kotlin) {
   function generateTasks(area, startExpression, rulepacks, additionalParamsMap) {
     if (rulepacks === void 0)
       rulepacks = [];
-    if (additionalParamsMap === void 0)
-      additionalParamsMap = null;
+    if (additionalParamsMap === void 0) {
+      additionalParamsMap = emptyMap();
+    }
     var tmp$;
     if (!equals(area, '(Trigonometry)')) {
       return [];
     }
-    var settings = new GeneratorSettings(void 0, mapGoalStepCount(typeof (tmp$ = additionalParamsMap != null ? additionalParamsMap['complexity'] : null) === 'number' ? tmp$ : throwCCE()), generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_mmdj6g$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks)));
+    var settings = new GeneratorSettings(void 0, mapGoalStepCount(typeof (tmp$ = additionalParamsMap['complexity']) === 'number' ? tmp$ : throwCCE()), generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_mmdj6g$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks)));
     return copyToArray(generateTrigonometricTasks(settings));
   }
   function getDefaultRulePacks() {
@@ -15373,6 +15375,7 @@ var twf_js = function (_, Kotlin) {
     var tmp$;
     substitutionSelectionData.topOfSelection = findLowestSubtreeTopOfNodes(substitutionSelectionData.expressionToTransform, substitutionSelectionData.selectedNodes);
     substitutionSelectionData.topOfSelectionParent = (tmp$ = substitutionSelectionData.topOfSelection) != null ? tmp$.parent : null;
+    substitutionSelectionData.topOfSelectionIndex = indexOf(ensureNotNull(substitutionSelectionData.topOfSelectionParent).children, substitutionSelectionData.topOfSelection);
     var nestedNodesInSelection = ArrayList_init_0();
     substitutionSelectionData.lowestSubtree = findLowestSubtreeWithNodes(substitutionSelectionData.expressionToTransform, substitutionSelectionData.selectedNodes, false, nestedNodesInSelection);
     if (nestedNodesInSelection.contains_11rb$(true)) {
@@ -34659,7 +34662,7 @@ var twf_js = function (_, Kotlin) {
     var result = ArrayList_init_0();
     var startPosition = 0;
     while (startPosition < expression.length) {
-      var pos = indexOf(expression, StringExtension$Companion_getInstance().newLineMspace, startPosition);
+      var pos = indexOf_0(expression, StringExtension$Companion_getInstance().newLineMspace, startPosition);
       if (pos < 0) {
         break;
       }
@@ -39239,7 +39242,7 @@ var twf_js = function (_, Kotlin) {
   package$api.checkSolutionInTex_tlsgcf$ = checkSolutionInTex;
   package$api.checkSolutionInTexWithCompiledConfiguration_43fm9k$ = checkSolutionInTexWithCompiledConfiguration;
   package$api.checkChainCorrectnessInTex_puj7f4$ = checkChainCorrectnessInTex;
-  package$api.generateTasks_yawk0q$ = generateTasks;
+  package$api.generateTasks_13u2yt$ = generateTasks;
   package$api.getDefaultRulePacks = getDefaultRulePacks;
   package$api.mapGoalStepCount_mqu1mq$ = mapGoalStepCount;
   var package$baseoperations = package$twf.baseoperations || (package$twf.baseoperations = {});
