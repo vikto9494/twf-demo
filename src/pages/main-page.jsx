@@ -206,7 +206,6 @@ const MainPage = () => {
   };
 
   const onCheckTexSolutionInput = () => {
-    console.log(solutionInTex)
     const res = checkTex(
       solutionInTex,
       startSS,
@@ -247,9 +246,7 @@ const MainPage = () => {
   };
 
   const getMathQuillNotebook = () => {
-    return [
-    <div>
-      <EditableMathField
+    return <EditableMathField
         latex={solutionInTex}
         mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
         onChange={(mathField) => {
@@ -261,8 +258,6 @@ const MainPage = () => {
           fontSize: "2.2rem",
         }}
     />
-    </div>
-    ]
   }
 
   const getMathQuillNotebooks = () => {
@@ -291,6 +286,8 @@ const MainPage = () => {
               setCurrentMode("Solve");
               let startExpression = task['goalExpressionTex'];
               let goalExpression = task['originalExpressionTex'];
+              setStartSS(convertMathInput("TEX", "STRUCTURE_STRING", goalExpression));
+              setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", startExpression));
               setStartTex(startExpression);
               setEndTex(goalExpression);
               setSolutionInTex(startExpression + "= ... =" + goalExpression);
