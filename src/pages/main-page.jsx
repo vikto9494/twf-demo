@@ -107,6 +107,7 @@ const MainPage = () => {
     } else return false;
   };
   // static data
+  const defaultStartForGenerator = "(cos(*(2;x)))";
   const defaultStart = checkExpressionUrl(originalExpressionUrl, "start")
     ? decodeUrlSymbols(originalExpressionUrl)
     : "(sin(*(2;x)))";
@@ -127,7 +128,6 @@ const MainPage = () => {
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Trigonometry"
   );
   const [currentTasks, setCurrentTasks] = useState([]);
-  const [currentTaskIndex, setCurrentTasksIndex] = useState(null);
 
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
@@ -143,6 +143,9 @@ const MainPage = () => {
         selectedComparisonSign === "<="
       ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
       : null;
+  const [startTaskForGenerator, setStartTaskForGenerator] = useState(
+    convertMathInput("STRUCTURE_STRING", "TEX", defaultStartForGenerator)
+  );
   const [startTex, setStartTex] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultStart)
   );
@@ -203,6 +206,7 @@ const MainPage = () => {
   };
 
   const onCheckTexSolutionInput = () => {
+    console.log(solutionInTex)
     const res = checkTex(
       solutionInTex,
       startSS,
@@ -220,27 +224,8 @@ const MainPage = () => {
     setSolutionInTex(res.validatedSolution);
   };
 
-  function getCurrentTask() {
-    if (currentTasks.length === 0) {
-      return [];
-    }
-    return currentTasks[currentTaskIndex]
-  }
-  
-  const onSwitchToSolveMode = () => {
-    let task = getCurrentTask();
-    setCurrentMode("Solve");
-    let startExpression = task['goalExpressionPlainText'].replaceAll('*', ' \\cdot ');
-    let goalExpression = task['originalExpressionPlainText'].replaceAll('*', ' \\cdot ');
-    setStartTex(startExpression);
-    setEndTex(goalExpression);
-    setSolutionInTex(startExpression + "= ... =" + goalExpression);
-    setSuccessMsg(null);
-    setCurrentTasks([]);
-  }
-
   const onGenerateTasksInput = () => {
-    let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTex);
+    let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
     const tasks = generateTasks(
@@ -258,32 +243,26 @@ const MainPage = () => {
       setSuccessMsg("Tasks generated total: " + tasks.length);
     }
 
-    if (tasks.length > 0) {
-      let task = tasks[0]
-      setSolutionInTex(task['goalExpressionPlainText']);
-    } else {
-      setSolutionInTex("");
-    }
-
     setCurrentTasks(tasks);
-    setCurrentTasksIndex(0);
   };
 
   const getMathQuillNotebook = () => {
-    return [<div>
-    <EditableMathField
-      latex={solutionInTex}
-      mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
-      onChange={(mathField) => {
-        setSolutionInTex(mathField.latex());
-      }}
-      style={{
-        minWidth: "40rem",
-        maxWidth: window.innerWidth - 100 + "px",
-        fontSize: "2.2rem",
-      }}
-  />
-  </div>]
+    return [
+    <div>
+      <EditableMathField
+        latex={solutionInTex}
+        mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
+        onChange={(mathField) => {
+          setSolutionInTex(mathField.latex());
+        }}
+        style={{
+          minWidth: "40rem",
+          maxWidth: window.innerWidth - 100 + "px",
+          fontSize: "2.2rem",
+        }}
+    />
+    </div>
+    ]
   }
 
   const getMathQuillNotebooks = () => {
@@ -291,25 +270,41 @@ const MainPage = () => {
       return getMathQuillNotebook();
     }
     let content = [];
-    let notebookCount = currentTasks.length;
-    for (let i = 0; i < notebookCount; i++) {
+    let notebooksCount = currentTasks.length;
+    for (let i = 0; i < notebooksCount; i++) {
       let task = currentTasks[i];
-      let taskText = task['goalExpressionPlainText'].replaceAll('*', ' \\cdot ');
+      let taskText = task['goalExpressionTex'];
       content.push(
         <div>
           <EditableMathField
             latex={taskText}
-            onClick={(mathField) => {
-              setCurrentTasksIndex(i);
-            }}
             style={{
               backgroundColor: 'white',
-              minWidth: "60rem",
+              minWidth: "40rem",
               maxWidth: window.innerWidth - 50 + "px",
               fontSize: "2.2rem",
+              margin: "10px"
             }}
           />
-        </div>
+          <Button
+            onClick={function() {
+              setCurrentMode("Solve");
+              let startExpression = task['goalExpressionTex'];
+              let goalExpression = task['originalExpressionTex'];
+              setStartTex(startExpression);
+              setEndTex(goalExpression);
+              setSolutionInTex(startExpression + "= ... =" + goalExpression);
+              setSuccessMsg(null);
+              setCurrentTasks([]);
+            }}
+            style={{
+              marginLeft: "20px",
+            }}
+            type="primary"
+          >
+          Solve
+          </Button>
+        </div> 
       );
     }
     return content;
@@ -531,9 +526,9 @@ const MainPage = () => {
               <h2>Start expression: </h2>
               {!hideDetails ? (
                 <EditableMathField
-                  latex={startTex}
+                  latex={startTaskForGenerator}
                   onChange={(mathField) => {
-                    setStartTex(mathField.latex());
+                    setStartTaskForGenerator(mathField.latex());
                   }}
                   style={{
                     width: "22rem",
@@ -627,13 +622,6 @@ const MainPage = () => {
               })}
             </div>
             )}
-            {currentMode === "Generate tasks" && currentTasks.length == 0 && (
-              <h2>
-                1. Click 'Generate tasks' button
-                <br></br>
-                2. Select task and click 'Solve' button
-              </h2>
-            )}
             {getMathQuillNotebooks()}    
           </div>
           <ClipLoader loading={showSpinner} />
@@ -676,18 +664,6 @@ const MainPage = () => {
                 Get correct solution
               </Button>
             )}
-
-            {currentMode === "Generate tasks" &&
-              <Button
-                onClick={onSwitchToSolveMode}
-                style={{
-                  marginTop: "1rem",
-                }}
-                type="primary"
-              >
-              Solve
-              </Button>
-            }
           </div>
         </div>
       )}
