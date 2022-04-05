@@ -7,6 +7,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { EditableMathField, StaticMathField } from "react-mathquill";
 // custom components
 import GameEditor from "../components/game-editor/game-editor";
+import Slider from 'react-input-slider';
+
 // utils
 import {
   convertMathInput,
@@ -128,6 +130,7 @@ const MainPage = () => {
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Trigonometry"
   );
   const [currentTasks, setCurrentTasks] = useState([]);
+  const [complexityValue, setComplexityValue] = useState(25);
 
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
@@ -231,7 +234,7 @@ const MainPage = () => {
       area,
       startExpression,
       [],
-      {complexity: 0.0}
+      {complexity: complexityValue / 100.0}
     );
 
     if (tasks.errorMessage) {
@@ -618,6 +621,19 @@ const MainPage = () => {
                 );
               })}
             </div>
+            )}
+
+            {currentMode === "Generate tasks" && (
+              <div>
+                <h2>
+                Complexity
+                </h2>
+                <Slider
+                  axis="x"
+                  x={complexityValue}
+                  onChange={({ x }) => setComplexityValue(x)}
+                />
+              </div>
             )}
             {getMathQuillNotebooks()}    
           </div>
