@@ -133,9 +133,15 @@ const MainPage = () => {
   );
   const [currentTasks, setCurrentTasks] = useState([]);
   const [allSupportedTags, setAllSupportedTags] = useState(getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)")))
-  const [currentTags, setCurrentTags] = useState([]);
+  const [defaultTags, setDefaultTags] = useState(getDefaultTags())
+  const [currentTags, setCurrentTags] = useState(defaultTags);
   const [complexityValue, setComplexityValue] = useState(25);
 
+  function getDefaultTags() {
+    let defaultTags = ['TRIGONOMETRY_BASIC', 'TRIGONOMETRY_DOUBLE_ANGLES']
+    return getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)"))
+      .filter(tag => defaultTags.includes(tag['name$']))
+  }
 
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
@@ -641,8 +647,8 @@ const MainPage = () => {
                       </div>
                     </div>
                   )}
-                </div>
-                <div>
+                </div> 
+                <div style = {{maxWidth: "800px"}}>
                   <h3>Tags</h3>
                   <div>
                   <Multiselect
@@ -652,6 +658,9 @@ const MainPage = () => {
                     options={allSupportedTags}
                     showCheckbox={true}
                     avoidHighlightFirstOption={true}
+                    showArrow={true}
+                    hidePlaceholder={true}
+                    selectedValues={defaultTags}
                   />
                   </div>
                   <h3>Complexity</h3>
