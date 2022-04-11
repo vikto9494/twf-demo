@@ -6,6 +6,7 @@ import { Alert, Button, Select, Tooltip } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
 import { EditableMathField, StaticMathField } from "react-mathquill";
 // custom components
+import Multiselect from 'multiselect-react-dropdown';
 import GameEditor from "../components/game-editor/game-editor";
 import Slider from 'react-input-slider';
 
@@ -16,6 +17,7 @@ import {
   generateTasks,
   decodeUrlSymbols,
   checkStatement,
+  getAllTagsForGeneration,
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
@@ -130,7 +132,10 @@ const MainPage = () => {
     rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Trigonometry"
   );
   const [currentTasks, setCurrentTasks] = useState([]);
+  const [allSupportedTags, setAllSupportedTags] = useState(getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)")))
+  const [currentTags, setCurrentTags] = useState([]);
   const [complexityValue, setComplexityValue] = useState(25);
+
 
   const hideDetails =
     hideDetailsUrl !== undefined ? hideDetailsUrl === "true" : false;
@@ -208,6 +213,14 @@ const MainPage = () => {
     }
   };
 
+  const onSelectTag = (selectedList, selectedItem) => {
+    setCurrentTags(selectedList);
+  }
+
+  const onRemoveTag = (selectedList, selectedItem) => {
+    setCurrentTags(selectedList);
+  }
+
   const onCheckTexSolutionInput = () => {
     const res = checkTex(
       solutionInTex,
@@ -230,11 +243,15 @@ const MainPage = () => {
     let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
+    console.log(currentTags.map(tag => tag['name$']))
     const tasks = generateTasks(
       area,
       startExpression,
       [],
-      {complexity: complexityValue / 100.0}
+      {
+        complexity: complexityValue / 100.0, 
+        tags: currentTags.map(tag => tag['name$'])
+      }
     );
 
     if (tasks.errorMessage) {
@@ -274,16 +291,6 @@ const MainPage = () => {
       let taskText = task['goalExpressionTex'];
       content.push(
         <div>
-          <EditableMathField
-            latex={taskText}
-            style={{
-              backgroundColor: 'white',
-              minWidth: "40rem",
-              maxWidth: window.innerWidth - 50 + "px",
-              fontSize: "2.2rem",
-              margin: "10px"
-            }}
-          />
           <Button
             onClick={function() {
               setCurrentMode("Solve");
@@ -304,6 +311,17 @@ const MainPage = () => {
           >
           Solve
           </Button>
+
+          <EditableMathField
+            latex={taskText}
+            style={{
+              backgroundColor: 'white',
+              minWidth: "40rem",
+              maxWidth: window.innerWidth - 50 + "px",
+              fontSize: "2.2rem",
+              margin: "10px"
+            }}
+          />
         </div> 
       );
     }
@@ -517,65 +535,6 @@ const MainPage = () => {
         </div>
       )}
 
-      {currentMode === "Generate tasks" && (
-        <div className="app__inputs">
-          <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
-            <div
-              className={createDefaultAndDisabledClassName("app__tex-input")}
-            >
-              <h2>Start expression: </h2>
-              {!hideDetails ? (
-                <EditableMathField
-                  latex={startTaskForGenerator}
-                  onChange={(mathField) => {
-                    setStartTaskForGenerator(mathField.latex());
-                  }}
-                  style={{
-                    width: "22rem",
-                    margin: "10px",
-                    fontSize: "1.6rem",
-                  }}
-                />
-              ) : (
-                <StaticMathField
-                  style={{
-                    fontSize: "2.2rem",
-                  }}
-                >
-                  {startTex}
-                </StaticMathField>
-              )}
-              <Button type="primary" onClick={onGenerateTasksInput}>
-                Generate tasks!
-              </Button>
-            </div>
-            <div
-              className={createDefaultAndDisabledClassName("app__tex-input")}
-            >
-            </div>
-          </div>
-          {!hideDetails && (
-            <div className="app__add-inputs">
-              <div className="app__input-group">
-                <label>Subject Area</label>
-                <Select
-                  defaultValue={currentRulePack}
-                  onChange={(value) => {
-                    setCurrentRulePack(value);
-                  }}
-                  style={{ width: "150px" }}
-                >
-                  {rulePacks.map((option) => (
-                    <Option key={option} value={option}>
-                      {option}
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
       <div className="app__errors">
         {startError && (
           <Alert
@@ -624,15 +583,84 @@ const MainPage = () => {
             )}
 
             {currentMode === "Generate tasks" && (
-              <div>
-                <h2>
-                Complexity
-                </h2>
-                <Slider
-                  axis="x"
-                  x={complexityValue}
-                  onChange={({ x }) => setComplexityValue(x)}
-                />
+              <div style={{ "margin-bottom": "50px" }}>
+                <h1>Generator settings</h1>
+                <div className="app__inputs">
+                  <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
+                    <div
+                      className={createDefaultAndDisabledClassName("app__tex-input")}
+                    >
+                      <h2>Start expression: </h2>
+                      {!hideDetails ? (
+                        <EditableMathField
+                          latex={startTaskForGenerator}
+                          onChange={(mathField) => {
+                            setStartTaskForGenerator(mathField.latex());
+                          }}
+                          style={{
+                            width: "22rem",
+                            margin: "10px",
+                            fontSize: "1.6rem",
+                          }}
+                        />
+                      ) : (
+                        <StaticMathField
+                          style={{
+                            fontSize: "2.2rem",
+                          }}
+                        >
+                          {startTex}
+                        </StaticMathField>
+                      )}
+                      <Button type="primary" onClick={onGenerateTasksInput}>
+                        Generate tasks!
+                      </Button>
+                    </div>
+                    <div
+                      className={createDefaultAndDisabledClassName("app__tex-input")}
+                    >
+                    </div>
+                  </div>
+                  {!hideDetails && (
+                    <div className="app__add-inputs">
+                      <div className="app__input-group">
+                        <label>Subject Area</label>
+                        <Select
+                          defaultValue={currentRulePack}
+                          onChange={(value) => {
+                            setCurrentRulePack(value);
+                          }}
+                          style={{ width: "150px" }}
+                        >
+                          {rulePacks.map((option) => (
+                            <Option key={option} value={option}>
+                              {option}
+                            </Option>
+                          ))}
+                        </Select>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h3>Tags</h3>
+                  <div>
+                  <Multiselect
+                    displayValue="code"
+                    onRemove={onRemoveTag}
+                    onSelect={onSelectTag}
+                    options={allSupportedTags}
+                    showCheckbox={true}
+                    avoidHighlightFirstOption={true}
+                  />
+                  </div>
+                  <h3>Complexity</h3>
+                  <Slider
+                    axis="x"
+                    x={complexityValue}
+                    onChange={({ x }) => setComplexityValue(x)}
+                  />
+                </div>
               </div>
             )}
             {getMathQuillNotebooks()}    

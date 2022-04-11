@@ -124,6 +124,11 @@ export const checkTex = (
   );
 };
 
+export const getAllTagsForGeneration = (area) => {
+  let tags = twf_js.getAllTagsForGeneration(area);
+  return tags;
+};
+
 export const generateTasks = (
   area,
   startExpression,
