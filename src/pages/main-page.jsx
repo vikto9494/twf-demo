@@ -18,6 +18,7 @@ import {
   decodeUrlSymbols,
   checkStatement,
   getAllTagsForGeneration,
+  getLogOfGeneration,
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
@@ -290,7 +291,27 @@ const MainPage = () => {
     if (currentMode !== 'Generate tasks') {
       return getMathQuillNotebook();
     }
+
     let content = [];
+
+    if (currentTasks.length > 0) {
+      content.push(
+        <div>
+          <Button
+            onClick={function () {
+              console.log(getLogOfGeneration())
+            }}
+            style={{
+              marginBottom: "20px",
+            }}
+            type="primary"
+          >
+            Get report of generation
+          </Button>
+        </div>
+      );
+    }
+
     let notebooksCount = currentTasks.length;
     for (let i = 0; i < notebooksCount; i++) {
       let task = currentTasks[i];

@@ -124,6 +124,11 @@ export const checkTex = (
   );
 };
 
+export const getLogOfGeneration = () => {
+  let log = twf_js.getLogOfGeneration();
+  return log;
+};
+
 export const getAllTagsForGeneration = (area) => {
   let tags = twf_js.getAllTagsForGeneration(area);
   return tags;

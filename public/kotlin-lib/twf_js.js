@@ -96,8 +96,12 @@ var twf_js = function (_, Kotlin) {
   var wrapFunction = Kotlin.wrapFunction;
   var Comparator = Kotlin.kotlin.Comparator;
   var contains_0 = Kotlin.kotlin.text.contains_sgbm27$;
+  var flatten = Kotlin.kotlin.collections.flatten_u0ad8z$;
+  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
+  var first = Kotlin.kotlin.collections.first_7wnvza$;
+  var contains_1 = Kotlin.kotlin.text.contains_li3zpu$;
   var toMutableSet_1 = Kotlin.kotlin.collections.toMutableSet_7wnvza$;
-  var first = Kotlin.kotlin.collections.first_2p1efm$;
+  var first_0 = Kotlin.kotlin.collections.first_2p1efm$;
   var drop = Kotlin.kotlin.collections.drop_ba2ldo$;
   var checkCountOverflow = Kotlin.kotlin.collections.checkCountOverflow_za3lpa$;
   var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init_pdl1vj$;
@@ -109,13 +113,12 @@ var twf_js = function (_, Kotlin) {
   var isFinite = Kotlin.kotlin.isFinite_yrwdxr$;
   var isInfinite = Kotlin.kotlin.isInfinite_yrwdxr$;
   var sortWith = Kotlin.kotlin.collections.sortWith_nqfjgj$;
-  var first_0 = Kotlin.kotlin.text.first_gw00vp$;
+  var first_1 = Kotlin.kotlin.text.first_gw00vp$;
   var last_0 = Kotlin.kotlin.text.last_gw00vp$;
   var get_lastIndex_0 = Kotlin.kotlin.text.get_lastIndex_gw00vp$;
   var repeat = Kotlin.kotlin.text.repeat_94bcnn$;
   var max = Kotlin.kotlin.collections.max_exjks8$;
-  var contains_1 = Kotlin.kotlin.collections.contains_mjy6jw$;
-  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
+  var contains_2 = Kotlin.kotlin.collections.contains_mjy6jw$;
   var get_indices = Kotlin.kotlin.text.get_indices_gw00vp$;
   var toBoxedChar = Kotlin.toBoxedChar;
   var get_lastIndex_1 = Kotlin.kotlin.collections.get_lastIndex_m7z4lg$;
@@ -124,9 +127,8 @@ var twf_js = function (_, Kotlin) {
   var toMutableList_0 = Kotlin.kotlin.collections.toMutableList_us0mfu$;
   var indexOf = Kotlin.kotlin.collections.indexOf_bv23uc$;
   var reverse = Kotlin.kotlin.collections.reverse_vvxzk3$;
-  var contains_2 = Kotlin.kotlin.text.contains_li3zpu$;
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
-  var first_1 = Kotlin.kotlin.collections.first_us0mfu$;
+  var first_2 = Kotlin.kotlin.collections.first_us0mfu$;
   var Array_0 = Array;
   var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
@@ -140,7 +142,6 @@ var twf_js = function (_, Kotlin) {
   var startsWith_1 = Kotlin.kotlin.text.startsWith_li3zpu$;
   var trim = Kotlin.kotlin.text.trim_gw00vp$;
   var sum = Kotlin.kotlin.collections.sum_l63kqw$;
-  var first_2 = Kotlin.kotlin.collections.first_7wnvza$;
   var dropLast = Kotlin.kotlin.text.dropLast_94bcnn$;
   var binarySearch = Kotlin.kotlin.collections.binarySearch_jhx6be$;
   var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
@@ -190,6 +191,8 @@ var twf_js = function (_, Kotlin) {
   ErrorLevel.prototype.constructor = ErrorLevel;
   StringDefinitionType.prototype = Object.create(Enum.prototype);
   StringDefinitionType.prototype.constructor = StringDefinitionType;
+  ReportType.prototype = Object.create(Enum.prototype);
+  ReportType.prototype.constructor = ReportType;
   RuleTag.prototype = Object.create(Enum.prototype);
   RuleTag.prototype.constructor = RuleTag;
   TaskTagCode.prototype = Object.create(Enum.prototype);
@@ -1899,6 +1902,11 @@ var twf_js = function (_, Kotlin) {
       return ExpressionUtils$Companion_getInstance().structureStringToGeneratedExpression_61zpoe$(closure$startExpression);
     };
   }
+  function generateTasks$lambda_0(closure$tasks) {
+    return function () {
+      return TexReportUtils$Companion_getInstance().fullReport_wv2sjc$(closure$tasks);
+    };
+  }
   function generateTasks(area, startExpression, rulepacks, additionalParamsMap) {
     if (rulepacks === void 0)
       rulepacks = [];
@@ -1906,6 +1914,7 @@ var twf_js = function (_, Kotlin) {
       additionalParamsMap = emptyMap();
     }
     var tmp$, tmp$_0, tmp$_1;
+    log_1.clear();
     if (!equals(area, '(Trigonometry)')) {
       return [];
     }
@@ -1928,13 +1937,18 @@ var twf_js = function (_, Kotlin) {
     }
     var tags = tmp$_0;
     var settings = new GeneratorSettings(void 0, mapGoalStepCount(typeof (tmp$_1 = additionalParamsMap['complexity']) === 'number' ? tmp$_1 : throwCCE()), generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_5b44qz$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks), tags));
-    return copyToArray(generateTrigonometricTasks(settings));
+    var tasks = generateTrigonometricTasks(settings);
+    log_1.addMessage_cte53e$(generateTasks$lambda_0(tasks));
+    return copyToArray(tasks);
+  }
+  function getLogOfGeneration() {
+    return log_1.getLogInPlainText_ap6kjd$();
   }
   function getAllTagsForGeneration(area) {
     if (!equals(area, '(Trigonometry)')) {
       return [];
     }
-    var $receiver = DefaultStandardMathRulePacks$Companion_getInstance().get();
+    var $receiver = TrigonometricRulePacks$Companion_getInstance().get();
     var destination = ArrayList_init_0();
     var tmp$;
     tmp$ = $receiver.iterator();
@@ -1972,17 +1986,7 @@ var twf_js = function (_, Kotlin) {
     return copyToArray(destination_2);
   }
   function getDefaultRulePacks() {
-    var codes = listOf_0(['ArithmeticPositiveAddition', 'ArithmeticAddition', 'ArithmeticMultiplication', 'ArithmeticDivision', 'ArithmeticExponentiation', 'ShortMultiplication', 'BasicTrigonometricDefinitionsIdentity', 'TrigonometrySinCosSumReduction', 'Trigonometry', 'AdvancedTrigonometry']);
-    var $receiver = DefaultStandardMathRulePacks$Companion_getInstance().get();
-    var destination = ArrayList_init_0();
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      if (contains(codes, element.code))
-        destination.add_11rb$(element);
-    }
-    return copyToArray(destination);
+    return copyToArray(RulePackProvider$Companion_getInstance().getBasicTrigonometricSubstitutions());
   }
   function mapGoalStepCount(complexity, minStepCount, maxStepCount) {
     if (minStepCount === void 0)
@@ -8880,6 +8884,107 @@ var twf_js = function (_, Kotlin) {
     simpleName: 'NewWeightsLogicRulePack',
     interfaces: []
   };
+  function ReportType(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function ReportType_initFields() {
+    ReportType_initFields = function () {
+    };
+    ReportType$RESULT_ONLY_instance = new ReportType('RESULT_ONLY', 0);
+    ReportType$RESULT_WITH_POSTPROCESSING_instance = new ReportType('RESULT_WITH_POSTPROCESSING', 1);
+    ReportType$RESULT_WITH_SUBSTITUTIONS_instance = new ReportType('RESULT_WITH_SUBSTITUTIONS', 2);
+    ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_instance = new ReportType('RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS', 3);
+  }
+  var ReportType$RESULT_ONLY_instance;
+  function ReportType$RESULT_ONLY_getInstance() {
+    ReportType_initFields();
+    return ReportType$RESULT_ONLY_instance;
+  }
+  var ReportType$RESULT_WITH_POSTPROCESSING_instance;
+  function ReportType$RESULT_WITH_POSTPROCESSING_getInstance() {
+    ReportType_initFields();
+    return ReportType$RESULT_WITH_POSTPROCESSING_instance;
+  }
+  var ReportType$RESULT_WITH_SUBSTITUTIONS_instance;
+  function ReportType$RESULT_WITH_SUBSTITUTIONS_getInstance() {
+    ReportType_initFields();
+    return ReportType$RESULT_WITH_SUBSTITUTIONS_instance;
+  }
+  var ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_instance;
+  function ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_getInstance() {
+    ReportType_initFields();
+    return ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_instance;
+  }
+  ReportType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ReportType',
+    interfaces: [Enum]
+  };
+  function ReportType$values() {
+    return [ReportType$RESULT_ONLY_getInstance(), ReportType$RESULT_WITH_POSTPROCESSING_getInstance(), ReportType$RESULT_WITH_SUBSTITUTIONS_getInstance(), ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_getInstance()];
+  }
+  ReportType.values = ReportType$values;
+  function ReportType$valueOf(name) {
+    switch (name) {
+      case 'RESULT_ONLY':
+        return ReportType$RESULT_ONLY_getInstance();
+      case 'RESULT_WITH_POSTPROCESSING':
+        return ReportType$RESULT_WITH_POSTPROCESSING_getInstance();
+      case 'RESULT_WITH_SUBSTITUTIONS':
+        return ReportType$RESULT_WITH_SUBSTITUTIONS_getInstance();
+      case 'RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS':
+        return ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_getInstance();
+      default:throwISE('No enum constant mathhelper.twf.defaultcontent.defaultrulepacks.autogeneration.ReportType.' + name);
+    }
+  }
+  ReportType.valueOf_61zpoe$ = ReportType$valueOf;
+  function RulePackProvider() {
+    RulePackProvider$Companion_getInstance();
+  }
+  function RulePackProvider$Companion() {
+    RulePackProvider$Companion_instance = this;
+  }
+  RulePackProvider$Companion.prototype.concatenate_0 = function (lists) {
+    return flatten(listOf_0(lists.slice()));
+  };
+  RulePackProvider$Companion.prototype.getDefaultMathPacks = function () {
+    var codes = listOf_0(['ArithmeticPositiveAddition', 'ArithmeticAddition', 'ArithmeticMultiplication', 'ArithmeticDivision', 'ArithmeticExponentiation', 'ShortMultiplication']);
+    var $receiver = DefaultStandardMathRulePacks$Companion_getInstance().get();
+    var destination = ArrayList_init_0();
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      if (contains(codes, element.code))
+        destination.add_11rb$(element);
+    }
+    return destination;
+  };
+  RulePackProvider$Companion.prototype.getTrigonometricPacks = function () {
+    return TrigonometricRulePacks$Companion_getInstance().get();
+  };
+  RulePackProvider$Companion.prototype.getBasicTrigonometricSubstitutions = function () {
+    return this.concatenate_0([this.getDefaultMathPacks(), this.getTrigonometricPacks()]);
+  };
+  RulePackProvider$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var RulePackProvider$Companion_instance = null;
+  function RulePackProvider$Companion_getInstance() {
+    if (RulePackProvider$Companion_instance === null) {
+      new RulePackProvider$Companion();
+    }
+    return RulePackProvider$Companion_instance;
+  }
+  RulePackProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RulePackProvider',
+    interfaces: []
+  };
   function RuleTag(name, ordinal, code, readyForUseInProduction) {
     if (readyForUseInProduction === void 0)
       readyForUseInProduction = true;
@@ -8893,38 +8998,47 @@ var twf_js = function (_, Kotlin) {
     RuleTag_initFields = function () {
     };
     RuleTag$BASIC_MATH_instance = new RuleTag('BASIC_MATH', 0, '\u0411\u0430\u0437\u043E\u0432\u044B\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043C\u0430\u0442\u0435\u043C\u0430\u0442\u0438\u043A\u0438');
-    RuleTag$TRIGONOMETRY_BASIC_instance = new RuleTag('TRIGONOMETRY_BASIC', 1, '\u0411\u0430\u0437\u043E\u0432\u044B\u0435 \u0441\u043E\u043E\u0442\u043D\u043E\u0448\u0435\u043D\u0438\u044F \u0432 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0438');
+    RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_instance = new RuleTag('TRIGONOMETRY_FUNCTIONS_DEFINITION', 1, '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0445 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 (sin, cos, tg, ctg), \u0438\u0445 \u0447\u0451\u0442\u043D\u043E\u0441\u0442\u044C/\u043D\u0435\u0447\u0451\u0442\u043D\u043E\u0441\u0442\u044C');
     RuleTag$TRIGONOMETRY_STANDARD_ANGLES_instance = new RuleTag('TRIGONOMETRY_STANDARD_ANGLES', 2, '\u0421\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0435 \u0443\u0433\u043B\u044B \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0439 \u0442\u0430\u0431\u043B\u0438\u0446\u044B');
-    RuleTag$TRIGONOMETRY_PERIODIC_instance = new RuleTag('TRIGONOMETRY_PERIODIC', 3, '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u043F\u0435\u0440\u0438\u043E\u0434\u043E\u0432');
-    RuleTag$TRIGONOMETRY_SHIFTING_instance = new RuleTag('TRIGONOMETRY_SHIFTING', 4, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F');
-    RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_instance = new RuleTag('TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES', 5, '\u0421\u0443\u043C\u043C\u0430 \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0443\u0433\u043B\u043E\u0432');
-    RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_instance = new RuleTag('TRIGONOMETRY_DOUBLE_ANGLES', 6, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441 \u0434\u0432\u043E\u0439\u043D\u044B\u043C\u0438 \u0443\u0433\u043B\u0430\u043C\u0438');
-    RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_instance = new RuleTag('TRIGONOMETRY_TRIPLE_ANGLES', 7, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441 \u0442\u0440\u043E\u0439\u043D\u044B\u043C\u0438 \u0443\u0433\u043B\u0430\u043C\u0438');
-    RuleTag$TRIGONOMETRY_MULTI_ANGLES_instance = new RuleTag('TRIGONOMETRY_MULTI_ANGLES', 8, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441 \u0443\u0433\u043B\u0430\u043C\u0438 \u043A\u0440\u0430\u0442\u043D\u043E\u0441\u0442\u0438 \u0431\u043E\u043B\u0435\u0435 3');
-    RuleTag$TRIGONOMETRY_HALF_ANGLES_instance = new RuleTag('TRIGONOMETRY_HALF_ANGLES', 9, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u043E\u043B\u043E\u0432\u0438\u043D\u043D\u044B\u0445 \u0443\u0433\u043B\u043E\u0432');
-    RuleTag$TRIGONOMETRY_POWER_REDUCING_instance = new RuleTag('TRIGONOMETRY_POWER_REDUCING', 10, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u043E\u043D\u0438\u0436\u0435\u043D\u0438\u044F \u0441\u0442\u0435\u043F\u0435\u043D\u0438', false);
-    RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS', 11, '\u0421\u0443\u043C\u043C\u0430 \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
-    RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_PROD_OF_FUNCTIONS', 12, '\u041F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
-    RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_INVERSE_FUNCTIONS', 13, '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438', false);
-    RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_instance = new RuleTag('TRIGONOMETRY_AUXILIARY_ARGUMENT', 14, '\u0424\u043E\u0440\u043C\u0443\u043B\u0430 \u0432\u0441\u043F\u043E\u043C\u043E\u0433\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430', false);
-    RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_instance = new RuleTag('TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION', 15, '\u0423\u043D\u0438\u0432\u0435\u0440\u0441\u0430\u043B\u044C\u043D\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u043F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430', false);
-    RuleTag$TRIGONOMETRY_EULER_FORMULAS_instance = new RuleTag('TRIGONOMETRY_EULER_FORMULAS', 16, '\u041F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u0432 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u043E\u0439 \u0444\u043E\u0440\u043C\u0435', false);
-    RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_HYPERBOLIC_FUNCTIONS', 17, '\u0413\u0438\u043F\u0435\u0440\u0431\u043E\u043B\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', false);
+    RuleTag$TRIGONOMETRY_BASIC_IDENTITY_instance = new RuleTag('TRIGONOMETRY_BASIC_IDENTITY', 3, '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E');
+    RuleTag$TRIGONOMETRY_PERIODIC_instance = new RuleTag('TRIGONOMETRY_PERIODIC', 4, '\u041F\u0435\u0440\u0438\u043E\u0434\u0438\u0447\u043D\u043E\u0441\u0442\u044C \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
+    RuleTag$TRIGONOMETRY_SHIFTING_instance = new RuleTag('TRIGONOMETRY_SHIFTING', 5, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F');
+    RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_INVERSE_FUNCTIONS', 6, '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435');
+    RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_instance = new RuleTag('TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES', 7, '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430');
+    RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_instance = new RuleTag('TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED', 8, '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u043F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430');
+    RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_instance = new RuleTag('TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES', 9, '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0435 \u0443\u0433\u043B\u044B \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0439 \u0442\u0430\u0431\u043B\u0438\u0446\u044B');
+    RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_instance = new RuleTag('TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES', 10, '\u0421\u0443\u043C\u043C\u0430 \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u043E\u0432 - sin, cos');
+    RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_instance = new RuleTag('TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES', 11, '\u0421\u0443\u043C\u043C\u0430 \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u043E\u0432 - tg, ctg');
+    RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_instance = new RuleTag('TRIGONOMETRY_DOUBLE_ANGLES', 12, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430');
+    RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_instance = new RuleTag('TRIGONOMETRY_TRIPLE_ANGLES', 13, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0442\u0440\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430');
+    RuleTag$TRIGONOMETRY_HALF_ANGLES_instance = new RuleTag('TRIGONOMETRY_HALF_ANGLES', 14, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u043E\u043B\u043E\u0432\u0438\u043D\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430');
+    RuleTag$TRIGONOMETRY_MULTI_ANGLES_instance = new RuleTag('TRIGONOMETRY_MULTI_ANGLES', 15, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430 \u043A\u0440\u0430\u0442\u043D\u043E\u0441\u0442\u0438 \u0431\u043E\u043B\u0435\u0435 3');
+    RuleTag$TRIGONOMETRY_POWER_REDUCING_instance = new RuleTag('TRIGONOMETRY_POWER_REDUCING', 16, '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u043E\u043D\u0438\u0436\u0435\u043D\u0438\u044F \u0441\u0442\u0435\u043F\u0435\u043D\u0438');
+    RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS', 17, '\u041F\u0440\u0435\u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u0443\u043C\u043C\u044B/\u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u0432 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435');
+    RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_instance = new RuleTag('TRIGONOMETRY_AUXILIARY_ARGUMENT', 18, '\u0424\u043E\u0440\u043C\u0443\u043B\u0430 \u0432\u0441\u043F\u043E\u043C\u043E\u0433\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430', false);
+    RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_instance = new RuleTag('TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION', 19, '\u0423\u043D\u0438\u0432\u0435\u0440\u0441\u0430\u043B\u044C\u043D\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u043F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430');
+    RuleTag$TRIGONOMETRY_EULER_FORMULAS_instance = new RuleTag('TRIGONOMETRY_EULER_FORMULAS', 20, '\u041F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u0432 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u043E\u0439 \u0444\u043E\u0440\u043C\u0435', false);
+    RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_instance = new RuleTag('TRIGONOMETRY_HYPERBOLIC_FUNCTIONS', 21, '\u0413\u0438\u043F\u0435\u0440\u0431\u043E\u043B\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', false);
   }
   var RuleTag$BASIC_MATH_instance;
   function RuleTag$BASIC_MATH_getInstance() {
     RuleTag_initFields();
     return RuleTag$BASIC_MATH_instance;
   }
-  var RuleTag$TRIGONOMETRY_BASIC_instance;
-  function RuleTag$TRIGONOMETRY_BASIC_getInstance() {
+  var RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_instance;
+  function RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance() {
     RuleTag_initFields();
-    return RuleTag$TRIGONOMETRY_BASIC_instance;
+    return RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_instance;
   }
   var RuleTag$TRIGONOMETRY_STANDARD_ANGLES_instance;
   function RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance() {
     RuleTag_initFields();
     return RuleTag$TRIGONOMETRY_STANDARD_ANGLES_instance;
+  }
+  var RuleTag$TRIGONOMETRY_BASIC_IDENTITY_instance;
+  function RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_BASIC_IDENTITY_instance;
   }
   var RuleTag$TRIGONOMETRY_PERIODIC_instance;
   function RuleTag$TRIGONOMETRY_PERIODIC_getInstance() {
@@ -8936,10 +9050,35 @@ var twf_js = function (_, Kotlin) {
     RuleTag_initFields();
     return RuleTag$TRIGONOMETRY_SHIFTING_instance;
   }
-  var RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_instance;
-  function RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance() {
+  var RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_instance;
+  function RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance() {
     RuleTag_initFields();
-    return RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_instance;
+    return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_instance;
+  }
+  var RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_instance;
+  function RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_instance;
+  }
+  var RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_instance;
+  function RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_instance;
+  }
+  var RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_instance;
+  function RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_instance;
+  }
+  var RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_instance;
+  function RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_instance;
+  }
+  var RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_instance;
+  function RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_instance;
   }
   var RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_instance;
   function RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance() {
@@ -8951,15 +9090,15 @@ var twf_js = function (_, Kotlin) {
     RuleTag_initFields();
     return RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_instance;
   }
-  var RuleTag$TRIGONOMETRY_MULTI_ANGLES_instance;
-  function RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance() {
-    RuleTag_initFields();
-    return RuleTag$TRIGONOMETRY_MULTI_ANGLES_instance;
-  }
   var RuleTag$TRIGONOMETRY_HALF_ANGLES_instance;
   function RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance() {
     RuleTag_initFields();
     return RuleTag$TRIGONOMETRY_HALF_ANGLES_instance;
+  }
+  var RuleTag$TRIGONOMETRY_MULTI_ANGLES_instance;
+  function RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance() {
+    RuleTag_initFields();
+    return RuleTag$TRIGONOMETRY_MULTI_ANGLES_instance;
   }
   var RuleTag$TRIGONOMETRY_POWER_REDUCING_instance;
   function RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance() {
@@ -8970,16 +9109,6 @@ var twf_js = function (_, Kotlin) {
   function RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance() {
     RuleTag_initFields();
     return RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_instance;
-  }
-  var RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_instance;
-  function RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance() {
-    RuleTag_initFields();
-    return RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_instance;
-  }
-  var RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_instance;
-  function RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance() {
-    RuleTag_initFields();
-    return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_instance;
   }
   var RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_instance;
   function RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance() {
@@ -9007,39 +9136,47 @@ var twf_js = function (_, Kotlin) {
     interfaces: [Enum]
   };
   function RuleTag$values() {
-    return [RuleTag$BASIC_MATH_getInstance(), RuleTag$TRIGONOMETRY_BASIC_getInstance(), RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_PERIODIC_getInstance(), RuleTag$TRIGONOMETRY_SHIFTING_getInstance(), RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance(), RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance(), RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance(), RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance(), RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance(), RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance(), RuleTag$TRIGONOMETRY_EULER_FORMULAS_getInstance(), RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_getInstance()];
+    return [RuleTag$BASIC_MATH_getInstance(), RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance(), RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance(), RuleTag$TRIGONOMETRY_PERIODIC_getInstance(), RuleTag$TRIGONOMETRY_SHIFTING_getInstance(), RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance(), RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance(), RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance(), RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance(), RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance(), RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance(), RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance(), RuleTag$TRIGONOMETRY_EULER_FORMULAS_getInstance(), RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_getInstance()];
   }
   RuleTag.values = RuleTag$values;
   function RuleTag$valueOf(name) {
     switch (name) {
       case 'BASIC_MATH':
         return RuleTag$BASIC_MATH_getInstance();
-      case 'TRIGONOMETRY_BASIC':
-        return RuleTag$TRIGONOMETRY_BASIC_getInstance();
+      case 'TRIGONOMETRY_FUNCTIONS_DEFINITION':
+        return RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance();
       case 'TRIGONOMETRY_STANDARD_ANGLES':
         return RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance();
+      case 'TRIGONOMETRY_BASIC_IDENTITY':
+        return RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance();
       case 'TRIGONOMETRY_PERIODIC':
         return RuleTag$TRIGONOMETRY_PERIODIC_getInstance();
       case 'TRIGONOMETRY_SHIFTING':
         return RuleTag$TRIGONOMETRY_SHIFTING_getInstance();
-      case 'TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES':
-        return RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance();
+      case 'TRIGONOMETRY_INVERSE_FUNCTIONS':
+        return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance();
+      case 'TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES':
+        return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance();
+      case 'TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED':
+        return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance();
+      case 'TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES':
+        return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance();
+      case 'TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES':
+        return RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance();
+      case 'TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES':
+        return RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance();
       case 'TRIGONOMETRY_DOUBLE_ANGLES':
         return RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance();
       case 'TRIGONOMETRY_TRIPLE_ANGLES':
         return RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance();
-      case 'TRIGONOMETRY_MULTI_ANGLES':
-        return RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance();
       case 'TRIGONOMETRY_HALF_ANGLES':
         return RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance();
+      case 'TRIGONOMETRY_MULTI_ANGLES':
+        return RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance();
       case 'TRIGONOMETRY_POWER_REDUCING':
         return RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance();
       case 'TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS':
         return RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance();
-      case 'TRIGONOMETRY_PROD_OF_FUNCTIONS':
-        return RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance();
-      case 'TRIGONOMETRY_INVERSE_FUNCTIONS':
-        return RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance();
       case 'TRIGONOMETRY_AUXILIARY_ARGUMENT':
         return RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance();
       case 'TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION':
@@ -9089,6 +9226,206 @@ var twf_js = function (_, Kotlin) {
   TaskSpecificLogicRulePacks.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'TaskSpecificLogicRulePacks',
+    interfaces: []
+  };
+  function TexReportUtils() {
+    TexReportUtils$Companion_getInstance();
+  }
+  function TexReportUtils$Companion() {
+    TexReportUtils$Companion_instance = this;
+  }
+  TexReportUtils$Companion.prototype.renderToTex_4lks0b$ = function (tasks, reportType) {
+    switch (reportType.name) {
+      case 'RESULT_ONLY':
+        return this.resultOnlyReport_0(tasks);
+      case 'RESULT_WITH_POSTPROCESSING':
+        return this.resultWithPostProcessingReport_0(tasks);
+      case 'RESULT_WITH_SUBSTITUTIONS':
+        return this.resultWithSubstitutionsReport_wv2sjc$(tasks);
+      case 'RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS':
+        return this.fullReport_wv2sjc$(tasks);
+      default:return Kotlin.noWhenBranchMatched();
+    }
+  };
+  TexReportUtils$Companion.prototype.addDollars_0 = function (str) {
+    return (new StringBuilder('$')).append_gw00v9$(str).append_gw00v9$('$').toString();
+  };
+  TexReportUtils$Companion.prototype.makeReplacements_0 = function (report) {
+    var result = replace(report, '\u03C0', '\\pi');
+    result = replace(result, 'ctg', 'cot');
+    result = replace(result, 'tg', 'tan');
+    return result;
+  };
+  TexReportUtils$Companion.prototype.resultWithPostProcessingReport_0 = function (tasks) {
+    var reportBuilder = StringBuilder_init_0();
+    for (var i = 0; i !== tasks.size; ++i) {
+      var task = tasks.get_za3lpa$(i);
+      var intermediateExpression1 = task.expressionTaskIntermediateData.expressionBeforePostprocessPhase1.toString();
+      var intermediateExpression2 = task.expressionTaskIntermediateData.expressionBeforePostprocessPhase2.toString();
+      reportBuilder.append_gw00v9$((i + 1 | 0).toString() + ')' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('original task: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.originalExpressionTex) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('generated task (before postprocessing phase 1): ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(structureStringToTexString(intermediateExpression1)) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('generated task (before postprocessing phase 2): ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(structureStringToTexString(intermediateExpression2)) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('generated task (after \\ \\ postprocessing): ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.goalExpressionTex) + '}' + '\n' + '\n');
+    }
+    var report = reportBuilder.toString();
+    report = this.makeReplacements_0(report);
+    return report;
+  };
+  TexReportUtils$Companion.prototype.fullReport_wv2sjc$ = function (tasks) {
+    var reportBuilder = StringBuilder_init_0();
+    for (var i = 0; i !== tasks.size; ++i) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+      var task = tasks.get_za3lpa$(i);
+      var appliedPostprocessSubstitutions = task.expressionTaskIntermediateData.appliedPostprocessSubstitutions;
+      var steps = Kotlin.isType(tmp$_1 = (tmp$_0 = (tmp$ = task.solutionsStepsTree) != null ? tmp$.values : null) != null ? first(tmp$_0) : null, List) ? tmp$_1 : throwCCE();
+      var expressionChain = (tmp$_3 = (tmp$_2 = task.solutionPlainText) != null ? split(tmp$_2, [' = ']) : null) != null ? tmp$_3 : ArrayList_init_0();
+      var expressionChainTex = ArrayList_init_0();
+      var j = 0;
+      for (var tmp$_5 = steps.iterator(); tmp$_5.hasNext(); ++j) {
+        var step = tmp$_5.next();
+        var tmp$_6;
+        var expressionState = expressionChain.get_za3lpa$(j);
+        var structureString = ExpressionUtils$Companion_getInstance().stringToGeneratedExpression_61zpoe$(expressionState).expressionNode.identifier;
+        var rule = step.substitution.code;
+        var color = step.substitution.isExtending ? 'red' : 'orange';
+        var lastStepId = (tmp$_6 = appliedPostprocessSubstitutions.get_11rb$(step.substitution.code)) != null ? tmp$_6 : 2147483647;
+        if (step.stepId >= lastStepId) {
+          color = 'green';
+        }
+        expressionChainTex.add_11rb$('\\' + 'textcolor{' + color + '}{' + ('[' + this.ruleToTex_61zpoe$(rule) + ']') + '}' + ' = ' + '\\textcolor{black}{' + structureStringToTexString(structureString) + '}' + ' = ' + '\\newline');
+      }
+      if ((tmp$_4 = task.goalExpressionTex) != null) {
+        expressionChainTex.add_11rb$(tmp$_4);
+      }
+      var solution = joinToString(expressionChainTex, '$ \\newline = $', '\\texttt{$', '$}');
+      reportBuilder.append_gw00v9$((i + 1 | 0).toString() + ')' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('original task: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.originalExpressionTex) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('generated task: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.goalExpressionTex) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('original task structure string: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.originalExpressionStructureString) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('generated task structure string: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.goalExpressionStructureString) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('solution: ');
+      reportBuilder.append_gw00v9$(solution + '\n' + '\n');
+    }
+    var report = reportBuilder.toString();
+    report = this.makeReplacements_0(report);
+    return report;
+  };
+  TexReportUtils$Companion.prototype.resultOnlyReport_0 = function (tasks) {
+    var reportBuilder = StringBuilder_init_0();
+    if (tasks.isEmpty()) {
+      return reportBuilder.toString();
+    }
+    reportBuilder.append_gw00v9$('\n\n original task: ');
+    reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(tasks.get_za3lpa$(0).originalExpressionTex) + '}' + '\n' + '\n');
+    reportBuilder.append_gw00v9$('\\bigskip');
+    for (var i = 0; i !== tasks.size; ++i) {
+      var task = tasks.get_za3lpa$(i);
+      reportBuilder.append_gw00v9$((i + 1 | 0).toString() + ') ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.goalExpressionTex) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('\\bigskip');
+    }
+    var report = reportBuilder.toString();
+    report = this.makeReplacements_0(report);
+    return report;
+  };
+  TexReportUtils$Companion.prototype.resultWithSubstitutionsReport_wv2sjc$ = function (tasks) {
+    var reportBuilder = StringBuilder_init_0();
+    for (var i = 0; i !== tasks.size; ++i) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+      var task = tasks.get_za3lpa$(i);
+      var appliedPostprocessSubstitutions = task.expressionTaskIntermediateData.appliedPostprocessSubstitutions;
+      var steps = Kotlin.isType(tmp$_1 = (tmp$_0 = (tmp$ = task.solutionsStepsTree) != null ? tmp$.values : null) != null ? first(tmp$_0) : null, List) ? tmp$_1 : throwCCE();
+      var rulesTex = ArrayList_init_0();
+      tmp$_2 = steps.iterator();
+      while (tmp$_2.hasNext()) {
+        var step = tmp$_2.next();
+        var rule = step.substitution.code;
+        var color = step.substitution.isExtending ? 'red' : 'orange';
+        var lastStepId = (tmp$_3 = appliedPostprocessSubstitutions.get_11rb$(step.substitution.code)) != null ? tmp$_3 : 2147483647;
+        if (step.stepId >= lastStepId) {
+          color = 'green';
+        }
+        rulesTex.add_11rb$('\\' + 'textcolor{' + color + '}{' + this.ruleToTex_61zpoe$(rule) + '}');
+      }
+      reportBuilder.append_gw00v9$((i + 1 | 0).toString() + ')' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('original task: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.originalExpressionTex) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('generated task: ');
+      reportBuilder.append_gw00v9$('\\' + 'textcolor{blue}{' + this.addDollars_0(task.goalExpressionTex) + '}' + '\n' + '\n');
+      reportBuilder.append_gw00v9$('applied substitutions: ' + joinToString(rulesTex, '$;\\ $', '\\texttt{$', '$} \\newline'));
+    }
+    var report = reportBuilder.toString();
+    report = this.makeReplacements_0(report);
+    return report;
+  };
+  TexReportUtils$Companion.prototype.ruleToTex_61zpoe$ = function (rule) {
+    var tmp$;
+    if (!contains_1(rule, '__to__')) {
+      if (contains_1(rule, 'sophisticatedPostprocessing')) {
+        split(rule, ['sophisticatedPostprocessing']).get_za3lpa$(0);
+      }
+      tmp$ = rule;
+    }
+     else {
+      var parts = split(rule, ['__to__']);
+      var left = parts.get_za3lpa$(0);
+      var right = parts.get_za3lpa$(1);
+      tmp$ = structureStringToTexString(left) + ' \\rightarrow ' + structureStringToTexString(right);
+    }
+    var ruleTex = tmp$;
+    return ruleTex;
+  };
+  TexReportUtils$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var TexReportUtils$Companion_instance = null;
+  function TexReportUtils$Companion_getInstance() {
+    if (TexReportUtils$Companion_instance === null) {
+      new TexReportUtils$Companion();
+    }
+    return TexReportUtils$Companion_instance;
+  }
+  TexReportUtils.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TexReportUtils',
+    interfaces: []
+  };
+  function TrigonometricRulePacks() {
+    TrigonometricRulePacks$Companion_getInstance();
+  }
+  function TrigonometricRulePacks$Companion() {
+    TrigonometricRulePacks$Companion_instance = this;
+    this.trigonometricRulePacks = listOf_0([new RulePackITR('Obvious identities', void 0, void 0, 'Obvious identities', '\u041F\u0440\u043E\u0441\u0442\u044B\u0435 \u0441\u043E\u043E\u0442\u043D\u043E\u0448\u0435\u043D\u0438\u044F, \u043D\u043E \u043F\u043E\u043C\u043E\u0433\u0430\u044E\u0449\u0438\u0435 \u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u0443 \u0437\u0430\u0434\u0430\u0447', 'Obvious identities', '\u041F\u0440\u043E\u0441\u0442\u044B\u0435 \u0441\u043E\u043E\u0442\u043D\u043E\u0448\u0435\u043D\u0438\u044F, \u043D\u043E \u043F\u043E\u043C\u043E\u0433\u0430\u044E\u0449\u0438\u0435 \u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u0443 \u0437\u0430\u0434\u0430\u0447', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(1;1))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(+(-(1));1))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(+(a;b);c)))', '(tg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(+(a;b);c)))', '(ctg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(+(a;b);c)))', '(cos(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(+(a;b);c)))', '(sin(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance()))])), new RulePackITR('BasicFunctionsDefinitionAndParity', void 0, void 0, 'Sin, Cos, Tg, Ctg Definitions', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 sin(x), cos(x), tg(x), ctg(x), \u0438\u0445 \u0447\u0451\u0442\u043D\u043E\u0441\u0442\u044C/\u043D\u0435\u0447\u0451\u0442\u043D\u043E\u0441\u0442\u044C', 'Definition of sin(x), cos(x), tg(x), ctg(x); parity', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 sin(x), cos(x), tg(x), ctg(x), \u0438\u0445 \u0447\u0451\u0442\u043D\u043E\u0441\u0442\u044C/\u043D\u0435\u0447\u0451\u0442\u043D\u043E\u0441\u0442\u044C', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(tg(a);ctg(a)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(ctg(a);tg(a)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(x);ctg(x)))', 5, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(ctg(x);tg(x)))', 5, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 25, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(sin(a);cos(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 25, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(cos(a);sin(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 25, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(1;ctg(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 25, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(1;tg(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(-(a))))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(-(a))))))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(-(a))))', '(cos(a))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(-(a))))', '(+(-(tg(a))))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(tg(a))))', '(tg(+(-(a))))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(tg(+(-(a))))))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(-(a))))', '(+(-(ctg(a))))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(ctg(a))))', '(ctg(+(-(a))))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(ctg(+(-(a))))))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(*(sin(a);ctg(a)))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(cos(a);tg(a)))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance()))])), new RulePackITR('BasicTrigonometryTable', void 0, void 0, 'Trigonometry table', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0442\u0430\u0431\u043B\u0438\u0446\u0430', 'Trigonometry table - basic angles (pi/3, pi/4, pi/2, ...)', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0442\u0430\u0431\u043B\u0438\u0446\u0430 - \u0431\u0430\u0437\u043E\u0432\u044B\u0435 \u0443\u0433\u043B\u044B (pi/3, pi/4, pi/2, ...)', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(0))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(cos(0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;6)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(sin(/(\u03C0;6)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;6)))', '(/(^(3;/(1;2));3))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);3))', '(tg(/(\u03C0;6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;6)))', '(^(3;/(1;2)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(3;/(1;2)))', '(ctg(/(\u03C0;6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(tg(/(\u03C0;4)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(ctg(/(\u03C0;4)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;3)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(cos(/(\u03C0;3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;3)))', '(^(3;/(1;2)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(3;/(1;2)))', '(tg(/(\u03C0;3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;3)))', '(/(^(3;/(1;2));3))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;/(1;2));3))', '(ctg(/(\u03C0;3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;2)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(/(\u03C0;2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(/(\u03C0;2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(ctg(/(\u03C0;2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(*(2;\u03C0);3)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(sin(/(*(2;\u03C0);3)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(*(2;\u03C0);3)))', '(+(-(/(1;2))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(0.5)))', '(cos(/(*(2;\u03C0);3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(*(2;\u03C0);3)))', '(+(-(^(3;/(1;2)))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(3;/(1;2)))))', '(tg(/(*(2;\u03C0);3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(*(2;\u03C0);3)))', '(+(-(/(^(3;/(1;2));3))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(^(3;/(1;2));3))))', '(ctg(/(*(2;\u03C0);3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(*(3;\u03C0);4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(sin(/(*(3;\u03C0);4)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(*(3;\u03C0);4)))', '(+(-(/(^(2;/(1;2));2))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(^(2;/(1;2));2))))', '(cos(/(*(3;\u03C0);4)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(*(3;\u03C0);4)))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(tg(/(*(3;\u03C0);4)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(*(3;\u03C0);4)))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(ctg(/(*(3;\u03C0);4)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(*(5;\u03C0);6)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(sin(/(*(5;\u03C0);6)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(*(5;\u03C0);6)))', '(+(-(/(^(3;/(1;2));2))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(^(3;/(1;2));2))))', '(cos(/(*(5;\u03C0);6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(*(5;\u03C0);6)))', '(+(-(/(^(3;/(1;2));3))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(^(3;/(1;2));3))))', '(tg(/(*(5;\u03C0);6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(*(5;\u03C0);6)))', '(+(-(^(3;/(1;2)))))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(3;/(1;2)))))', '(ctg(/(*(5;\u03C0);6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(\u03C0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(\u03C0))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(cos(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(\u03C0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(*(3;\u03C0);2)))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(sin(/(*(3;\u03C0);2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(*(3;\u03C0);2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(/(*(3;\u03C0);2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(*(3;\u03C0);2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(ctg(/(*(3;\u03C0);2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;\u03C0)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(*(2;\u03C0)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;\u03C0)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(cos(*(2;\u03C0)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(2;\u03C0)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(*(2;\u03C0)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;sin(/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 5.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 5.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance()))])), new RulePackITR('BasicTrigonometricDefinitionsIdentity', void 0, void 0, 'Basic Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', 'Basic Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(sin(a);2);^(cos(a);2)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(sin(x);2);^(cos(x);2)))', 5, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(cos(a);2);^(sin(a);2)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(cos(x);2);^(sin(x);2)))', 5, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', 25, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', 25, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(+(/(1;^(sin(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(+(/(1;^(cos(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(x);2);+(1;^(tg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(x);2));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(x);2));+(-(^(ctg(x);2)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(^(sin(x);2);^(cos(x);2);+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(*(^(tg(x);2);^(ctg(x);2));+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(tg(x);2);+(-(/(1;^(cos(x);2))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(ctg(x);2);+(-(/(1;^(sin(x);2))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance()))])), new RulePackITR('TrigonometryPeriods', void 0, void 0, 'Trigonometry periods', '\u041F\u0435\u0440\u0438\u043E\u0434\u044B', 'Periods of basic trigonometry functions', '\u041F\u0435\u0440\u0438\u043E\u0434\u044B \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0445 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(*(2;\u03C0)))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(*(2;\u03C0)))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;\u03C0)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;\u03C0)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance()))])), new RulePackITR('TrigonometryShiftingFormulas', void 0, void 0, 'Trigonometry shifting formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', 'Trigonometry shifting formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;\u03C0)))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(\u03C0))))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;\u03C0)))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(\u03C0))))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;\u03C0)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;\u03C0)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;a)))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;-(a))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(\u03C0;a)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(\u03C0;a)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;a)))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(\u03C0;a)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(\u03C0;a)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(\u03C0;-(a))))', '(+(-(tg(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(\u03C0;a)))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(\u03C0;a)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(\u03C0;-(a))))', '(+(-(ctg(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(\u03C0;a)))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(/(\u03C0;2)))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;/(\u03C0;2))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(sin(+(a;-(/(\u03C0;2)))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(a;/(\u03C0;2))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(/(\u03C0;2)))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;/(\u03C0;2))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(a;-(/(\u03C0;2)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(cos(+(a;/(\u03C0;2))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(/(\u03C0;2)))))', '(+(-(ctg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;/(\u03C0;2))))', '(+(-(ctg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(/(\u03C0;2)))))', '(+(-(tg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;/(\u03C0;2))))', '(+(-(tg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(tg(+(a;-(/(\u03C0;2)))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(tg(+(a;/(\u03C0;2))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(ctg(+(a;-(/(\u03C0;2)))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(ctg(+(a;/(\u03C0;2))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);a)))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(/(\u03C0;2);a)))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);a)))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(cos(+(/(\u03C0;2);a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(/(\u03C0;2);-(a))))', '(ctg(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(/(\u03C0;2);a)))', '(+(-(ctg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(/(\u03C0;2);-(a))))', '(tg(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(/(\u03C0;2);a)))', '(+(-(tg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(tg(+(/(\u03C0;2);-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(tg(+(/(\u03C0;2);a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(ctg(+(/(\u03C0;2);-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(ctg(+(/(\u03C0;2);a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(*(3;\u03C0);2);-(a))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(*(3;\u03C0);2);a)))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(sin(+(/(*(3;\u03C0);2);-(a))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(sin(+(/(*(3;\u03C0);2);a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(*(3;\u03C0);2);-(a))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(*(3;\u03C0);2);a)))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(cos(+(/(*(3;\u03C0);2);-(a))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(/(*(3;\u03C0);2);a)))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(/(*(3;\u03C0);2);-(a))))', '(ctg(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(/(*(3;\u03C0);2);a)))', '(+(-(ctg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(/(*(3;\u03C0);2);-(a))))', '(tg(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(/(*(3;\u03C0);2);a)))', '(+(-(tg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(tg(+(/(*(3;\u03C0);2);-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(tg(+(/(*(3;\u03C0);2);a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(ctg(+(/(*(3;\u03C0);2);-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(ctg(+(/(*(3;\u03C0);2);a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(/(*(3;\u03C0);2)))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;/(*(3;\u03C0);2))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(a;-(/(*(3;\u03C0);2)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(sin(+(a;/(*(3;\u03C0);2))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(/(*(3;\u03C0);2)))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;/(*(3;\u03C0);2))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(cos(+(a;-(/(*(3;\u03C0);2)))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(a;/(*(3;\u03C0);2))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(/(*(3;\u03C0);2)))))', '(+(-(ctg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;/(*(3;\u03C0);2))))', '(+(-(ctg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(/(*(3;\u03C0);2)))))', '(+(-(tg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;/(*(3;\u03C0);2))))', '(+(-(tg(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(tg(+(a;-(/(*(3;\u03C0);2)))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(+(-(tg(+(a;/(*(3;\u03C0);2))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(ctg(+(a;-(/(*(3;\u03C0);2)))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(+(-(ctg(+(a;/(*(3;\u03C0);2))))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance()))])), new RulePackITR('TrigonometryArcFunctions', void 0, void 0, 'Trigonometry arcfunctions', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Trigonometry arcfunctions', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435\u044C', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(sin(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(asin(sin(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(cos(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(acos(cos(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(tg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(atg(tg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(ctg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(actg(ctg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(asin(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(sin(asin(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(acos(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(cos(acos(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(atg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(tg(atg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(actg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(ctg(actg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance()))])), new RulePackITR('TrigonometryArcFunctionsProperties', void 0, void 0, 'Trigonometry arcfunctions properties', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Trigonometry arcfunctions properties', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;2))', '(+(asin(x);acos(x)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;2))', '(+(atg(x);actg(x)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(2;+(asin(x);acos(x))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(2;+(atg(x);actg(x))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(a))', '(+(/(\u03C0;2);+(-(acos(a)))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(a))', '(+(/(\u03C0;2);+(-(asin(a)))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(a))', '(+(/(\u03C0;2);+(-(actg(a)))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(a))', '(+(/(\u03C0;2);+(-(atg(a)))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(+(-(a))))', '(+(-(asin(a))))', 30, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(asin(a))))', '(asin(+(-(a))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(asin(x);asin(+(-(x)))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(+(-(a))))', '(+(\u03C0;-(acos(a))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(\u03C0;-(acos(a))))', '(acos(+(-(a))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(+(acos(x);acos(+(-(x)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(+(-(a))))', '(+(-(atg(a))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(atg(a))))', '(atg(+(-(a))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(a))', '(actg(/(1;a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(+(-(a))))', '(+(\u03C0;-(actg(a))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(a))', '(+(/(\u03C0;2);-(atg(a))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance()))])), new RulePackITR('TrigonometryArcFunctionsAdvanced', void 0, void 0, 'Trigonometry arcfunctions advanced', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u043F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Trigonometry arcfunctions advanced', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 - \u043F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(acos(a)))', '(^(+(1;-(^(a;2)));/(1;2)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(asin(a)))', '(^(+(1;-(^(a;2)));/(1;2)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(atg(a)))', '(/(a;^(+(1;^(a;2));/(1;2))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(atg(a)))', '(/(1;^(+(1;^(a;2));/(1;2))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(actg(a)))', '(/(1;^(+(1;^(a;2));/(1;2))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(actg(a)))', '(/(a;^(+(1;^(a;2));/(1;2))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(asin(a)))', '(/(^(+(1;-(^(a;2)));/(1;2));a))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(a))', '(atg(/(a;^(+(1;-(^(a;2)));0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(a))', '(actg(/(a;^(+(1;-(^(a;2)));0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(a))', '(*(2;asin(^(/(+(1;-(a));2);0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(a))', '(*(2;acos(^(/(+(1;a);2);0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(a))', '(*(2;atg(^(/(+(1;-(a));+(1;a));0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(a))', '(asin(/(a;^(+(1;^(a;2));0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(a))', '(acos(/(a;^(+(1;^(a;2));0.5))))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance()))])), new RulePackITR('TrigonometryArcFunctionsStandardSAngles', void 0, void 0, 'Trigonometry arcfunctions of standard angles', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0445 \u0443\u0433\u043B\u043E\u0432', 'Trigonometry arcfunctions', '\u0410\u0440\u043A\u0444\u0443\u043D\u043A\u0446\u0438\u0438 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0445 \u0443\u0433\u043B\u043E\u0432 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0439 \u0442\u0430\u0431\u043B\u0438\u0446\u044B', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;2))', '(+(-(asin(+(-(1))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(2;+(-(asin(+(-(1)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(acos(+(-(1))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;4))', '(+(-(atg(+(-(1))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(4;+(-(atg(+(-(1)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(3;\u03C0);4))', '(actg(+(-(1))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(3;\u03C0))', '(*(4;actg(+(-(1)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;3))', '(+(-(asin(+(-(/(^(3;0.5);2)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(3;+(-(asin(+(-(/(^(3;0.5);2))))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(5;\u03C0);6))', '(acos(+(-(/(^(3;0.5);2)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(5;\u03C0))', '(*(6;acos(+(-(/(^(3;0.5);2))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;4))', '(+(-(asin(+(-(/(^(2;0.5);2)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(4;+(-(asin(+(-(/(^(2;0.5);2))))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(3;\u03C0);4))', '(acos(+(-(/(^(2;0.5);2)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(3;\u03C0))', '(*(4;acos(+(-(/(^(2;0.5);2))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;6))', '(+(-(asin(+(-(/(1;2)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(6;+(-(asin(+(-(/(1;2))))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;\u03C0);3))', '(acos(+(-(/(1;2)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;\u03C0))', '(*(3;acos(+(-(/(1;2))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(asin(0))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;2))', '(acos(0))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(2;acos(0)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;6))', '(asin(/(1;2)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(6;asin(/(1;2))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;3))', '(acos(/(1;2)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(3;acos(/(1;2))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;4))', '(asin(/(^(2;0.5);2)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(asin(/(^(2;0.5);2)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;3))', '(asin(/(^(3;0.5);2)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(3;asin(/(^(3;0.5);2))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;6))', '(acos(/(^(3;0.5);2)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(6;acos(/(^(3;0.5);2))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(acos(1))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;2))', '(asin(1))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(2;asin(1)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;3))', '(+(-(atg(+(-(^(3;0.5)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(3;+(-(atg(+(-(^(3;0.5))))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(5;\u03C0);6))', '(actg(+(-(^(3;0.5)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(5;\u03C0))', '(*(6;actg(+(-(^(3;0.5))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;6))', '(+(-(atg(+(-(/(^(3;0.5);3)))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(6;+(-(atg(+(-(/(^(3;0.5);3))))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;\u03C0);3))', '(actg(+(-(/(^(3;0.5);3)))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;\u03C0))', '(*(3;actg(+(-(/(^(3;0.5);3))))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;3))', '(atg(/(^(3;0.5);3)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(3;atg(/(^(3;0.5);3))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;6))', '(actg(/(^(3;0.5);3)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(6;actg(/(^(3;0.5);3))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;3))', '(atg(^(3;0.5)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(3;atg(^(3;0.5))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C0;6))', '(actg(^(3;0.5)))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C0)', '(*(6;actg(^(3;0.5))))', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance()))])), new RulePackITR('TrigonometrySinCosSumReduction', void 0, void 0, "Trigonometry Sin Cos of Sum and it's Reduction", '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0438\u0445 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Sin Cos of sum and difference; reduction Formulas', 'Sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438; \u0438\u0445 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', "Placed in separated rule pack for tasks for Derivation of formulas on Sin Cos of Double Argument, also it's Sum, Difference and Product", '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u044B \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u0432\u044B\u0432\u043E\u0434 \u0444\u043E\u0440\u043C\u0443\u043B \u043D\u0430 sin cos \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0438\u0445 \u0441\u0443\u043C\u043C\u0443, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0438 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'BasicTrigonometricDefinitionsIdentity')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', 24, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', 24, true, true, false, false, 'SORTED', void 0, 30.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', 24, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', 24, true, true, false, false, 'SORTED', void 0, 30.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', 14, true, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance()))])), new RulePackITR('TrigonometryTgCtgSumReduction', void 0, void 0, "Trigonometry Tg Ctg of Sum and it's Reduction", '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F tg ctg \u0441\u0443\u043C\u043C\u044B \u0438 \u0438\u0445 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Tg Ctg of sum and difference', 'Tg ctg \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438', 'Tg Ctg of sum and difference', 'Tg ctg \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438', 'standard_math', listOf(new RulePackLinkITR(void 0, 'BasicTrigonometricDefinitionsIdentity')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', 30, true, false, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', 30, true, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', 30, true, false, true, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', 30, true, false, true, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', '(ctg(+(a;-(b))))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance()))])), new RulePackITR('TrigonometryArgFormulas', void 0, void 0, 'Trigonometry argument formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E, \u0442\u0440\u043E\u0439\u043D\u043E\u0433\u043E, \u043F\u043E\u043B\u043E\u0432\u0438\u0438\u043D\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430', 'Trigonometry argument formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E, \u0442\u0440\u043E\u0439\u043D\u043E\u0433\u043E, \u043F\u043E\u043B\u043E\u0432\u0438\u0438\u043D\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(tg(/(a;2));+(1;cos(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(ctg(/(a;2));+(1;+(-(cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;+(-(cos(a))));tg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;cos(a));ctg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(2;cos(/(a;2));sin(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(2;+(tg(/(a;2));ctg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(*(2;^(cos(/(a;2));2));+(-(1))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(+(1;+(-(cos(a))));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(sin(a);+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(/(+(ctg(/(a;2));+(-(tg(/(a;2)))));+(ctg(/(a;2));tg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(/(a;2));2))', '(/(+(1;+(-(cos(a))));+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(+(1;cos(a));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(sin(a);+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(/(a;2));2))', '(/(+(1;cos(a));+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(+(1;cos(a));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(sin(a);+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(/(a;2));2))', '(/(+(1;cos(a));+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(/(x;2));2));+(-(cos(x)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(/(x;2)));sin(x));+(-(^(tg(/(x;2));2)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(/(x;2));ctg(x));^(tg(/(x;2));2)))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(3;a)))', '(+(*(3;sin(a));+(-(*(4;^(sin(a);3))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(3;a)))', '(+(-(^(sin(a);3));*(3;^(cos(a);2);sin(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(3;a)))', '(+(*(4;^(cos(a);3));-(+(*(3;cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(3;a)))', '(+(^(cos(a);3);-(*(3;^(sin(a);2);cos(a)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(3;a)))', '(/(+(*(3;tg(a));-(^(tg(a);3)));+(1;-(*(3;^(tg(a);2))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(3;a)))', '(/(+(*(3;ctg(a));-(^(ctg(a);3)));+(1;-(*(3;^(ctg(a);2))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);3))', '(/(+(*(3;sin(a));+(-(sin(*(3;a)))));+(*(3;cos(a));cos(*(3;a)))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(x));cos(*(3;x)));*(4;^(cos(x);3))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', 24, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', 24, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', 24, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', 24, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(2;a)))', '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', '(tg(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', '(ctg(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(/(+(1;+(-(cos(*(2;a)))));+(1;cos(*(2;a)))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));2))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);cos(x));2);+(-(sin(*(2;x))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);-(+(cos(x))));2);sin(*(2;x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(x);2));cos(*(2;x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(x);2));+(-(cos(*(2;x))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(x);+(-(tg(x))));*(2;ctg(*(2;x)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(2;x));*(2;sin(x);cos(x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));+(ctg(a);tg(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(2;+(tg(a);ctg(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(n;a)))', '(+(*(2;cos(a);sin(*(+(n;-(1));a)));-(sin(*(+(n;-(2));a)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(n;a)))', '(/(+(tg(a);tg(*(+(n;-(1));a)));+(1;-(*(tg(a);tg(*(+(n;-(1));a)))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(n;a)))', '(+(*(2;cos(a);cos(*(+(n;-(1));a)));-(cos(*(+(n;-(2));a)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance()))])), new RulePackITR('TrigonometryPowerReducing', void 0, void 0, 'Trigonometry power reducing', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u043E\u043D\u0438\u0436\u0435\u043D\u0438\u044F \u0441\u0442\u0435\u043F\u0435\u043D\u0438', 'Trigonometry power reducing', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u043E\u043D\u0438\u0436\u0435\u043D\u0438\u044F \u0441\u0442\u0435\u043F\u0435\u043D\u0438', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(/(+(1;cos(*(2;a)));2))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(/(+(1;-(cos(*(2;a))));2))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);3))', '(/(+(*(3;cos(a));cos(*(3;a)));4))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);3))', '(/(+(*(3;sin(a));-(sin(*(3;a))));4))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()])), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(/(+(1;cos(*(2;a)));+(1;+(-(cos(*(2;a)))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf_0([RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance(), RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance()]))])), new RulePackITR('TrigonometrySumToProd', void 0, void 0, 'Trigonometry sum to prod', '\u041F\u0440\u0435\u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u0443\u043C\u043C\u044B \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u0432 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Trigonometry sum to prods', '\u041F\u0440\u0435\u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u0443\u043C\u043C\u044B \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u0432 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);-(cos(b))))', '(+(-(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(tg(a);tg(b)))', '(/(sin(+(a;b));*(cos(a);cos(b))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(tg(a);-(tg(b))))', '(/(sin(+(a;-(b)));*(cos(a);cos(b))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(tg(a);tg(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));+(cos(+(a;-(b)));cos(+(a;b)))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance()))])), new RulePackITR('TrigonometryWeierstrass', void 0, void 0, 'Trigonometry Weierstrass substitution', '\u0423\u043D\u0438\u0432\u0435\u0440\u0441\u0430\u043B\u044C\u043D\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u043F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430', 'Trigonometry Weierstrass substitution', '\u0423\u043D\u0438\u0432\u0435\u0440\u0441\u0430\u043B\u044C\u043D\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u043F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(a;2)))', '(/(tg(/(a;2));^(+(1;^(tg(/(a;2));2));/(1;2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(a;2)))', '(/(1;^(+(1;^(tg(/(a;2));2));/(1;2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(*(2;tg(/(a;2)));+(1;^(tg(/(a;2));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(/(+(1;-(^(tg(/(a;2));2)));+(1;^(tg(/(a;2));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance()))])), new RulePackITR('TrigonometryComplex', void 0, void 0, 'Trigonometry in complex numbers', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u044B\u043C\u0438 \u0447\u0438\u0441\u043B\u0430\u043C\u0438', 'Trigonometry in complex numbers', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u044B\u043C\u0438 \u0447\u0438\u0441\u043B\u0430\u043C\u0438', void 0, void 0, 'standard_math', void 0, emptyList())]);
+  }
+  TrigonometricRulePacks$Companion.prototype.get = function () {
+    return this.trigonometricRulePacks;
+  };
+  TrigonometricRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var TrigonometricRulePacks$Companion_instance = null;
+  function TrigonometricRulePacks$Companion_getInstance() {
+    if (TrigonometricRulePacks$Companion_instance === null) {
+      new TrigonometricRulePacks$Companion();
+    }
+    return TrigonometricRulePacks$Companion_instance;
+  }
+  TrigonometricRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TrigonometricRulePacks',
     interfaces: []
   };
   function DefaultCombinatoricsRulePacks() {
@@ -9284,7 +9621,7 @@ var twf_js = function (_, Kotlin) {
     tmp$_10 = new RulePackITR('Logarithm', void 0, void 0, 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C', 'Basic Properties Without Regard to Domain', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 \u0443\u0447\u0435\u0442\u0430 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F', void 0, void 0, 'standard_math', tmp$_8, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;log(b;a)))', '(b)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(1;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(A;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c);a))', '(+(log(b;a);log(c;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a)))', '(log(*(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d);a))', '(+(log(b;a);log(c;a);log(d;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a)))', '(log(*(b;c;d);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d;e);a))', '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', '(log(*(b;c;d;e);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);-(log(c;a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(b;c);a))', '(*(c;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(c;log(b;a)))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(log(b;a);c))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;^(a;k)))', '(/(log(b;a);k))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(b;a);k))', '(log(b;^(a;k)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;log(b;a)))', '(log(a;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(/(1;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(c;a);log(b;a)))', '(log(c;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(-(log(/(c;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(c;b);a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;a))', '(+(-(log(/(1;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(1;b);a))))', '(log(b;a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(1;b);a))', '(+(-(log(b;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(b;a))))', '(log(/(1;b);a))', 25, false, false, false, false), new RuleITR('LogExpComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 96, false, false, false, false)]), tmp$_9);
     tmp$_11 = listOf(new RulePackLinkITR(void 0, 'ShortMultiplication'));
     tmp$_12 = mapOf([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)]))]);
-    this.defaultStandardMathRulePacks = plus(tmp$_13, listOf_0([tmp$_7, tmp$_10, new RulePackITR('BasicTrigonometricDefinitionsIdentity', void 0, void 0, 'Basic Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', 'Sin, Cos, Tg, Ctg Definitions and Basic Identity', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F sin, cos, tg, ctg \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', void 0, void 0, 'standard_math', tmp$_11, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(sin(a);2);^(cos(a);2)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', 25, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', 25, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', 25, true, true, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(tg(a);ctg(a)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(sin(a);cos(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(cos(a);sin(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(1;ctg(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 25, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(1;tg(a)))', 25, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(\u03C0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;\u03C0)))', '(0)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;2)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(/(\u03C0;2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(0))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(cos(0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(\u03C0))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;\u03C0)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(cos(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(1))', '(cos(\u03C0))', 89, true, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(/(\u03C0;2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;6)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(sin(/(\u03C0;6)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;3)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(cos(/(\u03C0;3)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', 13, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(tg(/(\u03C0;4)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(ctg(/(\u03C0;4)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(0))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(ctg(/(\u03C0;2)))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(*(2;\u03C0)))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(*(2;\u03C0)))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;*(2;\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(*(2;\u03C0)))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;*(2;\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(*(2;\u03C0)))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;\u03C0)))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(\u03C0))))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;\u03C0)))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(\u03C0))))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;\u03C0)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;\u03C0)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(tg(/(a;2));+(1;cos(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(ctg(/(a;2));+(1;+(-(cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;+(-(cos(a))));tg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;cos(a));ctg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(2;cos(/(a;2));sin(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(2;+(tg(a);ctg(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(2;+(tg(/(a;2));ctg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(3;a)))', '(+(*(3;sin(a));+(-(*(4;^(sin(a);3))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(+(a;b);c)))', '(sin(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(*(sin(a);ctg(a)))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(*(2;^(cos(/(a;2));2));+(-(1))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));+(ctg(a);tg(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(/(+(ctg(/(a;2));+(-(tg(/(a;2)))));+(ctg(/(a;2));tg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(3;a)))', '(+(*(4;^(cos(a);3));-(+(*(3;cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(+(a;b);c)))', '(cos(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(+(/(1;^(cos(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(+(1;+(-(cos(a))));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(sin(a);+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(/(a;2));2))', '(/(+(1;+(-(cos(a))));+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(/(+(1;+(-(cos(*(2;a)))));+(1;cos(*(2;a)))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);3))', '(/(+(*(3;sin(a));+(-(sin(*(3;a)))));+(*(3;cos(a));cos(*(3;a)))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(+(a;b);c)))', '(tg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(+(/(1;^(sin(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(+(1;cos(a));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(sin(a);+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(/(a;2));2))', '(/(+(1;cos(a));+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(/(+(1;cos(*(2;a)));+(1;+(-(cos(*(2;a)))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));2))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);3))', '(/(+(*(3;cos(a));cos(*(3;a)));+(*(3;sin(a));+(-(sin(*(3;a)))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(+(a;b);c)))', '(ctg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(+(-(1));1))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(^(sin(x);2);^(cos(x);2);+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(*(^(tg(x);2);^(ctg(x);2));+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(tg(x);2);+(-(/(1;^(cos(x);2))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(ctg(x);2);+(-(/(1;^(sin(x);2))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(1;1))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);cos(x));2);+(-(sin(*(2;x))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);-(+(cos(x))));2);sin(*(2;x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(x);2);+(1;^(tg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(x);2));cos(*(2;x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(x);2));+(-(cos(*(2;x))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(/(x;2));2));+(-(cos(x)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(/(x;2)));sin(x));+(-(^(tg(/(x;2));2)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(/(x;2));ctg(x));^(tg(/(x;2));2)))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(x);+(-(tg(x))));*(2;ctg(*(2;x)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(x));cos(*(3;x)));*(4;^(cos(x);3))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(x);ctg(x)))', 89, true, false, false, false, void 0, void 0, 1.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(x);2));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(x);2));+(-(^(ctg(x);2)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(2;x));*(2;sin(x);cos(x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(x);2);^(cos(x);2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;sin(/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 5.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 5.0, void 0, listOf(RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));cos(*(2;x)));2);+(-(sin(*(4;x))))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));-(+(cos(*(2;x)))));2);sin(*(4;x))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(*(2;x));2);+(1;^(tg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(*(2;x));2);+(1;^(ctg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(*(2;x));2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(*(2;x));2));+(-(cos(*(4;x))))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(x));sin(*(2;x)));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(x);ctg(*(2;x)));^(tg(x);2)))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(*(2;x));+(-(tg(*(2;x)))));*(2;ctg(*(4;x)))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(*(2;x)));cos(*(6;x)));*(4;^(cos(*(2;x));3))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(*(2;x));ctg(*(2;x))))', 89, true, false, false, false, void 0, void 0, 1.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(*(2;x));2));+(-(^(tg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(*(2;x));2));+(-(^(ctg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(4;x));*(2;sin(*(2;x));cos(*(2;x)))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(*(2;x));2);^(cos(*(2;x));2));cos(*(8;x))))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance()))]), tmp$_12), new RulePackITR('TrigonometrySinCosSumReduction', void 0, void 0, "Trigonometry Sin Cos of Sum and it's Reduction", '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0438\u0445 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Sin Cos of sum and difference; reduction Formulas', 'Sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438; \u0438\u0445 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', "Placed in separated rule pack for tasks for Derivation of formulas on Sin Cos of Double Argument, also it's Sum, Difference and Product", '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u044B \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u0432\u044B\u0432\u043E\u0434 \u0444\u043E\u0440\u043C\u0443\u043B \u043D\u0430 sin cos \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0438\u0445 \u0441\u0443\u043C\u043C\u0443, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0438 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'BasicTrigonometricDefinitionsIdentity')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', 24, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', 24, true, true, false, false, 'SORTED', void 0, 30.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', 24, true, true, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', 24, true, true, false, false, 'SORTED', void 0, 30.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(sin(a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(-(a)))', '(+(-(sin(a))))', 17, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;a)))', '(+(-(cos(-(a)))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(\u03C0;-(a))))', 14, true, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(cos(a)))', '(cos(+(\u03C0;-(a))))', 35, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(\u03C0;-(a))))', 35, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);a)))', '(cos(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', 35, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', 35, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 17, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', 14, true, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(-(a)))', '(cos(a))', 14, false, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(cos(+(b;-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_BASIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;-(\u03C0))))))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;-(\u03C0))))))', 89, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SHIFTING_getInstance()))])), new RulePackITR('Trigonometry', void 0, void 0, 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'Basic properties without Tg Ctg of sum and \u03C0k', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'TrigonometrySinCosSumReduction')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', 24, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', 24, true, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', 24, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', 24, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);-(cos(b))))', '(+(-(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance()))])), new RulePackITR('AdvancedTrigonometry', void 0, void 0, 'Advanced Trigonometry', '\u041F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'With Tg Ctg of Sum and \u03C0k reduction', '\u0421 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k \u0443\u043F\u0440\u043E\u0449\u0435\u043D\u0438\u0435\u043C', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'Trigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', 30, true, false, false, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', 30, true, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', 30, true, false, true, false, 'SORTED', void 0, 1000.0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', 30, true, false, true, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', '(ctg(+(a;-(b))))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(2;a)))', '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', '(tg(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', 30, true, false, false, false, 'SORTED', void 0, 15.0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', '(ctg(*(2;a)))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', 30, false, false, false, false, 'SORTED', void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_PERIODIC_getInstance()))])), new RulePackITR('InverseTrigonometricFunctions', void 0, void 0, 'Inverse Trigonometric Functions', '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions relations. Defined not on full domain', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u044B \u043D\u0435 \u0432\u0435\u0437\u0434\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'AdvancedTrigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(sin(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(asin(sin(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(cos(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(acos(cos(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(tg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(atg(tg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(ctg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(actg(ctg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(asin(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(sin(asin(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(acos(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(cos(acos(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(atg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(tg(atg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(actg(a)))', '(a)', 30, false, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(ctg(actg(a)))', 30, true, false, false, false, void 0, void 0, void 0, void 0, listOf(RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance()))]))]));
+    this.defaultStandardMathRulePacks = plus(tmp$_13, listOf_0([tmp$_7, tmp$_10, new RulePackITR('BasicTrigonometricDefinitionsIdentity', void 0, void 0, 'Basic Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', 'Sin, Cos, Tg, Ctg Definitions and Basic Identity', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F sin, cos, tg, ctg \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', void 0, void 0, 'standard_math', tmp$_11, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(sin(a);2);^(cos(a);2)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(tg(a);ctg(a)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(sin(a);cos(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(cos(a);sin(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(1;ctg(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(1;tg(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(\u03C0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;\u03C0)))', '(0)', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(\u03C0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;2)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(0))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(cos(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(\u03C0))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;\u03C0)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(cos(\u03C0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(1))', '(cos(\u03C0))', 89, true, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;6)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(sin(/(\u03C0;6)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;3)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(cos(/(\u03C0;3)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(tg(/(\u03C0;4)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(ctg(/(\u03C0;4)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(0))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(ctg(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(*(2;\u03C0)))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(*(2;\u03C0)))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;*(2;\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(*(2;\u03C0)))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;*(2;\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(*(2;\u03C0)))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;\u03C0)))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(\u03C0))))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;\u03C0)))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(\u03C0))))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;\u03C0)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;\u03C0)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(tg(/(a;2));+(1;cos(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(ctg(/(a;2));+(1;+(-(cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;+(-(cos(a))));tg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;cos(a));ctg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(2;cos(/(a;2));sin(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(2;+(tg(a);ctg(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(2;+(tg(/(a;2));ctg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(3;a)))', '(+(*(3;sin(a));+(-(*(4;^(sin(a);3))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(+(a;b);c)))', '(sin(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(*(sin(a);ctg(a)))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(*(2;^(cos(/(a;2));2));+(-(1))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));+(ctg(a);tg(a))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(/(+(ctg(/(a;2));+(-(tg(/(a;2)))));+(ctg(/(a;2));tg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(3;a)))', '(+(*(4;^(cos(a);3));-(+(*(3;cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(+(a;b);c)))', '(cos(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(+(/(1;^(cos(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(+(1;+(-(cos(a))));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(sin(a);+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(/(a;2));2))', '(/(+(1;+(-(cos(a))));+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(/(+(1;+(-(cos(*(2;a)))));+(1;cos(*(2;a)))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);3))', '(/(+(*(3;sin(a));+(-(sin(*(3;a)))));+(*(3;cos(a));cos(*(3;a)))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(+(a;b);c)))', '(tg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(+(/(1;^(sin(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(+(1;cos(a));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(sin(a);+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(/(a;2));2))', '(/(+(1;cos(a));+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(/(+(1;cos(*(2;a)));+(1;+(-(cos(*(2;a)))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));2))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);3))', '(/(+(*(3;cos(a));cos(*(3;a)));+(*(3;sin(a));+(-(sin(*(3;a)))))))', 80, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(+(a;b);c)))', '(ctg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(+(-(1));1))', 89, true, false, false, false, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(^(sin(x);2);^(cos(x);2);+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(*(^(tg(x);2);^(ctg(x);2));+(-(1))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(tg(x);2);+(-(/(1;^(cos(x);2))))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(ctg(x);2);+(-(/(1;^(sin(x);2))))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(1;1))', 89, true, false, false, false, void 0, void 0, 10.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);cos(x));2);+(-(sin(*(2;x))))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);-(+(cos(x))));2);sin(*(2;x))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(x);2);+(1;^(tg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(x);2));cos(*(2;x))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(x);2));+(-(cos(*(2;x))))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(/(x;2));2));+(-(cos(x)))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(/(x;2)));sin(x));+(-(^(tg(/(x;2));2)))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(/(x;2));ctg(x));^(tg(/(x;2));2)))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(x);+(-(tg(x))));*(2;ctg(*(2;x)))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(x));cos(*(3;x)));*(4;^(cos(x);3))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(x);ctg(x)))', 89, true, false, false, false, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(x);2));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(x);2));+(-(^(ctg(x);2)))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(2;x));*(2;sin(x);cos(x))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(x);2);^(cos(x);2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;sin(/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));cos(*(2;x)));2);+(-(sin(*(4;x))))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));-(+(cos(*(2;x)))));2);sin(*(4;x))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(*(2;x));2);+(1;^(tg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(*(2;x));2);+(1;^(ctg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(*(2;x));2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(*(2;x));2));+(-(cos(*(4;x))))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(x));sin(*(2;x)));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(x);ctg(*(2;x)));^(tg(x);2)))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(*(2;x));+(-(tg(*(2;x)))));*(2;ctg(*(4;x)))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(*(2;x)));cos(*(6;x)));*(4;^(cos(*(2;x));3))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(*(2;x));ctg(*(2;x))))', 89, true, false, false, false, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(*(2;x));2));+(-(^(tg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(*(2;x));2));+(-(^(ctg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(4;x));*(2;sin(*(2;x));cos(*(2;x)))))', 89, true, false, false, false, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(*(2;x));2);^(cos(*(2;x));2));cos(*(8;x))))', 89, true, false, false, false, void 0, void 0, 10.0)]), tmp$_12), new RulePackITR('TrigonometrySinCosSumReduction', void 0, void 0, "Trigonometry Sin Cos of Sum and it's Reduction", '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0438\u0445 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Sin Cos of sum and difference; reduction Formulas', 'Sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438; \u0438\u0445 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', "Placed in separated rule pack for tasks for Derivation of formulas on Sin Cos of Double Argument, also it's Sum, Difference and Product", '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u044B \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u0432\u044B\u0432\u043E\u0434 \u0444\u043E\u0440\u043C\u0443\u043B \u043D\u0430 sin cos \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0438\u0445 \u0441\u0443\u043C\u043C\u0443, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0438 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'BasicTrigonometricDefinitionsIdentity')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', 24, true, true, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', 24, true, true, false, false, 'SORTED', void 0, 30.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', 24, true, true, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', 24, true, true, false, false, 'SORTED', void 0, 30.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(sin(a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(-(a)))', '(+(-(sin(a))))', 17, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;a)))', '(+(-(cos(-(a)))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(\u03C0;-(a))))', 14, true, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(cos(a)))', '(cos(+(\u03C0;-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(\u03C0;-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);a)))', '(cos(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 17, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', 14, true, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', 14, false, false, false, false, 'SORTED', void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(-(a)))', '(cos(a))', 14, false, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, true, false, false, false, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(cos(+(b;-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;-(\u03C0))))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;-(\u03C0))))))', 89, true, false, false, false)])), new RulePackITR('Trigonometry', void 0, void 0, 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'Basic properties without Tg Ctg of sum and \u03C0k', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'TrigonometrySinCosSumReduction')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', 24, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', 24, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', 24, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', 24, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);-(cos(b))))', '(+(-(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))))', 23, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, 15.0)])), new RulePackITR('AdvancedTrigonometry', void 0, void 0, 'Advanced Trigonometry', '\u041F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'With Tg Ctg of Sum and \u03C0k reduction', '\u0421 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k \u0443\u043F\u0440\u043E\u0449\u0435\u043D\u0438\u0435\u043C', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'Trigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', 30, true, false, false, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', 30, true, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', 30, true, false, true, false, 'SORTED', void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', 30, true, false, true, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', '(ctg(+(a;-(b))))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(2;a)))', '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', 30, true, false, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', '(tg(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', 30, true, false, false, false, 'SORTED', void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', '(ctg(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', 30, false, false, false, false, 'SORTED')])), new RulePackITR('InverseTrigonometricFunctions', void 0, void 0, 'Inverse Trigonometric Functions', '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions relations. Defined not on full domain', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u044B \u043D\u0435 \u0432\u0435\u0437\u0434\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'AdvancedTrigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(sin(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(asin(sin(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(cos(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(acos(cos(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(tg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(atg(tg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(ctg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(actg(ctg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(asin(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(sin(asin(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(acos(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(cos(acos(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(atg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(tg(atg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(actg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(ctg(actg(a)))', 30, true, false, false, false)]))]));
   }
   DefaultStandardMathRulePacks$Companion.prototype.get = function () {
     return this.defaultStandardMathRulePacks;
@@ -9484,7 +9821,7 @@ var twf_js = function (_, Kotlin) {
     tmp$_67 = listOf_0([new RulePackLinkITR(void 0, 'LogicBase'), new RulePackLinkITR(void 0, 'LogicAbsorptionLaw')]);
     tmp$_68 = new TaskITR(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, 'logic', mutableSetOf([TaskTagCode$LOGIC_getInstance().code, TaskTagCode$NORMAL_FORMS_getInstance().code, TaskTagCode$CNF_getInstance().code]), '(not(or(A;B;C)))', void 0, void 0, 'DNF', void 0, void 0, void 0, 'or : (and) : : : not', void 0, void 0, tmp$_67, void 0, void 0, void 0, 1.5);
     tmp$_69 = listOf_0([new RulePackLinkITR(void 0, 'LogicBase'), new RulePackLinkITR(void 0, 'LogicAbsorptionLaw')]);
-    tmp$_70 = new TaskITR(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, 'logic', mutableSetOf([TaskTagCode$LOGIC_getInstance().code]), '(implic(and(a;b);or(\u0441;b)))', void 0, void 0, void 0, '(implic(a;implic(b;implic(not(c);b))))', void 0, void 0, void 0, void 0, void 0, tmp$_69, void 0, void 0, void 0, 3.0);
+    tmp$_70 = new TaskITR(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, 'logic', mutableSetOf([TaskTagCode$LOGIC_getInstance().code]), '(implic(and(a;b);or(c;b)))', void 0, void 0, void 0, '(implic(d;implic(b;implic(not(c);b))))', void 0, void 0, void 0, void 0, void 0, tmp$_69, void 0, void 0, void 0, 3.0);
     tmp$_71 = listOf_0([new RulePackLinkITR(void 0, 'LogicBase'), new RulePackLinkITR(void 0, 'LogicAbsorptionLaw')]);
     tmp$_72 = new TaskITR(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, 'logic', mutableSetOf([TaskTagCode$LOGIC_getInstance().code, TaskTagCode$NORMAL_FORMS_getInstance().code, TaskTagCode$CNF_getInstance().code]), '(not(and(A;implic(B;C))))', void 0, void 0, 'CNF', void 0, void 0, void 0, 'and : (or : 3) : : : not', 3, void 0, tmp$_71, void 0, void 0, void 0, 2.0);
     tmp$_73 = listOf_0([new RulePackLinkITR(void 0, 'LogicBase'), new RulePackLinkITR(void 0, 'LogicAbsorptionLaw')]);
@@ -11041,7 +11378,7 @@ var twf_js = function (_, Kotlin) {
       var denominatorNode = $receiver.children.get_za3lpa$(1).cloneAndWrap();
       return cmp.fastProbabilityCheckOnZero_em03xr$(denominatorNode) || containsUncertainties(denominatorNode, cmp);
     }
-    if (equals($receiver.value, '^') && cmp.fastProbabilityEquals_heho5o$(first($receiver.children), zero)) {
+    if (equals($receiver.value, '^') && cmp.fastProbabilityEquals_heho5o$(first_0($receiver.children), zero)) {
       var $receiver_0 = drop($receiver.children, 1);
       var any$result;
       any$break: do {
@@ -12944,14 +13281,14 @@ var twf_js = function (_, Kotlin) {
     value.parent = this;
   };
   ExpressionNode.prototype.isNumberValue = function () {
-    return !isBlank(this.value) && (isNumberPart(first_0(this.value)) || equals(this.value, '\u03C0') || equals(this.value, 'e'));
+    return !isBlank(this.value) && (isNumberPart(first_1(this.value)) || equals(this.value, '\u03C0') || equals(this.value, 'e'));
   };
   ExpressionNode.prototype.isIntNumber = function () {
     var tmp$;
     if (this.value.length === 0 && this.children.size === 1) {
-      return first(this.children).isIntNumber();
+      return first_0(this.children).isIntNumber();
     }
-    if (isBlank(this.value) || !isNumberPart(first_0(this.value))) {
+    if (isBlank(this.value) || !isNumberPart(first_1(this.value))) {
       return false;
     }
     tmp$ = toDoubleOrNull(this.value);
@@ -12968,9 +13305,9 @@ var twf_js = function (_, Kotlin) {
   ExpressionNode.prototype.isOddNumber = function () {
     var tmp$;
     if (this.value.length === 0 && this.children.size === 1) {
-      return first(this.children).isOddNumber();
+      return first_0(this.children).isOddNumber();
     }
-    if (isBlank(this.value) || !isNumberPart(first_0(this.value))) {
+    if (isBlank(this.value) || !isNumberPart(first_1(this.value))) {
       return false;
     }
     tmp$ = toDoubleOrNull(this.value);
@@ -13019,7 +13356,7 @@ var twf_js = function (_, Kotlin) {
   ExpressionNode.prototype.getFirstNotBracketChild = function () {
     var result = this;
     while (equals(result.value, '') && result.children.size === 1) {
-      result = first(result.children);
+      result = first_0(result.children);
     }
     return result;
   };
@@ -13118,8 +13455,8 @@ var twf_js = function (_, Kotlin) {
     }
     for (var i = get_lastIndex(this.children); i >= 0; i--) {
       this.children.get_za3lpa$(i).reduceExtraSigns_9jge9g$(extraUnaryFunctions, exclusionChildFunctions);
-      if ((this.children.size === 1 || !extraUnaryFunctions.contains_11rb$(this.value)) && this.children.get_za3lpa$(i).children.size === 1 && extraUnaryFunctions.contains_11rb$(this.children.get_za3lpa$(i).value) && !exclusionChildFunctions.contains_11rb$(first(this.children.get_za3lpa$(i).children).value)) {
-        this.children.set_wxm5ur$(i, first(this.children.get_za3lpa$(i).children));
+      if ((this.children.size === 1 || !extraUnaryFunctions.contains_11rb$(this.value)) && this.children.get_za3lpa$(i).children.size === 1 && extraUnaryFunctions.contains_11rb$(this.children.get_za3lpa$(i).value) && !exclusionChildFunctions.contains_11rb$(first_0(this.children.get_za3lpa$(i).children).value)) {
+        this.children.set_wxm5ur$(i, first_0(this.children.get_za3lpa$(i).children));
         this.children.get_za3lpa$(i).parent = this;
       }
     }
@@ -13148,8 +13485,8 @@ var twf_js = function (_, Kotlin) {
       var element = tmp$_7.next();
       element.normalizeTrivialFunctions();
     }
-    if (this.nodeType === NodeType$FUNCTION_getInstance() && ((tmp$_0 = (tmp$ = this.functionStringDefinition) != null ? tmp$.function : null) != null ? tmp$_0.numberOfArguments : null) === -1 && equals((tmp$_2 = (tmp$_1 = this.functionStringDefinition) != null ? tmp$_1.function : null) != null ? tmp$_2.notObligateMainFunction() : null, (tmp$_4 = (tmp$_3 = this.functionStringDefinition) != null ? tmp$_3.function : null) != null ? tmp$_4.function : null) && this.children.size === 1 && !equals((tmp$_6 = (tmp$_5 = first(this.children).functionStringDefinition) != null ? tmp$_5.function : null) != null ? tmp$_6.mainFunction : null, this.value)) {
-      this.setNode_em03xr$(first(this.children));
+    if (this.nodeType === NodeType$FUNCTION_getInstance() && ((tmp$_0 = (tmp$ = this.functionStringDefinition) != null ? tmp$.function : null) != null ? tmp$_0.numberOfArguments : null) === -1 && equals((tmp$_2 = (tmp$_1 = this.functionStringDefinition) != null ? tmp$_1.function : null) != null ? tmp$_2.notObligateMainFunction() : null, (tmp$_4 = (tmp$_3 = this.functionStringDefinition) != null ? tmp$_3.function : null) != null ? tmp$_4.function : null) && this.children.size === 1 && !equals((tmp$_6 = (tmp$_5 = first_0(this.children).functionStringDefinition) != null ? tmp$_5.function : null) != null ? tmp$_6.mainFunction : null, this.value)) {
+      this.setNode_em03xr$(first_0(this.children));
     }
   };
   ExpressionNode.prototype.normalizeSubtructions_z11m8b$ = function (functionConfiguration) {
@@ -13193,8 +13530,8 @@ var twf_js = function (_, Kotlin) {
     for (var i = get_lastIndex(this.children); i >= 0; i--) {
       this.children.get_za3lpa$(i).normalizeNullWeightCommutativeFunctions();
       if (this.children.get_za3lpa$(i).children.size === 1 && (((tmp$_0 = (tmp$ = this.children.get_za3lpa$(i).functionStringDefinition) != null ? tmp$.function : null) != null ? tmp$_0.isCommutativeWithNullWeight : null) === true || equals(this.children.get_za3lpa$(i).value, ''))) {
-        first(this.children.get_za3lpa$(i).children).parent = this;
-        this.children.set_wxm5ur$(i, first(this.children.get_za3lpa$(i).children));
+        first_0(this.children.get_za3lpa$(i).children).parent = this;
+        this.children.set_wxm5ur$(i, first_0(this.children.get_za3lpa$(i).children));
       }
     }
   };
@@ -13354,7 +13691,7 @@ var twf_js = function (_, Kotlin) {
       functionNameGetter = ExpressionNode$toPlainTextView$lambda_0;
     var tmp$;
     var result = this.toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
-    if (first_0(result) === 40 && last_0(result) === 41) {
+    if (first_1(result) === 40 && last_0(result) === 41) {
       var numberOfOpenBrackets = 1;
       var currentIndex = 1;
       while (currentIndex < result.length && numberOfOpenBrackets > 0) {
@@ -13381,7 +13718,7 @@ var twf_js = function (_, Kotlin) {
       identifier = getNodeValueString(this);
     }
      else if (equals(this.value, '') && this.children.size === 1) {
-      identifier = first(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
+      identifier = first_0(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
     }
      else {
       var $receiver = functionConfiguration.functionProperties;
@@ -13417,7 +13754,7 @@ var twf_js = function (_, Kotlin) {
             }
 
             if (this.children.size > 0) {
-              identifier += first(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
+              identifier += first_0(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
               tmp$ = get_lastIndex(this.children);
               for (var i = 1; i <= tmp$; i++) {
                 if (!equals((tmp$_0 = functionConfiguration.functionPropertiesByName.get_11rb$(this.children.get_za3lpa$(i).value + '_-1')) != null ? tmp$_0.mainFunction : null, functionIdentifier.function) || equals((tmp$_1 = functionConfiguration.functionPropertiesByName.get_11rb$(this.children.get_za3lpa$(i).value + '_-1')) != null ? tmp$_1.function : null, functionIdentifier.function)) {
@@ -13451,16 +13788,16 @@ var twf_js = function (_, Kotlin) {
             }
              while (false);
             if (contains(tmp$_3, (tmp$_2 = firstOrNull$result_0) != null ? tmp$_2.defaultStringDefinitionType : null)) {
-              identifier += functionNameGetter(functionIdentifier) + first(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
+              identifier += functionNameGetter(functionIdentifier) + first_0(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
             }
              else {
-              identifier += '(' + functionNameGetter(functionIdentifier) + first(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter) + ')';
+              identifier += '(' + functionNameGetter(functionIdentifier) + first_0(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter) + ')';
             }
 
             break;
           case 'UNARY_RIGHT_OPERATION':
-            var childplainTextRepresentation = first(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
-            if (isSign(first_0(childplainTextRepresentation), 32, false)) {
+            var childplainTextRepresentation = first_0(this.children).toPlainTextViewRec_0(functionConfiguration, getNodeValueString, functionNameGetter);
+            if (isSign(first_1(childplainTextRepresentation), 32, false)) {
               tmp$_4 = '(' + childplainTextRepresentation + ')';
             }
              else {
@@ -13498,7 +13835,7 @@ var twf_js = function (_, Kotlin) {
       getNodeValueString = ExpressionNode$toTexView$lambda;
     var tmp$;
     var result = this.toTexViewRec_0(functionConfiguration, getNodeValueString);
-    if (first_0(result) === 40 && last_0(result) === 41) {
+    if (first_1(result) === 40 && last_0(result) === 41) {
       var numberOfOpenBrackets = 1;
       var currentIndex = 1;
       while (currentIndex < result.length && numberOfOpenBrackets > 0) {
@@ -13533,7 +13870,7 @@ var twf_js = function (_, Kotlin) {
       identifier = getNodeValueString(this);
     }
      else if (equals(this.value, '') && this.children.size === 1) {
-      identifier = first(this.children).toTexViewRec_0(functionConfiguration);
+      identifier = first_0(this.children).toTexViewRec_0(functionConfiguration);
     }
      else {
       var $receiver = functionConfiguration.functionProperties;
@@ -13560,13 +13897,13 @@ var twf_js = function (_, Kotlin) {
             }
 
             if (equals(this.value, '/') && this.children.size === 2) {
-              identifier += '\\frac{' + first(this.children).getFirstNotBracketChild().toTexViewRec_0(functionConfiguration) + '}{' + last(this.children).getFirstNotBracketChild().toTexViewRec_0(functionConfiguration) + '}';
+              identifier += '\\frac{' + first_0(this.children).getFirstNotBracketChild().toTexViewRec_0(functionConfiguration) + '}{' + last(this.children).getFirstNotBracketChild().toTexViewRec_0(functionConfiguration) + '}';
             }
              else if (equals(this.value, 'log') && this.children.size === 2) {
-              identifier += '\\log _{' + last(this.children).toTexViewRec_0(functionConfiguration) + '}{' + first(this.children).toTexViewRec_0(functionConfiguration) + '}';
+              identifier += '\\log _{' + last(this.children).toTexViewRec_0(functionConfiguration) + '}{' + first_0(this.children).toTexViewRec_0(functionConfiguration) + '}';
             }
              else if (equals(this.value, 'sqrt') && this.children.size === 1) {
-              identifier += '\\sqrt{' + first(this.children).toTexViewRec_0(functionConfiguration) + '}';
+              identifier += '\\sqrt{' + first_0(this.children).toTexViewRec_0(functionConfiguration) + '}';
             }
              else if (equals(this.value, '^') && this.children.size >= 2) {
               tmp$ = this.children.iterator();
@@ -13579,7 +13916,7 @@ var twf_js = function (_, Kotlin) {
               identifier = $receiver_0.substring(0, endIndex) + repeat('}', this.children.size);
             }
              else if (this.children.size > 0) {
-              identifier += first(this.children).toTexViewRec_0(functionConfiguration);
+              identifier += first_0(this.children).toTexViewRec_0(functionConfiguration);
               tmp$_0 = get_lastIndex(this.children);
               for (var i = 1; i <= tmp$_0; i++) {
                 if (!equals((tmp$_1 = functionConfiguration.functionPropertiesByName.get_11rb$(this.children.get_za3lpa$(i).value + '_-1')) != null ? tmp$_1.mainFunction : null, functionIdentifier.function) || equals((tmp$_2 = functionConfiguration.functionPropertiesByName.get_11rb$(this.children.get_za3lpa$(i).value + '_-1')) != null ? tmp$_2.function : null, functionIdentifier.function)) {
@@ -13595,11 +13932,11 @@ var twf_js = function (_, Kotlin) {
 
             break;
           case 'UNARY_LEFT_OPERATION':
-            identifier += ' ' + functionIdentifier.texRepresentation + ' ' + first(this.children).toTexViewRec_0(functionConfiguration);
+            identifier += ' ' + functionIdentifier.texRepresentation + ' ' + first_0(this.children).toTexViewRec_0(functionConfiguration);
             break;
           case 'UNARY_RIGHT_OPERATION':
-            var childTexRepresentation = first(this.children).toTexViewRec_0(functionConfiguration);
-            if (isSign(first_0(childTexRepresentation), 32, false)) {
+            var childTexRepresentation = first_0(this.children).toTexViewRec_0(functionConfiguration);
+            if (isSign(first_1(childTexRepresentation), 32, false)) {
               tmp$_3 = '(' + childTexRepresentation + ')';
             }
              else {
@@ -13638,7 +13975,7 @@ var twf_js = function (_, Kotlin) {
       if (!tmp$_27) {
         var tmp$_28 = equals((tmp$_22 = (tmp$_21 = this.functionStringDefinition) != null ? tmp$_21.function : null) != null ? tmp$_22.defaultStringDefinitionType : null, StringDefinitionType$FUNCTION_getInstance()) && this.nodeId !== ((tmp$_25 = (tmp$_24 = (tmp$_23 = this.parent) != null ? tmp$_23.children : null) != null ? last(tmp$_24) : null) != null ? tmp$_25.nodeId : null);
         if (tmp$_28) {
-          tmp$_28 = !first(this.children).children.isEmpty();
+          tmp$_28 = !first_0(this.children).children.isEmpty();
         }
         tmp$_27 = tmp$_28;
       }
@@ -14252,7 +14589,7 @@ var twf_js = function (_, Kotlin) {
     while (tmp$.hasNext()) {
       var child = tmp$.next();
       var simplifiedChild = child.cloneAndSimplifyByCommutativeNormalizeAndComputeSimplePlaces_wq2kg4$(compiledConfiguration, selectedNodeIds);
-      if (equals(simplifiedChild.value, this.value) && ((tmp$_1 = (tmp$_0 = this.functionStringDefinition) != null ? tmp$_0.function : null) != null ? tmp$_1.isCommutativeWithNullWeight : null) === true && !contains_1(selectedNodeIds, simplifiedChild.nodeId)) {
+      if (equals(simplifiedChild.value, this.value) && ((tmp$_1 = (tmp$_0 = this.functionStringDefinition) != null ? tmp$_0.function : null) != null ? tmp$_1.isCommutativeWithNullWeight : null) === true && !contains_2(selectedNodeIds, simplifiedChild.nodeId)) {
         tmp$_2 = simplifiedChild.children.iterator();
         while (tmp$_2.hasNext()) {
           var childOfChild = tmp$_2.next();
@@ -14755,16 +15092,16 @@ var twf_js = function (_, Kotlin) {
   function subtractionTree(minuend, subtrahend) {
     var result = new ExpressionNode(NodeType$FUNCTION_getInstance(), '');
     result.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
-    first(result.children).addChild_em03xr$(first(minuend.children).clone());
-    first(result.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
-    last(first(result.children).children).addChild_em03xr$(first(subtrahend.children).clone());
+    first_0(result.children).addChild_em03xr$(first_0(minuend.children).clone());
+    first_0(result.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
+    last(first_0(result.children).children).addChild_em03xr$(first_0(subtrahend.children).clone());
     return result;
   }
   function divisionTree(dividend, divider) {
     var result = new ExpressionNode(NodeType$FUNCTION_getInstance(), '');
     result.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '/'));
-    first(result.children).addChild_em03xr$(first(dividend.children).clone());
-    first(result.children).addChild_em03xr$(first(divider.children).clone());
+    first_0(result.children).addChild_em03xr$(first_0(dividend.children).clone());
+    first_0(result.children).addChild_em03xr$(first_0(divider.children).clone());
     return result;
   }
   function addRootNodeToExpression(expression) {
@@ -15459,7 +15796,7 @@ var twf_js = function (_, Kotlin) {
      else {
       substitutionSelectionData.selectedSubtreeTopArguments = substitutionSelectionData.topOfSelection;
       while (ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).value.length === 0 && ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children.size === 1) {
-        substitutionSelectionData.selectedSubtreeTopArguments = first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children);
+        substitutionSelectionData.selectedSubtreeTopArguments = first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children);
       }
       substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder = substitutionSelectionData.selectedSubtreeTopArguments;
     }
@@ -15508,7 +15845,7 @@ var twf_js = function (_, Kotlin) {
         minusDivisionSafetyAddChild(ensureNotNull(substitutionSelectionData.notSelectedSubtreeTopArguments), substitutionSelectionData.compiledConfiguration, newChild, updatedHasDivision);
       }
        else {
-        if (!childSelectionNode.children.isEmpty() && (equals((tmp$_1 = (tmp$_0 = childSelectionNode.functionStringDefinition) != null ? tmp$_0.function : null) != null ? tmp$_1.notObligateMainFunction() : null, topOperation) || (childSelectionNode.children.size === 1 && equals(childSelectionNode.value, '+') && equals(first(childSelectionNode.children).value, '-')))) {
+        if (!childSelectionNode.children.isEmpty() && (equals((tmp$_1 = (tmp$_0 = childSelectionNode.functionStringDefinition) != null ? tmp$_0.function : null) != null ? tmp$_1.notObligateMainFunction() : null, topOperation) || (childSelectionNode.children.size === 1 && equals(childSelectionNode.value, '+') && equals(first_0(childSelectionNode.children).value, '-')))) {
           simpleCommutativeOperationSelectionHandlingRecursivePart(childSelectionNode, substitutionSelectionData, topOperation, hasMinus ^ equals(childSelectionNode.value, '-'), updatedHasDivision);
         }
          else {
@@ -15524,7 +15861,7 @@ var twf_js = function (_, Kotlin) {
   function createNewArgument(hasMinus, child, substitutionSelectionData) {
     if (hasMinus) {
       if (hasMinus && equals(child.value, '-') && child.children.size === 1) {
-        return first(child.children).clone();
+        return first_0(child.children).clone();
       }
        else {
         return generateMinusNode(ensureNotNull(substitutionSelectionData.notSelectedSubtreeTopArguments).value, substitutionSelectionData.compiledConfiguration, child.clone());
@@ -15561,7 +15898,7 @@ var twf_js = function (_, Kotlin) {
         last($receiver.children).addChild_em03xr$(newChild);
       }
        else {
-        first($receiver.children).addChild_em03xr$(newChild);
+        first_0($receiver.children).addChild_em03xr$(newChild);
       }
     }
   }
@@ -15671,7 +16008,7 @@ var twf_js = function (_, Kotlin) {
     if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$(PARENT_BRACKETS_EXPANSION)) {
       var subst = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$(PARENT_BRACKETS_EXPANSION));
       if (substitutionSelectionData.selectedNodes.size === 1 && equals((tmp$ = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$.value : null, (tmp$_1 = (tmp$_0 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_0.parent : null) != null ? tmp$_1.value : null) && ((tmp$_4 = (tmp$_3 = (tmp$_2 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_2.functionStringDefinition : null) != null ? tmp$_3.function : null) != null ? tmp$_4.isCommutativeWithNullWeight : null) === true) {
-        var inBracketsNode = first(substitutionSelectionData.selectedNodes);
+        var inBracketsNode = first_0(substitutionSelectionData.selectedNodes);
         var inBracketsNodeParent = ensureNotNull(inBracketsNode.parent);
         var inBracketsNodeIndex = inBracketsNodeParent.children.indexOf_11rb$(inBracketsNode);
         var newParent = inBracketsNodeParent.copy_4anocu$();
@@ -15710,10 +16047,10 @@ var twf_js = function (_, Kotlin) {
     if (substitutionSelectionData.selectedNodes.size === 1 && equals((tmp$_1 = (tmp$_0 = (tmp$ = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$.functionStringDefinition : null) != null ? tmp$_0.function : null) != null ? tmp$_1.mainFunction : null, '+') && substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('MinusInOutBrackets')) {
       var subst = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('MinusInOutBrackets'));
       if (equals((tmp$_2 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_2.value : null, '+')) {
-        tmp$_7 = first(substitutionSelectionData.selectedNodes);
+        tmp$_7 = first_0(substitutionSelectionData.selectedNodes);
       }
        else if (equals((tmp$_3 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_3.value : null, '-') && equals((tmp$_6 = (tmp$_5 = (tmp$_4 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_4.children : null) != null ? firstOrNull_1(tmp$_5) : null) != null ? tmp$_6.value : null, '+')) {
-        tmp$_7 = first(first(substitutionSelectionData.selectedNodes).children);
+        tmp$_7 = first_0(first_0(substitutionSelectionData.selectedNodes).children);
       }
        else
         return emptyList();
@@ -15723,7 +16060,7 @@ var twf_js = function (_, Kotlin) {
       while (tmp$_8.hasNext()) {
         var child = tmp$_8.next();
         if (equals(child.value, '-')) {
-          newInBracketsNode.addChild_em03xr$(first(child.children).clone());
+          newInBracketsNode.addChild_em03xr$(first_0(child.children).clone());
         }
          else {
           var $receiver = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1);
@@ -15797,7 +16134,7 @@ var twf_js = function (_, Kotlin) {
         var selectedHighList = ensureNotNull(substitutionSelectionData.lowestSubtreeHigh).listWhichParentsFunctionIs_61zpoe$(ensureNotNull(ensureNotNull(substitutionSelectionData.lowestSubtreeHigh).functionStringDefinition).function.mainFunction);
         if (selectedHighList.size === 2) {
           var originalExpression = substitutionSelectionData.originalExpression.clone();
-          var firstNode = first(selectedHighList);
+          var firstNode = first_0(selectedHighList);
           tmp$_9 = firstNode.parent;
           if (tmp$_9 == null) {
             return result;
@@ -15916,7 +16253,7 @@ var twf_js = function (_, Kotlin) {
       if (substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.containsKey_11rb$('ReduceArithmetic')) {
         var subst = ensureNotNull(substitutionSelectionData.compiledConfiguration.expressionTreeAutogeneratedTransformationRuleIdentifiers.get_11rb$('ReduceArithmetic'));
         if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '+')) {
-          var possibleDenominator = getOperandsFrom2ArgsNode(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), '/', 1, new ExpressionNode(NodeType$EMPTY_getInstance(), ''));
+          var possibleDenominator = getOperandsFrom2ArgsNode(first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), '/', 1, new ExpressionNode(NodeType$EMPTY_getInstance(), ''));
           if (ensureNotNull(possibleDenominator).nodeType !== NodeType$EMPTY_getInstance()) {
             tmp$ = get_lastIndex(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children);
             for (var i = 1; i <= tmp$; i++) {
@@ -15940,7 +16277,7 @@ var twf_js = function (_, Kotlin) {
           }
         }
         if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '*')) {
-          var possibleDegree = getOperandsFrom2ArgsNode(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), '^', 0, null);
+          var possibleDegree = getOperandsFrom2ArgsNode(first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), '^', 0, null);
           tmp$_2 = get_lastIndex(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children);
           for (var i_0 = 1; i_0 <= tmp$_2; i_0++) {
             if (!equals(possibleDegree != null ? possibleDegree.expressionStrictureIdentifier : null, getOperandsFrom2ArgsNode(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children.get_za3lpa$(i_0), '^', 0, null).expressionStrictureIdentifier)) {
@@ -15962,7 +16299,7 @@ var twf_js = function (_, Kotlin) {
           }
         }
         if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '*')) {
-          var possibleDegree_0 = getOperandsFrom2ArgsNode(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), '^', 1, new ExpressionNode(NodeType$EMPTY_getInstance(), ''));
+          var possibleDegree_0 = getOperandsFrom2ArgsNode(first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), '^', 1, new ExpressionNode(NodeType$EMPTY_getInstance(), ''));
           if (ensureNotNull(possibleDegree_0).nodeType !== NodeType$EMPTY_getInstance()) {
             tmp$_5 = get_lastIndex(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children);
             for (var i_1 = 1; i_1 <= tmp$_5; i_1++) {
@@ -16008,7 +16345,7 @@ var twf_js = function (_, Kotlin) {
       return emptyList();
     }
     var subst = tmp$;
-    var possibleMultipliersSet = getMultipliersFromNode(plusOperation, dotOperation, first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), useExpanded);
+    var possibleMultipliersSet = getMultipliersFromNode(plusOperation, dotOperation, first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), useExpanded);
     tmp$_0 = get_lastIndex(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children);
     for (var i = 1; i <= tmp$_0; i++) {
       var childMultipliers = getMultipliersFromNode(plusOperation, dotOperation, ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children.get_za3lpa$(i), useExpanded);
@@ -16063,7 +16400,7 @@ var twf_js = function (_, Kotlin) {
         while (tmp$_10.hasNext()) {
           var node = tmp$_10.next();
           var nodeIdentifier = node.toString();
-          if (contains_2(originalOrderIdentifier, nodeIdentifier) || contains_2(commutativeSortedIdentifier, nodeIdentifier)) {
+          if (contains_1(originalOrderIdentifier, nodeIdentifier) || contains_1(commutativeSortedIdentifier, nodeIdentifier)) {
             selected = true;
             break;
           }
@@ -16079,7 +16416,7 @@ var twf_js = function (_, Kotlin) {
         var prodNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$(dotOperation, -1);
         var dotZero = ensureNotNull(ensureNotNull(prodNode.functionStringDefinition).function.fieldAddZero);
         var sumNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$(plusOperation, -1);
-        handleAdditiveNodeAsReductionPart(plusOperation, dotOperation, dotZero, substitutionSelectionData, first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), possibleMultipliersSet, sumNode, prodNode, useExpanded);
+        handleAdditiveNodeAsReductionPart(plusOperation, dotOperation, dotZero, substitutionSelectionData, first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children), possibleMultipliersSet, sumNode, prodNode, useExpanded);
         tmp$_4 = get_lastIndex(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children);
         for (var i_0 = 1; i_0 <= tmp$_4; i_0++) {
           handleAdditiveNodeAsReductionPart(plusOperation, dotOperation, dotZero, substitutionSelectionData, ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children.get_za3lpa$(i_0), possibleMultipliersSet, sumNode, null, useExpanded);
@@ -16130,8 +16467,8 @@ var twf_js = function (_, Kotlin) {
       if (tmp$_8 && !substitutionSelectionData.compiledConfiguration.factComparator.expressionComparator.fastProbabilityCheckOnZero_em03xr$(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children))) {
         var originalExpression = substitutionSelectionData.originalExpression.clone();
         ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).fillStructureStringIdentifiers_5osufp$();
-        var numerator = first(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children).children);
-        var denominator = first(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children).children);
+        var numerator = first_0(first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children).children);
+        var denominator = first_0(last(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArguments).children).children);
         var rightBase = ensureNotNull(substitutionSelectionData.notSelectedSubtreeTopArguments);
         if (equals(numerator.expressionStrictureIdentifier, denominator.expressionStrictureIdentifier)) {
           var $receiver_0 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('/', -1);
@@ -16181,7 +16518,7 @@ var twf_js = function (_, Kotlin) {
               last($receiver_4.children).addChildOnPosition_gk94xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), denomDivNum.toString()), 0);
             }
              else {
-              first($receiver_4.children).addChildOnPosition_gk94xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), numDivDenom.toString()), 0);
+              first_0($receiver_4.children).addChildOnPosition_gk94xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), numDivDenom.toString()), 0);
             }
             var applicationResultInPlace_0 = normalizeReduceFractionResult($receiver_4);
             ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_gk94xr$(applicationResultInPlace_0, substitutionSelectionData.topOfSelectionIndex);
@@ -16190,18 +16527,18 @@ var twf_js = function (_, Kotlin) {
             result.add_11rb$(new SubstitutionApplication(expressionSubstitution_0, originalExpression, applicationPlace_0, $receiver_5, applicationResultInPlace_0, REDUCE_FRACTION, (tmp$_3 = subst.priority) != null ? tmp$_3 : 5));
           }
         }
-         else if (equals(numerator.value, '^') && equals(denominator.value, '^') && numerator.children.size === 2 && denominator.children.size === 2 && equals(first(numerator.children).expressionStrictureIdentifier, first(denominator.children).expressionStrictureIdentifier)) {
+         else if (equals(numerator.value, '^') && equals(denominator.value, '^') && numerator.children.size === 2 && denominator.children.size === 2 && equals(first_0(numerator.children).expressionStrictureIdentifier, first_0(denominator.children).expressionStrictureIdentifier)) {
           var numPow = toDoubleOrNull(last(numerator.children).value);
           var denomPow = toDoubleOrNull(last(denominator.children).value);
           if (numPow != null && denomPow != null) {
             if (numPow >= denomPow) {
               var pow = numPow - denomPow;
               if (substitutionSelectionData.compiledConfiguration.factComparator.expressionComparator.baseOperationsDefinitions.additivelyEqual_yvo9jy$(pow, 1.0)) {
-                tmp$_4 = first(numerator.children).clone();
+                tmp$_4 = first_0(numerator.children).clone();
               }
                else {
                 var $receiver_6 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('^', -1);
-                $receiver_6.addChild_em03xr$(first(numerator.children).clone());
+                $receiver_6.addChild_em03xr$(first_0(numerator.children).clone());
                 $receiver_6.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), toShortString(pow)));
                 tmp$_4 = $receiver_6;
               }
@@ -16211,11 +16548,11 @@ var twf_js = function (_, Kotlin) {
               var $receiver_7 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('/', -1);
               $receiver_7.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '1'));
               if (substitutionSelectionData.compiledConfiguration.factComparator.expressionComparator.baseOperationsDefinitions.additivelyEqual_yvo9jy$(pow_0, 1.0)) {
-                $receiver_7.addChild_em03xr$(first(numerator.children).clone());
+                $receiver_7.addChild_em03xr$(first_0(numerator.children).clone());
               }
                else {
                 var $receiver_8 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('^', -1);
-                $receiver_8.addChild_em03xr$(first(numerator.children).clone());
+                $receiver_8.addChild_em03xr$(first_0(numerator.children).clone());
                 $receiver_8.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), toShortString(pow_0)));
                 $receiver_7.addChild_em03xr$($receiver_8);
               }
@@ -16232,7 +16569,7 @@ var twf_js = function (_, Kotlin) {
               last($receiver_10.children).addChildOnPosition_gk94xr$(last(resNode_0.children).clone(), 0);
             }
              else {
-              first($receiver_10.children).addChildOnPosition_gk94xr$(resNode_0.clone(), 0);
+              first_0($receiver_10.children).addChildOnPosition_gk94xr$(resNode_0.clone(), 0);
             }
             var applicationResultInPlace_1 = normalizeReduceFractionResult($receiver_10);
             ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_gk94xr$(applicationResultInPlace_1, substitutionSelectionData.topOfSelectionIndex);
@@ -16242,7 +16579,7 @@ var twf_js = function (_, Kotlin) {
           }
            else {
             var $receiver_12 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('^', -1);
-            $receiver_12.addChild_em03xr$(first(numerator.children).clone());
+            $receiver_12.addChild_em03xr$(first_0(numerator.children).clone());
             var $receiver_13 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('+', -1);
             $receiver_13.addChild_em03xr$(last(numerator.children));
             var $receiver_14 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1);
@@ -16256,7 +16593,7 @@ var twf_js = function (_, Kotlin) {
             var expressionSubstitutionNumerator = new ExpressionSubstitution(addRootNodeToExpression($receiver_15), addRootNodeToExpression(resNodeNumerator), void 0, void 0, subst.code, subst.nameEn, subst.nameRu, void 0, void 0, void 0, void 0, subst.priority);
             var applicationPlaceNumerator = ensureNotNull(substitutionSelectionData.topOfSelection).clone();
             var $receiver_16 = rightBase.clone();
-            first($receiver_16.children).addChild_em03xr$(resNodeNumerator.clone());
+            first_0($receiver_16.children).addChild_em03xr$(resNodeNumerator.clone());
             var applicationResultInPlaceNumerator = normalizeReduceFractionResult($receiver_16);
             ensureNotNull(substitutionSelectionData.topOfSelectionParent).setChildOnPosition_gk94xr$(applicationResultInPlaceNumerator, substitutionSelectionData.topOfSelectionIndex);
             var $receiver_17 = substitutionSelectionData.expressionToTransform.clone();
@@ -16265,7 +16602,7 @@ var twf_js = function (_, Kotlin) {
             var $receiver_18 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('/', -1);
             $receiver_18.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '1'));
             var $receiver_19 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('^', -1);
-            $receiver_19.addChild_em03xr$(first(numerator.children).clone());
+            $receiver_19.addChild_em03xr$(first_0(numerator.children).clone());
             var $receiver_20 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('+', -1);
             $receiver_20.addChild_em03xr$(last(denominator.children));
             var $receiver_21 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1);
@@ -16316,16 +16653,16 @@ var twf_js = function (_, Kotlin) {
       $receiver.setVariable_61zpoe$('1');
     }
      else {
-      if (first($receiver.children).children.size === 0) {
-        first($receiver.children).setVariable_61zpoe$('1');
+      if (first_0($receiver.children).children.size === 0) {
+        first_0($receiver.children).setVariable_61zpoe$('1');
       }
-       else if (first($receiver.children).children.size === 1) {
-        $receiver.setChildOnPosition_gk94xr$(first(first($receiver.children).children), 0);
+       else if (first_0($receiver.children).children.size === 1) {
+        $receiver.setChildOnPosition_gk94xr$(first_0(first_0($receiver.children).children), 0);
       }
       if (last($receiver.children).children.size === 0) {
-        $receiver.value = first($receiver.children).value;
-        $receiver.functionStringDefinition = first($receiver.children).functionStringDefinition;
-        $receiver.children = first($receiver.children).children;
+        $receiver.value = first_0($receiver.children).value;
+        $receiver.functionStringDefinition = first_0($receiver.children).functionStringDefinition;
+        $receiver.children = first_0($receiver.children).children;
         var tmp$_0;
         tmp$_0 = $receiver.children.iterator();
         while (tmp$_0.hasNext()) {
@@ -16334,7 +16671,7 @@ var twf_js = function (_, Kotlin) {
         }
       }
        else if (last($receiver.children).children.size === 1) {
-        $receiver.setChildOnPosition_gk94xr$(first(last($receiver.children).children), 1);
+        $receiver.setChildOnPosition_gk94xr$(first_0(last($receiver.children).children), 1);
       }
     }
     return $receiver;
@@ -16346,7 +16683,7 @@ var twf_js = function (_, Kotlin) {
       hasMinus = false;
     var tmp$;
     if (equals(expressionNode.value, '-')) {
-      return getOperandsFrom2ArgsNode(first(expressionNode.children), operation, operandIndex, ifNotReturn, substitutionSelectionData, hasMinus ^ true);
+      return getOperandsFrom2ArgsNode(first_0(expressionNode.children), operation, operandIndex, ifNotReturn, substitutionSelectionData, hasMinus ^ true);
     }
      else {
       if (equals(expressionNode.value, operation) && expressionNode.children.size === 2) {
@@ -16368,7 +16705,7 @@ var twf_js = function (_, Kotlin) {
   function getMultipliersFromNode(plusOperation, dotOperation, expressionNode, expandPow) {
     var tmp$;
     if (equals(expressionNode.value, '-') && equals(plusOperation, '+')) {
-      return getMultipliersFromNode(plusOperation, dotOperation, first(expressionNode.children), expandPow);
+      return getMultipliersFromNode(plusOperation, dotOperation, first_0(expressionNode.children), expandPow);
     }
      else if (equals(expressionNode.value, dotOperation)) {
       var result = ArrayList_init_0();
@@ -16377,7 +16714,7 @@ var twf_js = function (_, Kotlin) {
         var child = tmp$.next();
         if (powExpandCondition(plusOperation, expandPow, child)) {
           var pow = toInt(last(child.children).value);
-          addMultiplierIdentifierToList(result, first(child.children), pow);
+          addMultiplierIdentifierToList(result, first_0(child.children), pow);
         }
          else {
           addMultiplierIdentifierToList(result, child);
@@ -16387,7 +16724,7 @@ var twf_js = function (_, Kotlin) {
     }
      else if (powExpandCondition(plusOperation, expandPow, expressionNode)) {
       var pow_0 = toInt(last(expressionNode.children).value);
-      return listOf(new ExpressionStrictureIdentifierCounter(ensureNotNull(first(expressionNode.children).expressionStrictureIdentifier), pow_0));
+      return listOf(new ExpressionStrictureIdentifierCounter(ensureNotNull(first_0(expressionNode.children).expressionStrictureIdentifier), pow_0));
     }
      else {
       return listOf(new ExpressionStrictureIdentifierCounter(ensureNotNull(expressionNode.expressionStrictureIdentifier)));
@@ -16449,7 +16786,7 @@ var twf_js = function (_, Kotlin) {
       hasMinus = false;
     var tmp$, tmp$_0;
     if (equals(expressionNode.value, '-') && equals(plusOperation, '+')) {
-      handleAdditiveNodeAsReductionPart(plusOperation, dotOperation, dotZero, substitutionSelectionData, first(expressionNode.children), multipliers, sumNode, prodNode, expandPow, hasMinus ^ true);
+      handleAdditiveNodeAsReductionPart(plusOperation, dotOperation, dotZero, substitutionSelectionData, first_0(expressionNode.children), multipliers, sumNode, prodNode, expandPow, hasMinus ^ true);
     }
      else if (equals(expressionNode.value, dotOperation)) {
       var multipliersCopy = ArrayList_init_0();
@@ -16464,7 +16801,7 @@ var twf_js = function (_, Kotlin) {
         var child = tmp$_0.next();
         if (powExpandCondition(plusOperation, expandPow, child)) {
           var pow = toInt(last(child.children).value);
-          addMultiplierToSumProdNode(multipliersCopy, first(child.children), prodNode, substitutionSelectionData, sumProdNode, pow);
+          addMultiplierToSumProdNode(multipliersCopy, first_0(child.children), prodNode, substitutionSelectionData, sumProdNode, pow);
         }
          else {
           addMultiplierToSumProdNode(multipliersCopy, child, prodNode, substitutionSelectionData, sumProdNode, 1);
@@ -16474,7 +16811,7 @@ var twf_js = function (_, Kotlin) {
         sumNode.addChild_em03xr$(minusNode(substitutionSelectionData, new ExpressionNode(NodeType$VARIABLE_getInstance(), dotZero), hasMinus));
       }
       if (sumProdNode.children.size === 1) {
-        sumNode.addChild_em03xr$(minusNode(substitutionSelectionData, first(sumProdNode.children), hasMinus));
+        sumNode.addChild_em03xr$(minusNode(substitutionSelectionData, first_0(sumProdNode.children), hasMinus));
       }
        else if (sumProdNode.children.size > 1) {
         sumNode.addChild_em03xr$(minusNode(substitutionSelectionData, sumProdNode, hasMinus));
@@ -16489,7 +16826,7 @@ var twf_js = function (_, Kotlin) {
           tmp$_1 = multipliers.iterator();
           while (tmp$_1.hasNext()) {
             var element = tmp$_1.next();
-            if (equals(element.expressionStrictureIdentifier, first(expressionNode.children).expressionStrictureIdentifier)) {
+            if (equals(element.expressionStrictureIdentifier, first_0(expressionNode.children).expressionStrictureIdentifier)) {
               firstOrNull$result = element;
               break firstOrNull$break;
             }
@@ -16700,9 +17037,9 @@ var twf_js = function (_, Kotlin) {
       }
       if (substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder != null && ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children.size === 2) {
         result.addAll_brywnq$(generalOpeningBracketsSubstitutions(substitutionSelectionData.originalExpression, substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder, substitutionSelectionData.topOfSelectionParent, substitutionSelectionData.topOfSelectionIndex, substitutionSelectionData.compiledConfiguration, substitutionSelectionData.expressionToTransform, substitutionSelectionData.notSelectedSubtreeTopArguments, substitutionSelectionData.notSelectedSubtreeTopOriginalTree, substitutionSelectionData.topOfSelection, simplifyNotSelectedTopArguments));
-        if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '^') && equals(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, '*') && first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.size > 1) {
+        if (equals(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).value, '^') && equals(first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).value, '*') && first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.size > 1) {
           var prodNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('*', -1);
-          tmp$_7 = first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.iterator();
+          tmp$_7 = first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).children.iterator();
           while (tmp$_7.hasNext()) {
             var lChild = tmp$_7.next();
             var powNode = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('^', -1);
@@ -16718,7 +17055,7 @@ var twf_js = function (_, Kotlin) {
           while (tmp$_9.hasNext()) {
             var rChild = tmp$_9.next();
             var powNode_0 = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('^', -1);
-            powNode_0.addChild_em03xr$(first(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).clone());
+            powNode_0.addChild_em03xr$(first_0(ensureNotNull(substitutionSelectionData.selectedSubtreeTopArgumentsInSelectionOrder).children).clone());
             if (equals(rChild.value, '-')) {
               powNode_0.addChild_em03xr$(substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('+', -1));
               last(powNode_0.children).addChild_em03xr$(rChild.clone());
@@ -16852,7 +17189,7 @@ var twf_js = function (_, Kotlin) {
     var tmp$;
     var result = ArrayList_init_0();
     if (substitutionSelectionData.selectedNodes.size === 2) {
-      var applicationPlace = first(substitutionSelectionData.selectedNodes);
+      var applicationPlace = first_0(substitutionSelectionData.selectedNodes);
       tmp$ = applicationPlace.parent;
       if (tmp$ == null) {
         return result;
@@ -16928,7 +17265,7 @@ var twf_js = function (_, Kotlin) {
       }
       var applicationToSelectedPartResult = tmp$_0;
       addApplicationToResults(true, substitutionSelectionData, simplifyNotSelectedTopArguments, applicationToSelectedPartResult, result, expressionSubstitution, (tmp$_1 = expressionSubstitution.code) != null ? tmp$_1 : '', (tmp$_2 = expressionSubstitution.priority) != null ? tmp$_2 : 100);
-      return first(result).resultExpression;
+      return first_0(result).resultExpression;
     }
     return null;
   }
@@ -17160,7 +17497,7 @@ var twf_js = function (_, Kotlin) {
         tmp$_0 = selectedNodes.iterator();
         while (tmp$_0.hasNext()) {
           var selectedNode = tmp$_0.next();
-          if (!equals(selectedNode.value, first(rule.right.children).value) && !containsAny_0(selectedNode.getAllChildrenNodeIds(), substitutionSelectionData.selectedNodeIds)) {
+          if (!equals(selectedNode.value, first_0(rule.right.children).value) && !containsAny_0(selectedNode.getAllChildrenNodeIds(), substitutionSelectionData.selectedNodeIds)) {
             tmp$_1 = selectedNode.parent;
             if (tmp$_1 == null) {
               continue;
@@ -17185,11 +17522,11 @@ var twf_js = function (_, Kotlin) {
      else if (equals((tmp$_3 = (tmp$_2 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_2.parent : null) != null ? tmp$_3.value : null, '-') && equals((tmp$_6 = (tmp$_5 = (tmp$_4 = firstOrNull_1(substitutionSelectionData.selectedNodes)) != null ? tmp$_4.parent : null) != null ? tmp$_5.parent : null) != null ? tmp$_6.value : null, '+')) {
       var expression_0 = substitutionSelectionData.originalExpression.clone();
       var selectedNodes_0 = nodeIdsToNodeLinksInSameOrder(expression_0, substitutionSelectionData.selectedNodeIds, nodeIdsPositionsMap(substitutionSelectionData.selectedNodeIds));
-      var dadPlusNode = ensureNotNull(ensureNotNull(first(selectedNodes_0).parent).parent);
-      var parentMinusNode = ensureNotNull(first(selectedNodes_0).parent);
+      var dadPlusNode = ensureNotNull(ensureNotNull(first_0(selectedNodes_0).parent).parent);
+      var parentMinusNode = ensureNotNull(first_0(selectedNodes_0).parent);
       var parentMinusNodeIndex = dadPlusNode.children.indexOf_11rb$(parentMinusNode);
       var $receiver = substitutionSelectionData.compiledConfiguration.createExpressionFunctionNode_twmih4$('+', -1);
-      $receiver.nodeId = first_1(substitutionSelectionData.selectedNodeIds);
+      $receiver.nodeId = first_2(substitutionSelectionData.selectedNodeIds);
       var addNode = $receiver;
       parentMinusNode.resetNodeIds();
       addNode.addChild_em03xr$(parentMinusNode);
@@ -17282,7 +17619,7 @@ var twf_js = function (_, Kotlin) {
     var result = ArrayList_init_0();
     fillSubstitutionSelectionData(substitutionSelectionData);
     if (substitutionSelectionData.selectedNodes.size === 1) {
-      var applicationPlace = first(substitutionSelectionData.selectedNodes);
+      var applicationPlace = first_0(substitutionSelectionData.selectedNodes);
       tmp$ = applicationPlace.parent;
       if (tmp$ == null) {
         return result;
@@ -17620,7 +17957,7 @@ var twf_js = function (_, Kotlin) {
     if (tmp$) {
       return false;
     }
-     else if (this.treePermittedFunctions.isEmpty() || (this.treePermittedFunctions.size === 1 && first(this.treePermittedFunctions).isEmpty())) {
+     else if (this.treePermittedFunctions.isEmpty() || (this.treePermittedFunctions.size === 1 && first_0(this.treePermittedFunctions).isEmpty())) {
       return true;
     }
      else {
@@ -19930,7 +20267,7 @@ var twf_js = function (_, Kotlin) {
       return null;
   };
   ExpressionSubstitution.prototype.isNormalType = function () {
-    return !contains_2(this.code, '__to__');
+    return !contains_1(this.code, '__to__');
   };
   ExpressionSubstitution.$metadata$ = {
     kind: Kind_CLASS,
@@ -20545,7 +20882,7 @@ var twf_js = function (_, Kotlin) {
         var tmp$_1;
         tmp$_0 = endsWith_0(trim(Kotlin.isCharSequence(tmp$_1 = originalExpression) ? tmp$_1 : throwCCE()).toString(), '>');
       }
-      isMathML = tmp$_0 || contains_2(originalExpression, '&#');
+      isMathML = tmp$_0 || contains_1(originalExpression, '&#');
     }
     this.originalExpression = originalExpression;
     this.nameForRuleDesignationsPossible = nameForRuleDesignationsPossible;
@@ -22524,11 +22861,11 @@ var twf_js = function (_, Kotlin) {
       if (!isBlank(plusOperation)) {
         if (!equals(dotOperation, '/') && equals(last(ensureNotNull(transformationNode).children).value, plusOperation) && last(ensureNotNull(transformationNode).children).children.size > 1) {
           var sumNode = compiledConfiguration.createExpressionFunctionNode_twmih4$(plusOperation, -1);
-          if (equals(first(ensureNotNull(transformationNode).children).value, plusOperation)) {
-            tmp$ = first(ensureNotNull(transformationNode).children).children;
+          if (equals(first_0(ensureNotNull(transformationNode).children).value, plusOperation)) {
+            tmp$ = first_0(ensureNotNull(transformationNode).children).children;
           }
            else {
-            tmp$ = listOf(first(ensureNotNull(transformationNode).children));
+            tmp$ = listOf(first_0(ensureNotNull(transformationNode).children));
           }
           var lChildren = tmp$;
           if (equals(last(ensureNotNull(transformationNode).children).value, plusOperation)) {
@@ -22540,13 +22877,13 @@ var twf_js = function (_, Kotlin) {
           var rChildren = tmp$_0;
           addSumOpeningBracketsResult(originalExpression, transformationNode, transformationNodeParent, transformationNodeIndex, expressionToTransform, notSelectedSubtreeTopArguments, notSelectedSubtreeTopOriginalTree, fullTransformationNode, lChildren, rChildren, compiledConfiguration, sumNode, simplifyNotSelectedTopArguments, result);
         }
-        if (equals(first(ensureNotNull(transformationNode).children).value, plusOperation) && first(ensureNotNull(transformationNode).children).children.size > 1) {
+        if (equals(first_0(ensureNotNull(transformationNode).children).value, plusOperation) && first_0(ensureNotNull(transformationNode).children).children.size > 1) {
           var sumNode_0 = compiledConfiguration.createExpressionFunctionNode_twmih4$(plusOperation, -1);
-          if (equals(first(ensureNotNull(transformationNode).children).value, plusOperation)) {
-            tmp$_1 = first(ensureNotNull(transformationNode).children).children;
+          if (equals(first_0(ensureNotNull(transformationNode).children).value, plusOperation)) {
+            tmp$_1 = first_0(ensureNotNull(transformationNode).children).children;
           }
            else {
-            tmp$_1 = listOf(first(ensureNotNull(transformationNode).children));
+            tmp$_1 = listOf(first_0(ensureNotNull(transformationNode).children));
           }
           var lChildren_0 = tmp$_1;
           var rChildren_0 = listOf(last(ensureNotNull(transformationNode).children));
@@ -22593,14 +22930,14 @@ var twf_js = function (_, Kotlin) {
           var needMinus = false;
           if (equals(lChild.value, '-')) {
             needMinus = needMinus ^ true;
-            tmp$_1 = first(lChild.children);
+            tmp$_1 = first_0(lChild.children);
           }
            else
             tmp$_1 = lChild;
           var lMul = tmp$_1;
           if (equals(rChild.value, '-')) {
             needMinus = needMinus ^ true;
-            tmp$_2 = first(rChild.children);
+            tmp$_2 = first_0(rChild.children);
           }
            else
             tmp$_2 = rChild;
@@ -23048,7 +23385,7 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 1) {
       return null;
     }
-    return -first(args);
+    return -first_0(args);
   }
   function mul(args, simpleComputationRuleParams) {
     if (simpleComputationRuleParams === void 0)
@@ -23077,7 +23414,7 @@ var twf_js = function (_, Kotlin) {
       tmp$_0 = any$result;
     }
     if (tmp$_0) {
-      return first(args) * last(args);
+      return first_0(args) * last(args);
     }
     var result = 1.0;
     tmp$ = args.iterator();
@@ -23113,10 +23450,10 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 2) {
       return null;
     }
-    if (roundNumber(first(args)) > simpleComputationRuleParams.maxDivBaseRounded || roundNumber(last(args)) > simpleComputationRuleParams.maxMulArgRounded || last(args) === 0.0) {
+    if (roundNumber(first_0(args)) > simpleComputationRuleParams.maxDivBaseRounded || roundNumber(last(args)) > simpleComputationRuleParams.maxMulArgRounded || last(args) === 0.0) {
       return null;
     }
-    var result = first(args) / last(args);
+    var result = first_0(args) / last(args);
     return result;
   }
   function pow(args, simpleComputationRuleParams) {
@@ -23125,13 +23462,13 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 2) {
       return null;
     }
-    var $receiver = first(args);
+    var $receiver = first_0(args);
     var x = last(args);
     var result = Math_0.pow($receiver, x);
     if (!isFinite(result)) {
       return null;
     }
-    if (roundNumber(result) > simpleComputationRuleParams.maxResRounded || (roundNumber(first(args)) > simpleComputationRuleParams.maxPowBaseRounded && roundNumber(last(args)) > simpleComputationRuleParams.maxPowDegRounded)) {
+    if (roundNumber(result) > simpleComputationRuleParams.maxResRounded || (roundNumber(first_0(args)) > simpleComputationRuleParams.maxPowBaseRounded && roundNumber(last(args)) > simpleComputationRuleParams.maxPowDegRounded)) {
       return null;
     }
     return result;
@@ -23142,11 +23479,11 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 2) {
       return null;
     }
-    var result = log(first(args), last(args));
+    var result = log(first_0(args), last(args));
     if (!isFinite(result) || (roundNumber(result) >= 1 && !inZ(result))) {
       return null;
     }
-    if (roundNumber(result) > simpleComputationRuleParams.maxResRounded || (roundNumber(first(args)) > simpleComputationRuleParams.maxPowBaseRounded && roundNumber(last(args)) > simpleComputationRuleParams.maxLogBaseRounded)) {
+    if (roundNumber(result) > simpleComputationRuleParams.maxResRounded || (roundNumber(first_0(args)) > simpleComputationRuleParams.maxPowBaseRounded && roundNumber(last(args)) > simpleComputationRuleParams.maxLogBaseRounded)) {
       return null;
     }
     return result;
@@ -23157,7 +23494,7 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 1) {
       return null;
     }
-    var x = first(args);
+    var x = first_0(args);
     var result = Math_0.sin(x);
     if (!isFinite(result) || toReal_0(roundNumber(result)).additivelyEqualToZero() || toReal_0(roundNumber(result) - 0.5).additivelyEqualToZero() || toReal_0(roundNumber(result) - 1.0).additivelyEqualToZero()) {
       return null;
@@ -23170,7 +23507,7 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 1) {
       return null;
     }
-    var x = first(args);
+    var x = first_0(args);
     var result = Math_0.cos(x);
     if (!isFinite(result) || toReal_0(roundNumber(result)).additivelyEqualToZero() || toReal_0(roundNumber(result) - 0.5).additivelyEqualToZero() || toReal_0(roundNumber(result) - 1.0).additivelyEqualToZero()) {
       return null;
@@ -23183,7 +23520,7 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 1) {
       return null;
     }
-    var x = first(args);
+    var x = first_0(args);
     var result = Math_0.tan(x);
     if (!isFinite(result) || toReal_0(roundNumber(result)).additivelyEqualToZero() || toReal_0(roundNumber(result) - 1.0).additivelyEqualToZero()) {
       return null;
@@ -23196,7 +23533,7 @@ var twf_js = function (_, Kotlin) {
     if (args.size !== 1) {
       return null;
     }
-    var x = first(args);
+    var x = first_0(args);
     var result = 1 / Math_0.tan(x);
     if (!isFinite(result) || toReal_0(roundNumber(result)).additivelyEqualToZero() || toReal_0(roundNumber(result) - 1.0).additivelyEqualToZero()) {
       return null;
@@ -23457,7 +23794,7 @@ var twf_js = function (_, Kotlin) {
     }
     var topNode = this.data;
     while (isBlank(topNode.value) && topNode.children.size === 1) {
-      topNode = first(topNode.children);
+      topNode = first_0(topNode.children);
     }
     if (!equals(topNode.value, '*')) {
       return new GeneralError('Answer is not factorized');
@@ -23516,7 +23853,7 @@ var twf_js = function (_, Kotlin) {
         return new GeneralError('left part of the result contains more than one variable: ' + joinToString(containedVariables, void 0, void 0, void 0, void 0, void 0, Expression$isSolutionForVariables$lambda));
       }
        else if (containedVariables.size === 1) {
-        targetVariables.put_xwzc9p$(first_2(containedVariables), true);
+        targetVariables.put_xwzc9p$(first(containedVariables), true);
       }
       return null;
     }
@@ -23940,7 +24277,7 @@ var twf_js = function (_, Kotlin) {
   }
   function ExpressionChain$check$lambda_65(this$ExpressionChain) {
     return function () {
-      return CheckingKeyWords$Companion_getInstance().expressionChainVerified + ". '" + first(this$ExpressionChain.chain) + "' " + this$ExpressionChain.comparisonType.string + " '" + last(this$ExpressionChain.chain) + "'";
+      return CheckingKeyWords$Companion_getInstance().expressionChainVerified + ". '" + first_0(this$ExpressionChain.chain) + "' " + this$ExpressionChain.comparisonType.string + " '" + last(this$ExpressionChain.chain) + "'";
     };
   }
   ExpressionChain.prototype.check_i0qcxd$$default = function (factComparator, onExpressionLevel, factsTransformations, expressionTransformations, additionalFacts, skipTrivialCheck) {
@@ -24013,7 +24350,7 @@ var twf_js = function (_, Kotlin) {
             }
             return new ComparisonResult(false, coloringTasks, tmp$_27, tmp$_28, tmp$_29 + joinToString(destination_1, void 0, void 0, void 0, void 0, void 0, ExpressionChain$check$lambda_21));
           }
-          tmp$_1 = first(rules);
+          tmp$_1 = first_0(rules);
         }
         var transformation = tmp$_1;
         currentRightIndex = log_1.assignAndLog_746w4o$(currentRightIndex + 1 | 0, currentLogLevel.v, ExpressionChain$check$lambda_22);
@@ -24115,7 +24452,7 @@ var twf_js = function (_, Kotlin) {
       currentRightIndex = log_1.assignAndLog_746w4o$(currentRightIndex + 1 | 0, currentLogLevel.v, ExpressionChain$check$lambda_64);
     }
     log_1.addMessage_cte53e$(ExpressionChain$check$lambda_65(this), MessageType$USER_getInstance(), currentLogLevel.v);
-    return new ComparisonResult(true, coloringTasks, first(this.chain), last(this.chain), void 0, additionalFactUsed);
+    return new ComparisonResult(true, coloringTasks, first_0(this.chain), last(this.chain), void 0, additionalFactUsed);
   };
   ExpressionChain.$metadata$ = {
     kind: Kind_CLASS,
@@ -24658,19 +24995,19 @@ var twf_js = function (_, Kotlin) {
     if (comparisonResult.isCorrect) {
       log_1.addMessage_cte53e$(Rule$check$lambda_1(this), void 0, currentLogLevel.v);
       if (!this.root.expressionTransformationChains.isEmpty()) {
-        var left = Kotlin.isType(tmp$ = first(first(this.root.expressionTransformationChains).chain), Expression) ? tmp$ : throwCCE();
-        var right = Kotlin.isType(tmp$_0 = last(first(this.root.expressionTransformationChains).chain), Expression) ? tmp$_0 : throwCCE();
+        var left = Kotlin.isType(tmp$ = first_0(first_0(this.root.expressionTransformationChains).chain), Expression) ? tmp$ : throwCCE();
+        var right = Kotlin.isType(tmp$_0 = last(first_0(this.root.expressionTransformationChains).chain), Expression) ? tmp$_0 : throwCCE();
         applyAllImmediateSubstitutions(left.data, factComparator.compiledConfiguration);
         applyAllImmediateSubstitutions(right.data, factComparator.compiledConfiguration);
         if (!factComparator.expressionComparator.compareAsIs_5gxvt3$(left.data, right.data)) {
-          this.expressionSubstitution = new ExpressionSubstitution(left.data, right.data, void 0, comparisonResult.additionalFactUsed, this.name, void 0, void 0, first(this.root.expressionTransformationChains).comparisonType);
+          this.expressionSubstitution = new ExpressionSubstitution(left.data, right.data, void 0, comparisonResult.additionalFactUsed, this.name, void 0, void 0, first_0(this.root.expressionTransformationChains).comparisonType);
           log_1.addMessageWithExpressionSubstitutionShort_w3y3zc$(Rule$check$lambda_2, ensureNotNull(this.expressionSubstitution), MessageType$USER_getInstance(), currentLogLevel.v);
         }
       }
        else {
         if (!this.root.factTransformationChains.isEmpty()) {
-          var left_0 = first(first(this.root.factTransformationChains).chain);
-          var right_0 = last(first(this.root.factTransformationChains).chain);
+          var left_0 = first_0(first_0(this.root.factTransformationChains).chain);
+          var right_0 = last(first_0(this.root.factTransformationChains).chain);
           if (!factComparator.compareAsIs_4xgx46$(left_0, right_0)) {
             this.factSubstitution = new FactSubstitution(left_0, right_0, void 0, comparisonResult.additionalFactUsed, void 0, this.name, factComparator);
             log_1.addMessageWithFactSubstitutionDetail_garven$(Rule$check$lambda_3, ensureNotNull(this.factSubstitution), MessageType$USER_getInstance(), currentLogLevel.v);
@@ -25054,7 +25391,7 @@ var twf_js = function (_, Kotlin) {
   }
   function MainChain$check$lambda_93(this$MainChain) {
     return function () {
-      return CheckingKeyWords$Companion_getInstance().factChainVerified + ". '" + first(this$MainChain.chain) + "' -> '" + last(this$MainChain.chain) + "'";
+      return CheckingKeyWords$Companion_getInstance().factChainVerified + ". '" + first_0(this$MainChain.chain) + "' -> '" + last(this$MainChain.chain) + "'";
     };
   }
   MainChain.prototype.check_i0qcxd$ = function (factComparator, onExpressionLevel, factsTransformations, expressionTransformations, additionalFacts, skipTrivialCheck) {
@@ -25145,7 +25482,7 @@ var twf_js = function (_, Kotlin) {
         tmp$_2 = (Kotlin.isType(tmp$_1 = this.chain.get_za3lpa$(currentRightIndex), MainLineNode) ? tmp$_1 : throwCCE()).factTransformationChains.iterator();
         while (tmp$_2.hasNext()) {
           var transformationChain = tmp$_2.next();
-          (Kotlin.isType(tmp$_3 = this.chain.get_za3lpa$(currentRightIndex), MainLineNode) ? tmp$_3 : throwCCE()).inFacts.add_11rb$(first(transformationChain.chain));
+          (Kotlin.isType(tmp$_3 = this.chain.get_za3lpa$(currentRightIndex), MainLineNode) ? tmp$_3 : throwCCE()).inFacts.add_11rb$(first_0(transformationChain.chain));
         }
       }
       log_1.addMessage_cte53e$(MainChain$check$lambda_20, MessageType$USER_getInstance(), currentLogLevel.v);
@@ -25416,7 +25753,7 @@ var twf_js = function (_, Kotlin) {
       currentRightIndex = log_1.assignAndLog_746w4o$(currentRightIndex + 1 | 0, currentLogLevel.v, MainChain$check$lambda_92);
     }
     log_1.addMessage_cte53e$(MainChain$check$lambda_93(this), MessageType$USER_getInstance(), currentLogLevel.v);
-    return new ComparisonResult(true, coloringTasks, first(this.chain), last(this.chain), void 0, additionalFactUsed);
+    return new ComparisonResult(true, coloringTasks, first_0(this.chain), last(this.chain), void 0, additionalFactUsed);
   };
   MainChain.prototype.variableReplacement_y0zsll$ = function (replacements) {
     var tmp$;
@@ -25815,17 +26152,17 @@ var twf_js = function (_, Kotlin) {
     tmp$ = this.factTransformationChains.iterator();
     while (tmp$.hasNext()) {
       var factChain = tmp$.next();
-      var checkingResult = first(factChain.chain).check_i0qcxd$(factComparator, false, factsTransformations, expressionTransformations, additionalFacts, skipTrivialCheck);
+      var checkingResult = first_0(factChain.chain).check_i0qcxd$(factComparator, false, factsTransformations, expressionTransformations, additionalFacts, skipTrivialCheck);
       coloringTasks.addAll_brywnq$(checkingResult.coloringTasks);
       if (checkingResult.isCorrect) {
-        log_1.addMessageWithFactDetail_d1xyjh$(MainLineAndNode$check$lambda_3, first(factChain.chain), MessageType$USER_getInstance(), currentLogLevel.v);
+        log_1.addMessageWithFactDetail_d1xyjh$(MainLineAndNode$check$lambda_3, first_0(factChain.chain), MessageType$USER_getInstance(), currentLogLevel.v);
         if (checkingResult.additionalFactUsed) {
           additionalFactUsed = log_1.assignAndLog_746w4o$(true, currentLogLevel.v, MainLineAndNode$check$lambda_4);
         }
       }
        else {
         log_1.addMessage_cte53e$(MainLineAndNode$check$lambda_5, MessageType$USER_getInstance(), currentLogLevel.v);
-        log_1.add_ww6hhz$(first(factChain.chain), MainLineAndNode$check$lambda_6, MainLineAndNode$check$lambda_7, currentLogLevel.v);
+        log_1.add_ww6hhz$(first_0(factChain.chain), MainLineAndNode$check$lambda_6, MainLineAndNode$check$lambda_7, currentLogLevel.v);
         return checkingResult;
       }
     }
@@ -25882,7 +26219,7 @@ var twf_js = function (_, Kotlin) {
       var checkingResult_1 = expressionChain.check_i0qcxd$(factComparator, false, plus(factsTransformations, nodeFactsTransformations), plus(expressionTransformations, nodeExpressionTransformations), plus(additionalFacts, this.inFacts), skipTrivialCheck);
       coloringTasks.addAll_brywnq$(checkingResult_1.coloringTasks);
       if (checkingResult_1.isCorrect) {
-        this.outFacts.add_11rb$(new ExpressionComparison(void 0, void 0, Kotlin.isType(tmp$_4 = first(expressionChain.chain), Expression) ? tmp$_4 : throwCCE(), Kotlin.isType(tmp$_5 = last(expressionChain.chain), Expression) ? tmp$_5 : throwCCE(), expressionChain.comparisonType, this));
+        this.outFacts.add_11rb$(new ExpressionComparison(void 0, void 0, Kotlin.isType(tmp$_4 = first_0(expressionChain.chain), Expression) ? tmp$_4 : throwCCE(), Kotlin.isType(tmp$_5 = last(expressionChain.chain), Expression) ? tmp$_5 : throwCCE(), expressionChain.comparisonType, this));
         log_1.addMessageWithFactDetail_d1xyjh$(MainLineAndNode$check$lambda_20, last(this.outFacts), MessageType$USER_getInstance(), currentLogLevel.v);
         if (checkingResult_1.additionalFactUsed) {
           additionalFactUsed = log_1.assignAndLog_746w4o$(true, currentLogLevel.v, MainLineAndNode$check$lambda_21);
@@ -26593,7 +26930,7 @@ var twf_js = function (_, Kotlin) {
      else if (startsWith(string, 'OR_NODE(')) {
       return MainLineOrNode$Companion_getInstance().parseFromFactIdentifier_r5gof1$(string, parent, functionConfiguration);
     }
-     else if (contains_2(string, ';ec;')) {
+     else if (contains_1(string, ';ec;')) {
       return ExpressionComparison$Companion_getInstance().parseFromFactIdentifier_r5gof1$(string, parent, functionConfiguration);
     }
      else {
@@ -26938,11 +27275,11 @@ var twf_js = function (_, Kotlin) {
         }
         var newFact = tmp$;
         var i = 0;
-        var mainNodeData = first(identifierData.list);
+        var mainNodeData = first_0(identifierData.list);
         while (i < mainNodeData.length) {
           var mainNodePartData = this.splitStringByBracketsOnTopLevel_0(mainNodeData, i);
           var mainLineNodePartName = mainNodePartData.name;
-          var mainLineNodePartIdentifier = first(mainNodePartData.list);
+          var mainLineNodePartIdentifier = first_0(mainNodePartData.list);
           i = mainNodePartData.endPosition;
           var tmp$_22;
           switch (trim(Kotlin.isCharSequence(tmp$_22 = mainLineNodePartName) ? tmp$_22 : throwCCE()).toString()) {
@@ -27061,10 +27398,10 @@ var twf_js = function (_, Kotlin) {
   ExpressionComparisonExpanse.prototype.expanseGeneratorRecursive_0 = function (l, r, result, onlyExpressPairs, comparisonType) {
     var tmp$, tmp$_0;
     if (equals(l.value, '') && l.children.size === 1) {
-      return this.expanseGeneratorRecursive_0(first(l.children), r, result, onlyExpressPairs, comparisonType);
+      return this.expanseGeneratorRecursive_0(first_0(l.children), r, result, onlyExpressPairs, comparisonType);
     }
      else if (equals(r.value, '') && r.children.size === 1) {
-      return this.expanseGeneratorRecursive_0(l, first(r.children), result, onlyExpressPairs, comparisonType);
+      return this.expanseGeneratorRecursive_0(l, first_0(r.children), result, onlyExpressPairs, comparisonType);
     }
     if (l.nodeType === NodeType$VARIABLE_getInstance()) {
       if (!onlyExpressPairs || (!l.isNumberValue() && !r.containsVariables_ywdfdh$(setOf(l.value)))) {
@@ -27073,15 +27410,15 @@ var twf_js = function (_, Kotlin) {
     }
      else {
       if (l.children.size === 1) {
-        if (equals(l.value, '+') && equals(first(l.children).value, '-') && first(l.children).children.size === 1) {
-          var newL = first(first(l.children).children).clone();
+        if (equals(l.value, '+') && equals(first_0(l.children).value, '-') && first_0(l.children).children.size === 1) {
+          var newL = first_0(first_0(l.children).children).clone();
           var $receiver = this.compiledConfiguration.createExpressionFunctionNode_twmih4$('+', -1);
           $receiver.addChild_em03xr$(this.compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1));
           $receiver.addChild_em03xr$(r.clone());
           var newR = $receiver;
           this.expanseGeneratorRecursive_0(newL, newR, result, onlyExpressPairs, reverse_0(comparisonType));
         }
-        var newL_0 = first(l.children).clone();
+        var newL_0 = first_0(l.children).clone();
         var newR_0 = r;
       }
        else if (equals(l.value, '+') || equals(l.value, '*')) {
@@ -27114,8 +27451,8 @@ var twf_js = function (_, Kotlin) {
             tmp$_0 = $receiver_2;
           }
           var newR_1 = tmp$_0;
-          if (newL_1.children.size === 1 && !equals(first(newL_1.children).value, '-')) {
-            this.expanseGeneratorRecursive_0(first(newL_1.children), newR_1, result, onlyExpressPairs, comparisonType);
+          if (newL_1.children.size === 1 && !equals(first_0(newL_1.children).value, '-')) {
+            this.expanseGeneratorRecursive_0(first_0(newL_1.children), newR_1, result, onlyExpressPairs, comparisonType);
           }
            else {
             this.expanseGeneratorRecursive_0(newL_1, newR_1, result, onlyExpressPairs, comparisonType);
@@ -27938,7 +28275,7 @@ var twf_js = function (_, Kotlin) {
     var conditionNode = inputConditionNode;
     if (inputConditionNode.type() === ComparableTransformationPartType$MAIN_LINE_AND_NODE_getInstance() || inputConditionNode.type() === ComparableTransformationPartType$MAIN_LINE_OR_NODE_getInstance()) {
       if ((Kotlin.isType(tmp$ = inputConditionNode, MainLineNode) ? tmp$ : throwCCE()).outFacts.size === 1 && factNode.type() !== ComparableTransformationPartType$MAIN_LINE_AND_NODE_getInstance() && factNode.type() !== ComparableTransformationPartType$MAIN_LINE_OR_NODE_getInstance()) {
-        conditionNode = first(inputConditionNode.outFacts);
+        conditionNode = first_0(inputConditionNode.outFacts);
       }
     }
      else if (factNode.type() === ComparableTransformationPartType$MAIN_LINE_AND_NODE_getInstance() || factNode.type() === ComparableTransformationPartType$MAIN_LINE_OR_NODE_getInstance()) {
@@ -28117,7 +28454,7 @@ var twf_js = function (_, Kotlin) {
                 continue;
               }
               var conditionFact_0 = conditionFacts.get_za3lpa$(j_0);
-              var matchingFactIndex = first_2(nodesCorrespondingToConditionFacts[j_0]);
+              var matchingFactIndex = first(nodesCorrespondingToConditionFacts[j_0]);
               if (matchingFactIndex >= actualFacts_0.size) {
                 substitutionInstance.varNamesTimeStorage.addVarName_i6eyy4$(additionalFactUsedVarName, SubstitutionInstanceVarType$INFO_getInstance());
                 tmp$_15 = additionalFacts.get_za3lpa$(matchingFactIndex - actualFacts_0.size | 0);
@@ -28169,7 +28506,7 @@ var twf_js = function (_, Kotlin) {
                 substitutionInstance.dropExtraVarsAfter_za3lpa$(startGeneratingResultTime_0);
                 return;
               }
-              var matchingFactIndex_0 = first_2(nodesCorrespondingToConditionFacts[j_2]);
+              var matchingFactIndex_0 = first(nodesCorrespondingToConditionFacts[j_2]);
               if (matchingFactIndex_0 >= actualFacts_0.size) {
                 substitutionInstance.varNamesTimeStorage.addVarName_i6eyy4$(additionalFactUsedVarName, SubstitutionInstanceVarType$INFO_getInstance());
                 tmp$_20 = additionalFacts.get_za3lpa$(matchingFactIndex_0 - actualFacts_0.size | 0);
@@ -30610,7 +30947,7 @@ var twf_js = function (_, Kotlin) {
     var mathMLWithoutSupportingTags = deleteUnsupportedMathMLTags(mathMLWithoutBrushing);
     var mathMLAfterSpecificSystemReplacements = specificMathMlSystemReplacements(mathMLWithoutSupportingTags);
     var mathML = correctMathMlTagsAccordingToBracketsFromEnd(mathMLAfterSpecificSystemReplacements);
-    if (contains_2(mathML, 'error', true) && contains_2(mathML, '#FF')) {
+    if (contains_1(mathML, 'error', true) && contains_1(mathML, '#FF')) {
       return mathML;
     }
     log_1.addMessage_cte53e$(checkFactsInMathML$lambda_0(mathML), void 0, 0);
@@ -30856,13 +31193,13 @@ var twf_js = function (_, Kotlin) {
     var tmp$;
     var endIndex = mathML.length - 7 | 0;
     var withoutEnd = mathML.substring(0, endIndex);
-    if (contains_2(error, '<=')) {
+    if (contains_1(error, '<=')) {
       tmp$ = replace(error, '<=', '<\/mtext><mo mathvariant="bold" mathcolor="#FF0000">&le;<\/mo><mtext mathvariant="bold" mathcolor="#FF0000">');
     }
-     else if (contains_2(error, '>=')) {
+     else if (contains_1(error, '>=')) {
       tmp$ = replace(error, '>=', '<\/mtext><mo mathvariant="bold" mathcolor="#FF0000">&ge;<\/mo><mtext mathvariant="bold" mathcolor="#FF0000">');
     }
-     else if (contains_2(error, '<')) {
+     else if (contains_1(error, '<')) {
       tmp$ = replace(error, '<', '<\/mtext><mo mathvariant="bold" mathcolor="#FF0000">&lt;<\/mo><mtext mathvariant="bold" mathcolor="#FF0000">');
     }
      else {
@@ -30898,8 +31235,8 @@ var twf_js = function (_, Kotlin) {
       tmp$_2 = firstInputSystem.factTransformationChains.iterator();
       while (tmp$_2.hasNext()) {
         var factTransformationChain = tmp$_2.next();
-        if (factTransformationChain.chain.size === 1 && Kotlin.isType(first(factTransformationChain.chain), ExpressionComparison)) {
-          var fact = Kotlin.isType(tmp$_3 = first(factTransformationChain.chain), ExpressionComparison) ? tmp$_3 : throwCCE();
+        if (factTransformationChain.chain.size === 1 && Kotlin.isType(first_0(factTransformationChain.chain), ExpressionComparison)) {
+          var fact = Kotlin.isType(tmp$_3 = first_0(factTransformationChain.chain), ExpressionComparison) ? tmp$_3 : throwCCE();
           result.add_11rb$(fact);
         }
       }
@@ -31348,16 +31685,16 @@ var twf_js = function (_, Kotlin) {
     if (!isBlank(startExpressionIdentifier) && transformationChainParser.root.factTransformationChains.isEmpty() && transformationChainParser.root.expressionTransformationChains.size === 1) {
       var expressionNodeConstructor = new ExpressionNodeConstructor(compiledConfiguration.functionConfiguration);
       var startExpression = expressionNodeConstructor.construct_61zpoe$(startExpressionIdentifier);
-      first(transformationChainParser.root.expressionTransformationChains).chain.add_wxm5ur$(0, new Expression(void 0, void 0, startExpression, void 0, transformationChainParser.root));
+      first_0(transformationChainParser.root.expressionTransformationChains).chain.add_wxm5ur$(0, new Expression(void 0, void 0, startExpression, void 0, transformationChainParser.root));
       if (!isBlank(endExpressionIdentifier)) {
         var endExpression = expressionNodeConstructor.construct_61zpoe$(endExpressionIdentifier);
-        first(transformationChainParser.root.expressionTransformationChains).chain.add_11rb$(new Expression(void 0, void 0, endExpression, void 0, transformationChainParser.root));
+        first_0(transformationChainParser.root.expressionTransformationChains).chain.add_11rb$(new Expression(void 0, void 0, endExpression, void 0, transformationChainParser.root));
       }
       if (comparisonSign.length > 0) {
-        first(transformationChainParser.root.expressionTransformationChains).comparisonType = valueOfComparisonType(comparisonSign);
+        first_0(transformationChainParser.root.expressionTransformationChains).comparisonType = valueOfComparisonType(comparisonSign);
       }
     }
-    if (contains_2(targetFactIdentifier, '}{=}{') || contains_2(targetFactIdentifier, '}{<}{') || contains_2(targetFactIdentifier, '}{>}{') || contains_2(targetFactIdentifier, '}{<=}{') || contains_2(targetFactIdentifier, '}{>=}{')) {
+    if (contains_1(targetFactIdentifier, '}{=}{') || contains_1(targetFactIdentifier, '}{<}{') || contains_1(targetFactIdentifier, '}{>}{') || contains_1(targetFactIdentifier, '}{<=}{') || contains_1(targetFactIdentifier, '}{>=}{')) {
       var taskTargetFact = ensureNotNull(log_1.factConstructorViewer).constructFactByIdentifier_5jrdui$(targetFactIdentifier);
       var taskTargetRoot = taskTargetFact.type() === transformationChainParser.root.type() ? taskTargetFact : new MainLineAndNode(void 0, void 0, void 0, void 0, mutableListOf([taskTargetFact]));
       var newRoot = new MainLineAndNode(void 0, void 0, void 0, mutableListOf([new MainChain(mutableListOf([transformationChainParser.root, taskTargetRoot]))]));
@@ -32197,7 +32534,7 @@ var twf_js = function (_, Kotlin) {
     if ($receiver.children.isEmpty())
       return true;
     tmp$ = $receiver.value;
-    if (contains_2('', tmp$) || equals(tmp$, '+') || equals(tmp$, '-') || equals(tmp$, '*')) {
+    if (contains_1('', tmp$) || equals(tmp$, '+') || equals(tmp$, '-') || equals(tmp$, '*')) {
       tmp$_0 = $receiver.children.iterator();
       while (tmp$_0.hasNext()) {
         var child = tmp$_0.next();
@@ -32205,8 +32542,8 @@ var twf_js = function (_, Kotlin) {
           return false;
       }
     }
-     else if (contains_2('/', tmp$) || equals(tmp$, '^')) {
-      if (!this.isPolynom_ucqqkr$(first($receiver.children), variables))
+     else if (contains_1('/', tmp$) || equals(tmp$, '^')) {
+      if (!this.isPolynom_ucqqkr$(first_0($receiver.children), variables))
         return false;
       tmp$_1 = $receiver.children.size;
       for (var i = 1; i < tmp$_1; i++) {
@@ -32227,7 +32564,7 @@ var twf_js = function (_, Kotlin) {
   InequalityApproximateSolver.prototype.isPolynomThatCanHaveDivsOnlyOnTopLevel_ucqqkr$ = function ($receiver, variables) {
     var tmp$, tmp$_0, tmp$_1;
     tmp$ = $receiver.value;
-    if (contains_2('*', tmp$) || equals(tmp$, '')) {
+    if (contains_1('*', tmp$) || equals(tmp$, '')) {
       tmp$_0 = $receiver.children.iterator();
       while (tmp$_0.hasNext()) {
         var child = tmp$_0.next();
@@ -32235,7 +32572,7 @@ var twf_js = function (_, Kotlin) {
           return false;
       }
     }
-     else if (contains_2('/', tmp$)) {
+     else if (contains_1('/', tmp$)) {
       tmp$_1 = $receiver.children.iterator();
       while (tmp$_1.hasNext()) {
         var child_0 = tmp$_1.next();
@@ -32280,31 +32617,31 @@ var twf_js = function (_, Kotlin) {
           for (var i = 0; i <= tmp$_0; i++) {
             if (i !== variableChildNumber) {
               if (equals($receiver.children.get_za3lpa$(i).value, '-')) {
-                first(root.children).addChild_em03xr$(first($receiver.children.get_za3lpa$(i).children).clone());
+                first_0(root.children).addChild_em03xr$(first_0($receiver.children.get_za3lpa$(i).children).clone());
               }
                else {
                 var additive = new ExpressionNode(NodeType$FUNCTION_getInstance(), '-');
                 additive.addChild_em03xr$($receiver.children.get_za3lpa$(i).clone());
-                first(root.children).addChild_em03xr$(additive);
+                first_0(root.children).addChild_em03xr$(additive);
               }
             }
           }
 
-          first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+          first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
           break;
         case '-':
           if ($receiver.children.size === 1) {
             root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-            first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+            first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
           }
            else {
             if (variableChildNumber === 0) {
               root.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
               tmp$_1 = get_lastIndex($receiver.children);
               for (var i_0 = 1; i_0 <= tmp$_1; i_0++) {
-                first(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(i_0).clone());
+                first_0(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(i_0).clone());
               }
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
             }
              else {
               if ($receiver.children.size === 2)
@@ -32314,11 +32651,11 @@ var twf_js = function (_, Kotlin) {
                 tmp$_2 = get_lastIndex($receiver.children);
                 for (var i_1 = 0; i_1 <= tmp$_2; i_1++) {
                   if (i_1 !== variableChildNumber) {
-                    first(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(i_1).clone());
+                    first_0(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(i_1).clone());
                   }
                 }
               }
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
             }
           }
 
@@ -32332,14 +32669,14 @@ var twf_js = function (_, Kotlin) {
             var mult = tmp$_3;
             if (mult > 0) {
               root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
             }
              else if (mult < 0) {
               root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
             }
              else
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
           }
            else
             return null;
@@ -32353,11 +32690,11 @@ var twf_js = function (_, Kotlin) {
             var mult_0 = tmp$_4;
             if (mult_0 > 0) {
               root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
             }
              else if (mult_0 < 0) {
               root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
             }
           }
            else
@@ -32366,20 +32703,20 @@ var twf_js = function (_, Kotlin) {
         case '^':
           if (variableChildNumber === 0) {
             root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-            first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+            first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
           }
            else if ($receiver.children.size === 2) {
-            first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
+            first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
           }
            else
             return null;
           break;
         case 'exp':
-          first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
+          first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
           break;
         case 'ln':
           root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '1'));
-          first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root, void 0, void 0, false));
+          first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root, void 0, void 0, false));
           break;
         case 'S':
           if ($receiver.children.size !== 4)
@@ -32389,9 +32726,9 @@ var twf_js = function (_, Kotlin) {
             case 2:
               if (equals($receiver.children.get_za3lpa$(3).value, $receiver.children.get_za3lpa$(0).value)) {
                 root.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
-                first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
-                first(first(root.children).children).addChild_em03xr$($receiver.children.get_za3lpa$(variableChildNumber - 1 | 0).clone());
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+                first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
+                first_0(first_0(root.children).children).addChild_em03xr$($receiver.children.get_za3lpa$(variableChildNumber - 1 | 0).clone());
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
               }
                else
                 return null;
@@ -32409,16 +32746,16 @@ var twf_js = function (_, Kotlin) {
               var mult_1 = tmp$_5;
               if (mult_1 > 0) {
                 root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
               }
                else if (mult_1 < 0) {
                 root.addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), '0'));
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
               }
                else
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
               break;
-            default:first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
+            default:first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
               break;
           }
 
@@ -32437,38 +32774,38 @@ var twf_js = function (_, Kotlin) {
           case '-':
             if (varChild.children.size === 1) {
               root.addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
-              first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+              first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
             }
              else {
               root.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
               if (variableGrandSonNumber === 0) {
                 tmp$_6 = get_lastIndex(varChild.children);
                 for (var i_2 = 1; i_2 <= tmp$_6; i_2++) {
-                  first(root.children).addChild_em03xr$(varChild.children.get_za3lpa$(i_2).clone());
+                  first_0(root.children).addChild_em03xr$(varChild.children.get_za3lpa$(i_2).clone());
                 }
                 if (equals($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).value, '-')) {
-                  first(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                  first_0(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
                 }
                  else {
-                  first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
-                  first(first(root.children).children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                  first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
+                  first_0(first_0(root.children).children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
                 }
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
               }
                else {
-                first(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                first_0(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
                 if (varChild.children.size === 2)
-                  first(root.children).addChild_em03xr$(varChild.children.get_za3lpa$(0).clone());
+                  first_0(root.children).addChild_em03xr$(varChild.children.get_za3lpa$(0).clone());
                 else {
-                  first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
+                  first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
                   tmp$_7 = get_lastIndex(varChild.children);
                   for (var i_3 = 0; i_3 <= tmp$_7; i_3++) {
                     if (i_3 !== variableGrandSonNumber) {
-                      first(first(root.children).children).addChild_em03xr$(varChild.children.get_za3lpa$(i_3).clone());
+                      first_0(first_0(root.children).children).addChild_em03xr$(varChild.children.get_za3lpa$(i_3).clone());
                     }
                   }
                 }
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
               }
             }
 
@@ -32482,20 +32819,20 @@ var twf_js = function (_, Kotlin) {
               var mult_2 = tmp$_8;
               root.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '/'));
               if (equals($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).value, '-')) {
-                first(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                first_0(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
               }
                else {
-                first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
-                first(first(root.children).children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
-                first(first(first(root.children).children).children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
+                first_0(first_0(root.children).children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
+                first_0(first_0(first_0(root.children).children).children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
               }
               if (mult_2 > 0) {
-                first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), mult_2.toString()));
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+                first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), mult_2.toString()));
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
               }
                else if (mult_2 < 0) {
-                first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), (-mult_2).toString()));
-                first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+                first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), (-mult_2).toString()));
+                first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
               }
                else {
                 tmp$_9 = toDoubleOrNull($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).value);
@@ -32504,7 +32841,7 @@ var twf_js = function (_, Kotlin) {
                 }
                 var const_0 = tmp$_9;
                 if (const_0 > 0)
-                  first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
+                  first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment());
               }
             }
              else
@@ -32520,20 +32857,20 @@ var twf_js = function (_, Kotlin) {
               if (variableGrandSonNumber === 0) {
                 root.addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '*'));
                 if (equals($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).value, '-')) {
-                  first(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                  first_0(root.children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
                 }
                  else {
-                  first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
-                  first(first(root.children).children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
-                  first(first(first(root.children).children).children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
+                  first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '+'));
+                  first_0(first_0(root.children).children).addChild_em03xr$(new ExpressionNode(NodeType$FUNCTION_getInstance(), '-'));
+                  first_0(first_0(first_0(root.children).children).children).addChild_em03xr$($receiver.children.get_za3lpa$(1 - variableChildNumber | 0).clone());
                 }
                 if (mult_3 > 0) {
-                  first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), mult_3.toString()));
-                  first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
+                  first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), mult_3.toString()));
+                  first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(root));
                 }
                  else if (mult_3 < 0) {
-                  first(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), (-mult_3).toString()));
-                  first(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
+                  first_0(root.children).addChild_em03xr$(new ExpressionNode(NodeType$VARIABLE_getInstance(), (-mult_3).toString()));
+                  first_0(result.segmentsUnionsIntersection).segmentsUnion.add_11rb$(new Segment(void 0, root));
                 }
               }
                else
@@ -34197,7 +34534,7 @@ var twf_js = function (_, Kotlin) {
   function toShortString($receiver) {
     var stringValue = $receiver.toString();
     if (contains_0(stringValue, 46)) {
-      if (contains_2(stringValue, '999')) {
+      if (contains_1(stringValue, '999')) {
         var fractionPart = substringBefore_0(substringAfter(stringValue, '.'), '999');
         stringValue = substringBefore_0(stringValue, '.');
         if (fractionPart.length > 0 && !equals(fractionPart, '9'))
@@ -35077,14 +35414,14 @@ var twf_js = function (_, Kotlin) {
         result.code = result.code + ('Sum' + powWord + capitalizedFunctionA + variableA + capitalizedFunctionB + variableB);
         result.nameEn = result.nameEn + ('Sum of ' + powWord + ' of ' + capitalizedFunctionA + ' and ' + capitalizedFunctionB);
         result.nameRu = result.nameRu + ('\u0421\u0443\u043C\u043C\u0430 ' + powWordRu + ' ' + functionA + ' \u0438 ' + functionB);
-        first(result.expressionNode.children).addChild_em03xr$(powedB);
+        first_0(result.expressionNode.children).addChild_em03xr$(powedB);
       }
        else {
         result.code = result.code + ('Diff' + powWord + capitalizedFunctionA + variableA + capitalizedFunctionB + variableB);
         result.nameEn = result.nameEn + ('Difference of ' + powWord + ' of ' + capitalizedFunctionA + ' and ' + capitalizedFunctionB);
         result.nameRu = result.nameRu + ('\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C ' + powWordRu + ' ' + functionA + ' \u0438 ' + functionB);
-        first(result.expressionNode.children).addChild_em03xr$(compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1));
-        last(first(result.expressionNode.children).children).addChild_em03xr$(powedB);
+        first_0(result.expressionNode.children).addChild_em03xr$(compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1));
+        last(first_0(result.expressionNode.children).children).addChild_em03xr$(powedB);
       }
     }
      else {
@@ -35095,19 +35432,19 @@ var twf_js = function (_, Kotlin) {
       $receiver_4.addChild_em03xr$(compiledConfiguration.createExpressionFunctionNode_twmih4$('+', -1));
       $receiver_4.addChild_em03xr$(compiledConfiguration.createExpressionVariableNode_61zpoe$(pow.toString()));
       tmp$_0.addChild_em03xr$($receiver_4);
-      first(first(result.expressionNode.children).children).addChild_em03xr$(nodeA);
+      first_0(first_0(result.expressionNode.children).children).addChild_em03xr$(nodeA);
       if (randomInt(0, 2) === 1) {
         result.code = result.code + (powWord_0 + 'Sum' + capitalizedFunctionA + variableA + capitalizedFunctionB + variableB);
         result.nameEn = result.nameEn + (powWord_0 + ' of Sum of ' + capitalizedFunctionA + ' and ' + capitalizedFunctionB);
         result.nameRu = result.nameRu + (powWordRu_0 + ' \u0441\u0443\u043C\u043C\u044B ' + functionA + ' \u0438 ' + functionB);
-        first(first(result.expressionNode.children).children).addChild_em03xr$(nodeB);
+        first_0(first_0(result.expressionNode.children).children).addChild_em03xr$(nodeB);
       }
        else {
         result.code = result.code + (powWord_0 + 'Diff' + capitalizedFunctionA + variableA + capitalizedFunctionB + variableB);
         result.nameEn = result.nameEn + (powWord_0 + ' of Difference of ' + capitalizedFunctionA + ' and ' + capitalizedFunctionB);
         result.nameRu = result.nameRu + (powWordRu_0 + ' \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438 ' + functionA + ' \u0438 ' + functionB);
-        first(first(result.expressionNode.children).children).addChild_em03xr$(compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1));
-        last(first(first(result.expressionNode.children).children).children).addChild_em03xr$(nodeB);
+        first_0(first_0(result.expressionNode.children).children).addChild_em03xr$(compiledConfiguration.createExpressionFunctionNode_twmih4$('-', -1));
+        last(first_0(first_0(result.expressionNode.children).children).children).addChild_em03xr$(nodeB);
       }
     }
     return result;
@@ -35266,8 +35603,8 @@ var twf_js = function (_, Kotlin) {
     this.minSubtreeDepth_0 = minSubtreeDepth;
   }
   DisparityMatrixMetric.prototype.invoke_heho5o$ = function (lhs, rhs) {
-    var normalizedLhs = first(lhs.cloneWithNormalization_1g1bdl$(void 0, true).children);
-    var normalizedRhs = first(rhs.cloneWithNormalization_1g1bdl$(void 0, true).children);
+    var normalizedLhs = first_0(lhs.cloneWithNormalization_1g1bdl$(void 0, true).children);
+    var normalizedRhs = first_0(rhs.cloneWithNormalization_1g1bdl$(void 0, true).children);
     var $receiver = getNonLeafSubexpressions(normalizedLhs);
     var destination = ArrayList_init_0();
     var tmp$;
@@ -36070,7 +36407,7 @@ var twf_js = function (_, Kotlin) {
           var selectedNodeIds = selectNodeIdsToTransformByLastStepId(currentExpression);
           if (selectedNodeIds.isEmpty() || (selectedNodeIds.size === 1 && randomInt(0, 100) === 0)) {
             var randomNodeId = random(currentExpression.getAllChildrenNodeIds(), Random.Default);
-            if (selectedNodeIds.isEmpty() || first(selectedNodeIds) !== randomNodeId) {
+            if (selectedNodeIds.isEmpty() || first_0(selectedNodeIds) !== randomNodeId) {
               selectedNodeIds = plus(selectedNodeIds, listOf(randomNodeId));
             }
           }
@@ -36388,7 +36725,7 @@ var twf_js = function (_, Kotlin) {
       tmp$_39 = $receiver_11.iterator();
       while (tmp$_39.hasNext()) {
         var item_0 = tmp$_39.next();
-        destination_4.add_11rb$(first(item_0));
+        destination_4.add_11rb$(first_0(item_0));
       }
       element_6.requiredSubstitutions = toMutableSet_1(destination_4);
       var $receiver_12 = element_6.requiredSubstitutions;
@@ -37350,7 +37687,7 @@ var twf_js = function (_, Kotlin) {
       tmp$_30 = $receiver_8.iterator();
       while (tmp$_30.hasNext()) {
         var item_0 = tmp$_30.next();
-        destination_4.add_11rb$(first(item_0));
+        destination_4.add_11rb$(first_0(item_0));
       }
       element_7.requiredSubstitutions = toMutableSet_1(destination_4);
       var $receiver_9 = element_7.requiredSubstitutions;
@@ -39408,6 +39745,9 @@ var twf_js = function (_, Kotlin) {
   function getAllTagsForGeneration_JS(area) {
     return getAllTagsForGeneration(area);
   }
+  function getLogOfGeneration_JS() {
+    return getLogOfGeneration();
+  }
   var package$mathhelper = _.mathhelper || (_.mathhelper = {});
   var package$twf = package$mathhelper.twf || (package$mathhelper.twf = {});
   var package$api = package$twf.api || (package$twf.api = {});
@@ -39506,6 +39846,7 @@ var twf_js = function (_, Kotlin) {
   package$api.checkSolutionInTexWithCompiledConfiguration_43fm9k$ = checkSolutionInTexWithCompiledConfiguration;
   package$api.checkChainCorrectnessInTex_puj7f4$ = checkChainCorrectnessInTex;
   package$api.generateTasks_13u2yt$ = generateTasks;
+  package$api.getLogOfGeneration = getLogOfGeneration;
   package$api.getAllTagsForGeneration_61zpoe$ = getAllTagsForGeneration;
   package$api.getDefaultRulePacks = getDefaultRulePacks;
   package$api.mapGoalStepCount_mqu1mq$ = mapGoalStepCount;
@@ -39735,14 +40076,35 @@ var twf_js = function (_, Kotlin) {
     get: NewWeightsLogicRulePack$Companion_getInstance
   });
   package$logic.NewWeightsLogicRulePack = NewWeightsLogicRulePack;
+  Object.defineProperty(ReportType, 'RESULT_ONLY', {
+    get: ReportType$RESULT_ONLY_getInstance
+  });
+  Object.defineProperty(ReportType, 'RESULT_WITH_POSTPROCESSING', {
+    get: ReportType$RESULT_WITH_POSTPROCESSING_getInstance
+  });
+  Object.defineProperty(ReportType, 'RESULT_WITH_SUBSTITUTIONS', {
+    get: ReportType$RESULT_WITH_SUBSTITUTIONS_getInstance
+  });
+  Object.defineProperty(ReportType, 'RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS', {
+    get: ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_getInstance
+  });
+  var package$autogeneration = package$defaultrulepacks.autogeneration || (package$defaultrulepacks.autogeneration = {});
+  package$autogeneration.ReportType = ReportType;
+  Object.defineProperty(RulePackProvider, 'Companion', {
+    get: RulePackProvider$Companion_getInstance
+  });
+  package$autogeneration.RulePackProvider = RulePackProvider;
   Object.defineProperty(RuleTag, 'BASIC_MATH', {
     get: RuleTag$BASIC_MATH_getInstance
   });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_BASIC', {
-    get: RuleTag$TRIGONOMETRY_BASIC_getInstance
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_FUNCTIONS_DEFINITION', {
+    get: RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance
   });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_STANDARD_ANGLES', {
     get: RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_BASIC_IDENTITY', {
+    get: RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance
   });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_PERIODIC', {
     get: RuleTag$TRIGONOMETRY_PERIODIC_getInstance
@@ -39750,8 +40112,23 @@ var twf_js = function (_, Kotlin) {
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_SHIFTING', {
     get: RuleTag$TRIGONOMETRY_SHIFTING_getInstance
   });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_ANGLES_getInstance
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance
   });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_DOUBLE_ANGLES', {
     get: RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance
@@ -39759,23 +40136,17 @@ var twf_js = function (_, Kotlin) {
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_TRIPLE_ANGLES', {
     get: RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance
   });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_MULTI_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance
-  });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_HALF_ANGLES', {
     get: RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_MULTI_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance
   });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_POWER_REDUCING', {
     get: RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance
   });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS', {
     get: RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_PROD_OF_FUNCTIONS', {
-    get: RuleTag$TRIGONOMETRY_PROD_OF_FUNCTIONS_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS', {
-    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance
   });
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_AUXILIARY_ARGUMENT', {
     get: RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance
@@ -39789,12 +40160,19 @@ var twf_js = function (_, Kotlin) {
   Object.defineProperty(RuleTag, 'TRIGONOMETRY_HYPERBOLIC_FUNCTIONS', {
     get: RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_getInstance
   });
-  var package$autogeneration = package$defaultrulepacks.autogeneration || (package$defaultrulepacks.autogeneration = {});
   package$autogeneration.RuleTag = RuleTag;
   Object.defineProperty(TaskSpecificLogicRulePacks, 'Companion', {
     get: TaskSpecificLogicRulePacks$Companion_getInstance
   });
   package$logic.TaskSpecificLogicRulePacks = TaskSpecificLogicRulePacks;
+  Object.defineProperty(TexReportUtils, 'Companion', {
+    get: TexReportUtils$Companion_getInstance
+  });
+  package$autogeneration.TexReportUtils = TexReportUtils;
+  Object.defineProperty(TrigonometricRulePacks, 'Companion', {
+    get: TrigonometricRulePacks$Companion_getInstance
+  });
+  package$autogeneration.TrigonometricRulePacks = TrigonometricRulePacks;
   Object.defineProperty(DefaultCombinatoricsRulePacks, 'Companion', {
     get: DefaultCombinatoricsRulePacks$Companion_getInstance
   });
@@ -40794,6 +41172,7 @@ var twf_js = function (_, Kotlin) {
   _.jsonToMap = jsonToMap_JS;
   _.generateTasks = generateTasks_JS;
   _.getAllTagsForGeneration = getAllTagsForGeneration_JS;
+  _.getLogOfGeneration = getLogOfGeneration_JS;
   MainChainPart.prototype.check_i0qcxd$ = ComparableTransformationsPart.prototype.check_i0qcxd$;
   MainLineNode.prototype.isSolutionForVariables_axkv0l$ = MainChainPart.prototype.isSolutionForVariables_axkv0l$;
   MainLineNode.prototype.check_i0qcxd$ = MainChainPart.prototype.check_i0qcxd$;
