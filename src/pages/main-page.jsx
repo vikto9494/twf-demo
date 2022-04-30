@@ -42,6 +42,7 @@ const MainPage = () => {
     mode: modeUrl,
     originalExpression: originalExpressionUrl,
     endExpression: endExpressionUrl,
+    startTaskForGenerator: startTaskForGeneratorUrl,
     rulePack: rulePackUrl,
     hideDetails: hideDetailsUrl,
     comparisonType: comparisonTypeUrl,
@@ -60,7 +61,7 @@ const MainPage = () => {
   );
   // local utils
   const formSolutionStartingTex = () => {
-    if (currentMode === "Generate tasks") {
+    if (currentMode === "GenerateTasks") {
       return "";
     }
     let solutionSignView = selectedComparisonSign;
@@ -112,25 +113,27 @@ const MainPage = () => {
     } else return false;
   };
   // static data
-  const defaultStartForGenerator = "(cos(*(2;x)))";
+  const defaultStartForGenerator = checkExpressionUrl(startTaskForGeneratorUrl, "startForGenerator")
+    ? decodeUrlSymbols(startTaskForGeneratorUrl)
+    : "(^(cos(x);2))";
   const defaultStart = checkExpressionUrl(originalExpressionUrl, "start")
     ? decodeUrlSymbols(originalExpressionUrl)
-    : "(sin(*(2;x)))";
+    : "(and(a;or(a;b)))";
   const defaultEnd = checkExpressionUrl(endExpressionUrl, "end")
     ? decodeUrlSymbols(endExpressionUrl)
-    : "(*(2;sin(x);cos(x)))";
+    : "(a)";
   const rulePacks = [
     "Logic",
     "ShortMultiplication",
     "Logarithm",
     "Trigonometry",
   ];
-  const modes = ["Play", "Solve", "Check Statement", "Generate tasks"];
+  const modes = ["Play", "Solve", "Check Statement", "GenerateTasks"];
   // app dependencies
   const [startSS, setStartSS] = useState(defaultStart);
   const [endSS, setEndSS] = useState(defaultEnd);
   const [currentRulePack, setCurrentRulePack] = useState(
-    rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Trigonometry"
+    rulePackUrl && rulePacks.includes(rulePackUrl) ? rulePackUrl : "Logic"
   );
   const [currentTasks, setCurrentTasks] = useState([]);
   const [allSupportedTags, setAllSupportedTags] = useState(getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)")))
@@ -139,7 +142,7 @@ const MainPage = () => {
   const [complexityValue, setComplexityValue] = useState(25);
 
   function getDefaultTags() {
-    let defaultTags = ['TRIGONOMETRY_BASIC', 'TRIGONOMETRY_DOUBLE_ANGLES']
+    let defaultTags = ['TRIGONOMETRY_DOUBLE_ANGLES']
     return getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)"))
       .filter(tag => defaultTags.includes(tag['name$']))
   }
@@ -158,6 +161,8 @@ const MainPage = () => {
         selectedComparisonSign === "<="
       ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
       : null;
+
+
   const [startTaskForGenerator, setStartTaskForGenerator] = useState(
     convertMathInput("STRUCTURE_STRING", "TEX", defaultStartForGenerator)
   );
@@ -168,7 +173,7 @@ const MainPage = () => {
     convertMathInput("STRUCTURE_STRING", "TEX", defaultEnd)
   );
   const [currentMode, setCurrentMode] = useState(
-    modes.includes(modeUrl) ? modeUrl : "Generate tasks"
+    modes.includes(modeUrl) ? modeUrl : "Play"
   );
   const [solutionInTex, setSolutionInTex] = useState(formSolutionStartingTex());
   const [showSpinner, setShowSpinner] = useState(false);
@@ -203,6 +208,7 @@ const MainPage = () => {
           `mode=${currentMode}` +
           `&originalExpression=${startSSConverted}` +
           `&endExpression=${endSSConverted}` +
+          `&startTaskForGenerator=${startTaskForGenerator}` +
           `&rulePack=${currentRulePack}` +
           `&hideDetails=${hideDetails}` +
           (plainSignToUrlSign(selectedComparisonSign) !== "="
@@ -288,7 +294,7 @@ const MainPage = () => {
   }
 
   const getMathQuillNotebooks = () => {
-    if (currentMode !== 'Generate tasks') {
+    if (currentMode !== 'GenerateTasks') {
       return getMathQuillNotebook();
     }
 
@@ -377,8 +383,7 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    if (currentMode === "Generate tasks") {
-      setShowSpinner(true);
+    if (showSpinner && currentMode === "GenerateTasks") {
       onGenerateTasksInput();
     } else if (showSpinner && currentMode === "Solve") {
       onCheckTexSolutionInput();
@@ -451,6 +456,9 @@ const MainPage = () => {
               key={mode}
               onClick={() => {
                 setCurrentMode(mode);
+                if (mode == 'GenerateTasks') {
+                  setCurrentRulePack("Trigonometry")
+                }
               }}
               className={`app__tab ${
                 currentMode === mode ? "app__tab--selected" : ""
@@ -462,7 +470,7 @@ const MainPage = () => {
         })}
         <div className="app__tab--bottom-line" />
       </div>
-      {currentMode !== "Check Statement" && currentMode !== "Generate tasks" && (
+      {currentMode !== "Check Statement" && currentMode !== "GenerateTasks" && (
         <div className="app__inputs">
           <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
             <div
@@ -591,7 +599,7 @@ const MainPage = () => {
             <h1>Write statement and check if it's correct (in TeX)</h1>
           )}
           <div className="tex-solution">
-          {currentMode !== "Generate tasks" && (
+          {currentMode !== "GenerateTasks" && (
             <div className="tex-solution__operations">
               {actions.map((action, i) => {
                 const { iconUrl, latexCmd, tooltip } = action;
@@ -610,7 +618,7 @@ const MainPage = () => {
             </div>
             )}
 
-            {currentMode === "Generate tasks" && (
+            {currentMode === "GenerateTasks" && (
               <div style={{ "margin-bottom": "50px" }}>
                 <h1>Generator settings</h1>
                 <div className="app__inputs">
@@ -713,7 +721,7 @@ const MainPage = () => {
           <div className="app__tex-solution-btns">
 
 
-            {currentMode !== "Generate tasks" &&
+            {currentMode !== "GenerateTasks" &&
               <Button
                 onClick={() => {
                   // callback is provided in useEffect
