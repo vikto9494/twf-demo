@@ -36,7 +36,7 @@ let alertCount = 0; //To avoid alert duplicates. TODO: make something normal
 const MainPage = () => {
   const { Option } = Select;
   // getting url query params
-  const history = useNavigate();
+  const navigate = useNavigate();
   const possibleComparisonSigns = ["=", ">=", ">", "<", "<="];
   const {
     mode: modeUrl,
@@ -198,7 +198,7 @@ const MainPage = () => {
       isError = true;
     }
     if (!isError) {
-      history.push(
+      navigate(
         `/?` +
           `mode=${currentMode}` +
           `&originalExpression=${startSSConverted}` +
