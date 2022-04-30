@@ -246,7 +246,7 @@ const MainPage = () => {
     setSolutionInTex(res.validatedSolution);
   };
 
-  const onGenerateTasksInput = () => {
+  const onGenerateTasksInput = () => {    
     let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
@@ -377,7 +377,8 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    if (showSpinner && currentMode === "Generate tasks") {
+    if (currentMode === "Generate tasks") {
+      setShowSpinner(true);
       onGenerateTasksInput();
     } else if (showSpinner && currentMode === "Solve") {
       onCheckTexSolutionInput();
@@ -639,7 +640,11 @@ const MainPage = () => {
                           {startTex}
                         </StaticMathField>
                       )}
-                      <Button type="primary" onClick={onGenerateTasksInput}>
+                      <Button type="primary" onClick={() => {
+                        // callback is provided in useEffect
+                        setShowSpinner(true);
+                      }
+                      }>
                         Generate tasks!
                       </Button>
                     </div>
@@ -668,7 +673,8 @@ const MainPage = () => {
                       </div>
                     </div>
                   )}
-                </div> 
+                </div>
+                <ClipLoader loading={showSpinner} /> 
                 <div style = {{maxWidth: "800px"}}>
                   <h3>Tags</h3>
                   <div>
@@ -695,7 +701,7 @@ const MainPage = () => {
             )}
             {getMathQuillNotebooks()}    
           </div>
-          <ClipLoader loading={showSpinner} />
+          
           {(successMsg || solutionError) && (
             <Alert
               message={solutionError ? solutionError : successMsg}
