@@ -1,6 +1,6 @@
 // hooks and libs
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // lib components
 import { Alert, Button, Select, Tooltip } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -36,7 +36,7 @@ let alertCount = 0; //To avoid alert duplicates. TODO: make something normal
 const MainPage = () => {
   const { Option } = Select;
   // getting url query params
-  const history = useHistory();
+  const history = useNavigate();
   const possibleComparisonSigns = ["=", ">=", ">", "<", "<="];
   const {
     mode: modeUrl,
