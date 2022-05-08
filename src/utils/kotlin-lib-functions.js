@@ -129,6 +129,11 @@ export const getLogOfGeneration = () => {
   return log;
 };
 
+export const getReportOfGeneration = () => {
+  let log = twf_js.getReportOfGeneration();
+  return log;
+};
+
 export const getAllTagsForGeneration = (area) => {
   let tags = twf_js.getAllTagsForGeneration(area);
   return tags;

@@ -9,6 +9,7 @@ import { EditableMathField, StaticMathField } from "react-mathquill";
 import Multiselect from 'multiselect-react-dropdown';
 import GameEditor from "../components/game-editor/game-editor";
 import Slider from 'react-input-slider';
+import { saveAs } from "file-saver";
 
 // utils
 import {
@@ -19,6 +20,7 @@ import {
   checkStatement,
   getAllTagsForGeneration,
   getLogOfGeneration,
+  getReportOfGeneration
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
@@ -115,7 +117,7 @@ const MainPage = () => {
   // static data
   const defaultStartForGenerator = checkExpressionUrl(startTaskForGeneratorUrl, "startForGenerator")
     ? decodeUrlSymbols(startTaskForGeneratorUrl)
-    : "(^(cos(x);2))";
+    : "(1)";
   const defaultStart = checkExpressionUrl(originalExpressionUrl, "start")
     ? decodeUrlSymbols(originalExpressionUrl)
     : "(and(a;or(a;b)))";
@@ -142,7 +144,7 @@ const MainPage = () => {
   const [complexityValue, setComplexityValue] = useState(25);
 
   function getDefaultTags() {
-    let defaultTags = ['TRIGONOMETRY_DOUBLE_ANGLES']
+    let defaultTags = ['TRIGONOMETRY_DOUBLE_ANGLES', 'TRIGONOMETRY_BASIC_IDENTITY', 'TRIGONOMETRY_SHIFTING']
     return getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)"))
       .filter(tag => defaultTags.includes(tag['name$']))
   }
@@ -300,12 +302,36 @@ const MainPage = () => {
 
     let content = [];
 
+    //if (currentTasks.length > 0) {
+      content.push(
+        <div>
+          <Button
+            onClick={function () {
+              var blob = new Blob([getLogOfGeneration()], {
+                type: "text/plain;charset=utf-8;",
+              });
+              saveAs(blob, "log.txt");
+            }}
+            style={{
+              marginBottom: "20px",
+            }}
+            type="primary"
+          >
+            Get log of generation
+          </Button>
+        </div>
+      );
+    //}
+
     if (currentTasks.length > 0) {
       content.push(
         <div>
           <Button
             onClick={function () {
-              console.log(getLogOfGeneration())
+              var blob = new Blob([getReportOfGeneration()], {
+                type: "text/plain;charset=utf-8;",
+              });
+              saveAs(blob, "report_tex.txt");
             }}
             style={{
               marginBottom: "20px",
@@ -695,7 +721,7 @@ const MainPage = () => {
                     avoidHighlightFirstOption={true}
                     showArrow={true}
                     hidePlaceholder={true}
-                    selectedValues={defaultTags}
+                    selectedValues={currentTags.length == 0 ? defaultTags : currentTags}
                   />
                   </div>
                   <h3>Complexity</h3>
