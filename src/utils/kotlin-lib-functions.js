@@ -134,6 +134,11 @@ export const getReportOfGeneration = () => {
   return log;
 };
 
+export const getAllSortTypesForGeneration = () => {
+  let sortTypes = twf_js.getAllSortTypesForGeneration();
+  return sortTypes;
+};
+
 export const getAllTagsForGeneration = (area) => {
   let tags = twf_js.getAllTagsForGeneration(area);
   return tags;

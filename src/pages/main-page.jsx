@@ -20,7 +20,8 @@ import {
   checkStatement,
   getAllTagsForGeneration,
   getLogOfGeneration,
-  getReportOfGeneration
+  getReportOfGeneration,
+  getAllSortTypesForGeneration
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
@@ -139,9 +140,17 @@ const MainPage = () => {
   );
   const [currentTasks, setCurrentTasks] = useState([]);
   const [allSupportedTags, setAllSupportedTags] = useState(getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)")))
+  const [allSupportedSortings, setAllSupportedSortings] = useState(getAllSortTypesForGeneration())
   const [defaultTags, setDefaultTags] = useState(getDefaultTags())
   const [currentTags, setCurrentTags] = useState(defaultTags);
-  const [complexityValue, setComplexityValue] = useState(25);
+  const [sortType, setSortType] = useState(getDefaultSortType());
+  const [complexityValue, setComplexityValue] = useState(40);
+
+  function getDefaultSortType() {
+    let defaultSortType = getAllSortTypesForGeneration()
+      .filter((sortTypeEnum) => sortTypeEnum['name$'] === 'BY_RULE_TAG_USAGE_DESC')[0]
+    return defaultSortType;
+  }
 
   function getDefaultTags() {
     let defaultTags = ['TRIGONOMETRY_DOUBLE_ANGLES', 'TRIGONOMETRY_BASIC_IDENTITY', 'TRIGONOMETRY_SHIFTING']
@@ -258,14 +267,14 @@ const MainPage = () => {
     let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
-    console.log(currentTags.map(tag => tag['name$']))
     const tasks = generateTasks(
       area,
       startExpression,
       [],
       {
         complexity: complexityValue / 100.0, 
-        tags: currentTags.map(tag => tag['name$'])
+        tags: currentTags.map(tag => tag['name$']),
+        sort: sortType['name$']
       }
     );
 
@@ -347,14 +356,16 @@ const MainPage = () => {
     let notebooksCount = currentTasks.length;
     for (let i = 0; i < notebooksCount; i++) {
       let task = currentTasks[i];
-      let taskText = task['goalExpressionTex'];
+      let taskText = replaceArcFunctionsNames(task['goalExpressionTex']);
+      let answerText = replaceArcFunctionsNames(task['originalExpressionTex']);
+
       content.push(
         <div>
           <Button
             onClick={function() {
               setCurrentMode("Solve");
-              let startExpression = task['goalExpressionTex'];
-              let goalExpression = task['originalExpressionTex'];
+              let startExpression = taskText;
+              let goalExpression = answerText;
               setStartSS(convertMathInput("TEX", "STRUCTURE_STRING", goalExpression));
               setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", startExpression));
               setStartTex(startExpression);
@@ -386,6 +397,14 @@ const MainPage = () => {
     }
     return content;
   };
+
+  function replaceArcFunctionsNames(taskText) {
+    taskText = taskText.replaceAll('asin', 'arcsin');
+    taskText = taskText.replaceAll('acos', 'arccos');
+    taskText = taskText.replaceAll('atg', 'arctan');
+    taskText = taskText.replaceAll('actg', 'arccot');
+    return taskText;
+  }
 
   const onCheckStatement = () => {
     const {
@@ -482,7 +501,7 @@ const MainPage = () => {
               key={mode}
               onClick={() => {
                 setCurrentMode(mode);
-                if (mode == 'GenerateTasks') {
+                if (mode === 'GenerateTasks') {
                   setCurrentRulePack("Trigonometry")
                 }
               }}
@@ -645,7 +664,7 @@ const MainPage = () => {
             )}
 
             {currentMode === "GenerateTasks" && (
-              <div style={{ "margin-bottom": "50px" }}>
+              <div style={{ "marginBottom": "50px" }}>
                 <h1>Generator settings</h1>
                 <div className="app__inputs">
                   <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
@@ -721,7 +740,7 @@ const MainPage = () => {
                     avoidHighlightFirstOption={true}
                     showArrow={true}
                     hidePlaceholder={true}
-                    selectedValues={currentTags.length == 0 ? defaultTags : currentTags}
+                    selectedValues={currentTags.length === 0 ? defaultTags : currentTags}
                   />
                   </div>
                   <h3>Complexity</h3>
@@ -730,6 +749,20 @@ const MainPage = () => {
                     x={complexityValue}
                     onChange={({ x }) => setComplexityValue(x)}
                   />
+                  <h3>Sort By</h3>
+                  <Select
+                    defaultValue={getDefaultSortType()['code']}
+                    onChange={(sortType) => {
+                      setSortType(allSupportedSortings.filter((sorting) => sorting['code'] === sortType)[0]);
+                    }}
+                    style={{ width: "400px" }}
+                  >
+                    {allSupportedSortings.map((option) => (
+                      <Option key={option['name$']} value={option['code']}>
+                        {option['code']}
+                      </Option>
+                    ))}
+                  </Select>
                 </div>
               </div>
             )}

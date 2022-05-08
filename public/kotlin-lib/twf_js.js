@@ -1996,6 +1996,9 @@ var twf_js = function (_, Kotlin) {
     }
     return copyToArray(destination_2);
   }
+  function getAllSortTypesForGeneration() {
+    return SortType$values();
+  }
   function getDefaultRulePacks() {
     return copyToArray(RulePackProvider$Companion_getInstance().getBasicTrigonometricSubstitutions());
   }
@@ -40625,6 +40628,9 @@ var twf_js = function (_, Kotlin) {
   function getAllTagsForGeneration_JS(area) {
     return getAllTagsForGeneration(area);
   }
+  function getAllSortTypesForGeneration_JS() {
+    return getAllSortTypesForGeneration();
+  }
   function getLogOfGeneration_JS() {
     return getLogOfGeneration();
   }
@@ -40732,6 +40738,7 @@ var twf_js = function (_, Kotlin) {
   package$api.getLogOfGeneration = getLogOfGeneration;
   package$api.getReportOfGeneration = getReportOfGeneration;
   package$api.getAllTagsForGeneration_61zpoe$ = getAllTagsForGeneration;
+  package$api.getAllSortTypesForGeneration = getAllSortTypesForGeneration;
   package$api.getDefaultRulePacks = getDefaultRulePacks;
   package$api.mapGoalStepCount_mqu1mq$ = mapGoalStepCount;
   var package$baseoperations = package$twf.baseoperations || (package$twf.baseoperations = {});
@@ -42144,6 +42151,7 @@ var twf_js = function (_, Kotlin) {
   _.jsonToMap = jsonToMap_JS;
   _.generateTasks = generateTasks_JS;
   _.getAllTagsForGeneration = getAllTagsForGeneration_JS;
+  _.getAllSortTypesForGeneration = getAllSortTypesForGeneration_JS;
   _.getLogOfGeneration = getLogOfGeneration_JS;
   _.getReportOfGeneration = getReportOfGeneration_JS;
   MainChainPart.prototype.check_i0qcxd$ = ComparableTransformationsPart.prototype.check_i0qcxd$;
