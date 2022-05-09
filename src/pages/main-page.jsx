@@ -286,6 +286,12 @@ const MainPage = () => {
       setSuccessMsg("Tasks generated total: " + tasks.length);
     }
 
+    if (tasks.length > 0 && tasks.every(task => task['difficulty'] < task['targetDifficulty'] 
+      && task['targetDifficulty'] - task['difficulty'] > 1)) {
+      setSuccessMsg(null);
+      setSolutionError("Can't generate tasks of given complexity setting. Please reduce complexity or add more tags.");
+    }
+
     setCurrentTasks(tasks);
   };
 
