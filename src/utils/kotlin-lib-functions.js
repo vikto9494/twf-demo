@@ -96,24 +96,29 @@ export const checkTexWithoutCompiledConfigurationCreating = (
 };
 
 export const checkTex = (
-  fullExpression,
+  solution,
   start,
   end,
   comparisonSign,
   rulePacks
 ) => {
+  var wellKnownFunctionsString = undefined;
+  if (rulePacks.length > 0 && rulePacks[0] === "Trigonometry") {
+    wellKnownFunctionsString = ";;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1"
+  }
+  console.log("checkSolutionInTex", solution, start, end, comparisonSign, wellKnownFunctionsString, rulePacks);
   return twf_js.checkSolutionInTex(
-    fullExpression,
+      solution,
     start,
     undefined,
     "",
     end,
     undefined,
     comparisonSign,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
+      undefined,
+      wellKnownFunctionsString,
+      undefined,
+      wellKnownFunctionsString,
     undefined,
     undefined,
     undefined,
@@ -155,7 +160,7 @@ export const generateTasks = (
   rulepacks,
   additionalParamsJsonString
 ) => {
-    console.log("Task Generation Params", area, startExpression, additionalParamsJsonString);
+    console.log("Task Generation Params", area, rulepacks, startExpression, additionalParamsJsonString);
   let tasks = twf_js.generateTasks(
       area,
       startExpression,
@@ -166,10 +171,11 @@ export const generateTasks = (
   return tasks;
 };
 
-export const checkStatement = (fullExpression, rulePacks) => {
+export const checkStatement = (statement, rulePacks) => {
+  console.log("checkStatement", statement, rulePacks);
   return {
     res: twf_js.checkSolutionInTex(
-        fullExpression,
+        statement,
         "",
         "",
         "",
