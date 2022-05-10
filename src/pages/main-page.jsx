@@ -267,16 +267,19 @@ const MainPage = () => {
     let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
+    const additionalParamsJsonString = JSON.stringify({
+      complexity: (complexityValue / 100.0).toString(),
+      tags: currentTags.map(tag => tag['name$']),
+      sort: sortType['name$']
+    });
+    console.log("Task Generation Params", additionalParamsJsonString);
     const tasks = generateTasks(
       area,
       startExpression,
       [],
-      {
-        complexity: complexityValue / 100.0, 
-        tags: currentTags.map(tag => tag['name$']),
-        sort: sortType['name$']
-      }
+        additionalParamsJsonString
     );
+    console.log("after generateTasks");
 
     if (tasks.errorMessage) {
       setSuccessMsg(null);
