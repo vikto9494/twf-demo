@@ -272,14 +272,12 @@ const MainPage = () => {
       tags: currentTags.map(tag => tag['name$']),
       sort: sortType['name$']
     });
-    console.log("Task Generation Params", additionalParamsJsonString);
     const tasks = generateTasks(
       area,
       startExpression,
       [],
         additionalParamsJsonString
     );
-    console.log("after generateTasks");
 
     if (tasks.errorMessage) {
       setSuccessMsg(null);

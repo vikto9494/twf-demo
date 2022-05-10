@@ -148,13 +148,14 @@ export const generateTasks = (
   area,
   startExpression,
   rulepacks,
-  additionalParamsMap
+  additionalParamsJsonString
 ) => {
+    console.log("Task Generation Params", area, startExpression, additionalParamsJsonString);
   let tasks = twf_js.generateTasks(
-    area,
-    startExpression,
-    rulepacks,
-    additionalParamsMap
+      area,
+      startExpression,
+      rulepacks,
+      additionalParamsJsonString
   );
   console.log(tasks);
   return tasks;
