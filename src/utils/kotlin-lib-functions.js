@@ -139,6 +139,11 @@ export const getAllSortTypesForGeneration = () => {
   return sortTypes;
 };
 
+export const getAllSortOrdersForGeneration = () => {
+  let sortTypes = twf_js.getAllSortOrdersForGeneration();
+  return sortTypes;
+};
+
 export const getAllTagsForGeneration = (area) => {
   let tags = twf_js.getAllTagsForGeneration(area);
   return tags;

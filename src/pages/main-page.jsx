@@ -21,7 +21,8 @@ import {
   getAllTagsForGeneration,
   getLogOfGeneration,
   getReportOfGeneration,
-  getAllSortTypesForGeneration
+  getAllSortTypesForGeneration,
+  getAllSortOrdersForGeneration
 } from "../utils/kotlin-lib-functions";
 import { addStyles } from "react-mathquill";
 import { plainSignToUrlSign, urlSignToPlainSign } from "./main-page.utils";
@@ -141,15 +142,23 @@ const MainPage = () => {
   const [currentTasks, setCurrentTasks] = useState([]);
   const [allSupportedTags, setAllSupportedTags] = useState(getAllTagsForGeneration(convertMathInput("TEX", "STRUCTURE_STRING", "(Trigonometry)")))
   const [allSupportedSortings, setAllSupportedSortings] = useState(getAllSortTypesForGeneration())
+  const [allSupportedSortOrders, setAllSupportedSortOrders] = useState(getAllSortOrdersForGeneration())
   const [defaultTags, setDefaultTags] = useState(getDefaultTags())
   const [currentTags, setCurrentTags] = useState(defaultTags);
   const [sortType, setSortType] = useState(getDefaultSortType());
+  const [sortOrder, setSortOrder] = useState(getDefaultSortOrder());
   const [complexityValue, setComplexityValue] = useState(40);
 
   function getDefaultSortType() {
     let defaultSortType = getAllSortTypesForGeneration()
-      .filter((sortTypeEnum) => sortTypeEnum['name$'] === 'BY_RULE_TAG_USAGE_DESC')[0]
+      .filter((sortTypeEnum) => sortTypeEnum['name$'] === 'BY_RULE_TAG_USAGE')[0]
     return defaultSortType;
+  }
+
+  function getDefaultSortOrder() {
+    let defaultSortOrder = getAllSortOrdersForGeneration()
+      .filter((sortOrderEnum) => sortOrderEnum['name$'] === 'DESC')[0]
+    return defaultSortOrder;
   }
 
   function getDefaultTags() {
@@ -270,7 +279,8 @@ const MainPage = () => {
     const additionalParamsJsonString = JSON.stringify({
       complexity: (complexityValue / 100.0).toString(),
       tags: currentTags.map(tag => tag['name$']),
-      sort: sortType['name$']
+      sort: sortType['name$'],
+      sortOrder: sortOrder['name$']
     });
     const tasks = generateTasks(
       area,
@@ -765,6 +775,20 @@ const MainPage = () => {
                     style={{ width: "400px" }}
                   >
                     {allSupportedSortings.map((option) => (
+                      <Option key={option['name$']} value={option['code']}>
+                        {option['code']}
+                      </Option>
+                    ))}
+                  </Select>
+                  <h3>Sort Order</h3>
+                  <Select
+                    defaultValue={getDefaultSortOrder()['code']}
+                    onChange={(sortOrder) => {
+                      setSortOrder(allSupportedSortOrders.filter((sorting) => sorting['code'] === sortOrder)[0]);
+                    }}
+                    style={{ width: "400px" }}
+                  >
+                    {allSupportedSortOrders.map((option) => (
                       <Option key={option['name$']} value={option['code']}>
                         {option['code']}
                       </Option>

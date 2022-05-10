@@ -4,37 +4,35 @@ if (typeof kotlin === 'undefined') {
 var twf_js = function (_, Kotlin) {
   'use strict';
   var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
-  var toList = Kotlin.kotlin.collections.toList_us0mfu$;
-  var split = Kotlin.kotlin.text.split_ip8yn$;
-  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
-  var hashCode = Kotlin.hashCode;
-  var setOf = Kotlin.kotlin.collections.setOf_mh5how$;
-  var setOf_0 = Kotlin.kotlin.collections.setOf_i5x0yv$;
-  var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
-  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
-  var copyToArray = Kotlin.kotlin.collections.copyToArray;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
-  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   var mutableSetOf = Kotlin.kotlin.collections.mutableSetOf_i5x0yv$;
   var toString = Kotlin.toString;
+  var toList = Kotlin.kotlin.collections.toList_us0mfu$;
   var toList_0 = Kotlin.kotlin.collections.toList_7wnvza$;
   var flatten = Kotlin.kotlin.collections.flatten_u0ad8z$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var ensureNotNull = Kotlin.ensureNotNull;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
   var toChar = Kotlin.toChar;
   var downTo = Kotlin.kotlin.ranges.downTo_ui3wc7$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var unboxChar = Kotlin.unboxChar;
+  var copyToArray = Kotlin.kotlin.collections.copyToArray;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var HashSet_init = Kotlin.kotlin.collections.HashSet_init_287e2$;
   var Map = Kotlin.kotlin.collections.Map;
   var throwCCE = Kotlin.throwCCE;
   var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var setOf = Kotlin.kotlin.collections.setOf_mh5how$;
+  var setOf_0 = Kotlin.kotlin.collections.setOf_i5x0yv$;
+  var split = Kotlin.kotlin.text.split_ip8yn$;
+  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var endsWith = Kotlin.kotlin.text.endsWith_sgbm27$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
   var subtract = Kotlin.kotlin.collections.subtract_q4559j$;
@@ -85,6 +83,7 @@ var twf_js = function (_, Kotlin) {
   var sortedDescending = Kotlin.kotlin.collections.sortedDescending_exjks8$;
   var sortedWith_0 = Kotlin.kotlin.sequences.sortedWith_vjgqpk$;
   var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init;
+  var hashCode = Kotlin.hashCode;
   var Throwable = Error;
   var emptySet = Kotlin.kotlin.collections.emptySet_287e2$;
   var kotlin_js_internal_DoubleCompanionObject = Kotlin.kotlin.js.internal.DoubleCompanionObject;
@@ -180,6 +179,7 @@ var twf_js = function (_, Kotlin) {
   var reversed_0 = Kotlin.kotlin.comparisons.reversed_2avth4$;
   var replaceFirst = Kotlin.kotlin.text.replaceFirst_680rmw$;
   var findAnyOf = Kotlin.kotlin.text.findAnyOf_7utkvz$;
+  var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   ComputationType.prototype = Object.create(Enum.prototype);
   ComputationType.prototype.constructor = ComputationType;
   ComputeExpressionVariableType.prototype = Object.create(Enum.prototype);
@@ -192,14 +192,14 @@ var twf_js = function (_, Kotlin) {
   ErrorLevel.prototype.constructor = ErrorLevel;
   StringDefinitionType.prototype = Object.create(Enum.prototype);
   StringDefinitionType.prototype.constructor = StringDefinitionType;
-  TaskTagCode.prototype = Object.create(Enum.prototype);
-  TaskTagCode.prototype.constructor = TaskTagCode;
-  TaskSetTagCode.prototype = Object.create(Enum.prototype);
-  TaskSetTagCode.prototype.constructor = TaskSetTagCode;
   ReportType.prototype = Object.create(Enum.prototype);
   ReportType.prototype.constructor = ReportType;
   RuleTag.prototype = Object.create(Enum.prototype);
   RuleTag.prototype.constructor = RuleTag;
+  TaskTagCode.prototype = Object.create(Enum.prototype);
+  TaskTagCode.prototype.constructor = TaskTagCode;
+  TaskSetTagCode.prototype = Object.create(Enum.prototype);
+  TaskSetTagCode.prototype.constructor = TaskSetTagCode;
   NodeType.prototype = Object.create(Enum.prototype);
   NodeType.prototype.constructor = NodeType;
   ForwardInverseExtensionType.prototype = Object.create(Enum.prototype);
@@ -236,519 +236,10 @@ var twf_js = function (_, Kotlin) {
   ExpressionGenerationDirection.prototype.constructor = ExpressionGenerationDirection;
   RuleTag_0.prototype = Object.create(Enum.prototype);
   RuleTag_0.prototype.constructor = RuleTag_0;
+  SortOrder.prototype = Object.create(Enum.prototype);
+  SortOrder.prototype.constructor = SortOrder;
   SortType.prototype = Object.create(Enum.prototype);
   SortType.prototype.constructor = SortType;
-  function createCompiledConfigurationFromExpressionSubstitutionsAndParams_JS(expressionSubstitutions, additionalParamsMap) {
-    if (additionalParamsMap === void 0) {
-      additionalParamsMap = emptyMap();
-    }
-    return createCompiledConfigurationFromExpressionSubstitutionsAndParams(expressionSubstitutions, additionalParamsMap);
-  }
-  function createConfigurationFromRulePacksAndParams_JS(rulePacks, additionalParamsMap) {
-    if (rulePacks === void 0) {
-      rulePacks = copyToArray(listOf('Algebra'));
-    }
-    if (additionalParamsMap === void 0) {
-      additionalParamsMap = emptyMap();
-    }
-    return createConfigurationFromRulePacksAndParams(rulePacks, additionalParamsMap);
-  }
-  function createConfigurationFromRulePacksAndDetailSolutionCheckingParams_JS(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules) {
-    if (rulePacks === void 0) {
-      rulePacks = copyToArray(listOf('Algebra'));
-    }
-    if (wellKnownFunctionsString === void 0)
-      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
-    if (expressionTransformationRulesString === void 0)
-      expressionTransformationRulesString = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
-    if (maxExpressionTransformationWeight === void 0)
-      maxExpressionTransformationWeight = '1.0';
-    if (unlimitedWellKnownFunctionsString === void 0)
-      unlimitedWellKnownFunctionsString = wellKnownFunctionsString;
-    if (taskContextExpressionTransformationRules === void 0)
-      taskContextExpressionTransformationRules = '';
-    if (maxDistBetweenDiffSteps === void 0)
-      maxDistBetweenDiffSteps = '';
-    if (scopeFilter === void 0)
-      scopeFilter = '';
-    if (wellKnownFunctions === void 0)
-      wellKnownFunctions = [];
-    if (unlimitedWellKnownFunctions === void 0)
-      unlimitedWellKnownFunctions = wellKnownFunctions;
-    if (expressionTransformationRules === void 0)
-      expressionTransformationRules = [];
-    return createConfigurationFromRulePacksAndDetailSolutionCheckingParams(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, toList(wellKnownFunctions), toList(unlimitedWellKnownFunctions), toList(expressionTransformationRules));
-  }
-  function stringToExpression_JS(string, scope, isMathMl, functionConfiguration, compiledConfiguration) {
-    if (scope === void 0)
-      scope = '';
-    if (isMathMl === void 0)
-      isMathMl = false;
-    if (functionConfiguration === void 0) {
-      var $receiver = split(scope, [';']);
-      var destination = ArrayList_init();
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.length > 0)
-          destination.add_11rb$(element);
-      }
-      functionConfiguration = new FunctionConfiguration(toSet(destination));
-    }
-    if (compiledConfiguration === void 0)
-      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return stringToExpression(string, scope, isMathMl, functionConfiguration, compiledConfiguration);
-  }
-  function structureStringToExpression_JS(structureString, scope, functionConfiguration) {
-    if (scope === void 0)
-      scope = '';
-    if (functionConfiguration === void 0) {
-      var $receiver = split(scope, [';']);
-      var destination = ArrayList_init();
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.length > 0)
-          destination.add_11rb$(element);
-      }
-      functionConfiguration = new FunctionConfiguration(toSet(destination));
-    }
-    return structureStringToExpression(structureString, scope, functionConfiguration);
-  }
-  function cloneExpression_JS(expressionNode) {
-    return expressionNode.clone();
-  }
-  function expressionToString_JS(expressionNode, characterEscapingDepth) {
-    if (characterEscapingDepth === void 0)
-      characterEscapingDepth = 1;
-    return expressionToString(expressionNode, characterEscapingDepth);
-  }
-  function expressionToUnicodeString_JS(expressionNode, characterEscapingDepth) {
-    if (characterEscapingDepth === void 0)
-      characterEscapingDepth = 1;
-    return expressionToUnicodeString(expressionNode, characterEscapingDepth);
-  }
-  function expressionToTexString_JS(expressionNode, characterEscapingDepth) {
-    if (characterEscapingDepth === void 0)
-      characterEscapingDepth = 1;
-    return expressionToTexString(expressionNode, characterEscapingDepth);
-  }
-  function expressionToStructureString_JS(expressionNode) {
-    return expressionToStructureString(expressionNode);
-  }
-  function stringToStructureString_JS(string, scope, isMathMl, functionConfiguration, compiledConfiguration) {
-    if (scope === void 0)
-      scope = '';
-    if (isMathMl === void 0)
-      isMathMl = false;
-    if (functionConfiguration === void 0) {
-      var $receiver = split(scope, [';']);
-      var destination = ArrayList_init();
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.length > 0)
-          destination.add_11rb$(element);
-      }
-      functionConfiguration = new FunctionConfiguration(toSet(destination));
-    }
-    if (compiledConfiguration === void 0)
-      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return stringToStructureString(string, scope, isMathMl, functionConfiguration, compiledConfiguration);
-  }
-  function expressionSubstitutionFromStrings(left, right, scope, basedOnTaskContext, functionConfiguration, compiledConfiguration) {
-    if (scope === void 0)
-      scope = '';
-    if (basedOnTaskContext === void 0)
-      basedOnTaskContext = false;
-    if (functionConfiguration === void 0) {
-      var $receiver = split(scope, [';']);
-      var destination = ArrayList_init();
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.length > 0)
-          destination.add_11rb$(element);
-      }
-      functionConfiguration = new FunctionConfiguration(toSet(destination));
-    }
-    if (compiledConfiguration === void 0)
-      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return expressionSubstitutionFromStrings_0(left, right, scope, basedOnTaskContext, void 0, void 0, void 0, void 0, void 0, functionConfiguration, compiledConfiguration);
-  }
-  function expressionSubstitutionFromStructureStrings_JS(leftStructureString, rightStructureString, basedOnTaskContext, matchJumbledAndNested, simpleAdditional, isExtending, priority, code, nameEn, nameRu) {
-    if (leftStructureString === void 0)
-      leftStructureString = '';
-    if (rightStructureString === void 0)
-      rightStructureString = '';
-    if (basedOnTaskContext === void 0)
-      basedOnTaskContext = false;
-    if (matchJumbledAndNested === void 0)
-      matchJumbledAndNested = false;
-    if (simpleAdditional === void 0)
-      simpleAdditional = false;
-    if (isExtending === void 0)
-      isExtending = false;
-    if (priority === void 0)
-      priority = 50;
-    if (code === void 0)
-      code = '';
-    if (nameEn === void 0)
-      nameEn = '';
-    if (nameRu === void 0)
-      nameRu = '';
-    return expressionSubstitutionFromStructureStrings(leftStructureString, rightStructureString, basedOnTaskContext, matchJumbledAndNested, simpleAdditional, isExtending, priority, code, nameEn, nameRu);
-  }
-  function findApplicableSubstitutionsInSelectedPlace_JS(expression, selectedNodeIds, compiledConfiguration, simplifyNotSelectedTopArguments, withReadyApplicationResult) {
-    if (simplifyNotSelectedTopArguments === void 0)
-      simplifyNotSelectedTopArguments = false;
-    if (withReadyApplicationResult === void 0)
-      withReadyApplicationResult = true;
-    return copyToArray(findApplicableSubstitutionsInSelectedPlace(expression, selectedNodeIds, compiledConfiguration, simplifyNotSelectedTopArguments, withReadyApplicationResult));
-  }
-  function findSubstitutionPlacesInExpression(expression, substitution) {
-    return copyToArray(findSubstitutionPlacesInExpression_0(expression, substitution));
-  }
-  function applySubstitution(expression, substitution, substitutionPlaces) {
-    return applySubstitution_0(expression, substitution, toList(substitutionPlaces));
-  }
-  function checkSolutionInTex_JS(originalTexSolution, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, comparisonSign, wellKnownFunctions, wellKnownFunctionsString, unlimitedWellKnownFunctions, unlimitedWellKnownFunctionsString, expressionTransformationRules, expressionTransformationRulesString, taskContextExpressionTransformationRules, rulePacks, maxExpressionTransformationWeight, maxDistBetweenDiffSteps, scopeFilter, shortErrorDescription) {
-    if (startExpressionIdentifier === void 0)
-      startExpressionIdentifier = '';
-    if (targetFactPattern === void 0)
-      targetFactPattern = '';
-    if (additionalFactsIdentifiers === void 0)
-      additionalFactsIdentifiers = '';
-    if (endExpressionIdentifier === void 0)
-      endExpressionIdentifier = '';
-    if (targetFactIdentifier === void 0)
-      targetFactIdentifier = '';
-    if (comparisonSign === void 0)
-      comparisonSign = '';
-    if (wellKnownFunctions === void 0)
-      wellKnownFunctions = [];
-    if (wellKnownFunctionsString === void 0)
-      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
-    if (unlimitedWellKnownFunctions === void 0)
-      unlimitedWellKnownFunctions = wellKnownFunctions;
-    if (unlimitedWellKnownFunctionsString === void 0)
-      unlimitedWellKnownFunctionsString = wellKnownFunctionsString;
-    if (expressionTransformationRules === void 0)
-      expressionTransformationRules = [];
-    if (expressionTransformationRulesString === void 0)
-      expressionTransformationRulesString = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
-    if (taskContextExpressionTransformationRules === void 0)
-      taskContextExpressionTransformationRules = '';
-    if (rulePacks === void 0) {
-      rulePacks = copyToArray(emptyList());
-    }
-    if (maxExpressionTransformationWeight === void 0)
-      maxExpressionTransformationWeight = '1.0';
-    if (maxDistBetweenDiffSteps === void 0)
-      maxDistBetweenDiffSteps = '';
-    if (scopeFilter === void 0)
-      scopeFilter = '';
-    if (shortErrorDescription === void 0)
-      shortErrorDescription = '0';
-    return checkSolutionInTex(originalTexSolution, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, comparisonSign, toList(wellKnownFunctions), wellKnownFunctionsString, toList(unlimitedWellKnownFunctions), unlimitedWellKnownFunctionsString, toList(expressionTransformationRules), expressionTransformationRulesString, taskContextExpressionTransformationRules, rulePacks, maxExpressionTransformationWeight, maxDistBetweenDiffSteps, scopeFilter, shortErrorDescription);
-  }
-  function checkSolutionInTexWithCompiledConfiguration_JS(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, comparisonSign, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription) {
-    if (startExpressionIdentifier === void 0)
-      startExpressionIdentifier = '';
-    if (targetFactPattern === void 0)
-      targetFactPattern = '';
-    if (additionalFactsIdentifiers === void 0)
-      additionalFactsIdentifiers = '';
-    if (endExpressionIdentifier === void 0)
-      endExpressionIdentifier = '';
-    if (targetFactIdentifier === void 0)
-      targetFactIdentifier = '';
-    if (shortErrorDescription === void 0)
-      shortErrorDescription = '0';
-    return checkSolutionInTexWithCompiledConfiguration(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, comparisonSign, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription);
-  }
-  function createCompiledConfigurationFromITR_JS(taskITR, rulePacksITR, comparisonSettings) {
-    if (comparisonSettings === void 0)
-      comparisonSettings = new ComparisonSettings();
-    return createCompiledConfigurationFromITR(taskITR, rulePacksITR, comparisonSettings);
-  }
-  function checkSolutionInTexITR_JS(originalTexSolution, taskITR, rulePacksITR, shortErrorDescription, skipTrivialCheck, comparisonSettings, inputCompiledConfiguration) {
-    if (shortErrorDescription === void 0)
-      shortErrorDescription = '0';
-    if (skipTrivialCheck === void 0)
-      skipTrivialCheck = false;
-    if (comparisonSettings === void 0)
-      comparisonSettings = new ComparisonSettings();
-    if (inputCompiledConfiguration === void 0)
-      inputCompiledConfiguration = null;
-    return checkSolutionInTexITR(originalTexSolution, taskITR, rulePacksITR, shortErrorDescription, skipTrivialCheck, comparisonSettings, inputCompiledConfiguration);
-  }
-  function getParsedExpressionByMathML(mathML) {
-    var expressionTreeParser = new ExpressionTreeParser(mathML);
-    expressionTreeParser.parse();
-    var root = expressionTreeParser.root;
-    return root.toString();
-  }
-  function checkFactsInMathML(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts) {
-    if (wellKnownFunctions === void 0)
-      wellKnownFunctions = '+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1';
-    if (expressionTransformationRules === void 0)
-      expressionTransformationRules = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
-    if (targetFactIdentifier === void 0)
-      targetFactIdentifier = '';
-    if (targetVariablesNames === void 0)
-      targetVariablesNames = '';
-    if (minNumberOfMultipliersInAnswer === void 0)
-      minNumberOfMultipliersInAnswer = '';
-    if (maxNumberOfDivisionsInAnswer === void 0)
-      maxNumberOfDivisionsInAnswer = '';
-    if (additionalFactsIdentifiers === void 0)
-      additionalFactsIdentifiers = '';
-    if (maxExpressionTransformationWeight === void 0)
-      maxExpressionTransformationWeight = '1.0';
-    if (unlimitedWellKnownFunctions === void 0)
-      unlimitedWellKnownFunctions = wellKnownFunctions;
-    if (shortErrorDescription === void 0)
-      shortErrorDescription = '0';
-    if (taskContextExpressionTransformationRules === void 0)
-      taskContextExpressionTransformationRules = '';
-    if (allowedVariablesNames === void 0)
-      allowedVariablesNames = '';
-    if (maxDistBetweenDiffSteps === void 0)
-      maxDistBetweenDiffSteps = '';
-    if (forbiddenFunctions === void 0)
-      forbiddenFunctions = '';
-    if (scopeFilter === void 0)
-      scopeFilter = '';
-    if (makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts === void 0)
-      makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts = '0';
-    return checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts);
-  }
-  function getUserLogInPlainText() {
-    return log_1.getLogInPlainText_ap6kjd$(MessageType$USER_getInstance());
-  }
-  function getUserLogInJson() {
-    return log_1.getLogInJson_j7vfu1$(MessageType$USER_getInstance());
-  }
-  function getAllLogInPlainText() {
-    return log_1.getLogInPlainText_ap6kjd$();
-  }
-  function getAllLogInJson() {
-    return log_1.getLogInJson_j7vfu1$();
-  }
-  function encryptSolution(solution) {
-    return hashCode(solution).toString() + '_' + solution.length;
-  }
-  function encryptResult(result, solution) {
-    return result + ' ' + hashCode(solution) + '_' + solution.length;
-  }
-  function decodeUrlSymbols_JS(string) {
-    return decodeUrlSymbols(string);
-  }
-  function compareWithoutSubstitutions(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, compiledConfiguration) {
-    if (scope === void 0)
-      scope = setOf('');
-    if (notChangesOnVariablesFunction === void 0)
-      notChangesOnVariablesFunction = setOf_0(['+', '-', '*', '/', '^']);
-    if (maxExpressionBustCount === void 0)
-      maxExpressionBustCount = 4096;
-    if (functionConfiguration === void 0)
-      functionConfiguration = new FunctionConfiguration(scope, notChangesOnVariablesFunction);
-    if (comparisonSettings === void 0) {
-      var $receiver = new ComparisonSettings();
-      $receiver.maxExpressionBustCount = maxExpressionBustCount;
-      comparisonSettings = $receiver;
-    }
-    if (compiledConfiguration === void 0)
-      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    return compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, new DebugOutputMessages(), compiledConfiguration);
-  }
-  function createExpressionFrontInput_JS(expression, format) {
-    return createExpressionFrontInput(expression, format);
-  }
-  function createRuleITR_JS(code, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, left, right, priority, isExtending, matchJumbledAndNested, simpleAdditional, basedOnTaskContext, normalizationType, weight, subjectType) {
-    if (code === void 0)
-      code = null;
-    if (nameEn === void 0)
-      nameEn = null;
-    if (nameRu === void 0)
-      nameRu = null;
-    if (descriptionShortEn === void 0)
-      descriptionShortEn = null;
-    if (descriptionShortRu === void 0)
-      descriptionShortRu = null;
-    if (descriptionEn === void 0)
-      descriptionEn = null;
-    if (descriptionRu === void 0)
-      descriptionRu = null;
-    if (left === void 0)
-      left = null;
-    if (right === void 0)
-      right = null;
-    if (priority === void 0)
-      priority = null;
-    if (isExtending === void 0)
-      isExtending = null;
-    if (matchJumbledAndNested === void 0)
-      matchJumbledAndNested = null;
-    if (simpleAdditional === void 0)
-      simpleAdditional = null;
-    if (basedOnTaskContext === void 0)
-      basedOnTaskContext = null;
-    if (normalizationType === void 0)
-      normalizationType = null;
-    if (weight === void 0)
-      weight = null;
-    if (subjectType === void 0)
-      subjectType = null;
-    return createRuleITR(code, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, left, right, priority, isExtending, matchJumbledAndNested, simpleAdditional, basedOnTaskContext, normalizationType, weight, subjectType);
-  }
-  function createRulePackLinkITR_JS(namespaceCode, rulePackCode) {
-    if (namespaceCode === void 0)
-      namespaceCode = null;
-    if (rulePackCode === void 0)
-      rulePackCode = null;
-    return createRulePackLinkITR(namespaceCode, rulePackCode);
-  }
-  function createRulePackITR_JS(code, version, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, rulePacks, rules, otherCheckSolutionData, otherAutoGenerationData, otherData) {
-    if (code === void 0)
-      code = null;
-    if (version === void 0)
-      version = 0;
-    if (namespaceCode === void 0)
-      namespaceCode = null;
-    if (nameEn === void 0)
-      nameEn = null;
-    if (nameRu === void 0)
-      nameRu = null;
-    if (descriptionShortEn === void 0)
-      descriptionShortEn = null;
-    if (descriptionShortRu === void 0)
-      descriptionShortRu = null;
-    if (descriptionEn === void 0)
-      descriptionEn = null;
-    if (descriptionRu === void 0)
-      descriptionRu = null;
-    if (subjectType === void 0)
-      subjectType = 'standard_math';
-    if (rulePacks === void 0)
-      rulePacks = null;
-    if (rules === void 0)
-      rules = null;
-    if (otherCheckSolutionData === void 0)
-      otherCheckSolutionData = null;
-    if (otherAutoGenerationData === void 0)
-      otherAutoGenerationData = null;
-    if (otherData === void 0)
-      otherData = null;
-    return createRulePackITR(code, version, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, rulePacks != null ? toList(rulePacks) : null, rules != null ? toList(rules) : null, otherCheckSolutionData, otherAutoGenerationData, otherData);
-  }
-  function createTaskITR_JS(taskCreationType, code, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, tags, originalExpression, goalType, goalExpression, goalPattern, goalNumberProperty, otherGoalData, rulePacks, rules, stepsNumber, time, difficulty, solution, solutionsStepsTree, interestingFacts, nextRecommendedTasks, hints, otherCheckSolutionData, countOfAutoGeneratedTasks, otherAutoGenerationData, otherAwardData, otherData) {
-    if (taskCreationType === void 0)
-      taskCreationType = 'manual';
-    if (code === void 0)
-      code = null;
-    if (namespaceCode === void 0)
-      namespaceCode = null;
-    if (nameEn === void 0)
-      nameEn = null;
-    if (nameRu === void 0)
-      nameRu = null;
-    if (descriptionShortEn === void 0)
-      descriptionShortEn = null;
-    if (descriptionShortRu === void 0)
-      descriptionShortRu = null;
-    if (descriptionEn === void 0)
-      descriptionEn = null;
-    if (descriptionRu === void 0)
-      descriptionRu = null;
-    if (subjectType === void 0)
-      subjectType = null;
-    if (tags === void 0)
-      tags = null;
-    if (originalExpression === void 0)
-      originalExpression = null;
-    if (goalType === void 0)
-      goalType = null;
-    if (goalExpression === void 0)
-      goalExpression = null;
-    if (goalPattern === void 0)
-      goalPattern = null;
-    if (goalNumberProperty === void 0)
-      goalNumberProperty = null;
-    if (otherGoalData === void 0)
-      otherGoalData = null;
-    if (rulePacks === void 0)
-      rulePacks = null;
-    if (rules === void 0)
-      rules = null;
-    if (stepsNumber === void 0)
-      stepsNumber = null;
-    if (time === void 0)
-      time = null;
-    if (solution === void 0)
-      solution = null;
-    if (solutionsStepsTree === void 0)
-      solutionsStepsTree = null;
-    if (interestingFacts === void 0)
-      interestingFacts = null;
-    if (nextRecommendedTasks === void 0)
-      nextRecommendedTasks = null;
-    if (hints === void 0)
-      hints = null;
-    if (otherCheckSolutionData === void 0)
-      otherCheckSolutionData = null;
-    if (countOfAutoGeneratedTasks === void 0)
-      countOfAutoGeneratedTasks = 0;
-    if (otherAutoGenerationData === void 0)
-      otherAutoGenerationData = null;
-    if (otherAwardData === void 0)
-      otherAwardData = null;
-    if (otherData === void 0)
-      otherData = null;
-    return createTaskITR(taskCreationType, code, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, tags, originalExpression, goalType, goalExpression, goalPattern, goalNumberProperty, otherGoalData, rulePacks, rules, stepsNumber, time, difficulty, solution, solutionsStepsTree, interestingFacts, nextRecommendedTasks, hints, otherCheckSolutionData, countOfAutoGeneratedTasks, otherAutoGenerationData, otherAwardData, otherData);
-  }
-  function arrayToList_JS(data) {
-    return toList(data);
-  }
-  function listToArray_JS(data) {
-    return copyToArray(data);
-  }
-  function arrayToSet_JS(data) {
-    return toSet_0(data);
-  }
-  function dinamicToMap_JS(data) {
-    return mapOf_1(data);
-  }
-  function jsonStringToMap_JS(json) {
-    return JsonParser$Companion_getInstance().parseMap_61zpoe$(json);
-  }
-  function jsonToMap_JS(json) {
-    return JsonParser$Companion_getInstance().parseMapRecursive_qk3xy8$(json);
-  }
-  function generateTasks_JS(area, startExpression, rulepacks, additionalParamsJsonString) {
-    if (rulepacks === void 0)
-      rulepacks = [];
-    if (additionalParamsJsonString === void 0)
-      additionalParamsJsonString = '{}';
-    return generateTasks(area, startExpression, rulepacks, additionalParamsJsonString);
-  }
-  function getAllTagsForGeneration_JS(area) {
-    return getAllTagsForGeneration(area);
-  }
-  function getAllSortTypesForGeneration_JS() {
-    return getAllSortTypesForGeneration();
-  }
-  function getLogOfGeneration_JS() {
-    return getLogOfGeneration();
-  }
-  function getReportOfGeneration_JS() {
-    return getReportOfGeneration();
-  }
   function createConfigurationFromRulePacksAndParams(actualRulePackCodes, additionalParamsMap) {
     if (actualRulePackCodes === void 0) {
       actualRulePackCodes = copyToArray(listOf('Algebra'));
@@ -1168,7 +659,7 @@ var twf_js = function (_, Kotlin) {
     topExpressionNode.computeNodeIdsAsNumbersInDirectTraversalAndDistancesToRoot_ydzd23$();
     topExpressionNode.computeIdentifier_5osufp$();
   }
-  function compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, debugOutputMessages, compiledConfiguration) {
+  function compareWithoutSubstitutions(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, debugOutputMessages, compiledConfiguration) {
     if (scope === void 0)
       scope = setOf('');
     if (notChangesOnVariablesFunction === void 0)
@@ -1191,7 +682,7 @@ var twf_js = function (_, Kotlin) {
   function compareByPattern(expression, pattern) {
     return checkExpressionStructure(expression, pattern);
   }
-  function compareWithoutSubstitutions_1(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, debugOutputMessages, compiledConfiguration) {
+  function compareWithoutSubstitutions_0(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, debugOutputMessages, compiledConfiguration) {
     if (scope === void 0)
       scope = '';
     if (notChangesOnVariablesFunction === void 0)
@@ -1229,7 +720,7 @@ var twf_js = function (_, Kotlin) {
       debugOutputMessages = new DebugOutputMessages();
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration, comparisonSettings, void 0, void 0, void 0, void 0, void 0, void 0, debugOutputMessages);
-    return compareWithoutSubstitutions_0(stringToExpression(left, void 0, void 0, void 0, compiledConfiguration), stringToExpression(right, void 0, void 0, void 0, compiledConfiguration), void 0, void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
+    return compareWithoutSubstitutions(stringToExpression(left, void 0, void 0, void 0, compiledConfiguration), stringToExpression(right, void 0, void 0, void 0, compiledConfiguration), void 0, void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
   }
   function compareByPattern_0(expression, pattern, scope, notChangesOnVariablesFunction, functionConfiguration, compiledConfiguration) {
     if (scope === void 0)
@@ -1293,7 +784,7 @@ var twf_js = function (_, Kotlin) {
       debugOutputMessages = new DebugOutputMessages();
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration, void 0, void 0, void 0, void 0, void 0, void 0, void 0, debugOutputMessages);
-    return compareWithoutSubstitutions_0(structureStringToExpression(leftStructureString), structureStringToExpression(rightStructureString), void 0, void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
+    return compareWithoutSubstitutions(structureStringToExpression(leftStructureString), structureStringToExpression(rightStructureString), void 0, void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
   }
   function stringToExpression(string, scope, isMathMl, functionConfiguration, compiledConfiguration) {
     if (scope === void 0)
@@ -1499,7 +990,7 @@ var twf_js = function (_, Kotlin) {
     }
     return result;
   }
-  function expressionSubstitutionFromStrings_0(left, right, scope, basedOnTaskContext, matchJumbledAndNested, priority, code, nameEn, nameRu, functionConfiguration, compiledConfiguration) {
+  function expressionSubstitutionFromStrings(left, right, scope, basedOnTaskContext, matchJumbledAndNested, priority, code, nameEn, nameRu, functionConfiguration, compiledConfiguration) {
     if (left === void 0)
       left = '';
     if (right === void 0)
@@ -1602,7 +1093,7 @@ var twf_js = function (_, Kotlin) {
     }
     return result;
   }
-  function findSubstitutionPlacesInExpression_0(expression, substitution, compiledConfiguration) {
+  function findSubstitutionPlacesInExpression(expression, substitution, compiledConfiguration) {
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration();
     if (!substitution.isAppropriateToFunctions_ywdfdh$(expression.getContainedFunctions()) && intersect(substitution.left.getContainedVariables(), expression.getContainedVariables()).isEmpty()) {
@@ -1620,7 +1111,7 @@ var twf_js = function (_, Kotlin) {
     }
     return result;
   }
-  function applySubstitution_0(expression, substitution, substitutionPlaces, compiledConfiguration) {
+  function applySubstitution(expression, substitution, substitutionPlaces, compiledConfiguration) {
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration();
     substitution.applySubstitution_3grqus$(substitutionPlaces, compiledConfiguration.factComparator.expressionComparator);
@@ -1687,7 +1178,7 @@ var twf_js = function (_, Kotlin) {
       simplifyNotSelectedTopArguments = false;
     var substitutionSelectionData = new SubstitutionSelectionData(expression, selectedNodeIds, compiledConfiguration);
     fillSubstitutionSelectionData(substitutionSelectionData);
-    return applySubstitution_1(substitutionSelectionData, substitution, simplifyNotSelectedTopArguments);
+    return applySubstitution_0(substitutionSelectionData, substitution, simplifyNotSelectedTopArguments);
   }
   function checkAndAddNewVariableReplacement(variableName, variableValue, expression, compiledConfiguration) {
     return compiledConfiguration.checkAndAddNewVariableReplacement_6moki$(variableName, variableValue, expression);
@@ -1797,7 +1288,7 @@ var twf_js = function (_, Kotlin) {
     }
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    var substitutionPlaces = findSubstitutionPlacesInExpression_0(stringToExpression(expression, void 0, void 0, void 0, compiledConfiguration), expressionSubstitutionFromStrings_0(substitutionLeft, substitutionRight, void 0, basedOnTaskContext, matchJumbledAndNested, void 0, void 0, void 0, void 0, void 0, compiledConfiguration));
+    var substitutionPlaces = findSubstitutionPlacesInExpression(stringToExpression(expression, void 0, void 0, void 0, compiledConfiguration), expressionSubstitutionFromStrings(substitutionLeft, substitutionRight, void 0, basedOnTaskContext, matchJumbledAndNested, void 0, void 0, void 0, void 0, void 0, compiledConfiguration));
     var destination_0 = ArrayList_init_0(collectionSizeOrDefault(substitutionPlaces, 10));
     var tmp$_0;
     tmp$_0 = substitutionPlaces.iterator();
@@ -1832,7 +1323,7 @@ var twf_js = function (_, Kotlin) {
     }
     if (compiledConfiguration === void 0)
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
-    var substitutionPlaces = findSubstitutionPlacesInExpression_0(stringToExpression(expression, void 0, void 0, void 0, compiledConfiguration), expressionSubstitutionFromStructureStrings(substitutionLeftStructureString, substitutionRightStructureString, basedOnTaskContext, matchJumbledAndNested));
+    var substitutionPlaces = findSubstitutionPlacesInExpression(stringToExpression(expression, void 0, void 0, void 0, compiledConfiguration), expressionSubstitutionFromStructureStrings(substitutionLeftStructureString, substitutionRightStructureString, basedOnTaskContext, matchJumbledAndNested));
     var destination_0 = ArrayList_init_0(collectionSizeOrDefault(substitutionPlaces, 10));
     var tmp$_0;
     tmp$_0 = substitutionPlaces.iterator();
@@ -1868,8 +1359,8 @@ var twf_js = function (_, Kotlin) {
       compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
     var tmp$_0;
     var actualExpression = stringToExpression(expression, void 0, void 0, void 0, compiledConfiguration);
-    var actualSubstitution = expressionSubstitutionFromStrings_0(substitutionLeft, substitutionRight, void 0, basedOnTaskContext, matchJumbledAndNested, void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
-    var substitutionPlaces = findSubstitutionPlacesInExpression_0(actualExpression, actualSubstitution);
+    var actualSubstitution = expressionSubstitutionFromStrings(substitutionLeft, substitutionRight, void 0, basedOnTaskContext, matchJumbledAndNested, void 0, void 0, void 0, void 0, void 0, compiledConfiguration);
+    var substitutionPlaces = findSubstitutionPlacesInExpression(actualExpression, actualSubstitution);
     var destination_0 = ArrayList_init();
     var tmp$_1;
     tmp$_1 = substitutionPlaces.iterator();
@@ -1880,7 +1371,7 @@ var twf_js = function (_, Kotlin) {
     }
     var actualPlace = destination_0;
     if (!actualPlace.isEmpty()) {
-      tmp$_0 = applySubstitution_0(actualExpression, actualSubstitution, actualPlace);
+      tmp$_0 = applySubstitution(actualExpression, actualSubstitution, actualPlace);
     }
      else {
       tmp$_0 = actualExpression;
@@ -1914,7 +1405,7 @@ var twf_js = function (_, Kotlin) {
     var tmp$_0;
     var actualExpression = stringToExpression(expression, void 0, void 0, void 0, compiledConfiguration);
     var actualSubstitution = expressionSubstitutionFromStructureStrings(substitutionLeftStructureString, substitutionRightStructureString, basedOnTaskContext, matchJumbledAndNested);
-    var substitutionPlaces = findSubstitutionPlacesInExpression_0(actualExpression, actualSubstitution);
+    var substitutionPlaces = findSubstitutionPlacesInExpression(actualExpression, actualSubstitution);
     var destination_0 = ArrayList_init();
     var tmp$_1;
     tmp$_1 = substitutionPlaces.iterator();
@@ -1925,7 +1416,7 @@ var twf_js = function (_, Kotlin) {
     }
     var actualPlace = destination_0;
     if (!actualPlace.isEmpty()) {
-      tmp$_0 = applySubstitution_0(actualExpression, actualSubstitution, actualPlace);
+      tmp$_0 = applySubstitution(actualExpression, actualSubstitution, actualPlace);
     }
      else {
       tmp$_0 = actualExpression;
@@ -2407,7 +1898,7 @@ var twf_js = function (_, Kotlin) {
       rulepacks = [];
     if (additionalParamsJsonString === void 0)
       additionalParamsJsonString = '{}';
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     log_1.clear();
     if (!equals(area, '(Trigonometry)')) {
       return [];
@@ -2419,10 +1910,10 @@ var twf_js = function (_, Kotlin) {
      else {
       var $receiver = Kotlin.isType(tmp$ = parsedAdditionalParams.get_11rb$('tags'), List) ? tmp$ : throwCCE();
       var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
-      var tmp$_3;
-      tmp$_3 = $receiver.iterator();
-      while (tmp$_3.hasNext()) {
-        var item = tmp$_3.next();
+      var tmp$_4;
+      tmp$_4 = $receiver.iterator();
+      while (tmp$_4.hasNext()) {
+        var item = tmp$_4.next();
         destination.add_11rb$(RuleTag$valueOf_0(item));
       }
       var tagsChosen = toMutableList(destination);
@@ -2432,7 +1923,7 @@ var twf_js = function (_, Kotlin) {
       tmp$_0 = copyToArray(tagsChosen);
     }
     var tags = tmp$_0;
-    var settings = new GeneratorSettings(void 0, mapTargetWeight(toDouble(typeof (tmp$_1 = parsedAdditionalParams.get_11rb$('complexity')) === 'string' ? tmp$_1 : throwCCE())), void 0, generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_mh4gj9$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks), tags), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, SortType$valueOf(typeof (tmp$_2 = parsedAdditionalParams.get_11rb$('sort')) === 'string' ? tmp$_2 : throwCCE()));
+    var settings = new GeneratorSettings(void 0, mapTargetWeight(toDouble(typeof (tmp$_1 = parsedAdditionalParams.get_11rb$('complexity')) === 'string' ? tmp$_1 : throwCCE())), void 0, generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_mh4gj9$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks), tags), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, SortType$valueOf(typeof (tmp$_2 = parsedAdditionalParams.get_11rb$('sort')) === 'string' ? tmp$_2 : throwCCE()), SortOrder$valueOf(typeof (tmp$_3 = parsedAdditionalParams.get_11rb$('sortOrder')) === 'string' ? tmp$_3 : throwCCE()));
     var tasks = generateTrigonometricTasks(settings);
     log_1.addMessage_cte53e$(generateTasks$lambda_0(tasks), MessageType$USER_getInstance());
     return copyToArray(tasks);
@@ -2486,6 +1977,9 @@ var twf_js = function (_, Kotlin) {
   }
   function getAllSortTypesForGeneration() {
     return SortType$values();
+  }
+  function getAllSortOrdersForGeneration() {
+    return SortOrder$values();
   }
   function getDefaultRulePacks() {
     return copyToArray(RulePackProvider$Companion_getInstance().getBasicTrigonometricSubstitutions());
@@ -9634,647 +9128,6 @@ var twf_js = function (_, Kotlin) {
   GameFrontInput.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.taskSet, other.taskSet) && Kotlin.equals(this.rulePacks, other.rulePacks)))));
   };
-  function TaskTagCode(name, ordinal, code, nameEn, nameRu, descriptionEn, descriptionRu) {
-    if (descriptionEn === void 0)
-      descriptionEn = nameEn;
-    if (descriptionRu === void 0)
-      descriptionRu = nameRu;
-    Enum.call(this);
-    this.code = code;
-    this.nameEn = nameEn;
-    this.nameRu = nameRu;
-    this.descriptionEn = descriptionEn;
-    this.descriptionRu = descriptionRu;
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function TaskTagCode_initFields() {
-    TaskTagCode_initFields = function () {
-    };
-    TaskTagCode$PROOF_instance = new TaskTagCode('PROOF', 0, 'Proof', 'Proof', '\u0414\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E');
-    TaskTagCode$SIMPLIFICATION_instance = new TaskTagCode('SIMPLIFICATION', 1, 'Simplification', 'Simplification', '\u0423\u043F\u0440\u043E\u0449\u0435\u043D\u0438\u0435');
-    TaskTagCode$COMPUTATION_instance = new TaskTagCode('COMPUTATION', 2, 'Computation', 'Computation', '\u0412\u044B\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0435');
-    TaskTagCode$EQUATION_instance = new TaskTagCode('EQUATION', 3, 'Equation', 'Equation', '\u0423\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u0435');
-    TaskTagCode$FACTORIZATION_instance = new TaskTagCode('FACTORIZATION', 4, 'Factorization', 'Factorization', '\u0420\u0430\u0437\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u0438');
-    TaskTagCode$REDUCE_instance = new TaskTagCode('REDUCE', 5, 'Reduce', 'Factorization', '\u0420\u0430\u0437\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u0438');
-    TaskTagCode$FORMULA_BASE_instance = new TaskTagCode('FORMULA_BASE', 6, 'FormulaBase', 'Formula Application Task', '\u0417\u0430\u0434\u0430\u0447\u0430 \u043D\u0430 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B');
-    TaskTagCode$FORMULA_DEDUCE_instance = new TaskTagCode('FORMULA_DEDUCE', 7, 'FormulaDeduce', 'Formula Deducing Task', '\u0417\u0430\u0434\u0430\u0447\u0430, \u0432 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F \u0444\u043E\u0440\u043C\u0443\u043B\u0430');
-    TaskTagCode$TRICK_instance = new TaskTagCode('TRICK', 8, 'Trick', 'Task with Trick', '\u0417\u0430\u0434\u0430\u0447\u0430 \u0441 \u0438\u0437\u044E\u043C\u0438\u043D\u043A\u043E\u0439');
-    TaskTagCode$SHORT_MULTIPLICATION_instance = new TaskTagCode('SHORT_MULTIPLICATION', 9, 'ShortMultiplication', 'Short Multiplication', '\u0421\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435');
-    TaskTagCode$SUM_SQRS_instance = new TaskTagCode('SUM_SQRS', 10, 'SumSqrs', 'Sum of Squares', '\u0421\u0443\u043C\u043C\u0430 \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432');
-    TaskTagCode$DIFF_SQRS_instance = new TaskTagCode('DIFF_SQRS', 11, 'DiffSqrs', 'Difference of Squares', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432');
-    TaskTagCode$SQR_SUM_instance = new TaskTagCode('SQR_SUM', 12, 'SqrSum', 'Square of Sum', '\u041A\u0432\u0430\u0434\u0440\u0430\u0442 \u0441\u0443\u043C\u043C\u044B');
-    TaskTagCode$SQR_DIFF_instance = new TaskTagCode('SQR_DIFF', 13, 'SqrDiff', 'Square of Difference', '\u041A\u0432\u0430\u0434\u0440\u0430\u0442 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438');
-    TaskTagCode$SUM_CUBES_instance = new TaskTagCode('SUM_CUBES', 14, 'SumCubes', 'Sum of Cubes', '\u0421\u0443\u043C\u043C\u0430 \u043A\u0443\u0431\u043E\u0432');
-    TaskTagCode$DIFF_CUBES_instance = new TaskTagCode('DIFF_CUBES', 15, 'DiffCubes', 'Difference of Cubes', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0443\u0431\u043E\u0432');
-    TaskTagCode$CUBE_SUM_instance = new TaskTagCode('CUBE_SUM', 16, 'CubeSum', 'Cube of Sum', '\u041A\u0443\u0431 \u0441\u0443\u043C\u043C\u044B');
-    TaskTagCode$CUBE_DIFF_instance = new TaskTagCode('CUBE_DIFF', 17, 'CubeDiff', 'Cube of Difference', '\u041A\u0443\u0431 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438');
-    TaskTagCode$FRACTION_instance = new TaskTagCode('FRACTION', 18, 'Fraction', 'Fraction', '\u0414\u0440\u043E\u0431\u044C');
-    TaskTagCode$TRIGONOMETRY_instance = new TaskTagCode('TRIGONOMETRY', 19, 'Trigonometry', 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F');
-    TaskTagCode$INVERSE_TRIGONOMETRY_instance = new TaskTagCode('INVERSE_TRIGONOMETRY', 20, 'InverseTrigonometry', 'Inverse Trigonometry Functions', '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438');
-    TaskTagCode$DEGREES_instance = new TaskTagCode('DEGREES', 21, 'Degrees', 'Degrees of Angles', '\u0413\u0440\u0430\u0434\u0443\u0441\u043D\u044B\u0435 \u043C\u0443\u0440\u044B \u0443\u0433\u043B\u043E\u0432');
-    TaskTagCode$PYTHAGOREAN_IDENTITY_instance = new TaskTagCode('PYTHAGOREAN_IDENTITY', 22, 'PythagoreanIdentity', 'Pythagorean Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E');
-    TaskTagCode$TRIGONOMETRY_ANGLE_SUM_instance = new TaskTagCode('TRIGONOMETRY_ANGLE_SUM', 23, 'TrigonometryAngleSum', 'Expanding of Sum or Difference of Angle in Trigonometry Function', '\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u043E\u0442 \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438');
-    TaskTagCode$TRIGONOMETRY_SUM_instance = new TaskTagCode('TRIGONOMETRY_SUM', 24, 'TrigonometrySum', 'Expanding of Sum or Difference of Trigonometry Functions', '\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u0441\u0443\u043C\u043C\u044B \u0438\u043B\u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
-    TaskTagCode$TRIGONOMETRY_PRODUCT_instance = new TaskTagCode('TRIGONOMETRY_PRODUCT', 25, 'TrigonometryProduct', 'Expanding of Product of Trigonometry Functions', '\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
-    TaskTagCode$TRIGONOMETRY_REFLECTIONS_instance = new TaskTagCode('TRIGONOMETRY_REFLECTIONS', 26, 'TrigonometryReflections', 'Trigonometry Reflection Formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0432 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0438');
-    TaskTagCode$LOGARITHM_instance = new TaskTagCode('LOGARITHM', 27, 'Logarithm', 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C');
-    TaskTagCode$SET_instance = new TaskTagCode('SET', 28, 'Set', 'Set Theory', '\u0422\u0435\u043E\u0440\u0438\u044F \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432');
-    TaskTagCode$LOGIC_instance = new TaskTagCode('LOGIC', 29, 'Logic', 'Logic', '\u041B\u043E\u0433\u0438\u043A\u0430');
-    TaskTagCode$NORMAL_FORMS_instance = new TaskTagCode('NORMAL_FORMS', 30, 'NormalForms', 'Normal Forms', '\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u044B\u0435 \u0444\u043E\u0440\u043C\u044B');
-    TaskTagCode$CNF_instance = new TaskTagCode('CNF', 31, 'CNF', 'CNF', '\u041A\u041D\u0424');
-    TaskTagCode$DNF_instance = new TaskTagCode('DNF', 32, 'DNF', 'DNF', '\u0414\u041D\u0424');
-    TaskTagCode$RESOLUTION_instance = new TaskTagCode('RESOLUTION', 33, 'Resolution', 'Resolution', '\u0420\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0438');
-    TaskTagCode$COMBINATORICS_instance = new TaskTagCode('COMBINATORICS', 34, 'Combinatorics', 'Combinatorics', '\u041A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u0438\u043A\u0430');
-  }
-  var TaskTagCode$PROOF_instance;
-  function TaskTagCode$PROOF_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$PROOF_instance;
-  }
-  var TaskTagCode$SIMPLIFICATION_instance;
-  function TaskTagCode$SIMPLIFICATION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SIMPLIFICATION_instance;
-  }
-  var TaskTagCode$COMPUTATION_instance;
-  function TaskTagCode$COMPUTATION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$COMPUTATION_instance;
-  }
-  var TaskTagCode$EQUATION_instance;
-  function TaskTagCode$EQUATION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$EQUATION_instance;
-  }
-  var TaskTagCode$FACTORIZATION_instance;
-  function TaskTagCode$FACTORIZATION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$FACTORIZATION_instance;
-  }
-  var TaskTagCode$REDUCE_instance;
-  function TaskTagCode$REDUCE_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$REDUCE_instance;
-  }
-  var TaskTagCode$FORMULA_BASE_instance;
-  function TaskTagCode$FORMULA_BASE_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$FORMULA_BASE_instance;
-  }
-  var TaskTagCode$FORMULA_DEDUCE_instance;
-  function TaskTagCode$FORMULA_DEDUCE_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$FORMULA_DEDUCE_instance;
-  }
-  var TaskTagCode$TRICK_instance;
-  function TaskTagCode$TRICK_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$TRICK_instance;
-  }
-  var TaskTagCode$SHORT_MULTIPLICATION_instance;
-  function TaskTagCode$SHORT_MULTIPLICATION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SHORT_MULTIPLICATION_instance;
-  }
-  var TaskTagCode$SUM_SQRS_instance;
-  function TaskTagCode$SUM_SQRS_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SUM_SQRS_instance;
-  }
-  var TaskTagCode$DIFF_SQRS_instance;
-  function TaskTagCode$DIFF_SQRS_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$DIFF_SQRS_instance;
-  }
-  var TaskTagCode$SQR_SUM_instance;
-  function TaskTagCode$SQR_SUM_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SQR_SUM_instance;
-  }
-  var TaskTagCode$SQR_DIFF_instance;
-  function TaskTagCode$SQR_DIFF_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SQR_DIFF_instance;
-  }
-  var TaskTagCode$SUM_CUBES_instance;
-  function TaskTagCode$SUM_CUBES_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SUM_CUBES_instance;
-  }
-  var TaskTagCode$DIFF_CUBES_instance;
-  function TaskTagCode$DIFF_CUBES_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$DIFF_CUBES_instance;
-  }
-  var TaskTagCode$CUBE_SUM_instance;
-  function TaskTagCode$CUBE_SUM_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$CUBE_SUM_instance;
-  }
-  var TaskTagCode$CUBE_DIFF_instance;
-  function TaskTagCode$CUBE_DIFF_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$CUBE_DIFF_instance;
-  }
-  var TaskTagCode$FRACTION_instance;
-  function TaskTagCode$FRACTION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$FRACTION_instance;
-  }
-  var TaskTagCode$TRIGONOMETRY_instance;
-  function TaskTagCode$TRIGONOMETRY_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$TRIGONOMETRY_instance;
-  }
-  var TaskTagCode$INVERSE_TRIGONOMETRY_instance;
-  function TaskTagCode$INVERSE_TRIGONOMETRY_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$INVERSE_TRIGONOMETRY_instance;
-  }
-  var TaskTagCode$DEGREES_instance;
-  function TaskTagCode$DEGREES_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$DEGREES_instance;
-  }
-  var TaskTagCode$PYTHAGOREAN_IDENTITY_instance;
-  function TaskTagCode$PYTHAGOREAN_IDENTITY_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$PYTHAGOREAN_IDENTITY_instance;
-  }
-  var TaskTagCode$TRIGONOMETRY_ANGLE_SUM_instance;
-  function TaskTagCode$TRIGONOMETRY_ANGLE_SUM_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$TRIGONOMETRY_ANGLE_SUM_instance;
-  }
-  var TaskTagCode$TRIGONOMETRY_SUM_instance;
-  function TaskTagCode$TRIGONOMETRY_SUM_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$TRIGONOMETRY_SUM_instance;
-  }
-  var TaskTagCode$TRIGONOMETRY_PRODUCT_instance;
-  function TaskTagCode$TRIGONOMETRY_PRODUCT_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$TRIGONOMETRY_PRODUCT_instance;
-  }
-  var TaskTagCode$TRIGONOMETRY_REFLECTIONS_instance;
-  function TaskTagCode$TRIGONOMETRY_REFLECTIONS_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$TRIGONOMETRY_REFLECTIONS_instance;
-  }
-  var TaskTagCode$LOGARITHM_instance;
-  function TaskTagCode$LOGARITHM_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$LOGARITHM_instance;
-  }
-  var TaskTagCode$SET_instance;
-  function TaskTagCode$SET_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$SET_instance;
-  }
-  var TaskTagCode$LOGIC_instance;
-  function TaskTagCode$LOGIC_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$LOGIC_instance;
-  }
-  var TaskTagCode$NORMAL_FORMS_instance;
-  function TaskTagCode$NORMAL_FORMS_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$NORMAL_FORMS_instance;
-  }
-  var TaskTagCode$CNF_instance;
-  function TaskTagCode$CNF_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$CNF_instance;
-  }
-  var TaskTagCode$DNF_instance;
-  function TaskTagCode$DNF_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$DNF_instance;
-  }
-  var TaskTagCode$RESOLUTION_instance;
-  function TaskTagCode$RESOLUTION_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$RESOLUTION_instance;
-  }
-  var TaskTagCode$COMBINATORICS_instance;
-  function TaskTagCode$COMBINATORICS_getInstance() {
-    TaskTagCode_initFields();
-    return TaskTagCode$COMBINATORICS_instance;
-  }
-  TaskTagCode.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'TaskTagCode',
-    interfaces: [Enum]
-  };
-  function TaskTagCode$values() {
-    return [TaskTagCode$PROOF_getInstance(), TaskTagCode$SIMPLIFICATION_getInstance(), TaskTagCode$COMPUTATION_getInstance(), TaskTagCode$EQUATION_getInstance(), TaskTagCode$FACTORIZATION_getInstance(), TaskTagCode$REDUCE_getInstance(), TaskTagCode$FORMULA_BASE_getInstance(), TaskTagCode$FORMULA_DEDUCE_getInstance(), TaskTagCode$TRICK_getInstance(), TaskTagCode$SHORT_MULTIPLICATION_getInstance(), TaskTagCode$SUM_SQRS_getInstance(), TaskTagCode$DIFF_SQRS_getInstance(), TaskTagCode$SQR_SUM_getInstance(), TaskTagCode$SQR_DIFF_getInstance(), TaskTagCode$SUM_CUBES_getInstance(), TaskTagCode$DIFF_CUBES_getInstance(), TaskTagCode$CUBE_SUM_getInstance(), TaskTagCode$CUBE_DIFF_getInstance(), TaskTagCode$FRACTION_getInstance(), TaskTagCode$TRIGONOMETRY_getInstance(), TaskTagCode$INVERSE_TRIGONOMETRY_getInstance(), TaskTagCode$DEGREES_getInstance(), TaskTagCode$PYTHAGOREAN_IDENTITY_getInstance(), TaskTagCode$TRIGONOMETRY_ANGLE_SUM_getInstance(), TaskTagCode$TRIGONOMETRY_SUM_getInstance(), TaskTagCode$TRIGONOMETRY_PRODUCT_getInstance(), TaskTagCode$TRIGONOMETRY_REFLECTIONS_getInstance(), TaskTagCode$LOGARITHM_getInstance(), TaskTagCode$SET_getInstance(), TaskTagCode$LOGIC_getInstance(), TaskTagCode$NORMAL_FORMS_getInstance(), TaskTagCode$CNF_getInstance(), TaskTagCode$DNF_getInstance(), TaskTagCode$RESOLUTION_getInstance(), TaskTagCode$COMBINATORICS_getInstance()];
-  }
-  TaskTagCode.values = TaskTagCode$values;
-  function TaskTagCode$valueOf(name) {
-    switch (name) {
-      case 'PROOF':
-        return TaskTagCode$PROOF_getInstance();
-      case 'SIMPLIFICATION':
-        return TaskTagCode$SIMPLIFICATION_getInstance();
-      case 'COMPUTATION':
-        return TaskTagCode$COMPUTATION_getInstance();
-      case 'EQUATION':
-        return TaskTagCode$EQUATION_getInstance();
-      case 'FACTORIZATION':
-        return TaskTagCode$FACTORIZATION_getInstance();
-      case 'REDUCE':
-        return TaskTagCode$REDUCE_getInstance();
-      case 'FORMULA_BASE':
-        return TaskTagCode$FORMULA_BASE_getInstance();
-      case 'FORMULA_DEDUCE':
-        return TaskTagCode$FORMULA_DEDUCE_getInstance();
-      case 'TRICK':
-        return TaskTagCode$TRICK_getInstance();
-      case 'SHORT_MULTIPLICATION':
-        return TaskTagCode$SHORT_MULTIPLICATION_getInstance();
-      case 'SUM_SQRS':
-        return TaskTagCode$SUM_SQRS_getInstance();
-      case 'DIFF_SQRS':
-        return TaskTagCode$DIFF_SQRS_getInstance();
-      case 'SQR_SUM':
-        return TaskTagCode$SQR_SUM_getInstance();
-      case 'SQR_DIFF':
-        return TaskTagCode$SQR_DIFF_getInstance();
-      case 'SUM_CUBES':
-        return TaskTagCode$SUM_CUBES_getInstance();
-      case 'DIFF_CUBES':
-        return TaskTagCode$DIFF_CUBES_getInstance();
-      case 'CUBE_SUM':
-        return TaskTagCode$CUBE_SUM_getInstance();
-      case 'CUBE_DIFF':
-        return TaskTagCode$CUBE_DIFF_getInstance();
-      case 'FRACTION':
-        return TaskTagCode$FRACTION_getInstance();
-      case 'TRIGONOMETRY':
-        return TaskTagCode$TRIGONOMETRY_getInstance();
-      case 'INVERSE_TRIGONOMETRY':
-        return TaskTagCode$INVERSE_TRIGONOMETRY_getInstance();
-      case 'DEGREES':
-        return TaskTagCode$DEGREES_getInstance();
-      case 'PYTHAGOREAN_IDENTITY':
-        return TaskTagCode$PYTHAGOREAN_IDENTITY_getInstance();
-      case 'TRIGONOMETRY_ANGLE_SUM':
-        return TaskTagCode$TRIGONOMETRY_ANGLE_SUM_getInstance();
-      case 'TRIGONOMETRY_SUM':
-        return TaskTagCode$TRIGONOMETRY_SUM_getInstance();
-      case 'TRIGONOMETRY_PRODUCT':
-        return TaskTagCode$TRIGONOMETRY_PRODUCT_getInstance();
-      case 'TRIGONOMETRY_REFLECTIONS':
-        return TaskTagCode$TRIGONOMETRY_REFLECTIONS_getInstance();
-      case 'LOGARITHM':
-        return TaskTagCode$LOGARITHM_getInstance();
-      case 'SET':
-        return TaskTagCode$SET_getInstance();
-      case 'LOGIC':
-        return TaskTagCode$LOGIC_getInstance();
-      case 'NORMAL_FORMS':
-        return TaskTagCode$NORMAL_FORMS_getInstance();
-      case 'CNF':
-        return TaskTagCode$CNF_getInstance();
-      case 'DNF':
-        return TaskTagCode$DNF_getInstance();
-      case 'RESOLUTION':
-        return TaskTagCode$RESOLUTION_getInstance();
-      case 'COMBINATORICS':
-        return TaskTagCode$COMBINATORICS_getInstance();
-      default:throwISE('No enum constant mathhelper.twf.defaultcontent.TaskTagCode.' + name);
-    }
-  }
-  TaskTagCode.valueOf_61zpoe$ = TaskTagCode$valueOf;
-  function TaskSetTagCode(name, ordinal, code, nameEn, nameRu, descriptionEn, descriptionRu) {
-    if (descriptionEn === void 0)
-      descriptionEn = nameEn;
-    if (descriptionRu === void 0)
-      descriptionRu = nameRu;
-    Enum.call(this);
-    this.code = code;
-    this.nameEn = nameEn;
-    this.nameRu = nameRu;
-    this.descriptionEn = descriptionEn;
-    this.descriptionRu = descriptionRu;
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function TaskSetTagCode_initFields() {
-    TaskSetTagCode_initFields = function () {
-    };
-    TaskSetTagCode$TRIGONOMETRY_instance = new TaskSetTagCode('TRIGONOMETRY', 0, 'Trigonometry', 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F');
-    TaskSetTagCode$LOGIC_instance = new TaskSetTagCode('LOGIC', 1, 'Logic', 'Logic', '\u041B\u043E\u0433\u0438\u043A\u0430');
-    TaskSetTagCode$SET_instance = new TaskSetTagCode('SET', 2, 'Set', 'Set Theory', '\u0422\u0435\u043E\u0440\u0438\u044F \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432');
-    TaskSetTagCode$COMBINATORICS_instance = new TaskSetTagCode('COMBINATORICS', 3, 'Combinatorics', 'Combinatorics', '\u041A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u0438\u043A\u0430');
-    TaskSetTagCode$NORMAL_FORMS_instance = new TaskSetTagCode('NORMAL_FORMS', 4, 'NormalForms', 'Normal Forms', '\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u044B\u0435 \u0444\u043E\u0440\u043C\u044B');
-    TaskSetTagCode$RESOLUTION_instance = new TaskSetTagCode('RESOLUTION', 5, 'Resolution', 'Resolution', '\u0420\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0438');
-    TaskSetTagCode$CHECK_YOURSELF_instance = new TaskSetTagCode('CHECK_YOURSELF', 6, 'CheckYourself', 'Check Yourself', '\u041F\u0440\u043E\u0432\u0435\u0440\u044C \u0441\u0435\u0431\u044F');
-    TaskSetTagCode$STEP_BY_STEP_instance = new TaskSetTagCode('STEP_BY_STEP', 7, 'StepByStep', 'Step by Step', '\u0428\u0430\u0433 \u0437\u0430 \u0448\u0430\u0433\u043E\u043C');
-    TaskSetTagCode$TRAIN_SET_instance = new TaskSetTagCode('TRAIN_SET', 8, 'TrainSet', 'Train Set', '\u0422\u0440\u0435\u043D\u0438\u0440\u043E\u0432\u043A\u0430');
-    TaskSetTagCode$EXTRAORDINARY_instance = new TaskSetTagCode('EXTRAORDINARY', 9, 'Extraordinary', 'Extraordinary', '\u041D\u0435\u043E\u0431\u044B\u0447\u043D\u043E\u0435');
-  }
-  var TaskSetTagCode$TRIGONOMETRY_instance;
-  function TaskSetTagCode$TRIGONOMETRY_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$TRIGONOMETRY_instance;
-  }
-  var TaskSetTagCode$LOGIC_instance;
-  function TaskSetTagCode$LOGIC_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$LOGIC_instance;
-  }
-  var TaskSetTagCode$SET_instance;
-  function TaskSetTagCode$SET_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$SET_instance;
-  }
-  var TaskSetTagCode$COMBINATORICS_instance;
-  function TaskSetTagCode$COMBINATORICS_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$COMBINATORICS_instance;
-  }
-  var TaskSetTagCode$NORMAL_FORMS_instance;
-  function TaskSetTagCode$NORMAL_FORMS_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$NORMAL_FORMS_instance;
-  }
-  var TaskSetTagCode$RESOLUTION_instance;
-  function TaskSetTagCode$RESOLUTION_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$RESOLUTION_instance;
-  }
-  var TaskSetTagCode$CHECK_YOURSELF_instance;
-  function TaskSetTagCode$CHECK_YOURSELF_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$CHECK_YOURSELF_instance;
-  }
-  var TaskSetTagCode$STEP_BY_STEP_instance;
-  function TaskSetTagCode$STEP_BY_STEP_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$STEP_BY_STEP_instance;
-  }
-  var TaskSetTagCode$TRAIN_SET_instance;
-  function TaskSetTagCode$TRAIN_SET_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$TRAIN_SET_instance;
-  }
-  var TaskSetTagCode$EXTRAORDINARY_instance;
-  function TaskSetTagCode$EXTRAORDINARY_getInstance() {
-    TaskSetTagCode_initFields();
-    return TaskSetTagCode$EXTRAORDINARY_instance;
-  }
-  TaskSetTagCode.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'TaskSetTagCode',
-    interfaces: [Enum]
-  };
-  function TaskSetTagCode$values() {
-    return [TaskSetTagCode$TRIGONOMETRY_getInstance(), TaskSetTagCode$LOGIC_getInstance(), TaskSetTagCode$SET_getInstance(), TaskSetTagCode$COMBINATORICS_getInstance(), TaskSetTagCode$NORMAL_FORMS_getInstance(), TaskSetTagCode$RESOLUTION_getInstance(), TaskSetTagCode$CHECK_YOURSELF_getInstance(), TaskSetTagCode$STEP_BY_STEP_getInstance(), TaskSetTagCode$TRAIN_SET_getInstance(), TaskSetTagCode$EXTRAORDINARY_getInstance()];
-  }
-  TaskSetTagCode.values = TaskSetTagCode$values;
-  function TaskSetTagCode$valueOf(name) {
-    switch (name) {
-      case 'TRIGONOMETRY':
-        return TaskSetTagCode$TRIGONOMETRY_getInstance();
-      case 'LOGIC':
-        return TaskSetTagCode$LOGIC_getInstance();
-      case 'SET':
-        return TaskSetTagCode$SET_getInstance();
-      case 'COMBINATORICS':
-        return TaskSetTagCode$COMBINATORICS_getInstance();
-      case 'NORMAL_FORMS':
-        return TaskSetTagCode$NORMAL_FORMS_getInstance();
-      case 'RESOLUTION':
-        return TaskSetTagCode$RESOLUTION_getInstance();
-      case 'CHECK_YOURSELF':
-        return TaskSetTagCode$CHECK_YOURSELF_getInstance();
-      case 'STEP_BY_STEP':
-        return TaskSetTagCode$STEP_BY_STEP_getInstance();
-      case 'TRAIN_SET':
-        return TaskSetTagCode$TRAIN_SET_getInstance();
-      case 'EXTRAORDINARY':
-        return TaskSetTagCode$EXTRAORDINARY_getInstance();
-      default:throwISE('No enum constant mathhelper.twf.defaultcontent.TaskSetTagCode.' + name);
-    }
-  }
-  TaskSetTagCode.valueOf_61zpoe$ = TaskSetTagCode$valueOf;
-  function DefaultCombinatoricsRulePacks() {
-    DefaultCombinatoricsRulePacks$Companion_getInstance();
-  }
-  function DefaultCombinatoricsRulePacks$Companion() {
-    DefaultCombinatoricsRulePacks$Companion_instance = this;
-    this.defaultCombinatoricsRulePacks = listOf_0([new RulePackITR('Factorial', void 0, void 0, 'Factorial', '\u0424\u0430\u043A\u0442\u043E\u0440\u0438\u0430\u043B', 'Basic Properties of Natural Factorial', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u043D\u0430\u0442\u0443\u0440\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u0444\u0430\u043A\u0442\u043E\u0440\u0438\u0430\u043B\u0430', void 0, void 0, 'combinatorics', listOf(new RulePackLinkITR(void 0, 'ShortMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(n;1)))', '(*(factorial(n);+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(n);+(n;1)))', '(factorial(+(n;1)))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(n;1));+(n;1)))', '(factorial(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(/(factorial(+(n;1));+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(n;1));factorial(n)))', '(+(n;1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(n;1))', '(/(factorial(+(n;1));factorial(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(*(factorial(+(n;-(1)));n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(+(n;-(1)));n))', '(factorial(n))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(n);n))', '(factorial(+(n;-(1))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(n;-(1))))', '(/(factorial(n);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(n);factorial(+(n;-(1)))))', '(n)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(n)', '(/(factorial(n);factorial(+(n;-(1)))))', 85, true, false, false, false)])), new RulePackITR('BasicCombinatorics', void 0, void 0, 'Basic Combinatorics', '\u0411\u0430\u0437\u043E\u0432\u0430\u044F \u043A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u0438\u043A\u0430', 'Connections between Base Combinatorial Numbers', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B, \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u044E\u0449\u0438\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Simple formulas for Placements (A), Placements with Repetitions (U), Combinations (C), Combinations with repetitions (V), Permutations (P), Stirling I kind (S1), Stirling II kind (S2), Bell (B), Catalan (C)', '\u041F\u0440\u043E\u0441\u0442\u044B\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u0434\u043B\u044F \u0447\u0438\u0441\u0435\u043B \u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F (A), \u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F \u0441 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F\u043C\u0438 (U), \u0421\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u0439 (C), \u0421\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u0439 \u0441 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F\u043C\u0438 (V), \u041F\u0435\u0440\u0435\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u043A (P), \u0421\u0442\u0438\u0440\u043B\u0438\u043D\u0433\u0430 I \u0440\u043E\u0434\u0430 (S1), \u0421\u0442\u0438\u0440\u043B\u0438\u043D\u0433\u0430 II \u0440\u043E\u0434\u0430 (S2), \u0411\u0435\u043B\u043B\u0430 (B), \u041A\u0430\u0442\u0430\u043B\u0430\u043D\u0430 (C)', 'combinatorics', listOf(new RulePackLinkITR(void 0, 'Factorial')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U(m;n))', '(^(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(m;n))', '(U(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P(n))', '(factorial(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(P(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A(n;n))', '(P(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P(n))', '(A(n;n))', 70, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(C(m;n);P(n)))', '(A(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A(m;n))', '(*(C(m;n);P(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A(m;n);P(n)))', '(C(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(m;n))', '(/(A(m;n);P(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A(m;n);C(m;n)))', '(P(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P(n))', '(/(A(m;n);C(m;n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V(+(m;1);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', '(V(+(m;1);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(m;n)))', '(*(V(+(m;1);n);*(factorial(m);factorial(n))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(V(+(m;1);n);*(factorial(m);factorial(n))))', '(factorial(+(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(m);factorial(n)))', '(/(factorial(+(m;n));V(+(m;1);n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));V(+(m;1);n)))', '(*(factorial(m);factorial(n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(+(m;n);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(+(m;n);n))', '(V(+(m;1);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V(+(m;1);n))', '(C(+(m;n);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A(+(m;n);n))', '(/(factorial(+(m;n));factorial(m)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));factorial(m)))', '(A(+(m;n);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(m;n)))', '(*(A(+(m;n);n);factorial(m)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A(+(m;n);n);factorial(m)))', '(factorial(+(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(m);A(+(m;n);n)))', '(factorial(+(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(m))', '(/(factorial(+(m;n));A(+(m;n);n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));A(+(m;n);n)))', '(factorial(m))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S1(m;n))', '(*(factorial(n);S2(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(n);S2(m;n)))', '(S1(m;n))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(/(S1(m;n);S2(m;n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(S1(m;n);S2(m;n)))', '(factorial(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S2(m;n))', '(/(S1(m;n);factorial(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(S1(m;n);factorial(n)))', '(S2(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S2(+(m;1);+(n;1)))', '(+(S2(m;n);*(n;S2(m;+(n;1)))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(S2(m;n);*(n;S2(m;+(n;1)))))', '(S2(+(m;1);+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S2(m;m))', '(1)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(S2(m;n))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(*(2;n);n))', '(*(C(n);+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(C(n);+(n;1)))', '(C(*(2;n);n))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(n))', '(/(C(*(2;n);n);+(n;1)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(C(*(2;n);n);+(n;1)))', '(C(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(n;1))', '(/(C(*(2;n);n);C(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(C(*(2;n);n);C(n)))', '(+(n;1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(C(0))', 90, true, false, false, false)]))]);
-  }
-  DefaultCombinatoricsRulePacks$Companion.prototype.get = function () {
-    return this.defaultCombinatoricsRulePacks;
-  };
-  DefaultCombinatoricsRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var DefaultCombinatoricsRulePacks$Companion_instance = null;
-  function DefaultCombinatoricsRulePacks$Companion_getInstance() {
-    if (DefaultCombinatoricsRulePacks$Companion_instance === null) {
-      new DefaultCombinatoricsRulePacks$Companion();
-    }
-    return DefaultCombinatoricsRulePacks$Companion_instance;
-  }
-  DefaultCombinatoricsRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'DefaultCombinatoricsRulePacks',
-    interfaces: []
-  };
-  function DefaultComplexRulePacks() {
-    DefaultComplexRulePacks$Companion_getInstance();
-  }
-  function DefaultComplexRulePacks$Companion() {
-    DefaultComplexRulePacks$Companion_instance = this;
-    this.defaultComplexRulePacks = listOf(new RulePackITR('ComplexNumbers', void 0, void 0, 'Complex Numbers', '\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Basic properties', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', void 0, void 0, 'complex_numbers', listOf_0([new RulePackLinkITR(void 0, 'AdvancedTrigonometry'), new RulePackLinkITR(void 0, 'Logarithm')]), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sys_def_i_complex;sys_def_i_complex))', '(+(-(1)))', 100, false, false, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sys_def_i_complex;2))', '(+(-(1)))', 100, false, false, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(abs(+(x;*(y;sys_def_i_complex))))', '(sqrt(+(^(x;2);^(y;2))))', 30, false, true, false, false, 'SORTED_AND_I_MULTIPLICATED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(abs(+(x;*(y;sys_def_i_complex))))', '(^(+(^(x;2);^(y;2));0.5))', 30, false, true, false, false, 'SORTED_AND_I_MULTIPLICATED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(exp(+(x;*(y;sys_def_i_complex))))', '(*(exp(x);+(cos(y);*(sys_def_i_complex;sin(y)))))', 30, false, true, false, false, 'SORTED_AND_I_MULTIPLICATED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(exp(ln(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(z))', '(/(+(exp(*(sys_def_i_complex;z));exp(+(-(*(sys_def_i_complex;z)))));2))', 30, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(z))', '(/(+(exp(*(sys_def_i_complex;z));-(exp(+(-(*(sys_def_i_complex;z))))));*(2;sys_def_i_complex)))', 30, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(e;ln(a)))', '(a)', 30, false, false, false, false)])));
-  }
-  DefaultComplexRulePacks$Companion.prototype.get = function () {
-    return this.defaultComplexRulePacks;
-  };
-  DefaultComplexRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var DefaultComplexRulePacks$Companion_instance = null;
-  function DefaultComplexRulePacks$Companion_getInstance() {
-    if (DefaultComplexRulePacks$Companion_instance === null) {
-      new DefaultComplexRulePacks$Companion();
-    }
-    return DefaultComplexRulePacks$Companion_instance;
-  }
-  DefaultComplexRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'DefaultComplexRulePacks',
-    interfaces: []
-  };
-  function DefaultRulePacks() {
-    DefaultRulePacks$Companion_getInstance();
-  }
-  function DefaultRulePacks$Companion() {
-    DefaultRulePacks$Companion_instance = this;
-    this.defaultRulePacks = plus(plus(plus(plus(plus(DefaultStandardMathRulePacks$Companion_getInstance().get(), DefaultCombinatoricsRulePacks$Companion_getInstance().get()), DefaultComplexRulePacks$Companion_getInstance().get()), LogicRulePacks$Companion_getInstance().get()), SetRulePacks$Companion_getInstance().get()), DefaultPhysicsRulePacks$Companion_getInstance().get());
-    var $receiver = this.defaultRulePacks;
-    var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
-    var destination = LinkedHashMap_init(capacity);
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      destination.put_xwzc9p$(ensureNotNull(element.code), element);
-    }
-    this.defaultRulePacksMap = destination;
-  }
-  DefaultRulePacks$Companion.prototype.map = function () {
-    return this.defaultRulePacksMap;
-  };
-  DefaultRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var DefaultRulePacks$Companion_instance = null;
-  function DefaultRulePacks$Companion_getInstance() {
-    if (DefaultRulePacks$Companion_instance === null) {
-      new DefaultRulePacks$Companion();
-    }
-    return DefaultRulePacks$Companion_instance;
-  }
-  DefaultRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'DefaultRulePacks',
-    interfaces: []
-  };
-  function LogicRulePacks() {
-    LogicRulePacks$Companion_getInstance();
-  }
-  function LogicRulePacks$Companion() {
-    LogicRulePacks$Companion_instance = this;
-    this.defaultLogicRulePacks = listOf_0([new RulePackITR('LogicBase', void 0, void 0, 'Basic Boolean Logic', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B \u0431\u0443\u043B\u0435\u0432\u043E\u0439 \u043B\u043E\u0433\u0438\u043A\u0438', "Basic operations, it's definitions and properties", '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438, \u0438\u0445 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F', 'logic', void 0, listOf_0([new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(a;b)))', '(or(not(a);not(b)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(not(a);not(b)))', '(not(and(a;b)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(a;b)))', '(and(not(a);not(b)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(not(a);not(b)))', '(not(or(a;b)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(a;b))', '(not(or(not(a);not(b))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(not(a);not(b))))', '(and(a;b))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(a;b))', '(not(and(not(a);not(b))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(not(a);not(b))))', '(or(a;b))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(not(a)))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(not(not(a)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(or(a;a))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(and(a;a))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;b))', '(and(b;a))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;b))', '(or(b;a))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(and(a;1))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(or(a;0))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;not(a)))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(a);a))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a)))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;1))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(1;a))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;1))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(1;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;0))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(0;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;0))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(0;a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(1))', '(0)', 5, false, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(a);b))', '(implic(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(b;not(a)))', '(implic(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;b))', '(or(not(a);b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(0;a))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;1))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;0))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(1;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(implic(1;a))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(or(and(not(a);b);and(a;not(b))))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(not(a);b);and(a;not(b))))', '(xor(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(or(and(a;b);and(not(a);not(b))))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(a;b);and(not(a);not(b))))', '(alleq(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(and(or(not(a);not(b));or(a;b)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);not(b));or(a;b)))', '(xor(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(and(or(not(a);b);or(a;not(b))))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);b);or(a;not(b))))', '(alleq(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;0))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;1))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(0;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(1;a))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(0;a))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;1))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;0))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(1;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(xor(a;0))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(alleq(1;a))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(a))', '(xor(a;1))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(a))', '(alleq(0;a))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(not(alleq(a;b)))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(not(xor(a;b)))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(alleq(a;b)))', '(xor(a;b))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(xor(a;b)))', '(alleq(a;b))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(not(a);b))', '(alleq(a;b))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(xor(not(a);b))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(not(a);b))', '(xor(a;b))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(alleq(not(a);b))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;a))', '(1)', 5, false, false, false, false), new RuleITR('SetComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false), new RuleITR('Xor', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)])), new RulePackITR('RelativeComplement', void 0, void 0, 'Relative Complement', '\u041B\u043E\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0434\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435', 'Definition and basic properties', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence, Relative Complement', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F, \u0434\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435', 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(b)))', '(set-(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(b);a))', '(set-(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;b))', '(and(a;not(b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;b))', '(not(implic(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(implic(a;b)))', '(set-(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;b))', '(not(set-(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(set-(a;b)))', '(implic(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;0))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;1))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(0;a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(1;a))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(set-(a;0))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;a))', '(0)', 5, false, false, false, false), new RuleITR('SetMinusOrRelativeComplement', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false)])), new RulePackITR('LogicNotAnd', void 0, void 0, 'Negation of Conjunction', '\u041E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u0438 (\u0428\u0442\u0440\u0438\u0445 \u0428\u0435\u0444\u0444\u0435\u0440\u0430)', 'Definition and basic properties', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence, Negation of Conjunction', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u0438', 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nand(a;b))', '(not(and(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(and(a;b)))', '(nand(a;b))', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nand(a;b))', '(or(not(a);not(b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(a);not(b)))', '(nand(a;b))', 6, false, false, false, false)])), new RulePackITR('LogicNotOr', void 0, void 0, 'Negation of Disjunction', '\u041E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u0438 (\u0421\u0442\u0440\u0435\u043B\u043A\u0430 \u041F\u0438\u0440\u0441\u0430)', 'Definition and basic properties', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence, Negation of Disjunction', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u0438', 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nor(a;b))', '(not(or(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(or(a;b)))', '(nor(a;b))', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nor(a;b))', '(and(not(a);not(b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);not(b)))', '(nor(a;b))', 6, false, false, false, false)])), new RulePackITR('LogicAbsorptionLaw', void 0, void 0, 'Absorption Law', '\u0417\u0430\u043A\u043E\u043D \u043F\u043E\u0433\u043B\u043E\u0449\u0435\u043D\u0438\u044F', 'Law and basic properties in Boolean Algebra', '\u0417\u0430\u043A\u043E\u043D \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0432 \u0431\u0443\u043B\u0435\u0432\u043E\u0439 \u0430\u043B\u0433\u0435\u0431\u0440\u0435', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(a;b)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;and(a;b)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(b;a)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;and(b;a)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;b);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(a;b);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(b;a);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(b;a);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(and(a;or(a;b)))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(or(a;and(a;b)))', 90, true, false, false, false), new RuleITR('AbsorptionComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)])), new RulePackITR('LogicXorDistribution', void 0, void 0, 'XOR Distributive Law', '\u0414\u0438\u0441\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C XOR', 'Rules of XOR Distributive Law', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u0438\u0441\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0433\u043E \u0438\u043B\u0438', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf(new RuleITR('XorDistribution', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false))), new RulePackITR('LogicZhegalkinPolynom', void 0, void 0, 'Zhegalkin Polynomial', '\u041F\u043E\u043B\u0438\u043D\u043E\u043C \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430', 'Zhegalkin polynomial transformation rules', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043A \u043F\u043E\u043B\u0438\u043D\u043E\u043C\u0443 \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicXorDistribution')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;b))', '(xor(a;b;and(a;b)))', 34, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b;and(a;b)))', '(or(a;b))', 6, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(xor(a;b;1))', 34, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b;1))', '(alleq(a;b))', 6, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;b))', '(xor(a;and(a;b);1))', 34, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;and(a;b);1))', '(implic(a;b))', 6, false, true, false, false)])), new RulePackITR('LogicZhegalkinNandNor', void 0, void 0, 'Zhegalkin Polinomial and Negation', '\u041F\u043E\u043B\u0438\u043D\u043E\u043C \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430 \u0438 \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u044F', 'Zhegalkin polynomial transformation rules with negation of conjunction and disjunction Zhegalkin polynomial', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043A \u043F\u043E\u043B\u0438\u043D\u043E\u043C\u0443 \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430 \u0441 \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435\u043C \u043A\u043E\u043D\u044C\u044E\u043D\u043A\u0446\u0438\u0438 \u0438 \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u0438', void 0, void 0, 'logic', listOf_0([new RulePackLinkITR(void 0, 'LogicZhegalkinPolynom'), new RulePackLinkITR(void 0, 'LogicNotAnd'), new RulePackLinkITR(void 0, 'LogicNotOr')]), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nand(a;b))', '(xor(and(a;b);1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(and(a;b);1))', '(nand(a;b))', 6, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nor(a;b))', '(xor(a;b;and(a;b);1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b;and(a;b);1))', '(nor(a;b))', 6, false, true, false, false)])), new RulePackITR('LogicResolution', void 0, void 0, 'Resolution', '\u041C\u0435\u0442\u043E\u0434 \u0440\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0439', 'Rules for proof by Resolution method', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0434\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C\u0441\u0442\u0432 \u043C\u0435\u0442\u043E\u0434\u043E\u043C \u0440\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0439', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a)))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a)))', '(and(X;or(a;X);not(a)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X)))', '(and(X;not(a);or(a;X)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a))', '(and(X;or(not(a);X);a))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X)))', '(and(X;a;or(not(a);X)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y)))', '(and(or(X;Y);or(a;X);or(not(a);Y)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y)))', '(and(or(X;Y);or(not(a);X);or(a;Y)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C))', '(and(X;or(a;X);not(a);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C))', '(and(X;not(a);or(a;X);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C))', '(and(X;or(not(a);X);a;C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C))', '(and(X;a;or(not(a);X);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C))', '(and(or(X;Y);or(a;X);or(not(a);Y);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C))', '(and(or(X;Y);or(not(a);X);or(a;Y);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D))', '(and(X;or(a;X);not(a);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D))', '(and(X;not(a);or(a;X);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D))', '(and(X;or(not(a);X);a;C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D))', '(and(X;a;or(not(a);X);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E))', '(and(X;or(a;X);not(a);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E))', '(and(X;not(a);or(a;X);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E))', '(and(X;or(not(a);X);a;C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E))', '(and(X;a;or(not(a);X);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F))', '(and(X;or(a;X);not(a);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F))', '(and(X;not(a);or(a;X);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F))', '(and(X;or(not(a);X);a;C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F))', '(and(X;a;or(not(a);X);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F;G))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F;G))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F;G))', '(and(X;or(a;X);not(a);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F;G))', '(and(X;not(a);or(a;X);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F;G))', '(and(X;or(not(a);X);a;C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F;G))', '(and(X;a;or(not(a);X);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F;G))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F;G))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F;G;H))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F;G;H))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F;G;H))', '(and(X;or(a;X);not(a);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F;G;H))', '(and(X;not(a);or(a;X);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F;G;H))', '(and(X;or(not(a);X);a;C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F;G;H))', '(and(X;a;or(not(a);X);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F;G;H))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F;G;H))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F;G;H;I))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F;G;H;I))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F;G;H;I))', '(and(X;or(a;X);not(a);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F;G;H;I))', '(and(X;not(a);or(a;X);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F;G;H;I))', '(and(X;or(not(a);X);a;C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F;G;H;I))', '(and(X;a;or(not(a);X);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F;G;H;I))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F;G;H;I))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F;G;H;I))', 10, false, false, false, false)]))]);
-  }
-  LogicRulePacks$Companion.prototype.get = function () {
-    return this.defaultLogicRulePacks;
-  };
-  LogicRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var LogicRulePacks$Companion_instance = null;
-  function LogicRulePacks$Companion_getInstance() {
-    if (LogicRulePacks$Companion_instance === null) {
-      new LogicRulePacks$Companion();
-    }
-    return LogicRulePacks$Companion_instance;
-  }
-  LogicRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'LogicRulePacks',
-    interfaces: []
-  };
-  function DefaultPhysicsRulePacks() {
-    DefaultPhysicsRulePacks$Companion_getInstance();
-  }
-  function DefaultPhysicsRulePacks$Companion() {
-    DefaultPhysicsRulePacks$Companion_instance = this;
-    this.defaultPhysicsRulePacks = listOf_0([new RulePackITR('PhysicsStraightMoving', void 0, void 0, 'Basics of Straight Moving', '\u041E\u0441\u043D\u043E\u0432\u044B \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F \u043F\u043E \u043F\u0440\u044F\u043C\u043E\u0439', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(s)', '(/(v;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(s;t))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(s;v))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(s;v))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(s)', '(*(v;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(v;t))', '(s)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(v;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;t))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(v;a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;a))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(*(a;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;t))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(s)', '(/(*(a;^(t;2));2))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(a;^(t;2));2))', '(s)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(*(2;s);^(t;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;s);^(t;2)))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(^(/(*(2;s);a);0.5))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(*(2;s);a);0.5))', '(t)', 35, false, true, false, true)])), new RulePackITR('PhysicsCircleMoving', void 0, void 0, 'Basics of Circle Moving', '\u041E\u0441\u043D\u043E\u0432\u044B \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F \u043F\u043E \u043E\u043A\u0440\u0443\u0436\u043D\u043E\u0441\u0442\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C9)', '(/(*(2;\u03C0);T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;\u03C0);T))', '(\u03C9)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(T)', '(/(*(2;\u03C0);\u03C9))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;\u03C0);\u03C9))', '(T)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C9)', '(*(2;\u03C0;v))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;\u03C0;v))', '(\u03C9)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(/(\u03C9;*(2;\u03C0)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C9;*(2;\u03C0)))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C9)', '(/(v;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;R))', '(\u03C9)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(v;\u03C9))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;\u03C9))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(*(\u03C9;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03C9;R))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(^(v;2);R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(v;2);R))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(^(v;2);a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(v;2);a))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(^(*(a;R);/(1;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(*(a;R);0.5))', '(v)', 35, false, true, false, true)])), new RulePackITR('PhysicsMolecular', void 0, void 0, 'Basics of Molecular Physics', '\u041E\u0441\u043D\u043E\u0432\u044B \u043C\u043E\u043B\u0435\u043A\u0443\u043B\u044F\u0440\u043D\u043E\u0439 \u0444\u0438\u0437\u0438\u043A\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(F;S))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;S))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S)', '(/(F;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;P))', '(S)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F)', '(*(P;S))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;S))', '(F)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(/(F;a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;a))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(F;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;m))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F)', '(*(m;a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(m;a))', '(F)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(m;\u03BC))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(m;\u03BC))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BC)', '(/(m;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(m;\u03BD))', '(\u03BC)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(*(\u03BD;\u03BC))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BD;\u03BC))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(N;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;N\u2090))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N\u2090)', '(/(N;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;\u03BD))', '(N\u2090)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N)', '(*(\u03BD;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BD;N\u2090))', '(N)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(k)', '(/(R;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(R;N\u2090))', '(k)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N\u2090)', '(/(R;k))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(R;k))', '(N\u2090)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(*(k;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(k;N\u2090))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(n)', '(/(N;V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;V))', '(n)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V)', '(/(N;n))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;n))', '(V)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N)', '(*(n;V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(n;V))', '(N)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(*(n;k;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(n;k;T))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(T)', '(/(*(n;k);P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(n;k);P))', '(T)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;V))', '(*(\u03BD;R;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BD;R;T))', '(*(P;V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(*(\u03BD;R;T);V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03BD;R;T);V))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V)', '(/(*(\u03BD;R;T);P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03BD;R;T);P))', '(V)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(T)', '(/(*(P;V);*(\u03BD;R)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(P;V);*(\u03BD;R)))', '(T)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(N;/(3;2);k;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(N;/(3;2);k;T))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(/(3;2);\u03BD;R;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(3;2);\u03BD;R;T))', '(U)', 35, false, true, false, true)])), new RulePackITR('PhysicsElectrodynamics', void 0, void 0, 'Basics of Electrodynamics', '\u041E\u0441\u043D\u043E\u0432\u044B \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0434\u0438\u043D\u0430\u043C\u0438\u043A\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(q;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;t))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(q;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;I))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(*(I;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;t))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(/(A;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;U))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(/(A;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;q))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(*(U;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(U;q))', '(A)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S)', '(/(*(\u03C1;l);R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03C1;l);R))', '(S)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(*(\u03C1;l);S))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03C1;l);S))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(l)', '(/(*(S;R);\u03C1))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(S;R);\u03C1))', '(l)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C1)', '(/(*(S;R);l))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(S;R);l))', '(\u03C1)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(S;R))', '(*(\u03C1;l))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03C1;l))', '(*(S;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(U;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;R))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(U;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;I))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(I;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;R))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(A;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;t))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(A;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;P))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(*(P;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;t))', '(A)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(/(P;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(P;I))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(P;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(P;U))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(*(I;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;U))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(Q)', '(A)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(Q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(Q;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(Q;t))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(Q;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(Q;P))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(Q)', '(*(P;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;t))', '(Q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C)', '(/(q;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;U))', '(C)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(/(q;C))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;C))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(*(U;C))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(U;C))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(W)', '(/(*(C;^(U;2));2))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(C;^(U;2));2))', '(W)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C)', '(/(*(2;W);^(U;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;W);^(U;2)))', '(C)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(W)', '(/(*(L;^(I;2));2))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(L;^(I;2));2))', '(W)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(L)', '(/(*(2;W);^(I;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;W);^(I;2)))', '(L)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(\u03A8;L))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;L))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(L)', '(/(\u03A8;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;I))', '(L)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03A8)', '(*(I;L))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;L))', '(\u03A8)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(F\u2090;*(B;l;sin(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F\u2090;*(B;l;sin(\u03C6))))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(B)', '(/(F\u2090;*(I;l;sin(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F\u2090;*(I;l;sin(\u03C6))))', '(B)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(l)', '(/(F\u2090;*(B;I;sin(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F\u2090;*(B;I;sin(\u03C6))))', '(l)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F\u2090)', '(*(I;B;l;sin(\u03C6)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;B;l;sin(\u03C6)))', '(F\u2090)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(B)', '(/(\u03A8;*(S;cos(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;*(S;cos(\u03C6))))', '(B)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S)', '(/(\u03A8;*(B;cos(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;*(B;cos(\u03C6))))', '(S)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03A8)', '(*(B;S;cos(\u03C6)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(B;S;cos(\u03C6)))', '(\u03A8)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(/(F;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;q))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(/(F;E))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;E))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F)', '(*(E;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(E;q))', '(F)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(d)', '(/(U;E))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;E))', '(d)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(/(U;d))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;d))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(E;d))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(E;d))', '(U)', 35, false, true, false, true)])), new RulePackITR('PhysicsNuclear', void 0, void 0, 'Basics of Nuclear Physics', '\u041E\u0441\u043D\u043E\u0432\u044B \u044F\u0434\u0435\u0440\u043D\u043E\u0439 \u0444\u0438\u0437\u0438\u043A\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(/(E;^(c;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(E;^(c;2)))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(c)', '(^(/(E;m);/(1;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(E;m);0.5))', '(c)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(*(m;^(c;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(m;^(c;2)))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(h)', '(/(E;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(E;\u03BD))', '(h)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(E;h))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(E;h))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(*(h;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(h;\u03BD))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BB)', '(/(c;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(c;\u03BD))', '(\u03BB)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(c;\u03BB))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(c;\u03BB))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(c)', '(*(\u03BB;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BB;\u03BD))', '(c)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(c)', '(/(p;m))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(p;m))', '(c)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(/(p;c))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(p;c))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(p)', '(*(m;c))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(m;c))', '(p)', 35, false, true, false, true)]))]);
-  }
-  DefaultPhysicsRulePacks$Companion.prototype.get = function () {
-    return this.defaultPhysicsRulePacks;
-  };
-  DefaultPhysicsRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var DefaultPhysicsRulePacks$Companion_instance = null;
-  function DefaultPhysicsRulePacks$Companion_getInstance() {
-    if (DefaultPhysicsRulePacks$Companion_instance === null) {
-      new DefaultPhysicsRulePacks$Companion();
-    }
-    return DefaultPhysicsRulePacks$Companion_instance;
-  }
-  DefaultPhysicsRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'DefaultPhysicsRulePacks',
-    interfaces: []
-  };
-  function SetRulePacks() {
-    SetRulePacks$Companion_getInstance();
-  }
-  function SetRulePacks$Companion() {
-    SetRulePacks$Companion_instance = this;
-    this.defaultSetRulePacks = listOf_0([new RulePackITR('SetBase', void 0, void 0, 'Basic Set Theory', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B \u0442\u0435\u043E\u0440\u0438\u0438 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432', "Basic operations, it's definitions and properties", '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438, \u0438\u0445 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Set intersection, union, difference, symmetric difference, complement', '\u041F\u0435\u0440\u0435\u0441\u0435\u0447\u0435\u043D\u0438\u0435, \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u0435, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C, \u0441\u0438\u043C\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0440\u0430\u0437\u043D\u0441\u0442\u044C, \u0434\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435', 'set', void 0, listOf_0([new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(A;B)))', '(or(not(A);not(B)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(not(A);not(B)))', '(not(and(A;B)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(A;B)))', '(and(not(A);not(B)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(not(A);not(B)))', '(not(or(A;B)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(A;B))', '(not(or(not(A);not(B))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(not(A);not(B))))', '(and(A;B))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(A;B))', '(not(and(not(A);not(B))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(not(A);not(B))))', '(or(A;B))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(not(A)))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(not(not(A)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(or(A;A))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(and(A;A))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;B))', '(and(B;A))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;B))', '(or(B;A))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(and(A;1))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(or(A;0))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;not(A)))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(A);A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;not(A)))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(A);A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;1))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(1;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;1))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(1;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;0))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(0;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;0))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(0;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(1))', '(0)', 5, false, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;not(B)))', '(set-(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(B);A))', '(set-(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(A;B))', '(and(A;not(B)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(A;0))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(A;1))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(0;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(1;A))', '(not(A))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(set-(A;0))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(A))', '(set-(1;A))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(set-(A;1))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(set-(0;A))', 91, true, false, false, false)])), new RulePackITR('SetAbsorptionLaw', void 0, void 0, 'Absorption Law', '\u0417\u0430\u043A\u043E\u043D \u043F\u043E\u0433\u043B\u043E\u0449\u0435\u043D\u0438\u044F', 'Law and basic properties in Set Theory', '\u0417\u0430\u043A\u043E\u043D \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0432 \u0442\u0435\u043E\u0440\u0438\u0438 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432', void 0, void 0, 'set', listOf(new RulePackLinkITR(void 0, 'SetBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;or(A;B)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;and(A;B)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;or(B;A)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;and(B;A)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(A;B);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(A;B);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(B;A);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(B;A);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(and(A;or(A;B)))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(or(A;and(A;B)))', 90, true, false, false, false), new RuleITR('SetComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)]))]);
-  }
-  SetRulePacks$Companion.prototype.get = function () {
-    return this.defaultSetRulePacks;
-  };
-  SetRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var SetRulePacks$Companion_instance = null;
-  function SetRulePacks$Companion_getInstance() {
-    if (SetRulePacks$Companion_instance === null) {
-      new SetRulePacks$Companion();
-    }
-    return SetRulePacks$Companion_instance;
-  }
-  SetRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'SetRulePacks',
-    interfaces: []
-  };
-  function DefaultStandardMathRulePacks() {
-    DefaultStandardMathRulePacks$Companion_getInstance();
-  }
-  function DefaultStandardMathRulePacks$Companion() {
-    DefaultStandardMathRulePacks$Companion_instance = this;
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13;
-    tmp$ = new RulePackITR('ArithmeticPositiveAddition', void 0, void 0, 'Addition of Positive Numbers', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u0447\u0435\u0442 \u0434\u043B\u044F \u043D\u0430\u0447\u0438\u043D\u0430\u044E\u0449\u0438\u0445', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B. \u0421\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u044B \u0442\u0430\u043A, \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u0434\u0430\u0442\u044C \u0432\u044B\u0439\u0442\u0438 \u0432 \u043E\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043B\u044C\u043D\u0443\u044E \u043E\u0431\u043B\u0430\u0441\u0442\u044C', 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('PositiveNumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
-    tmp$_0 = new RulePackITR('ArithmeticAddition', void 0, void 0, 'Addition and Subtraction', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', 'Arithmetic Addition and Subtraction', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 90, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(+(-(a)))))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(+(-(a))))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(-(a)))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(-(+(-(a)))))', 95, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;-(a)))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(a);a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(-(a))))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(-(a));a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('NumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('MinusInOutBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 31, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('AdditiveComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
-    tmp$_1 = new RulePackITR('ArithmeticMultiplication', void 0, void 0, 'Addition Subtraction Multiplication', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Arithmetic Addition, Subtraction and Multiplication', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0438 \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticAddition')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;0))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(0;a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(*(a;0))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(1;a))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(*(a;1))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;b))', '(*(b;a))', 20, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('MultiplicationFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;a))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(a)))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a);a))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;a))', '(+(a;a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;*(a;n)))', '(*(a;+(n;1)))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(n;1)))', '(+(a;*(a;n)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(a;n);a))', '(*(a;+(1;n)))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(1;n)))', '(+(*(a;n);a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);-(B)))', '(*(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;B))', '(*(+(-(A));+(-(B))))', 80, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));+(-(B))))', '(*(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
-    tmp$_2 = new RulePackITR('ArithmeticDivision', void 0, void 0, 'Rational Numbers', '\u0420\u0430\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Addition, Subtraction, Multiplication and Division', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0434\u0435\u043B\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(0;a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;a))', '(1)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;a);a))', '(1)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(1;a)))', '(a)', 4, false, true, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(1;/(1;a)))', 90, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(/(1;2))', 15, false, false, true, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;2))', '(0.5)', 5, false, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;b))', '(/(*(a;b);*(b;b)))', 90, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('MultiplicativeComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ReduceFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('DecimalToFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);-(B)))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(+(-(A));+(-(B))))', 80, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));+(-(B))))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);/(A;D)))', '(/(+(*(B;D);*(C;A));*(C;D)))', 35, false, false, false, false, void 0, void 0, 0.0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);-(/(A;D))))', '(/(+(*(B;D);-(*(C;A)));*(C;D)))', 35, false, false, false, false, void 0, void 0, 0.0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;A)))', '(B)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;A);A))', '(B)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;C)))', '(/(*(A;B);C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;C);A))', '(/(*(A;B);C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(1;/(B;A)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(B;A)))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;B);C))', '(*(A;/(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(/(B;C);A))', '(/(B;*(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;*(A;C)))', '(/(/(B;C);A))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;/(B;C)))', '(/(*(A;C);B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;C);B))', '(/(A;/(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(A;B);/(1;C)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(1;B);/(A;C)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(A;B);/(1;C)))', '(/(A;*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;B);/(A;C)))', '(/(A;*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(D;B);/(A;C)))', '(/(*(D;A);*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;C)))', '(*(/(D;B);/(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;A)))', '(/(D;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(D;C)))', '(/(A;C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);D))', '(A)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;D);D))', '(A)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
-    tmp$_3 = listOf(new RulePackLinkITR(void 0, 'ArithmeticDivision'));
-    tmp$_4 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)]))]);
-    tmp$_13 = listOf_0([tmp$, tmp$_0, tmp$_1, tmp$_2, new RulePackITR('ArithmeticExponentiation', void 0, void 0, 'Algebraic Numbers', '\u0410\u043B\u0433\u0435\u0431\u0440\u0430\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0447\u0438\u0441\u043B\u0430', 'Pow, Ratio, Product, Difference, Sum', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C, \u0447\u0430\u0441\u0442\u043D\u043E\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C, \u0441\u0443\u043C\u043C\u0430', 'Pow, Division, Multiplication, Subtraction, Addition', '\u0412\u043E\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0432 \u0441\u0442\u0435\u043F\u0435\u043D\u044C, \u0434\u0435\u043B\u0435\u043D\u0438\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435', 'standard_math', tmp$_3, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(a;1))', 95, true, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;2))', 95, true, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;3))', 95, true, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;a))', '(^(a;+(-(1))))', 80, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(-(1))))', '(/(1;a))', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('PowFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(b;-(c))))', '(/(^(a;b);^(a;c)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;b);^(a;c)))', '(^(a;+(b;-(c))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;^(A;C)))', '(*(B;^(A;+(-(C)))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(B;^(A;+(-(C)))))', '(/(B;^(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(A;C)))', '(^(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;+(-(C))))', '(/(1;^(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(^(/(B;A);+(-(1))))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;A);+(-(1))))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;0))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(1;A))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;1))', '(A)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(0;A))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a))', '(^(a;2))', 40, false, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(*(a;a))', 40, false, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;^(a;n)))', '(^(a;+(n;1)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;1)))', '(*(a;^(a;n)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(^(a;n);a))', '(^(a;+(1;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(1;n)))', '(*(^(a;n);a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;n);a))', '(^(a;+(n;-(1))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;-(1))))', '(/(^(a;n);a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;*(B;C)))', '(^(^(A;B);C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(A;B);C))', '(^(A;*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;C);A))', '(/(^(B;A);^(C;A)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(B;A);^(C;A)))', '(^(/(B;C);A))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;*(2;n)))', '(^(+(-(a));*(2;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(^(+(-(a));2))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;b);/(1;b)))', '(a)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]), tmp$_4), new RulePackITR('ArithmeticPowExtension', void 0, void 0, 'Pow from Root and Root from Pow', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C \u0438\u0437 \u043A\u043E\u0440\u043D\u044F \u0438 \u043A\u043E\u0440\u0435\u043D\u044C \u0438\u0437 \u0441\u0442\u0435\u043F\u0435\u043D\u0438', 'Straight and Reverse Application of Root and Pow', '\u041F\u0440\u044F\u043C\u043E\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u043E\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0441\u0442\u0435\u043F\u0435\u043D\u0438 \u0438 \u043A\u043E\u0440\u043D\u044F', 'Moved to separate rule pack because of not full domain', '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u043E \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0442\u0430\u043A \u043A\u0430\u043A \u043D\u0435 \u0432\u0435\u0437\u0434\u0435 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043E', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;2);/(1;2)))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;2));2))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;3);/(1;3)))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;3));3))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('PowRootComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 96, false, false, false, false, void 0, void 0, void 0, 0.0)]))]);
-    tmp$_5 = listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation'));
-    tmp$_6 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)]))]);
-    tmp$_7 = new RulePackITR('ShortMultiplication', void 0, void 0, 'Short Multiplication', '\u0421\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Short Multiplication Formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0433\u043E \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u044F', 'Difference of Squares, Square of Sum, Square of Difference, Sum of Cubes, Difference of Cubes, Cube of Sum, Cube of Difference', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0441\u0443\u043C\u043C\u044B, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438, \u0441\u0443\u043C\u043C\u0430 \u043A\u0443\u0431\u043E\u0432, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0443\u0431\u043E\u0432, \u043A\u0443\u0431 \u0441\u0443\u043C\u043C\u044B, \u043A\u0443\u0431 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438', 'standard_math', tmp$_5, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(^(b;2))))', '(*(+(a;-(b));+(a;b)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(a;b)))', '(+(^(a;2);-(^(b;2))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);2))', '(+(^(a;2);*(2;a;b);^(b;2)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a;b);^(b;2)))', '(^(+(a;b);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a);1))', '(^(+(a;1);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));2))', '(+(^(a;2);-(*(2;a;b));^(b;2)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a;b));^(b;2)))', '(^(+(a;-(b));2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a));1))', '(^(+(a;-(1));2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);3))', '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', '(^(+(a;b);3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2));*(3;a);1))', '(^(+(a;1);3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));3))', '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', '(^(+(a;-(b));3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2)));*(3;a);-(1)))', '(^(+(a;-(1));3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(^(b;3))))', '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', '(+(^(a;3);-(^(b;3))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(1));+(^(a;2);a;1)))', '(+(^(a;3);-(^(1;3))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);^(b;3)))', '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', '(+(^(a;3);^(b;3)))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;1);+(^(a;2);-(a);1)))', '(+(^(a;3);^(1;3)))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]), tmp$_6);
-    tmp$_8 = listOf(new RulePackLinkITR(void 0, 'ShortMultiplication'));
-    tmp$_9 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)]))]);
-    tmp$_10 = new RulePackITR('Logarithm', void 0, void 0, 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C', 'Basic Properties Without Regard to Domain', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 \u0443\u0447\u0435\u0442\u0430 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F', void 0, void 0, 'standard_math', tmp$_8, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;log(b;a)))', '(b)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(1;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(A;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c);a))', '(+(log(b;a);log(c;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a)))', '(log(*(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d);a))', '(+(log(b;a);log(c;a);log(d;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a)))', '(log(*(b;c;d);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d;e);a))', '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', '(log(*(b;c;d;e);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);-(log(c;a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(b;c);a))', '(*(c;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(c;log(b;a)))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(log(b;a);c))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;^(a;k)))', '(/(log(b;a);k))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(b;a);k))', '(log(b;^(a;k)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;log(b;a)))', '(log(a;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(/(1;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(c;a);log(b;a)))', '(log(c;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(-(log(/(c;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(c;b);a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;a))', '(+(-(log(/(1;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(1;b);a))))', '(log(b;a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(1;b);a))', '(+(-(log(b;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(b;a))))', '(log(/(1;b);a))', 25, false, false, false, false), new RuleITR('LogExpComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 96, false, false, false, false)]), tmp$_9);
-    tmp$_11 = listOf(new RulePackLinkITR(void 0, 'ShortMultiplication'));
-    tmp$_12 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)]))]);
-    this.defaultStandardMathRulePacks = plus(tmp$_13, listOf_0([tmp$_7, tmp$_10, new RulePackITR('BasicTrigonometricDefinitionsIdentity', void 0, void 0, 'Basic Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', 'Sin, Cos, Tg, Ctg Definitions and Basic Identity', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F sin, cos, tg, ctg \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', void 0, void 0, 'standard_math', tmp$_11, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(sin(a);2);^(cos(a);2)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(tg(a);ctg(a)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(sin(a);cos(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(cos(a);sin(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(1;ctg(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(1;tg(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(\u03C0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;\u03C0)))', '(0)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(\u03C0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;2)))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(0))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(cos(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(\u03C0))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;\u03C0)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(cos(\u03C0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(1))', '(cos(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;6)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(sin(/(\u03C0;6)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;3)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(cos(/(\u03C0;3)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(tg(/(\u03C0;4)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(ctg(/(\u03C0;4)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(ctg(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(*(2;\u03C0)))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(*(2;\u03C0)))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;*(2;\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(*(2;\u03C0)))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;*(2;\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(*(2;\u03C0)))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;\u03C0)))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(\u03C0))))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;\u03C0)))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(\u03C0))))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;\u03C0)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;\u03C0)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(tg(/(a;2));+(1;cos(a))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(ctg(/(a;2));+(1;+(-(cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;+(-(cos(a))));tg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;cos(a));ctg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(2;cos(/(a;2));sin(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(2;+(tg(a);ctg(a))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(2;+(tg(/(a;2));ctg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(3;a)))', '(+(*(3;sin(a));+(-(*(4;^(sin(a);3))))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(+(a;b);c)))', '(sin(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(*(sin(a);ctg(a)))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(*(2;^(cos(/(a;2));2));+(-(1))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));+(ctg(a);tg(a))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(/(+(ctg(/(a;2));+(-(tg(/(a;2)))));+(ctg(/(a;2));tg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(3;a)))', '(+(*(4;^(cos(a);3));-(+(*(3;cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(+(a;b);c)))', '(cos(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(+(/(1;^(cos(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(+(1;+(-(cos(a))));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(sin(a);+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(/(a;2));2))', '(/(+(1;+(-(cos(a))));+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(/(+(1;+(-(cos(*(2;a)))));+(1;cos(*(2;a)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);3))', '(/(+(*(3;sin(a));+(-(sin(*(3;a)))));+(*(3;cos(a));cos(*(3;a)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(+(a;b);c)))', '(tg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(+(/(1;^(sin(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(+(1;cos(a));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(sin(a);+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(/(a;2));2))', '(/(+(1;cos(a));+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(/(+(1;cos(*(2;a)));+(1;+(-(cos(*(2;a)))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));2))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);3))', '(/(+(*(3;cos(a));cos(*(3;a)));+(*(3;sin(a));+(-(sin(*(3;a)))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(+(a;b);c)))', '(ctg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;+(-(1))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(+(-(1));1))', 89, true, false, false, false, void 0, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(^(sin(x);2);^(cos(x);2);+(-(1))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(*(^(tg(x);2);^(ctg(x);2));+(-(1))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(tg(x);2);+(-(/(1;^(cos(x);2))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(ctg(x);2);+(-(/(1;^(sin(x);2))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(1;1))', 89, true, false, false, false, void 0, void 0, void 0, 10.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);cos(x));2);+(-(sin(*(2;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);-(+(cos(x))));2);sin(*(2;x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(x);2);+(1;^(tg(x);2))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(x);2));cos(*(2;x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(x);2));+(-(cos(*(2;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(/(x;2));2));+(-(cos(x)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(/(x;2)));sin(x));+(-(^(tg(/(x;2));2)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(/(x;2));ctg(x));^(tg(/(x;2));2)))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(x);+(-(tg(x))));*(2;ctg(*(2;x)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(x));cos(*(3;x)));*(4;^(cos(x);3))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(x);ctg(x)))', 89, true, false, false, false, void 0, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(x);2));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(x);2));+(-(^(ctg(x);2)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(2;x));*(2;sin(x);cos(x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(x);2);^(cos(x);2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;sin(/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));cos(*(2;x)));2);+(-(sin(*(4;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));-(+(cos(*(2;x)))));2);sin(*(4;x))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(*(2;x));2);+(1;^(tg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(*(2;x));2);+(1;^(ctg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(*(2;x));2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(*(2;x));2));+(-(cos(*(4;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(x));sin(*(2;x)));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(x);ctg(*(2;x)));^(tg(x);2)))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(*(2;x));+(-(tg(*(2;x)))));*(2;ctg(*(4;x)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(*(2;x)));cos(*(6;x)));*(4;^(cos(*(2;x));3))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(*(2;x));ctg(*(2;x))))', 89, true, false, false, false, void 0, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(*(2;x));2));+(-(^(tg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(*(2;x));2));+(-(^(ctg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(4;x));*(2;sin(*(2;x));cos(*(2;x)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(*(2;x));2);^(cos(*(2;x));2));cos(*(8;x))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0)]), tmp$_12), new RulePackITR('TrigonometrySinCosSumReduction', void 0, void 0, "Trigonometry Sin Cos of Sum and it's Reduction", '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0438\u0445 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Sin Cos of sum and difference; reduction Formulas', 'Sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438; \u0438\u0445 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', "Placed in separated rule pack for tasks for Derivation of formulas on Sin Cos of Double Argument, also it's Sum, Difference and Product", '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u044B \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u0432\u044B\u0432\u043E\u0434 \u0444\u043E\u0440\u043C\u0443\u043B \u043D\u0430 sin cos \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0438\u0445 \u0441\u0443\u043C\u043C\u0443, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0438 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'BasicTrigonometricDefinitionsIdentity')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 30.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 30.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(sin(a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(-(a)))', '(+(-(sin(a))))', 17, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;a)))', '(+(-(cos(-(a)))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(\u03C0;-(a))))', 14, true, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(cos(a)))', '(cos(+(\u03C0;-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(\u03C0;-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);a)))', '(cos(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 17, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', 14, true, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(-(a)))', '(cos(a))', 14, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, true, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(cos(+(b;-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;-(\u03C0))))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;-(\u03C0))))))', 89, true, false, false, false)])), new RulePackITR('Trigonometry', void 0, void 0, 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'Basic properties without Tg Ctg of sum and \u03C0k', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'TrigonometrySinCosSumReduction')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', 24, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', 24, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', 24, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);-(cos(b))))', '(+(-(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0)])), new RulePackITR('AdvancedTrigonometry', void 0, void 0, 'Advanced Trigonometry', '\u041F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'With Tg Ctg of Sum and \u03C0k reduction', '\u0421 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k \u0443\u043F\u0440\u043E\u0449\u0435\u043D\u0438\u0435\u043C', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'Trigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', 30, true, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', 30, true, false, true, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', 30, true, false, true, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', '(ctg(+(a;-(b))))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(2;a)))', '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', '(tg(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', '(ctg(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', 30, false, false, false, false, 'SORTED')])), new RulePackITR('InverseTrigonometricFunctions', void 0, void 0, 'Inverse Trigonometric Functions', '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions relations. Defined not on full domain', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u044B \u043D\u0435 \u0432\u0435\u0437\u0434\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'AdvancedTrigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(sin(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(asin(sin(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(cos(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(acos(cos(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(tg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(atg(tg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(ctg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(actg(ctg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(asin(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(sin(asin(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(acos(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(cos(acos(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(atg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(tg(atg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(actg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(ctg(actg(a)))', 30, true, false, false, false)]))]));
-  }
-  DefaultStandardMathRulePacks$Companion.prototype.get = function () {
-    return this.defaultStandardMathRulePacks;
-  };
-  DefaultStandardMathRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var DefaultStandardMathRulePacks$Companion_instance = null;
-  function DefaultStandardMathRulePacks$Companion_getInstance() {
-    if (DefaultStandardMathRulePacks$Companion_instance === null) {
-      new DefaultStandardMathRulePacks$Companion();
-    }
-    return DefaultStandardMathRulePacks$Companion_instance;
-  }
-  DefaultStandardMathRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'DefaultStandardMathRulePacks',
-    interfaces: []
-  };
   function ModifiedLogicRulePacks() {
     ModifiedLogicRulePacks$Companion_getInstance();
   }
@@ -10895,6 +9748,221 @@ var twf_js = function (_, Kotlin) {
   TrigonometricRulePacks.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'TrigonometricRulePacks',
+    interfaces: []
+  };
+  function DefaultCombinatoricsRulePacks() {
+    DefaultCombinatoricsRulePacks$Companion_getInstance();
+  }
+  function DefaultCombinatoricsRulePacks$Companion() {
+    DefaultCombinatoricsRulePacks$Companion_instance = this;
+    this.defaultCombinatoricsRulePacks = listOf_0([new RulePackITR('Factorial', void 0, void 0, 'Factorial', '\u0424\u0430\u043A\u0442\u043E\u0440\u0438\u0430\u043B', 'Basic Properties of Natural Factorial', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u043D\u0430\u0442\u0443\u0440\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u0444\u0430\u043A\u0442\u043E\u0440\u0438\u0430\u043B\u0430', void 0, void 0, 'combinatorics', listOf(new RulePackLinkITR(void 0, 'ShortMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(n;1)))', '(*(factorial(n);+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(n);+(n;1)))', '(factorial(+(n;1)))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(n;1));+(n;1)))', '(factorial(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(/(factorial(+(n;1));+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(n;1));factorial(n)))', '(+(n;1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(n;1))', '(/(factorial(+(n;1));factorial(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(*(factorial(+(n;-(1)));n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(+(n;-(1)));n))', '(factorial(n))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(n);n))', '(factorial(+(n;-(1))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(n;-(1))))', '(/(factorial(n);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(n);factorial(+(n;-(1)))))', '(n)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(n)', '(/(factorial(n);factorial(+(n;-(1)))))', 85, true, false, false, false)])), new RulePackITR('BasicCombinatorics', void 0, void 0, 'Basic Combinatorics', '\u0411\u0430\u0437\u043E\u0432\u0430\u044F \u043A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u0438\u043A\u0430', 'Connections between Base Combinatorial Numbers', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B, \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u044E\u0449\u0438\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Simple formulas for Placements (A), Placements with Repetitions (U), Combinations (C), Combinations with repetitions (V), Permutations (P), Stirling I kind (S1), Stirling II kind (S2), Bell (B), Catalan (C)', '\u041F\u0440\u043E\u0441\u0442\u044B\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u0434\u043B\u044F \u0447\u0438\u0441\u0435\u043B \u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F (A), \u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F \u0441 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F\u043C\u0438 (U), \u0421\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u0439 (C), \u0421\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u0439 \u0441 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F\u043C\u0438 (V), \u041F\u0435\u0440\u0435\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u043A (P), \u0421\u0442\u0438\u0440\u043B\u0438\u043D\u0433\u0430 I \u0440\u043E\u0434\u0430 (S1), \u0421\u0442\u0438\u0440\u043B\u0438\u043D\u0433\u0430 II \u0440\u043E\u0434\u0430 (S2), \u0411\u0435\u043B\u043B\u0430 (B), \u041A\u0430\u0442\u0430\u043B\u0430\u043D\u0430 (C)', 'combinatorics', listOf(new RulePackLinkITR(void 0, 'Factorial')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U(m;n))', '(^(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(m;n))', '(U(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P(n))', '(factorial(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(P(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A(n;n))', '(P(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P(n))', '(A(n;n))', 70, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(C(m;n);P(n)))', '(A(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A(m;n))', '(*(C(m;n);P(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A(m;n);P(n)))', '(C(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(m;n))', '(/(A(m;n);P(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A(m;n);C(m;n)))', '(P(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P(n))', '(/(A(m;n);C(m;n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V(+(m;1);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', '(V(+(m;1);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(m;n)))', '(*(V(+(m;1);n);*(factorial(m);factorial(n))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(V(+(m;1);n);*(factorial(m);factorial(n))))', '(factorial(+(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(m);factorial(n)))', '(/(factorial(+(m;n));V(+(m;1);n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));V(+(m;1);n)))', '(*(factorial(m);factorial(n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(+(m;n);n))', '(/(factorial(+(m;n));*(factorial(m);factorial(n))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(+(m;n);n))', '(V(+(m;1);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V(+(m;1);n))', '(C(+(m;n);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A(+(m;n);n))', '(/(factorial(+(m;n));factorial(m)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));factorial(m)))', '(A(+(m;n);n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(+(m;n)))', '(*(A(+(m;n);n);factorial(m)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A(+(m;n);n);factorial(m)))', '(factorial(+(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(m);A(+(m;n);n)))', '(factorial(+(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(m))', '(/(factorial(+(m;n));A(+(m;n);n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(factorial(+(m;n));A(+(m;n);n)))', '(factorial(m))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S1(m;n))', '(*(factorial(n);S2(m;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(factorial(n);S2(m;n)))', '(S1(m;n))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(factorial(n))', '(/(S1(m;n);S2(m;n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(S1(m;n);S2(m;n)))', '(factorial(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S2(m;n))', '(/(S1(m;n);factorial(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(S1(m;n);factorial(n)))', '(S2(m;n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S2(+(m;1);+(n;1)))', '(+(S2(m;n);*(n;S2(m;+(n;1)))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(S2(m;n);*(n;S2(m;+(n;1)))))', '(S2(+(m;1);+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S2(m;m))', '(1)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(S2(m;n))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(*(2;n);n))', '(*(C(n);+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(C(n);+(n;1)))', '(C(*(2;n);n))', 35, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(n))', '(/(C(*(2;n);n);+(n;1)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(C(*(2;n);n);+(n;1)))', '(C(n))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(n;1))', '(/(C(*(2;n);n);C(n)))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(C(*(2;n);n);C(n)))', '(+(n;1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C(0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(C(0))', 90, true, false, false, false)]))]);
+  }
+  DefaultCombinatoricsRulePacks$Companion.prototype.get = function () {
+    return this.defaultCombinatoricsRulePacks;
+  };
+  DefaultCombinatoricsRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var DefaultCombinatoricsRulePacks$Companion_instance = null;
+  function DefaultCombinatoricsRulePacks$Companion_getInstance() {
+    if (DefaultCombinatoricsRulePacks$Companion_instance === null) {
+      new DefaultCombinatoricsRulePacks$Companion();
+    }
+    return DefaultCombinatoricsRulePacks$Companion_instance;
+  }
+  DefaultCombinatoricsRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DefaultCombinatoricsRulePacks',
+    interfaces: []
+  };
+  function DefaultComplexRulePacks() {
+    DefaultComplexRulePacks$Companion_getInstance();
+  }
+  function DefaultComplexRulePacks$Companion() {
+    DefaultComplexRulePacks$Companion_instance = this;
+    this.defaultComplexRulePacks = listOf(new RulePackITR('ComplexNumbers', void 0, void 0, 'Complex Numbers', '\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Basic properties', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', void 0, void 0, 'complex_numbers', listOf_0([new RulePackLinkITR(void 0, 'AdvancedTrigonometry'), new RulePackLinkITR(void 0, 'Logarithm')]), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sys_def_i_complex;sys_def_i_complex))', '(+(-(1)))', 100, false, false, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sys_def_i_complex;2))', '(+(-(1)))', 100, false, false, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(abs(+(x;*(y;sys_def_i_complex))))', '(sqrt(+(^(x;2);^(y;2))))', 30, false, true, false, false, 'SORTED_AND_I_MULTIPLICATED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(abs(+(x;*(y;sys_def_i_complex))))', '(^(+(^(x;2);^(y;2));0.5))', 30, false, true, false, false, 'SORTED_AND_I_MULTIPLICATED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(exp(+(x;*(y;sys_def_i_complex))))', '(*(exp(x);+(cos(y);*(sys_def_i_complex;sin(y)))))', 30, false, true, false, false, 'SORTED_AND_I_MULTIPLICATED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(exp(ln(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(z))', '(/(+(exp(*(sys_def_i_complex;z));exp(+(-(*(sys_def_i_complex;z)))));2))', 30, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(z))', '(/(+(exp(*(sys_def_i_complex;z));-(exp(+(-(*(sys_def_i_complex;z))))));*(2;sys_def_i_complex)))', 30, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(e;ln(a)))', '(a)', 30, false, false, false, false)])));
+  }
+  DefaultComplexRulePacks$Companion.prototype.get = function () {
+    return this.defaultComplexRulePacks;
+  };
+  DefaultComplexRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var DefaultComplexRulePacks$Companion_instance = null;
+  function DefaultComplexRulePacks$Companion_getInstance() {
+    if (DefaultComplexRulePacks$Companion_instance === null) {
+      new DefaultComplexRulePacks$Companion();
+    }
+    return DefaultComplexRulePacks$Companion_instance;
+  }
+  DefaultComplexRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DefaultComplexRulePacks',
+    interfaces: []
+  };
+  function DefaultRulePacks() {
+    DefaultRulePacks$Companion_getInstance();
+  }
+  function DefaultRulePacks$Companion() {
+    DefaultRulePacks$Companion_instance = this;
+    this.defaultRulePacks = plus(plus(plus(plus(plus(DefaultStandardMathRulePacks$Companion_getInstance().get(), DefaultCombinatoricsRulePacks$Companion_getInstance().get()), DefaultComplexRulePacks$Companion_getInstance().get()), LogicRulePacks$Companion_getInstance().get()), SetRulePacks$Companion_getInstance().get()), DefaultPhysicsRulePacks$Companion_getInstance().get());
+    var $receiver = this.defaultRulePacks;
+    var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
+    var destination = LinkedHashMap_init(capacity);
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      destination.put_xwzc9p$(ensureNotNull(element.code), element);
+    }
+    this.defaultRulePacksMap = destination;
+  }
+  DefaultRulePacks$Companion.prototype.map = function () {
+    return this.defaultRulePacksMap;
+  };
+  DefaultRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var DefaultRulePacks$Companion_instance = null;
+  function DefaultRulePacks$Companion_getInstance() {
+    if (DefaultRulePacks$Companion_instance === null) {
+      new DefaultRulePacks$Companion();
+    }
+    return DefaultRulePacks$Companion_instance;
+  }
+  DefaultRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DefaultRulePacks',
+    interfaces: []
+  };
+  function LogicRulePacks() {
+    LogicRulePacks$Companion_getInstance();
+  }
+  function LogicRulePacks$Companion() {
+    LogicRulePacks$Companion_instance = this;
+    this.defaultLogicRulePacks = listOf_0([new RulePackITR('LogicBase', void 0, void 0, 'Basic Boolean Logic', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B \u0431\u0443\u043B\u0435\u0432\u043E\u0439 \u043B\u043E\u0433\u0438\u043A\u0438', "Basic operations, it's definitions and properties", '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438, \u0438\u0445 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F', 'logic', void 0, listOf_0([new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(a;b)))', '(or(not(a);not(b)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(not(a);not(b)))', '(not(and(a;b)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(a;b)))', '(and(not(a);not(b)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(not(a);not(b)))', '(not(or(a;b)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(a;b))', '(not(or(not(a);not(b))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(not(a);not(b))))', '(and(a;b))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(a;b))', '(not(and(not(a);not(b))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(not(a);not(b))))', '(or(a;b))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(not(a)))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(not(not(a)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(or(a;a))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(and(a;a))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;b))', '(and(b;a))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;b))', '(or(b;a))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(and(a;1))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(or(a;0))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;not(a)))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(a);a))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a)))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;1))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(1;a))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;1))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(1;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;0))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(0;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;0))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(0;a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(1))', '(0)', 5, false, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(a);b))', '(implic(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(b;not(a)))', '(implic(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;b))', '(or(not(a);b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(0;a))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;1))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;0))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(1;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(implic(1;a))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(or(and(not(a);b);and(a;not(b))))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(not(a);b);and(a;not(b))))', '(xor(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(or(and(a;b);and(not(a);not(b))))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(a;b);and(not(a);not(b))))', '(alleq(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(and(or(not(a);not(b));or(a;b)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);not(b));or(a;b)))', '(xor(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(and(or(not(a);b);or(a;not(b))))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);b);or(a;not(b))))', '(alleq(a;b))', 5, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;0))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;1))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(0;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(1;a))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(0;a))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;1))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;0))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(1;a))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(xor(a;0))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(alleq(1;a))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(a))', '(xor(a;1))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(a))', '(alleq(0;a))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(not(alleq(a;b)))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(not(xor(a;b)))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(alleq(a;b)))', '(xor(a;b))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(xor(a;b)))', '(alleq(a;b))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(not(a);b))', '(alleq(a;b))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(xor(not(a);b))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(not(a);b))', '(xor(a;b))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b))', '(alleq(not(a);b))', 90, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;a))', '(1)', 5, false, false, false, false), new RuleITR('SetComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false), new RuleITR('Xor', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)])), new RulePackITR('RelativeComplement', void 0, void 0, 'Relative Complement', '\u041B\u043E\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0434\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435', 'Definition and basic properties', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence, Relative Complement', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F, \u0434\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435', 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(b)))', '(set-(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(b);a))', '(set-(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;b))', '(and(a;not(b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;b))', '(not(implic(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(implic(a;b)))', '(set-(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;b))', '(not(set-(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(set-(a;b)))', '(implic(a;b))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;0))', '(a)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;1))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(0;a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(1;a))', '(not(a))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(set-(a;0))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(a;a))', '(0)', 5, false, false, false, false), new RuleITR('SetMinusOrRelativeComplement', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false)])), new RulePackITR('LogicNotAnd', void 0, void 0, 'Negation of Conjunction', '\u041E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u0438 (\u0428\u0442\u0440\u0438\u0445 \u0428\u0435\u0444\u0444\u0435\u0440\u0430)', 'Definition and basic properties', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence, Negation of Conjunction', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u0438', 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nand(a;b))', '(not(and(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(and(a;b)))', '(nand(a;b))', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nand(a;b))', '(or(not(a);not(b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(a);not(b)))', '(nand(a;b))', 6, false, false, false, false)])), new RulePackITR('LogicNotOr', void 0, void 0, 'Negation of Disjunction', '\u041E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u0438 (\u0421\u0442\u0440\u0435\u043B\u043A\u0430 \u041F\u0438\u0440\u0441\u0430)', 'Definition and basic properties', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Boolean Algebra Conjunction, Disjunction, Negation, Implication, Exclusive Or, Equivalence, Negation of Disjunction', '\u0411\u0443\u043B\u0435\u0432\u0430 \u0430\u043B\u0433\u0435\u0431\u0440\u0430: \u043A\u043E\u043D\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435, \u0438\u043C\u043F\u043B\u0438\u043A\u0430\u0446\u0438\u044F, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0435 \u0438\u043B\u0438, \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0446\u0438\u044F, \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435 \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u0438', 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nor(a;b))', '(not(or(a;b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(or(a;b)))', '(nor(a;b))', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nor(a;b))', '(and(not(a);not(b)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);not(b)))', '(nor(a;b))', 6, false, false, false, false)])), new RulePackITR('LogicAbsorptionLaw', void 0, void 0, 'Absorption Law', '\u0417\u0430\u043A\u043E\u043D \u043F\u043E\u0433\u043B\u043E\u0449\u0435\u043D\u0438\u044F', 'Law and basic properties in Boolean Algebra', '\u0417\u0430\u043A\u043E\u043D \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0432 \u0431\u0443\u043B\u0435\u0432\u043E\u0439 \u0430\u043B\u0433\u0435\u0431\u0440\u0435', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(a;b)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;and(a;b)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(b;a)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;and(b;a)))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;b);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(a;b);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(b;a);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(b;a);a))', '(a)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(and(a;or(a;b)))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(or(a;and(a;b)))', 90, true, false, false, false), new RuleITR('AbsorptionComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)])), new RulePackITR('LogicXorDistribution', void 0, void 0, 'XOR Distributive Law', '\u0414\u0438\u0441\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C XOR', 'Rules of XOR Distributive Law', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u0438\u0441\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044E\u0449\u0435\u0433\u043E \u0438\u043B\u0438', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf(new RuleITR('XorDistribution', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false))), new RulePackITR('LogicZhegalkinPolynom', void 0, void 0, 'Zhegalkin Polynomial', '\u041F\u043E\u043B\u0438\u043D\u043E\u043C \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430', 'Zhegalkin polynomial transformation rules', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043A \u043F\u043E\u043B\u0438\u043D\u043E\u043C\u0443 \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicXorDistribution')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;b))', '(xor(a;b;and(a;b)))', 34, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b;and(a;b)))', '(or(a;b))', 6, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a;b))', '(xor(a;b;1))', 34, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b;1))', '(alleq(a;b))', 6, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(implic(a;b))', '(xor(a;and(a;b);1))', 34, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;and(a;b);1))', '(implic(a;b))', 6, false, true, false, false)])), new RulePackITR('LogicZhegalkinNandNor', void 0, void 0, 'Zhegalkin Polinomial and Negation', '\u041F\u043E\u043B\u0438\u043D\u043E\u043C \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430 \u0438 \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u044F', 'Zhegalkin polynomial transformation rules with negation of conjunction and disjunction Zhegalkin polynomial', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043A \u043F\u043E\u043B\u0438\u043D\u043E\u043C\u0443 \u0416\u0435\u0433\u0430\u043B\u043A\u0438\u043D\u0430 \u0441 \u043E\u0442\u0440\u0438\u0446\u0430\u043D\u0438\u0435\u043C \u043A\u043E\u043D\u044C\u044E\u043D\u043A\u0446\u0438\u0438 \u0438 \u0434\u0438\u0437\u044A\u044E\u043D\u043A\u0446\u0438\u0438', void 0, void 0, 'logic', listOf_0([new RulePackLinkITR(void 0, 'LogicZhegalkinPolynom'), new RulePackLinkITR(void 0, 'LogicNotAnd'), new RulePackLinkITR(void 0, 'LogicNotOr')]), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nand(a;b))', '(xor(and(a;b);1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(and(a;b);1))', '(nand(a;b))', 6, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(nor(a;b))', '(xor(a;b;and(a;b);1))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(xor(a;b;and(a;b);1))', '(nor(a;b))', 6, false, true, false, false)])), new RulePackITR('LogicResolution', void 0, void 0, 'Resolution', '\u041C\u0435\u0442\u043E\u0434 \u0440\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0439', 'Rules for proof by Resolution method', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0434\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C\u0441\u0442\u0432 \u043C\u0435\u0442\u043E\u0434\u043E\u043C \u0440\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0439', void 0, void 0, 'logic', listOf(new RulePackLinkITR(void 0, 'LogicBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a)))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a)))', '(and(X;or(a;X);not(a)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X)))', '(and(X;not(a);or(a;X)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a))', '(and(X;or(not(a);X);a))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X)))', '(and(X;a;or(not(a);X)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y)))', '(and(or(X;Y);or(a;X);or(not(a);Y)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y)))', '(and(or(X;Y);or(not(a);X);or(a;Y)))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C))', '(and(X;or(a;X);not(a);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C))', '(and(X;not(a);or(a;X);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C))', '(and(X;or(not(a);X);a;C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C))', '(and(X;a;or(not(a);X);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C))', '(and(or(X;Y);or(a;X);or(not(a);Y);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C))', '(and(or(X;Y);or(not(a);X);or(a;Y);C))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D))', '(and(X;or(a;X);not(a);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D))', '(and(X;not(a);or(a;X);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D))', '(and(X;or(not(a);X);a;C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D))', '(and(X;a;or(not(a);X);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E))', '(and(X;or(a;X);not(a);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E))', '(and(X;not(a);or(a;X);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E))', '(and(X;or(not(a);X);a;C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E))', '(and(X;a;or(not(a);X);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F))', '(and(X;or(a;X);not(a);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F))', '(and(X;not(a);or(a;X);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F))', '(and(X;or(not(a);X);a;C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F))', '(and(X;a;or(not(a);X);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F;G))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F;G))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F;G))', '(and(X;or(a;X);not(a);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F;G))', '(and(X;not(a);or(a;X);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F;G))', '(and(X;or(not(a);X);a;C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F;G))', '(and(X;a;or(not(a);X);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F;G))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F;G))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F;G))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F;G;H))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F;G;H))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F;G;H))', '(and(X;or(a;X);not(a);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F;G;H))', '(and(X;not(a);or(a;X);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F;G;H))', '(and(X;or(not(a);X);a;C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F;G;H))', '(and(X;a;or(not(a);X);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F;G;H))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F;G;H))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F;G;H))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);a;C;D;E;F;G;H;I))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;not(a);C;D;E;F;G;H;I))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);not(a);C;D;E;F;G;H;I))', '(and(X;or(a;X);not(a);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(a);or(a;X);C;D;E;F;G;H;I))', '(and(X;not(a);or(a;X);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);a;C;D;E;F;G;H;I))', '(and(X;or(not(a);X);a;C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;or(not(a);X);C;D;E;F;G;H;I))', '(and(X;a;or(not(a);X);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(a;X);or(not(a);Y);C;D;E;F;G;H;I))', '(and(or(X;Y);or(a;X);or(not(a);Y);C;D;E;F;G;H;I))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(not(a);X);or(a;Y);C;D;E;F;G;H;I))', '(and(or(X;Y);or(not(a);X);or(a;Y);C;D;E;F;G;H;I))', 10, false, false, false, false)]))]);
+  }
+  LogicRulePacks$Companion.prototype.get = function () {
+    return this.defaultLogicRulePacks;
+  };
+  LogicRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var LogicRulePacks$Companion_instance = null;
+  function LogicRulePacks$Companion_getInstance() {
+    if (LogicRulePacks$Companion_instance === null) {
+      new LogicRulePacks$Companion();
+    }
+    return LogicRulePacks$Companion_instance;
+  }
+  LogicRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'LogicRulePacks',
+    interfaces: []
+  };
+  function DefaultPhysicsRulePacks() {
+    DefaultPhysicsRulePacks$Companion_getInstance();
+  }
+  function DefaultPhysicsRulePacks$Companion() {
+    DefaultPhysicsRulePacks$Companion_instance = this;
+    this.defaultPhysicsRulePacks = listOf_0([new RulePackITR('PhysicsStraightMoving', void 0, void 0, 'Basics of Straight Moving', '\u041E\u0441\u043D\u043E\u0432\u044B \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F \u043F\u043E \u043F\u0440\u044F\u043C\u043E\u0439', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(s)', '(/(v;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(s;t))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(s;v))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(s;v))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(s)', '(*(v;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(v;t))', '(s)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(v;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;t))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(v;a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;a))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(*(a;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;t))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(s)', '(/(*(a;^(t;2));2))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(a;^(t;2));2))', '(s)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(*(2;s);^(t;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;s);^(t;2)))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(^(/(*(2;s);a);0.5))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(*(2;s);a);0.5))', '(t)', 35, false, true, false, true)])), new RulePackITR('PhysicsCircleMoving', void 0, void 0, 'Basics of Circle Moving', '\u041E\u0441\u043D\u043E\u0432\u044B \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F \u043F\u043E \u043E\u043A\u0440\u0443\u0436\u043D\u043E\u0441\u0442\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C9)', '(/(*(2;\u03C0);T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;\u03C0);T))', '(\u03C9)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(T)', '(/(*(2;\u03C0);\u03C9))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;\u03C0);\u03C9))', '(T)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C9)', '(*(2;\u03C0;v))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;\u03C0;v))', '(\u03C9)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(/(\u03C9;*(2;\u03C0)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03C9;*(2;\u03C0)))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C9)', '(/(v;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;R))', '(\u03C9)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(v;\u03C9))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(v;\u03C9))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(*(\u03C9;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03C9;R))', '(v)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(^(v;2);R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(v;2);R))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(^(v;2);a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(v;2);a))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(v)', '(^(*(a;R);/(1;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(*(a;R);0.5))', '(v)', 35, false, true, false, true)])), new RulePackITR('PhysicsMolecular', void 0, void 0, 'Basics of Molecular Physics', '\u041E\u0441\u043D\u043E\u0432\u044B \u043C\u043E\u043B\u0435\u043A\u0443\u043B\u044F\u0440\u043D\u043E\u0439 \u0444\u0438\u0437\u0438\u043A\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(F;S))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;S))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S)', '(/(F;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;P))', '(S)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F)', '(*(P;S))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;S))', '(F)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(/(F;a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;a))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(F;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;m))', '(a)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F)', '(*(m;a))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(m;a))', '(F)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(m;\u03BC))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(m;\u03BC))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BC)', '(/(m;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(m;\u03BD))', '(\u03BC)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(*(\u03BD;\u03BC))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BD;\u03BC))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(N;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;N\u2090))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N\u2090)', '(/(N;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;\u03BD))', '(N\u2090)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N)', '(*(\u03BD;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BD;N\u2090))', '(N)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(k)', '(/(R;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(R;N\u2090))', '(k)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N\u2090)', '(/(R;k))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(R;k))', '(N\u2090)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(*(k;N\u2090))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(k;N\u2090))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(n)', '(/(N;V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;V))', '(n)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V)', '(/(N;n))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(N;n))', '(V)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(N)', '(*(n;V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(n;V))', '(N)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(*(n;k;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(n;k;T))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(T)', '(/(*(n;k);P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(n;k);P))', '(T)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;V))', '(*(\u03BD;R;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BD;R;T))', '(*(P;V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(*(\u03BD;R;T);V))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03BD;R;T);V))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(V)', '(/(*(\u03BD;R;T);P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03BD;R;T);P))', '(V)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(T)', '(/(*(P;V);*(\u03BD;R)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(P;V);*(\u03BD;R)))', '(T)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(N;/(3;2);k;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(N;/(3;2);k;T))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(/(3;2);\u03BD;R;T))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(3;2);\u03BD;R;T))', '(U)', 35, false, true, false, true)])), new RulePackITR('PhysicsElectrodynamics', void 0, void 0, 'Basics of Electrodynamics', '\u041E\u0441\u043D\u043E\u0432\u044B \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0434\u0438\u043D\u0430\u043C\u0438\u043A\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(q;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;t))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(q;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;I))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(*(I;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;t))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(/(A;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;U))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(/(A;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;q))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(*(U;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(U;q))', '(A)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S)', '(/(*(\u03C1;l);R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03C1;l);R))', '(S)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(*(\u03C1;l);S))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(\u03C1;l);S))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(l)', '(/(*(S;R);\u03C1))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(S;R);\u03C1))', '(l)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03C1)', '(/(*(S;R);l))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(S;R);l))', '(\u03C1)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(S;R))', '(*(\u03C1;l))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03C1;l))', '(*(S;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(U;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;R))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(R)', '(/(U;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;I))', '(R)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(I;R))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;R))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(A;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;t))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(A;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;P))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(*(P;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;t))', '(A)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(/(P;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(P;I))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(P;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(P;U))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(*(I;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;U))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(Q)', '(A)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(Q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(P)', '(/(Q;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(Q;t))', '(P)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(t)', '(/(Q;P))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(Q;P))', '(t)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(Q)', '(*(P;t))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(P;t))', '(Q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C)', '(/(q;U))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;U))', '(C)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(/(q;C))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(q;C))', '(U)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(*(U;C))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(U;C))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(W)', '(/(*(C;^(U;2));2))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(C;^(U;2));2))', '(W)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(C)', '(/(*(2;W);^(U;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;W);^(U;2)))', '(C)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(W)', '(/(*(L;^(I;2));2))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(L;^(I;2));2))', '(W)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(L)', '(/(*(2;W);^(I;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;W);^(I;2)))', '(L)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(\u03A8;L))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;L))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(L)', '(/(\u03A8;I))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;I))', '(L)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03A8)', '(*(I;L))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;L))', '(\u03A8)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(I)', '(/(F\u2090;*(B;l;sin(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F\u2090;*(B;l;sin(\u03C6))))', '(I)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(B)', '(/(F\u2090;*(I;l;sin(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F\u2090;*(I;l;sin(\u03C6))))', '(B)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(l)', '(/(F\u2090;*(B;I;sin(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F\u2090;*(B;I;sin(\u03C6))))', '(l)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F\u2090)', '(*(I;B;l;sin(\u03C6)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(I;B;l;sin(\u03C6)))', '(F\u2090)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(B)', '(/(\u03A8;*(S;cos(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;*(S;cos(\u03C6))))', '(B)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(S)', '(/(\u03A8;*(B;cos(\u03C6))))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(\u03A8;*(B;cos(\u03C6))))', '(S)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03A8)', '(*(B;S;cos(\u03C6)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(B;S;cos(\u03C6)))', '(\u03A8)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(/(F;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;q))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(q)', '(/(F;E))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(F;E))', '(q)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(F)', '(*(E;q))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(E;q))', '(F)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(d)', '(/(U;E))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;E))', '(d)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(/(U;d))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(U;d))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(U)', '(*(E;d))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(E;d))', '(U)', 35, false, true, false, true)])), new RulePackITR('PhysicsNuclear', void 0, void 0, 'Basics of Nuclear Physics', '\u041E\u0441\u043D\u043E\u0432\u044B \u044F\u0434\u0435\u0440\u043D\u043E\u0439 \u0444\u0438\u0437\u0438\u043A\u0438', 'Start formulas', '\u041F\u0440\u043E\u0441\u0442\u0435\u0439\u0448\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B', void 0, void 0, 'physics', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(/(E;^(c;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(E;^(c;2)))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(c)', '(^(/(E;m);/(1;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(E;m);0.5))', '(c)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(*(m;^(c;2)))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(m;^(c;2)))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(h)', '(/(E;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(E;\u03BD))', '(h)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(E;h))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(E;h))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(E)', '(*(h;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(h;\u03BD))', '(E)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BB)', '(/(c;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(c;\u03BD))', '(\u03BB)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(\u03BD)', '(/(c;\u03BB))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(c;\u03BB))', '(\u03BD)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(c)', '(*(\u03BB;\u03BD))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(\u03BB;\u03BD))', '(c)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(c)', '(/(p;m))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(p;m))', '(c)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(m)', '(/(p;c))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(p;c))', '(m)', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(p)', '(*(m;c))', 35, false, true, false, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(m;c))', '(p)', 35, false, true, false, true)]))]);
+  }
+  DefaultPhysicsRulePacks$Companion.prototype.get = function () {
+    return this.defaultPhysicsRulePacks;
+  };
+  DefaultPhysicsRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var DefaultPhysicsRulePacks$Companion_instance = null;
+  function DefaultPhysicsRulePacks$Companion_getInstance() {
+    if (DefaultPhysicsRulePacks$Companion_instance === null) {
+      new DefaultPhysicsRulePacks$Companion();
+    }
+    return DefaultPhysicsRulePacks$Companion_instance;
+  }
+  DefaultPhysicsRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DefaultPhysicsRulePacks',
+    interfaces: []
+  };
+  function SetRulePacks() {
+    SetRulePacks$Companion_getInstance();
+  }
+  function SetRulePacks$Companion() {
+    SetRulePacks$Companion_instance = this;
+    this.defaultSetRulePacks = listOf_0([new RulePackITR('SetBase', void 0, void 0, 'Basic Set Theory', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B \u0442\u0435\u043E\u0440\u0438\u0438 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432', "Basic operations, it's definitions and properties", '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438, \u0438\u0445 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430', 'Set intersection, union, difference, symmetric difference, complement', '\u041F\u0435\u0440\u0435\u0441\u0435\u0447\u0435\u043D\u0438\u0435, \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u0435, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C, \u0441\u0438\u043C\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0440\u0430\u0437\u043D\u0441\u0442\u044C, \u0434\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435', 'set', void 0, listOf_0([new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(A;B)))', '(or(not(A);not(B)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(not(A);not(B)))', '(not(and(A;B)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(A;B)))', '(and(not(A);not(B)))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(not(A);not(B)))', '(not(or(A;B)))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(and(A;B))', '(not(or(not(A);not(B))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(or(not(A);not(B))))', '(and(A;B))', 10, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(or(A;B))', '(not(and(not(A);not(B))))', 15, false, false, false, false), new RuleITR('', 'De Morgan Law', '\u0417\u0430\u043A\u043E\u043D \u0434\u0435 \u041C\u043E\u0440\u0433\u0430\u043D\u0430', void 0, void 0, void 0, void 0, '(not(and(not(A);not(B))))', '(or(A;B))', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(not(A)))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(not(not(A)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(or(A;A))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(and(A;A))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;B))', '(and(B;A))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;B))', '(or(B;A))', 40, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(and(A;1))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(or(A;0))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;not(A)))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(not(A);A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;not(A)))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(A);A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;1))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(1;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;1))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(1;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;0))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(0;A))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;0))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(0;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(1))', '(0)', 5, false, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;not(B)))', '(set-(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(not(B);A))', '(set-(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(A;B))', '(and(A;not(B)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(A;0))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(A;1))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(0;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(set-(1;A))', '(not(A))', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(set-(A;0))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(A))', '(set-(1;A))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(set-(A;1))', 91, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(set-(0;A))', 91, true, false, false, false)])), new RulePackITR('SetAbsorptionLaw', void 0, void 0, 'Absorption Law', '\u0417\u0430\u043A\u043E\u043D \u043F\u043E\u0433\u043B\u043E\u0449\u0435\u043D\u0438\u044F', 'Law and basic properties in Set Theory', '\u0417\u0430\u043A\u043E\u043D \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0432 \u0442\u0435\u043E\u0440\u0438\u0438 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432', void 0, void 0, 'set', listOf(new RulePackLinkITR(void 0, 'SetBase')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;or(A;B)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;and(A;B)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(A;or(B;A)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(A;and(B;A)))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(A;B);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(A;B);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(or(B;A);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(and(B;A);A))', '(A)', 6, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(and(A;or(A;B)))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(A)', '(or(A;and(A;B)))', 90, true, false, false, false), new RuleITR('SetComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)]))]);
+  }
+  SetRulePacks$Companion.prototype.get = function () {
+    return this.defaultSetRulePacks;
+  };
+  SetRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var SetRulePacks$Companion_instance = null;
+  function SetRulePacks$Companion_getInstance() {
+    if (SetRulePacks$Companion_instance === null) {
+      new SetRulePacks$Companion();
+    }
+    return SetRulePacks$Companion_instance;
+  }
+  SetRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SetRulePacks',
+    interfaces: []
+  };
+  function DefaultStandardMathRulePacks() {
+    DefaultStandardMathRulePacks$Companion_getInstance();
+  }
+  function DefaultStandardMathRulePacks$Companion() {
+    DefaultStandardMathRulePacks$Companion_instance = this;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13;
+    tmp$ = new RulePackITR('ArithmeticPositiveAddition', void 0, void 0, 'Addition of Positive Numbers', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u0447\u0435\u0442 \u0434\u043B\u044F \u043D\u0430\u0447\u0438\u043D\u0430\u044E\u0449\u0438\u0445', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B. \u0421\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u044B \u0442\u0430\u043A, \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u0434\u0430\u0442\u044C \u0432\u044B\u0439\u0442\u0438 \u0432 \u043E\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043B\u044C\u043D\u0443\u044E \u043E\u0431\u043B\u0430\u0441\u0442\u044C', 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('PositiveNumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
+    tmp$_0 = new RulePackITR('ArithmeticAddition', void 0, void 0, 'Addition and Subtraction', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', 'Arithmetic Addition and Subtraction', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 90, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(+(-(a)))))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(+(-(a))))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(-(a)))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(-(+(-(a)))))', 95, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;-(a)))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(a);a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(-(a))))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(-(a));a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('NumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('MinusInOutBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 31, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('AdditiveComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
+    tmp$_1 = new RulePackITR('ArithmeticMultiplication', void 0, void 0, 'Addition Subtraction Multiplication', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Arithmetic Addition, Subtraction and Multiplication', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0438 \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticAddition')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;0))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(0;a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(*(a;0))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(1;a))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(*(a;1))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;b))', '(*(b;a))', 20, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('MultiplicationFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;a))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(a)))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a);a))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;a))', '(+(a;a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;*(a;n)))', '(*(a;+(n;1)))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(n;1)))', '(+(a;*(a;n)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(a;n);a))', '(*(a;+(1;n)))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(1;n)))', '(+(*(a;n);a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(*(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(*(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);-(B)))', '(*(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;B))', '(*(+(-(A));+(-(B))))', 80, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));+(-(B))))', '(*(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
+    tmp$_2 = new RulePackITR('ArithmeticDivision', void 0, void 0, 'Rational Numbers', '\u0420\u0430\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Addition, Subtraction, Multiplication and Division', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0434\u0435\u043B\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(0;a))', '(0)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;a))', '(1)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;a);a))', '(1)', 4, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(1;a)))', '(a)', 4, false, true, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(1;/(1;a)))', 90, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(/(1;2))', 15, false, false, true, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;2))', '(0.5)', 5, false, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;b))', '(/(*(a;b);*(b;b)))', 90, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('MultiplicativeComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('ReduceFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('DecimalToFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(/(+(-(A));C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(/(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);-(B)))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(+(-(A));+(-(B))))', 80, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));+(-(B))))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);/(A;D)))', '(/(+(*(B;D);*(C;A));*(C;D)))', 35, false, false, false, false, void 0, void 0, 0.0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);-(/(A;D))))', '(/(+(*(B;D);-(*(C;A)));*(C;D)))', 35, false, false, false, false, void 0, void 0, 0.0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;A)))', '(B)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;A);A))', '(B)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;C)))', '(/(*(A;B);C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;C);A))', '(/(*(A;B);C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(1;/(B;A)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(B;A)))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;B);C))', '(*(A;/(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(/(B;C);A))', '(/(B;*(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;*(A;C)))', '(/(/(B;C);A))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;/(B;C)))', '(/(*(A;C);B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;C);B))', '(/(A;/(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(A;B);/(1;C)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(1;B);/(A;C)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(A;B);/(1;C)))', '(/(A;*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;B);/(A;C)))', '(/(A;*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(D;B);/(A;C)))', '(/(*(D;A);*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;C)))', '(*(/(D;B);/(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;A)))', '(/(D;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(D;C)))', '(/(A;C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);D))', '(A)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;D);D))', '(A)', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]));
+    tmp$_3 = listOf(new RulePackLinkITR(void 0, 'ArithmeticDivision'));
+    tmp$_4 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)]))]);
+    tmp$_13 = listOf_0([tmp$, tmp$_0, tmp$_1, tmp$_2, new RulePackITR('ArithmeticExponentiation', void 0, void 0, 'Algebraic Numbers', '\u0410\u043B\u0433\u0435\u0431\u0440\u0430\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0447\u0438\u0441\u043B\u0430', 'Pow, Ratio, Product, Difference, Sum', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C, \u0447\u0430\u0441\u0442\u043D\u043E\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C, \u0441\u0443\u043C\u043C\u0430', 'Pow, Division, Multiplication, Subtraction, Addition', '\u0412\u043E\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0432 \u0441\u0442\u0435\u043F\u0435\u043D\u044C, \u0434\u0435\u043B\u0435\u043D\u0438\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435', 'standard_math', tmp$_3, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(a;1))', 95, true, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;2))', 95, true, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;3))', 95, true, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;a))', '(^(a;+(-(1))))', 80, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(-(1))))', '(/(1;a))', 40, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('PowFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(b;-(c))))', '(/(^(a;b);^(a;c)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;b);^(a;c)))', '(^(a;+(b;-(c))))', 35, false, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;^(A;C)))', '(*(B;^(A;+(-(C)))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(B;^(A;+(-(C)))))', '(/(B;^(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(A;C)))', '(^(A;+(-(C))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;+(-(C))))', '(/(1;^(A;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(^(/(B;A);+(-(1))))', 35, true, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;A);+(-(1))))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;0))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(1;A))', '(1)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;1))', '(A)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(0;A))', '(0)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a))', '(^(a;2))', 40, false, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(*(a;a))', 40, false, false, true, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;^(a;n)))', '(^(a;+(n;1)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;1)))', '(*(a;^(a;n)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(^(a;n);a))', '(^(a;+(1;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(1;n)))', '(*(^(a;n);a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;n);a))', '(^(a;+(n;-(1))))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;-(1))))', '(/(^(a;n);a))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;*(B;C)))', '(^(^(A;B);C))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(A;B);C))', '(^(A;*(B;C)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;C);A))', '(/(^(B;A);^(C;A)))', 35, true, false, false, false, void 0, void 0, 0.0, void 0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(B;A);^(C;A)))', '(^(/(B;C);A))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;*(2;n)))', '(^(+(-(a));*(2;n)))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(^(+(-(a));2))', 35, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;b);/(1;b)))', '(a)', 5, false, false, false, false, void 0, void 0, 0.0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]), tmp$_4), new RulePackITR('ArithmeticPowExtension', void 0, void 0, 'Pow from Root and Root from Pow', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C \u0438\u0437 \u043A\u043E\u0440\u043D\u044F \u0438 \u043A\u043E\u0440\u0435\u043D\u044C \u0438\u0437 \u0441\u0442\u0435\u043F\u0435\u043D\u0438', 'Straight and Reverse Application of Root and Pow', '\u041F\u0440\u044F\u043C\u043E\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u043E\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0441\u0442\u0435\u043F\u0435\u043D\u0438 \u0438 \u043A\u043E\u0440\u043D\u044F', 'Moved to separate rule pack because of not full domain', '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u043E \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0442\u0430\u043A \u043A\u0430\u043A \u043D\u0435 \u0432\u0435\u0437\u0434\u0435 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043E', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;2);/(1;2)))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;2));2))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;3);/(1;3)))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;3));3))', 96, false, false, false, false, void 0, void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('PowRootComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 96, false, false, false, false, void 0, void 0, void 0, 0.0)]))]);
+    tmp$_5 = listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation'));
+    tmp$_6 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1)]))]);
+    tmp$_7 = new RulePackITR('ShortMultiplication', void 0, void 0, 'Short Multiplication', '\u0421\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Short Multiplication Formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0433\u043E \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u044F', 'Difference of Squares, Square of Sum, Square of Difference, Sum of Cubes, Difference of Cubes, Cube of Sum, Cube of Difference', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0441\u0443\u043C\u043C\u044B, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438, \u0441\u0443\u043C\u043C\u0430 \u043A\u0443\u0431\u043E\u0432, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0443\u0431\u043E\u0432, \u043A\u0443\u0431 \u0441\u0443\u043C\u043C\u044B, \u043A\u0443\u0431 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438', 'standard_math', tmp$_5, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(^(b;2))))', '(*(+(a;-(b));+(a;b)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(a;b)))', '(+(^(a;2);-(^(b;2))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);2))', '(+(^(a;2);*(2;a;b);^(b;2)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a;b);^(b;2)))', '(^(+(a;b);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a);1))', '(^(+(a;1);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));2))', '(+(^(a;2);-(*(2;a;b));^(b;2)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a;b));^(b;2)))', '(^(+(a;-(b));2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a));1))', '(^(+(a;-(1));2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);3))', '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', '(^(+(a;b);3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2));*(3;a);1))', '(^(+(a;1);3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));3))', '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', '(^(+(a;-(b));3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2)));*(3;a);-(1)))', '(^(+(a;-(1));3))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(^(b;3))))', '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', 25, true, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', '(+(^(a;3);-(^(b;3))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(1));+(^(a;2);a;1)))', '(+(^(a;3);-(^(1;3))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);^(b;3)))', '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', 25, false, true, false, false, 'SORTED', void 0, void 0, 20.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', '(+(^(a;3);^(b;3)))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;1);+(^(a;2);-(a);1)))', '(+(^(a;3);^(1;3)))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0()))]), tmp$_6);
+    tmp$_8 = listOf(new RulePackLinkITR(void 0, 'ShortMultiplication'));
+    tmp$_9 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)]))]);
+    tmp$_10 = new RulePackITR('Logarithm', void 0, void 0, 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C', 'Basic Properties Without Regard to Domain', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 \u0443\u0447\u0435\u0442\u0430 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F', void 0, void 0, 'standard_math', tmp$_8, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;log(b;a)))', '(b)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(1;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(A;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c);a))', '(+(log(b;a);log(c;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a)))', '(log(*(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d);a))', '(+(log(b;a);log(c;a);log(d;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a)))', '(log(*(b;c;d);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d;e);a))', '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', '(log(*(b;c;d;e);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);-(log(c;a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(b;c);a))', '(*(c;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(c;log(b;a)))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(log(b;a);c))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;^(a;k)))', '(/(log(b;a);k))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(b;a);k))', '(log(b;^(a;k)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;log(b;a)))', '(log(a;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(/(1;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(c;a);log(b;a)))', '(log(c;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(-(log(/(c;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(c;b);a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;a))', '(+(-(log(/(1;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(1;b);a))))', '(log(b;a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(1;b);a))', '(+(-(log(b;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(b;a))))', '(log(/(1;b);a))', 25, false, false, false, false), new RuleITR('LogExpComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 96, false, false, false, false)]), tmp$_9);
+    tmp$_11 = listOf(new RulePackLinkITR(void 0, 'ShortMultiplication'));
+    tmp$_12 = mapOf_0([to(notChangesOnVariablesInComparisonFunctionJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)])), to(notChangesOnVariablesInComparisonFunctionWithoutTransformationsJsonName, listOf_0([new FunctionIdentifier('+', -1), new FunctionIdentifier('-', -1), new FunctionIdentifier('*', -1), new FunctionIdentifier('/', -1), new FunctionIdentifier('^', -1)]))]);
+    this.defaultStandardMathRulePacks = plus(tmp$_13, listOf_0([tmp$_7, tmp$_10, new RulePackITR('BasicTrigonometricDefinitionsIdentity', void 0, void 0, 'Basic Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', 'Sin, Cos, Tg, Ctg Definitions and Basic Identity', '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F sin, cos, tg, ctg \u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E', void 0, void 0, 'standard_math', tmp$_11, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(sin(a);2);^(cos(a);2)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(sin(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(+(1;-(^(sin(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(^(+(1;-(^(sin(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(^(cos(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(+(1;-(^(cos(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(^(+(1;-(^(cos(a);2)));0.5))', 25, true, true, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(cos(a);2)))', '(+(1;^(tg(a);2)))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(tg(a);2)))', '(/(1;^(cos(a);2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(sin(a);2)))', '(+(1;^(ctg(a);2)))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;^(ctg(a);2)))', '(/(1;^(sin(a);2)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(tg(a);2))))', '(^(cos(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(cos(a);2))', '(/(1;+(1;^(tg(a);2))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;+(1;^(ctg(a);2))))', '(^(sin(a);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(sin(a);2))', '(/(1;+(1;^(ctg(a);2))))', 25, true, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(tg(a);ctg(a)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(sin(a);cos(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(cos(a);sin(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(/(1;ctg(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(/(1;tg(a)))', 25, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(\u03C0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;\u03C0)))', '(0)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(sin(\u03C0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;2)))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(0))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(cos(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(\u03C0))', '(+(-(1)))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;\u03C0)))', '(1)', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(cos(\u03C0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(1))', '(cos(\u03C0))', 89, true, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;6)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(sin(/(\u03C0;6)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(sin(/(\u03C0;4)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(/(\u03C0;3)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(sin(/(\u03C0;3)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;3)))', '(/(1;2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(cos(/(\u03C0;3)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;4)))', '(/(^(2;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(2;0.5);2))', '(cos(/(\u03C0;4)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(/(\u03C0;6)))', '(/(^(3;/(1;2));2))', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(3;0.5);2))', '(cos(/(\u03C0;6)))', 13, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(tg(/(\u03C0;4)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;4)))', '(1)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(ctg(/(\u03C0;4)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(tg(0))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(\u03C0;2)))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(ctg(/(\u03C0;2)))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(*(2;\u03C0)))))', '(sin(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(*(2;\u03C0)))))', '(cos(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;*(2;\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(*(2;\u03C0)))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;*(2;\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(*(2;\u03C0)))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;*(2;\u03C0))))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;\u03C0)))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(\u03C0))))', '(+(-(sin(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;\u03C0)))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(\u03C0))))', '(+(-(cos(a))))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(a;\u03C0)))', 80, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;\u03C0)))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(\u03C0))))', '(tg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(a))', '(tg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;\u03C0)))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(\u03C0))))', '(ctg(a))', 5, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(a))', '(ctg(+(a;\u03C0)))', 85, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(tg(/(a;2));+(1;cos(a))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(ctg(/(a;2));+(1;+(-(cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;+(-(cos(a))));tg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(+(1;cos(a));ctg(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(*(2;cos(/(a;2));sin(/(a;2))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(2;+(tg(a);ctg(a))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(/(2;+(tg(/(a;2));ctg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(3;a)))', '(+(*(3;sin(a));+(-(*(4;^(sin(a);3))))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(+(a;b);c)))', '(sin(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(*(sin(a);ctg(a)))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(*(2;^(cos(/(a;2));2));+(-(1))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));+(ctg(a);tg(a))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(/(+(ctg(/(a;2));+(-(tg(/(a;2)))));+(ctg(/(a;2));tg(/(a;2)))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(3;a)))', '(+(*(4;^(cos(a);3));-(+(*(3;cos(a))))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(+(a;b);c)))', '(cos(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(+(/(1;^(cos(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(+(1;+(-(cos(a))));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(/(a;2)))', '(/(sin(a);+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(/(a;2));2))', '(/(+(1;+(-(cos(a))));+(1;cos(a))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);2))', '(/(+(1;+(-(cos(*(2;a)))));+(1;cos(*(2;a)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(tg(a);3))', '(/(+(*(3;sin(a));+(-(sin(*(3;a)))));+(*(3;cos(a));cos(*(3;a)))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(+(a;b);c)))', '(tg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(+(/(1;^(sin(a);2));+(-(1))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(+(1;cos(a));sin(a)))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(/(a;2)))', '(/(sin(a);+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(/(a;2));2))', '(/(+(1;cos(a));+(1;+(-(cos(a))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);2))', '(/(+(1;cos(*(2;a)));+(1;+(-(cos(*(2;a)))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+(ctg(a);+(-(tg(a))));2))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(ctg(a);3))', '(/(+(*(3;cos(a));cos(*(3;a)));+(*(3;sin(a));+(-(sin(*(3;a)))))))', 80, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(+(a;b);c)))', '(ctg(+(*(a;c);*(b;c))))', 85, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;+(-(1))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(+(-(1));1))', 89, true, false, false, false, void 0, void 0, void 0, 15.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(^(sin(x);2);^(cos(x);2);+(-(1))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(*(^(tg(x);2);^(ctg(x);2));+(-(1))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(tg(x);2);+(-(/(1;^(cos(x);2))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(1;^(ctg(x);2);+(-(/(1;^(sin(x);2))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(cos(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(1;1))', 89, true, false, false, false, void 0, void 0, void 0, 10.0, void 0, listOf(RuleTag$BASIC_MATH_getInstance_0())), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);cos(x));2);+(-(sin(*(2;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(x);-(+(cos(x))));2);sin(*(2;x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(x);2);+(1;^(tg(x);2))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(x);2));cos(*(2;x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(x);2);+(1;^(ctg(x);2))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(x);2));+(-(cos(*(2;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(/(x;2));2));+(-(cos(x)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(/(x;2)));sin(x));+(-(^(tg(/(x;2));2)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(/(x;2));ctg(x));^(tg(/(x;2));2)))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(x);+(-(tg(x))));*(2;ctg(*(2;x)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(x));cos(*(3;x)));*(4;^(cos(x);3))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(x);ctg(x)))', 89, true, false, false, false, void 0, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(x);2));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(x);2));+(-(^(ctg(x);2)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(2;x));*(2;sin(x);cos(x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(x);2);^(cos(x);2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(/(\u03C0;6));cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(\u03C0;3);/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(sin(+(/(*(2;\u03C0);3);+(-(/(\u03C0;6))))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;sin(/(\u03C0;6))))', 89, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(2;cos(/(\u03C0;3))))', 89, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));cos(*(2;x)));2);+(-(sin(*(4;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(^(+(sin(*(2;x));-(+(cos(*(2;x)))));2);sin(*(4;x))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(cos(*(2;x));2);+(1;^(tg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(^(sin(*(2;x));2);+(1;^(ctg(*(2;x));2))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(sin(*(2;x));2));cos(*(4;x))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;^(cos(*(2;x));2));+(-(cos(*(4;x))))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(*(2;tg(x));sin(*(2;x)));+(-(^(tg(x);2)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(2;tg(x);ctg(*(2;x)));^(tg(x);2)))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(ctg(*(2;x));+(-(tg(*(2;x)))));*(2;ctg(*(4;x)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(+(*(3;cos(*(2;x)));cos(*(6;x)));*(4;^(cos(*(2;x));3))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(*(tg(*(2;x));ctg(*(2;x))))', 89, true, false, false, false, void 0, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(cos(*(2;x));2));+(-(^(tg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(/(1;^(sin(*(2;x));2));+(-(^(ctg(*(2;x));2)))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(/(sin(*(4;x));*(2;sin(*(2;x));cos(*(2;x)))))', 89, true, false, false, false, void 0, void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(+(*(8;^(sin(*(2;x));2);^(cos(*(2;x));2));cos(*(8;x))))', 89, true, false, false, false, void 0, void 0, void 0, 10.0)]), tmp$_12), new RulePackITR('TrigonometrySinCosSumReduction', void 0, void 0, "Trigonometry Sin Cos of Sum and it's Reduction", '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0438\u0445 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'Sin Cos of sum and difference; reduction Formulas', 'Sin cos \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438; \u0438\u0445 \u0444\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F', "Placed in separated rule pack for tasks for Derivation of formulas on Sin Cos of Double Argument, also it's Sum, Difference and Product", '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u044B \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u0432\u044B\u0432\u043E\u0434 \u0444\u043E\u0440\u043C\u0443\u043B \u043D\u0430 sin cos \u0434\u0432\u043E\u0439\u043D\u043E\u0433\u043E \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u0430, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0438\u0445 \u0441\u0443\u043C\u043C\u0443, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u0438 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'BasicTrigonometricDefinitionsIdentity')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;b)))', '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));*(sin(b);cos(a))))', '(sin(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;-(b))))', '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 30.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(sin(a);cos(b));-(*(sin(b);cos(a)))))', '(sin(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;b)))', '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));-(*(sin(b);sin(a)))))', '(cos(+(a;b)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 30.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(cos(a);cos(b));*(sin(b);sin(a))))', '(cos(+(a;-(b))))', 24, false, true, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(a))))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(sin(a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(-(a)))', '(+(-(sin(a))))', 17, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;a)))', '(+(-(cos(-(a)))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(\u03C0;-(a))))', '(+(-(cos(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(cos(a))))', '(cos(+(\u03C0;-(a))))', 14, true, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(cos(a)))', '(cos(+(\u03C0;-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(\u03C0;-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(sin(+(\u03C0;-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);-(a))))', '(cos(a))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(/(\u03C0;2);a)))', '(cos(+(-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(sin(+(/(\u03C0;2);-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);-(a))))', '(sin(a))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(/(\u03C0;2);a)))', '(sin(+(-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(cos(+(/(\u03C0;2);-(a))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(-(a))))', '(+(-(sin(a))))', 17, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(b;-(a))))', '(+(-(sin(+(a;-(b))))))', 14, true, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(sin(+(a;-(b))))))', '(sin(+(b;-(a))))', 14, false, false, false, false, 'SORTED', void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(-(a)))', '(cos(a))', 14, false, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(cos(+(-(a))))', 35, true, false, false, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;-(b))))', '(cos(+(b;-(a))))', 14, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;\u03C0)))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(a))', '(+(-(sin(+(a;-(\u03C0))))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;\u03C0)))))', 89, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(a))', '(+(-(cos(+(a;-(\u03C0))))))', 89, true, false, false, false)])), new RulePackITR('Trigonometry', void 0, void 0, 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'Basic properties without Tg Ctg of sum and \u03C0k', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'TrigonometrySinCosSumReduction')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(*(2;sin(a);cos(a)))', 24, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;sin(a);cos(a)))', '(sin(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(^(cos(a);2);-(^(sin(a);2))))', 24, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(cos(a);2);-(^(sin(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(^(sin(a);2));^(cos(a);2)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(1;-(*(2;^(sin(a);2)))))', 24, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(1;-(*(2;^(sin(a);2)))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(2;^(sin(a);2)));1))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(+(*(2;^(cos(a);2));-(1)))', 24, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(2;^(cos(a);2));-(1)))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1);*(2;^(cos(a);2))))', '(cos(*(2;a)))', 24, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);sin(b)))', '(*(2;sin(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(sin(a);-(sin(b))))', '(*(2;sin(/(+(a;-(b));2));cos(/(+(a;b);2))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);cos(b)))', '(*(2;cos(/(+(a;b);2));cos(/(+(a;-(b));2))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(cos(a);-(cos(b))))', '(+(-(*(2;sin(/(+(a;-(b));2));sin(/(+(a;b);2))))))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);sin(b)))', '(/(+(cos(+(a;-(b)));-(cos(+(a;b))));2))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(sin(a);cos(b)))', '(/(+(sin(+(a;-(b)));sin(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(cos(a);cos(b)))', '(/(+(cos(+(a;-(b)));cos(+(a;b)));2))', 23, true, true, false, false, 'SORTED', void 0, void 0, 15.0)])), new RulePackITR('AdvancedTrigonometry', void 0, void 0, 'Advanced Trigonometry', '\u041F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u0430\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F', 'With Tg Ctg of Sum and \u03C0k reduction', '\u0421 tg ctg \u0441\u0443\u043C\u043C\u043C\u044B \u0438 \u03C0k \u0443\u043F\u0440\u043E\u0449\u0435\u043D\u0438\u0435\u043C', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'Trigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(*(2;a)))', '(/(*(2;tg(a));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;^(tg(a);2))))', '(sin(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(*(2;a)))', '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(1;-(^(tg(a);2)));+(1;^(tg(a);2))))', '(cos(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;b)))', '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);tg(b));+(1;-(*(tg(a);tg(b))))))', '(tg(+(a;b)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(+(a;-(b))))', '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', 30, true, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(tg(a);-(tg(b)));+(1;*(tg(a);tg(b)))))', '(tg(+(a;-(b))))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;b)))', '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', 30, true, false, true, false, 'SORTED', void 0, void 0, 1000.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));-(1));+(ctg(a);ctg(b))))', '(ctg(+(a;b)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(+(a;-(b))))', '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', 30, true, false, true, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(*(ctg(a);ctg(b));1);+(ctg(b);-(ctg(a)))))', '(ctg(+(a;-(b))))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(*(2;a)))', '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(2;tg(a));+(1;-(^(tg(a);2)))))', '(tg(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(*(2;a)))', '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', 30, true, false, false, false, 'SORTED', void 0, void 0, 15.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+((^(ctg(a);2));-(1));*(2;ctg(a))))', '(ctg(*(2;a)))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(+(a;*(2;\u03C0;k))))', '(sin(a))', 30, false, false, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(+(a;*(2;\u03C0;k))))', '(cos(a))', 30, false, false, false, false, 'SORTED')])), new RulePackITR('InverseTrigonometricFunctions', void 0, void 0, 'Inverse Trigonometric Functions', '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438', 'Straight and inverse trigonometric functions relations. Defined not on full domain', '\u041F\u0440\u044F\u043C\u044B\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u044B \u043D\u0435 \u0432\u0435\u0437\u0434\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'AdvancedTrigonometry')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(asin(sin(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(asin(sin(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(acos(cos(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(acos(cos(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(atg(tg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(atg(tg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(actg(ctg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(actg(ctg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(sin(asin(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(sin(asin(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(cos(acos(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(cos(acos(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(tg(atg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(tg(atg(a)))', 30, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(ctg(actg(a)))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(ctg(actg(a)))', 30, true, false, false, false)]))]));
+  }
+  DefaultStandardMathRulePacks$Companion.prototype.get = function () {
+    return this.defaultStandardMathRulePacks;
+  };
+  DefaultStandardMathRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var DefaultStandardMathRulePacks$Companion_instance = null;
+  function DefaultStandardMathRulePacks$Companion_getInstance() {
+    if (DefaultStandardMathRulePacks$Companion_instance === null) {
+      new DefaultStandardMathRulePacks$Companion();
+    }
+    return DefaultStandardMathRulePacks$Companion_instance;
+  }
+  DefaultStandardMathRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DefaultStandardMathRulePacks',
     interfaces: []
   };
   function CombinatoricTaskSets() {
@@ -12184,6 +11252,432 @@ var twf_js = function (_, Kotlin) {
     simpleName: 'TrigonometryStepByStep',
     interfaces: []
   };
+  function TaskTagCode(name, ordinal, code, nameEn, nameRu, descriptionEn, descriptionRu) {
+    if (descriptionEn === void 0)
+      descriptionEn = nameEn;
+    if (descriptionRu === void 0)
+      descriptionRu = nameRu;
+    Enum.call(this);
+    this.code = code;
+    this.nameEn = nameEn;
+    this.nameRu = nameRu;
+    this.descriptionEn = descriptionEn;
+    this.descriptionRu = descriptionRu;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function TaskTagCode_initFields() {
+    TaskTagCode_initFields = function () {
+    };
+    TaskTagCode$PROOF_instance = new TaskTagCode('PROOF', 0, 'Proof', 'Proof', '\u0414\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E');
+    TaskTagCode$SIMPLIFICATION_instance = new TaskTagCode('SIMPLIFICATION', 1, 'Simplification', 'Simplification', '\u0423\u043F\u0440\u043E\u0449\u0435\u043D\u0438\u0435');
+    TaskTagCode$COMPUTATION_instance = new TaskTagCode('COMPUTATION', 2, 'Computation', 'Computation', '\u0412\u044B\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0435');
+    TaskTagCode$EQUATION_instance = new TaskTagCode('EQUATION', 3, 'Equation', 'Equation', '\u0423\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u0435');
+    TaskTagCode$FACTORIZATION_instance = new TaskTagCode('FACTORIZATION', 4, 'Factorization', 'Factorization', '\u0420\u0430\u0437\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u0438');
+    TaskTagCode$REDUCE_instance = new TaskTagCode('REDUCE', 5, 'Reduce', 'Factorization', '\u0420\u0430\u0437\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043C\u043D\u043E\u0436\u0438\u0442\u0435\u043B\u0438');
+    TaskTagCode$FORMULA_BASE_instance = new TaskTagCode('FORMULA_BASE', 6, 'FormulaBase', 'Formula Application Task', '\u0417\u0430\u0434\u0430\u0447\u0430 \u043D\u0430 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0444\u043E\u0440\u043C\u0443\u043B\u044B');
+    TaskTagCode$FORMULA_DEDUCE_instance = new TaskTagCode('FORMULA_DEDUCE', 7, 'FormulaDeduce', 'Formula Deducing Task', '\u0417\u0430\u0434\u0430\u0447\u0430, \u0432 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F \u0444\u043E\u0440\u043C\u0443\u043B\u0430');
+    TaskTagCode$TRICK_instance = new TaskTagCode('TRICK', 8, 'Trick', 'Task with Trick', '\u0417\u0430\u0434\u0430\u0447\u0430 \u0441 \u0438\u0437\u044E\u043C\u0438\u043D\u043A\u043E\u0439');
+    TaskTagCode$SHORT_MULTIPLICATION_instance = new TaskTagCode('SHORT_MULTIPLICATION', 9, 'ShortMultiplication', 'Short Multiplication', '\u0421\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435');
+    TaskTagCode$SUM_SQRS_instance = new TaskTagCode('SUM_SQRS', 10, 'SumSqrs', 'Sum of Squares', '\u0421\u0443\u043C\u043C\u0430 \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432');
+    TaskTagCode$DIFF_SQRS_instance = new TaskTagCode('DIFF_SQRS', 11, 'DiffSqrs', 'Difference of Squares', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432');
+    TaskTagCode$SQR_SUM_instance = new TaskTagCode('SQR_SUM', 12, 'SqrSum', 'Square of Sum', '\u041A\u0432\u0430\u0434\u0440\u0430\u0442 \u0441\u0443\u043C\u043C\u044B');
+    TaskTagCode$SQR_DIFF_instance = new TaskTagCode('SQR_DIFF', 13, 'SqrDiff', 'Square of Difference', '\u041A\u0432\u0430\u0434\u0440\u0430\u0442 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438');
+    TaskTagCode$SUM_CUBES_instance = new TaskTagCode('SUM_CUBES', 14, 'SumCubes', 'Sum of Cubes', '\u0421\u0443\u043C\u043C\u0430 \u043A\u0443\u0431\u043E\u0432');
+    TaskTagCode$DIFF_CUBES_instance = new TaskTagCode('DIFF_CUBES', 15, 'DiffCubes', 'Difference of Cubes', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0443\u0431\u043E\u0432');
+    TaskTagCode$CUBE_SUM_instance = new TaskTagCode('CUBE_SUM', 16, 'CubeSum', 'Cube of Sum', '\u041A\u0443\u0431 \u0441\u0443\u043C\u043C\u044B');
+    TaskTagCode$CUBE_DIFF_instance = new TaskTagCode('CUBE_DIFF', 17, 'CubeDiff', 'Cube of Difference', '\u041A\u0443\u0431 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438');
+    TaskTagCode$FRACTION_instance = new TaskTagCode('FRACTION', 18, 'Fraction', 'Fraction', '\u0414\u0440\u043E\u0431\u044C');
+    TaskTagCode$TRIGONOMETRY_instance = new TaskTagCode('TRIGONOMETRY', 19, 'Trigonometry', 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F');
+    TaskTagCode$INVERSE_TRIGONOMETRY_instance = new TaskTagCode('INVERSE_TRIGONOMETRY', 20, 'InverseTrigonometry', 'Inverse Trigonometry Functions', '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438');
+    TaskTagCode$DEGREES_instance = new TaskTagCode('DEGREES', 21, 'Degrees', 'Degrees of Angles', '\u0413\u0440\u0430\u0434\u0443\u0441\u043D\u044B\u0435 \u043C\u0443\u0440\u044B \u0443\u0433\u043B\u043E\u0432');
+    TaskTagCode$PYTHAGOREAN_IDENTITY_instance = new TaskTagCode('PYTHAGOREAN_IDENTITY', 22, 'PythagoreanIdentity', 'Pythagorean Trigonometric Identity', '\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0442\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E');
+    TaskTagCode$TRIGONOMETRY_ANGLE_SUM_instance = new TaskTagCode('TRIGONOMETRY_ANGLE_SUM', 23, 'TrigonometryAngleSum', 'Expanding of Sum or Difference of Angle in Trigonometry Function', '\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439 \u043E\u0442 \u0441\u0443\u043C\u043C\u044B \u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438');
+    TaskTagCode$TRIGONOMETRY_SUM_instance = new TaskTagCode('TRIGONOMETRY_SUM', 24, 'TrigonometrySum', 'Expanding of Sum or Difference of Trigonometry Functions', '\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u0441\u0443\u043C\u043C\u044B \u0438\u043B\u0438 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
+    TaskTagCode$TRIGONOMETRY_PRODUCT_instance = new TaskTagCode('TRIGONOMETRY_PRODUCT', 25, 'TrigonometryProduct', 'Expanding of Product of Trigonometry Functions', '\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0444\u0443\u043D\u043A\u0446\u0438\u0439');
+    TaskTagCode$TRIGONOMETRY_REFLECTIONS_instance = new TaskTagCode('TRIGONOMETRY_REFLECTIONS', 26, 'TrigonometryReflections', 'Trigonometry Reflection Formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0432 \u0442\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u0438');
+    TaskTagCode$LOGARITHM_instance = new TaskTagCode('LOGARITHM', 27, 'Logarithm', 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C');
+    TaskTagCode$SET_instance = new TaskTagCode('SET', 28, 'Set', 'Set Theory', '\u0422\u0435\u043E\u0440\u0438\u044F \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432');
+    TaskTagCode$LOGIC_instance = new TaskTagCode('LOGIC', 29, 'Logic', 'Logic', '\u041B\u043E\u0433\u0438\u043A\u0430');
+    TaskTagCode$NORMAL_FORMS_instance = new TaskTagCode('NORMAL_FORMS', 30, 'NormalForms', 'Normal Forms', '\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u044B\u0435 \u0444\u043E\u0440\u043C\u044B');
+    TaskTagCode$CNF_instance = new TaskTagCode('CNF', 31, 'CNF', 'CNF', '\u041A\u041D\u0424');
+    TaskTagCode$DNF_instance = new TaskTagCode('DNF', 32, 'DNF', 'DNF', '\u0414\u041D\u0424');
+    TaskTagCode$RESOLUTION_instance = new TaskTagCode('RESOLUTION', 33, 'Resolution', 'Resolution', '\u0420\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0438');
+    TaskTagCode$COMBINATORICS_instance = new TaskTagCode('COMBINATORICS', 34, 'Combinatorics', 'Combinatorics', '\u041A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u0438\u043A\u0430');
+  }
+  var TaskTagCode$PROOF_instance;
+  function TaskTagCode$PROOF_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$PROOF_instance;
+  }
+  var TaskTagCode$SIMPLIFICATION_instance;
+  function TaskTagCode$SIMPLIFICATION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SIMPLIFICATION_instance;
+  }
+  var TaskTagCode$COMPUTATION_instance;
+  function TaskTagCode$COMPUTATION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$COMPUTATION_instance;
+  }
+  var TaskTagCode$EQUATION_instance;
+  function TaskTagCode$EQUATION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$EQUATION_instance;
+  }
+  var TaskTagCode$FACTORIZATION_instance;
+  function TaskTagCode$FACTORIZATION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$FACTORIZATION_instance;
+  }
+  var TaskTagCode$REDUCE_instance;
+  function TaskTagCode$REDUCE_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$REDUCE_instance;
+  }
+  var TaskTagCode$FORMULA_BASE_instance;
+  function TaskTagCode$FORMULA_BASE_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$FORMULA_BASE_instance;
+  }
+  var TaskTagCode$FORMULA_DEDUCE_instance;
+  function TaskTagCode$FORMULA_DEDUCE_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$FORMULA_DEDUCE_instance;
+  }
+  var TaskTagCode$TRICK_instance;
+  function TaskTagCode$TRICK_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$TRICK_instance;
+  }
+  var TaskTagCode$SHORT_MULTIPLICATION_instance;
+  function TaskTagCode$SHORT_MULTIPLICATION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SHORT_MULTIPLICATION_instance;
+  }
+  var TaskTagCode$SUM_SQRS_instance;
+  function TaskTagCode$SUM_SQRS_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SUM_SQRS_instance;
+  }
+  var TaskTagCode$DIFF_SQRS_instance;
+  function TaskTagCode$DIFF_SQRS_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$DIFF_SQRS_instance;
+  }
+  var TaskTagCode$SQR_SUM_instance;
+  function TaskTagCode$SQR_SUM_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SQR_SUM_instance;
+  }
+  var TaskTagCode$SQR_DIFF_instance;
+  function TaskTagCode$SQR_DIFF_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SQR_DIFF_instance;
+  }
+  var TaskTagCode$SUM_CUBES_instance;
+  function TaskTagCode$SUM_CUBES_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SUM_CUBES_instance;
+  }
+  var TaskTagCode$DIFF_CUBES_instance;
+  function TaskTagCode$DIFF_CUBES_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$DIFF_CUBES_instance;
+  }
+  var TaskTagCode$CUBE_SUM_instance;
+  function TaskTagCode$CUBE_SUM_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$CUBE_SUM_instance;
+  }
+  var TaskTagCode$CUBE_DIFF_instance;
+  function TaskTagCode$CUBE_DIFF_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$CUBE_DIFF_instance;
+  }
+  var TaskTagCode$FRACTION_instance;
+  function TaskTagCode$FRACTION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$FRACTION_instance;
+  }
+  var TaskTagCode$TRIGONOMETRY_instance;
+  function TaskTagCode$TRIGONOMETRY_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$TRIGONOMETRY_instance;
+  }
+  var TaskTagCode$INVERSE_TRIGONOMETRY_instance;
+  function TaskTagCode$INVERSE_TRIGONOMETRY_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$INVERSE_TRIGONOMETRY_instance;
+  }
+  var TaskTagCode$DEGREES_instance;
+  function TaskTagCode$DEGREES_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$DEGREES_instance;
+  }
+  var TaskTagCode$PYTHAGOREAN_IDENTITY_instance;
+  function TaskTagCode$PYTHAGOREAN_IDENTITY_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$PYTHAGOREAN_IDENTITY_instance;
+  }
+  var TaskTagCode$TRIGONOMETRY_ANGLE_SUM_instance;
+  function TaskTagCode$TRIGONOMETRY_ANGLE_SUM_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$TRIGONOMETRY_ANGLE_SUM_instance;
+  }
+  var TaskTagCode$TRIGONOMETRY_SUM_instance;
+  function TaskTagCode$TRIGONOMETRY_SUM_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$TRIGONOMETRY_SUM_instance;
+  }
+  var TaskTagCode$TRIGONOMETRY_PRODUCT_instance;
+  function TaskTagCode$TRIGONOMETRY_PRODUCT_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$TRIGONOMETRY_PRODUCT_instance;
+  }
+  var TaskTagCode$TRIGONOMETRY_REFLECTIONS_instance;
+  function TaskTagCode$TRIGONOMETRY_REFLECTIONS_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$TRIGONOMETRY_REFLECTIONS_instance;
+  }
+  var TaskTagCode$LOGARITHM_instance;
+  function TaskTagCode$LOGARITHM_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$LOGARITHM_instance;
+  }
+  var TaskTagCode$SET_instance;
+  function TaskTagCode$SET_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$SET_instance;
+  }
+  var TaskTagCode$LOGIC_instance;
+  function TaskTagCode$LOGIC_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$LOGIC_instance;
+  }
+  var TaskTagCode$NORMAL_FORMS_instance;
+  function TaskTagCode$NORMAL_FORMS_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$NORMAL_FORMS_instance;
+  }
+  var TaskTagCode$CNF_instance;
+  function TaskTagCode$CNF_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$CNF_instance;
+  }
+  var TaskTagCode$DNF_instance;
+  function TaskTagCode$DNF_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$DNF_instance;
+  }
+  var TaskTagCode$RESOLUTION_instance;
+  function TaskTagCode$RESOLUTION_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$RESOLUTION_instance;
+  }
+  var TaskTagCode$COMBINATORICS_instance;
+  function TaskTagCode$COMBINATORICS_getInstance() {
+    TaskTagCode_initFields();
+    return TaskTagCode$COMBINATORICS_instance;
+  }
+  TaskTagCode.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TaskTagCode',
+    interfaces: [Enum]
+  };
+  function TaskTagCode$values() {
+    return [TaskTagCode$PROOF_getInstance(), TaskTagCode$SIMPLIFICATION_getInstance(), TaskTagCode$COMPUTATION_getInstance(), TaskTagCode$EQUATION_getInstance(), TaskTagCode$FACTORIZATION_getInstance(), TaskTagCode$REDUCE_getInstance(), TaskTagCode$FORMULA_BASE_getInstance(), TaskTagCode$FORMULA_DEDUCE_getInstance(), TaskTagCode$TRICK_getInstance(), TaskTagCode$SHORT_MULTIPLICATION_getInstance(), TaskTagCode$SUM_SQRS_getInstance(), TaskTagCode$DIFF_SQRS_getInstance(), TaskTagCode$SQR_SUM_getInstance(), TaskTagCode$SQR_DIFF_getInstance(), TaskTagCode$SUM_CUBES_getInstance(), TaskTagCode$DIFF_CUBES_getInstance(), TaskTagCode$CUBE_SUM_getInstance(), TaskTagCode$CUBE_DIFF_getInstance(), TaskTagCode$FRACTION_getInstance(), TaskTagCode$TRIGONOMETRY_getInstance(), TaskTagCode$INVERSE_TRIGONOMETRY_getInstance(), TaskTagCode$DEGREES_getInstance(), TaskTagCode$PYTHAGOREAN_IDENTITY_getInstance(), TaskTagCode$TRIGONOMETRY_ANGLE_SUM_getInstance(), TaskTagCode$TRIGONOMETRY_SUM_getInstance(), TaskTagCode$TRIGONOMETRY_PRODUCT_getInstance(), TaskTagCode$TRIGONOMETRY_REFLECTIONS_getInstance(), TaskTagCode$LOGARITHM_getInstance(), TaskTagCode$SET_getInstance(), TaskTagCode$LOGIC_getInstance(), TaskTagCode$NORMAL_FORMS_getInstance(), TaskTagCode$CNF_getInstance(), TaskTagCode$DNF_getInstance(), TaskTagCode$RESOLUTION_getInstance(), TaskTagCode$COMBINATORICS_getInstance()];
+  }
+  TaskTagCode.values = TaskTagCode$values;
+  function TaskTagCode$valueOf(name) {
+    switch (name) {
+      case 'PROOF':
+        return TaskTagCode$PROOF_getInstance();
+      case 'SIMPLIFICATION':
+        return TaskTagCode$SIMPLIFICATION_getInstance();
+      case 'COMPUTATION':
+        return TaskTagCode$COMPUTATION_getInstance();
+      case 'EQUATION':
+        return TaskTagCode$EQUATION_getInstance();
+      case 'FACTORIZATION':
+        return TaskTagCode$FACTORIZATION_getInstance();
+      case 'REDUCE':
+        return TaskTagCode$REDUCE_getInstance();
+      case 'FORMULA_BASE':
+        return TaskTagCode$FORMULA_BASE_getInstance();
+      case 'FORMULA_DEDUCE':
+        return TaskTagCode$FORMULA_DEDUCE_getInstance();
+      case 'TRICK':
+        return TaskTagCode$TRICK_getInstance();
+      case 'SHORT_MULTIPLICATION':
+        return TaskTagCode$SHORT_MULTIPLICATION_getInstance();
+      case 'SUM_SQRS':
+        return TaskTagCode$SUM_SQRS_getInstance();
+      case 'DIFF_SQRS':
+        return TaskTagCode$DIFF_SQRS_getInstance();
+      case 'SQR_SUM':
+        return TaskTagCode$SQR_SUM_getInstance();
+      case 'SQR_DIFF':
+        return TaskTagCode$SQR_DIFF_getInstance();
+      case 'SUM_CUBES':
+        return TaskTagCode$SUM_CUBES_getInstance();
+      case 'DIFF_CUBES':
+        return TaskTagCode$DIFF_CUBES_getInstance();
+      case 'CUBE_SUM':
+        return TaskTagCode$CUBE_SUM_getInstance();
+      case 'CUBE_DIFF':
+        return TaskTagCode$CUBE_DIFF_getInstance();
+      case 'FRACTION':
+        return TaskTagCode$FRACTION_getInstance();
+      case 'TRIGONOMETRY':
+        return TaskTagCode$TRIGONOMETRY_getInstance();
+      case 'INVERSE_TRIGONOMETRY':
+        return TaskTagCode$INVERSE_TRIGONOMETRY_getInstance();
+      case 'DEGREES':
+        return TaskTagCode$DEGREES_getInstance();
+      case 'PYTHAGOREAN_IDENTITY':
+        return TaskTagCode$PYTHAGOREAN_IDENTITY_getInstance();
+      case 'TRIGONOMETRY_ANGLE_SUM':
+        return TaskTagCode$TRIGONOMETRY_ANGLE_SUM_getInstance();
+      case 'TRIGONOMETRY_SUM':
+        return TaskTagCode$TRIGONOMETRY_SUM_getInstance();
+      case 'TRIGONOMETRY_PRODUCT':
+        return TaskTagCode$TRIGONOMETRY_PRODUCT_getInstance();
+      case 'TRIGONOMETRY_REFLECTIONS':
+        return TaskTagCode$TRIGONOMETRY_REFLECTIONS_getInstance();
+      case 'LOGARITHM':
+        return TaskTagCode$LOGARITHM_getInstance();
+      case 'SET':
+        return TaskTagCode$SET_getInstance();
+      case 'LOGIC':
+        return TaskTagCode$LOGIC_getInstance();
+      case 'NORMAL_FORMS':
+        return TaskTagCode$NORMAL_FORMS_getInstance();
+      case 'CNF':
+        return TaskTagCode$CNF_getInstance();
+      case 'DNF':
+        return TaskTagCode$DNF_getInstance();
+      case 'RESOLUTION':
+        return TaskTagCode$RESOLUTION_getInstance();
+      case 'COMBINATORICS':
+        return TaskTagCode$COMBINATORICS_getInstance();
+      default:throwISE('No enum constant mathhelper.twf.defaultcontent.TaskTagCode.' + name);
+    }
+  }
+  TaskTagCode.valueOf_61zpoe$ = TaskTagCode$valueOf;
+  function TaskSetTagCode(name, ordinal, code, nameEn, nameRu, descriptionEn, descriptionRu) {
+    if (descriptionEn === void 0)
+      descriptionEn = nameEn;
+    if (descriptionRu === void 0)
+      descriptionRu = nameRu;
+    Enum.call(this);
+    this.code = code;
+    this.nameEn = nameEn;
+    this.nameRu = nameRu;
+    this.descriptionEn = descriptionEn;
+    this.descriptionRu = descriptionRu;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function TaskSetTagCode_initFields() {
+    TaskSetTagCode_initFields = function () {
+    };
+    TaskSetTagCode$TRIGONOMETRY_instance = new TaskSetTagCode('TRIGONOMETRY', 0, 'Trigonometry', 'Trigonometry', '\u0422\u0440\u0438\u0433\u043E\u043D\u043E\u043C\u0435\u0442\u0440\u0438\u044F');
+    TaskSetTagCode$LOGIC_instance = new TaskSetTagCode('LOGIC', 1, 'Logic', 'Logic', '\u041B\u043E\u0433\u0438\u043A\u0430');
+    TaskSetTagCode$SET_instance = new TaskSetTagCode('SET', 2, 'Set', 'Set Theory', '\u0422\u0435\u043E\u0440\u0438\u044F \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432');
+    TaskSetTagCode$COMBINATORICS_instance = new TaskSetTagCode('COMBINATORICS', 3, 'Combinatorics', 'Combinatorics', '\u041A\u043E\u043C\u0431\u0438\u043D\u0430\u0442\u043E\u0440\u0438\u043A\u0430');
+    TaskSetTagCode$NORMAL_FORMS_instance = new TaskSetTagCode('NORMAL_FORMS', 4, 'NormalForms', 'Normal Forms', '\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u044B\u0435 \u0444\u043E\u0440\u043C\u044B');
+    TaskSetTagCode$RESOLUTION_instance = new TaskSetTagCode('RESOLUTION', 5, 'Resolution', 'Resolution', '\u0420\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0438');
+    TaskSetTagCode$CHECK_YOURSELF_instance = new TaskSetTagCode('CHECK_YOURSELF', 6, 'CheckYourself', 'Check Yourself', '\u041F\u0440\u043E\u0432\u0435\u0440\u044C \u0441\u0435\u0431\u044F');
+    TaskSetTagCode$STEP_BY_STEP_instance = new TaskSetTagCode('STEP_BY_STEP', 7, 'StepByStep', 'Step by Step', '\u0428\u0430\u0433 \u0437\u0430 \u0448\u0430\u0433\u043E\u043C');
+    TaskSetTagCode$TRAIN_SET_instance = new TaskSetTagCode('TRAIN_SET', 8, 'TrainSet', 'Train Set', '\u0422\u0440\u0435\u043D\u0438\u0440\u043E\u0432\u043A\u0430');
+    TaskSetTagCode$EXTRAORDINARY_instance = new TaskSetTagCode('EXTRAORDINARY', 9, 'Extraordinary', 'Extraordinary', '\u041D\u0435\u043E\u0431\u044B\u0447\u043D\u043E\u0435');
+  }
+  var TaskSetTagCode$TRIGONOMETRY_instance;
+  function TaskSetTagCode$TRIGONOMETRY_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$TRIGONOMETRY_instance;
+  }
+  var TaskSetTagCode$LOGIC_instance;
+  function TaskSetTagCode$LOGIC_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$LOGIC_instance;
+  }
+  var TaskSetTagCode$SET_instance;
+  function TaskSetTagCode$SET_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$SET_instance;
+  }
+  var TaskSetTagCode$COMBINATORICS_instance;
+  function TaskSetTagCode$COMBINATORICS_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$COMBINATORICS_instance;
+  }
+  var TaskSetTagCode$NORMAL_FORMS_instance;
+  function TaskSetTagCode$NORMAL_FORMS_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$NORMAL_FORMS_instance;
+  }
+  var TaskSetTagCode$RESOLUTION_instance;
+  function TaskSetTagCode$RESOLUTION_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$RESOLUTION_instance;
+  }
+  var TaskSetTagCode$CHECK_YOURSELF_instance;
+  function TaskSetTagCode$CHECK_YOURSELF_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$CHECK_YOURSELF_instance;
+  }
+  var TaskSetTagCode$STEP_BY_STEP_instance;
+  function TaskSetTagCode$STEP_BY_STEP_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$STEP_BY_STEP_instance;
+  }
+  var TaskSetTagCode$TRAIN_SET_instance;
+  function TaskSetTagCode$TRAIN_SET_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$TRAIN_SET_instance;
+  }
+  var TaskSetTagCode$EXTRAORDINARY_instance;
+  function TaskSetTagCode$EXTRAORDINARY_getInstance() {
+    TaskSetTagCode_initFields();
+    return TaskSetTagCode$EXTRAORDINARY_instance;
+  }
+  TaskSetTagCode.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TaskSetTagCode',
+    interfaces: [Enum]
+  };
+  function TaskSetTagCode$values() {
+    return [TaskSetTagCode$TRIGONOMETRY_getInstance(), TaskSetTagCode$LOGIC_getInstance(), TaskSetTagCode$SET_getInstance(), TaskSetTagCode$COMBINATORICS_getInstance(), TaskSetTagCode$NORMAL_FORMS_getInstance(), TaskSetTagCode$RESOLUTION_getInstance(), TaskSetTagCode$CHECK_YOURSELF_getInstance(), TaskSetTagCode$STEP_BY_STEP_getInstance(), TaskSetTagCode$TRAIN_SET_getInstance(), TaskSetTagCode$EXTRAORDINARY_getInstance()];
+  }
+  TaskSetTagCode.values = TaskSetTagCode$values;
+  function TaskSetTagCode$valueOf(name) {
+    switch (name) {
+      case 'TRIGONOMETRY':
+        return TaskSetTagCode$TRIGONOMETRY_getInstance();
+      case 'LOGIC':
+        return TaskSetTagCode$LOGIC_getInstance();
+      case 'SET':
+        return TaskSetTagCode$SET_getInstance();
+      case 'COMBINATORICS':
+        return TaskSetTagCode$COMBINATORICS_getInstance();
+      case 'NORMAL_FORMS':
+        return TaskSetTagCode$NORMAL_FORMS_getInstance();
+      case 'RESOLUTION':
+        return TaskSetTagCode$RESOLUTION_getInstance();
+      case 'CHECK_YOURSELF':
+        return TaskSetTagCode$CHECK_YOURSELF_getInstance();
+      case 'STEP_BY_STEP':
+        return TaskSetTagCode$STEP_BY_STEP_getInstance();
+      case 'TRAIN_SET':
+        return TaskSetTagCode$TRAIN_SET_getInstance();
+      case 'EXTRAORDINARY':
+        return TaskSetTagCode$EXTRAORDINARY_getInstance();
+      default:throwISE('No enum constant mathhelper.twf.defaultcontent.TaskSetTagCode.' + name);
+    }
+  }
+  TaskSetTagCode.valueOf_61zpoe$ = TaskSetTagCode$valueOf;
   function containsUncertainties($receiver, cmp) {
     var tmp$;
     if (equals($receiver.value, 'log') || equals($receiver.value, 'ln')) {
@@ -18158,7 +17652,7 @@ var twf_js = function (_, Kotlin) {
     result.add_11rb$(new SubstitutionApplication(substitution, tmp$, applicationPlace, $receiver, newNode, substitutionType, (tmp$_0 = substitution.priority) != null ? tmp$_0 : 60, substitutionApplicationError));
     applicationPlaceParent.setChildOnPosition_gk94xr$(applicationPlace, applicationPlaceIndex);
   }
-  function applySubstitution_1(substitutionSelectionData, expressionSubstitution, simplifyNotSelectedTopArguments) {
+  function applySubstitution_0(substitutionSelectionData, expressionSubstitution, simplifyNotSelectedTopArguments) {
     if (simplifyNotSelectedTopArguments === void 0)
       simplifyNotSelectedTopArguments = false;
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
@@ -31914,7 +31408,7 @@ var twf_js = function (_, Kotlin) {
   function checkFactsInMathML$lambda_12() {
     return 'Answer checked successfully';
   }
-  function checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts) {
+  function checkFactsInMathML(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts) {
     if (wellKnownFunctions === void 0)
       wellKnownFunctions = '+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1';
     if (expressionTransformationRules === void 0)
@@ -39171,6 +38665,88 @@ var twf_js = function (_, Kotlin) {
     }
     return false;
   }
+  function LogarithmsRulePack() {
+    LogarithmsRulePack$Companion_getInstance();
+  }
+  function LogarithmsRulePack$Companion() {
+    LogarithmsRulePack$Companion_instance = this;
+    this.extendingFromSingleNumber = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(log(a;/(1;a)))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(log(1;a))', 25, true, false, false, false, void 0, void 0, void 0, 2.7), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(log(a;b);-(log(a;b))))', 25, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(log(a;a))', 25, true, false, false, false, void 0, void 0, void 0, 2.6), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(x;log(a;1)))', 25, true, false, false, false, void 0, void 0, void 0, 2.6), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(log(a;a);log(b;b)))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(log(^(a;2);a))', 25, true, false, false, false, void 0, void 0, void 0, 4.75), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(3)', '(log(^(a;3);a))', 25, true, false, false, false, void 0, void 0, void 0, 4.75), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(3)', '(+(log(a;a);log(b;b);log(c;c)))', 25, true, false, false, false, void 0, void 0, void 0, 3.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(4)', '(log(^(a;4);a))', 25, true, false, false, false, void 0, void 0, void 0, 5.0)]);
+    this.extendingFromSimpleLogarithm = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;a))', '(/(log(a;b);log(a;b)))', 25, true, false, false, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;a))', '(log(*(a;3);*(a;3)))', 25, true, false, false, false, void 0, void 0, void 0, 2.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;a))', '(log(*(a;2);*(a;2)))', 25, true, false, false, false, void 0, void 0, void 0, 2.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(*(a;1);b))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(/(a;1);b))', 25, true, false, false, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(^(a;1);b))', 25, true, false, true, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(/(*(a;c);c);b))', 25, true, false, true, false, void 0, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(+(-(log(/(1;a);b))))', 25, true, false, false, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(c;b))', '(/(log(c;a);log(b;a)))', 25, true, false, false, false, void 0, void 0, void 0, 5.0)]);
+    this.extendingInLogarithmContext = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(a;2);b))', '(log(+(*(-(a;b);+(a;b));^(b;2));b))', 25, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(1;a);b))', '(+(log(a;b);0))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(2;a);b))', '(+(log(a;b);log(a;b)))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, true, false, false, false, void 0, void 0, void 0, 2.5)]);
+    this.extendingFromFraction = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(m;k))', '(log(^(a;k);^(a;m)))', 25, true, false, false, false, void 0, void 0, void 0, 3.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;k))', '(log(^(a;k);a))', 25, true, false, false, false, void 0, void 0, void 0, 3.0)]);
+    this.logarithmsRulePack = new RulePackITR('LogarithmExtending', void 0, void 0, 'Logarithm extending rules', '\u0420\u0430\u0441\u0448\u0438\u0440\u044F\u044E\u0449\u0438\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043D\u0430 \u043B\u043E\u0433\u0430\u0440\u0438\u0444\u043C\u044B', '', '', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'Logarithm')), plus(plus(plus(this.extendingFromSingleNumber, this.extendingFromSimpleLogarithm), this.extendingInLogarithmContext), this.extendingFromFraction));
+  }
+  LogarithmsRulePack$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var LogarithmsRulePack$Companion_instance = null;
+  function LogarithmsRulePack$Companion_getInstance() {
+    if (LogarithmsRulePack$Companion_instance === null) {
+      new LogarithmsRulePack$Companion();
+    }
+    return LogarithmsRulePack$Companion_instance;
+  }
+  LogarithmsRulePack.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'LogarithmsRulePack',
+    interfaces: []
+  };
+  function LogarithmsStandardMathRulePacks() {
+    LogarithmsStandardMathRulePacks$Companion_getInstance();
+  }
+  function LogarithmsStandardMathRulePacks$Companion() {
+    LogarithmsStandardMathRulePacks$Companion_instance = this;
+    this.defaultStandardMathRulePacks = listOf_0([new RulePackITR('ArithmeticPositiveAddition', void 0, void 0, 'Addition of Positive Numbers', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u0447\u0435\u0442 \u0434\u043B\u044F \u043D\u0430\u0447\u0438\u043D\u0430\u044E\u0449\u0438\u0445', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B. \u0421\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u044B \u0442\u0430\u043A, \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u0434\u0430\u0442\u044C \u0432\u044B\u0439\u0442\u0438 \u0432 \u043E\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043B\u044C\u043D\u0443\u044E \u043E\u0431\u043B\u0430\u0441\u0442\u044C', 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 35, true, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('PositiveNumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false)])), new RulePackITR('ArithmeticAddition', void 0, void 0, 'Addition and Subtraction', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', 'Arithmetic Addition and Subtraction', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(+(-(a)))))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(+(-(a))))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(-(a)))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(-(+(-(a)))))', 95, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;-(a)))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(a);a))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(-(a))))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(-(a));a))', '(0)', 4, false, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('NumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false), new RuleITR('MinusInOutBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 31, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false), new RuleITR('AdditiveComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)])), new RulePackITR('ArithmeticMultiplication', void 0, void 0, 'Addition Subtraction Multiplication', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Arithmetic Addition, Subtraction and Multiplication', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0438 \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticAddition')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;0))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(0;a))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(*(a;0))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;1))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(1;a))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(*(a;1))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;b))', '(*(b;a))', 20, true, false, false, false), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('MultiplicationFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;a))', '(*(2;a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(a)))', '(*(2;a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a);a))', '(*(2;a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;a))', '(+(a;a))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;*(a;n)))', '(*(a;+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(n;1)))', '(+(a;*(a;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(a;n);a))', '(*(a;+(1;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(1;n)))', '(+(*(a;n);a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);-(B)))', '(*(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;B))', '(*(+(-(A));+(-(B))))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));+(-(B))))', '(*(A;B))', 35, false, false, false, false)])), new RulePackITR('ArithmeticDivision', void 0, void 0, 'Rational Numbers', '\u0420\u0430\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Addition, Subtraction, Multiplication and Division', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0434\u0435\u043B\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(0;a))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;1))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;a))', '(1)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;a);a))', '(1)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(1;a)))', '(a)', 4, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(1;/(1;a)))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(/(1;2))', 15, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;2))', '(0.5)', 5, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;b))', '(/(*(a;b);*(b;b)))', 90, true, false, false, false), new RuleITR('MultiplicativeComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false), new RuleITR('ReduceFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('DecimalToFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);-(B)))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(+(-(A));+(-(B))))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));+(-(B))))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);/(A;D)))', '(/(+(*(B;D);*(C;A));*(C;D)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);-(/(A;D))))', '(/(+(*(B;D);-(*(C;A)));*(C;D)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;A)))', '(B)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;A);A))', '(B)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;C)))', '(/(*(A;B);C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;C);A))', '(/(*(A;B);C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(1;/(B;A)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(B;A)))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;B);C))', '(*(A;/(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(/(B;C);A))', '(/(B;*(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;*(A;C)))', '(/(/(B;C);A))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;/(B;C)))', '(/(*(A;C);B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;C);B))', '(/(A;/(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(A;B);/(1;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(1;B);/(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(A;B);/(1;C)))', '(/(A;*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;B);/(A;C)))', '(/(A;*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(D;B);/(A;C)))', '(/(*(D;A);*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;C)))', '(*(/(D;B);/(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;A)))', '(/(D;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(D;C)))', '(/(A;C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);D))', '(A)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;D);D))', '(A)', 35, false, false, false, false)])), new RulePackITR('ArithmeticExponentiation', void 0, void 0, 'Algebraic Numbers', '\u0410\u043B\u0433\u0435\u0431\u0440\u0430\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0447\u0438\u0441\u043B\u0430', 'Pow, Ratio, Product, Difference, Sum', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C, \u0447\u0430\u0441\u0442\u043D\u043E\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C, \u0441\u0443\u043C\u043C\u0430', 'Pow, Division, Multiplication, Subtraction, Addition', '\u0412\u043E\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0432 \u0441\u0442\u0435\u043F\u0435\u043D\u044C, \u0434\u0435\u043B\u0435\u043D\u0438\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticDivision')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(a;1))', 95, true, false, true, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;2))', 95, true, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;3))', 95, true, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;a))', '(^(a;+(-(1))))', 80, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(-(1))))', '(/(1;a))', 40, false, false, false, false), new RuleITR('PowFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(b;-(c))))', '(/(^(a;b);^(a;c)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;b);^(a;c)))', '(^(a;+(b;-(c))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;^(A;C)))', '(*(B;^(A;+(-(C)))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(B;^(A;+(-(C)))))', '(/(B;^(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(A;C)))', '(^(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;+(-(C))))', '(/(1;^(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(^(/(B;A);+(-(1))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;A);+(-(1))))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(1;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;1))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(0;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a))', '(^(a;2))', 40, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(*(a;a))', 40, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;^(a;n)))', '(^(a;+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;1)))', '(*(a;^(a;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(^(a;n);a))', '(^(a;+(1;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(1;n)))', '(*(^(a;n);a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;n);a))', '(^(a;+(n;-(1))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;-(1))))', '(/(^(a;n);a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;*(B;C)))', '(^(^(A;B);C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(A;B);C))', '(^(A;*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;C);A))', '(/(^(B;A);^(C;A)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(B;A);^(C;A)))', '(^(/(B;C);A))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);2))', '(^(A;2))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));2))', '(^(A;2))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;*(2;n)))', '(^(+(-(a));*(2;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(^(+(-(a));2))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;b);/(1;b)))', '(a)', 5, false, false, false, false)])), new RulePackITR('ArithmeticPowExtension', void 0, void 0, 'Pow from Root and Root from Pow', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C \u0438\u0437 \u043A\u043E\u0440\u043D\u044F \u0438 \u043A\u043E\u0440\u0435\u043D\u044C \u0438\u0437 \u0441\u0442\u0435\u043F\u0435\u043D\u0438', 'Straight and Reverse Application of Root and Pow', '\u041F\u0440\u044F\u043C\u043E\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u043E\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0441\u0442\u0435\u043F\u0435\u043D\u0438 \u0438 \u043A\u043E\u0440\u043D\u044F', 'Moved to separate rule pack because of not full domain', '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u043E \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0442\u0430\u043A \u043A\u0430\u043A \u043D\u0435 \u0432\u0435\u0437\u0434\u0435 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043E', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;2);/(1;2)))', 96, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;2));2))', 96, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;3);/(1;3)))', 96, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;3));3))', 96, false, false, false, false)])), new RulePackITR('ShortMultiplication', void 0, void 0, 'Short Multiplication', '\u0421\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Short Multiplication Formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0433\u043E \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u044F', 'Difference of Squares, Square of Sum, Square of Difference, Sum of Cubes, Difference of Cubes, Cube of Sum, Cube of Difference', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0441\u0443\u043C\u043C\u044B, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438, \u0441\u0443\u043C\u043C\u0430 \u043A\u0443\u0431\u043E\u0432, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0443\u0431\u043E\u0432, \u043A\u0443\u0431 \u0441\u0443\u043C\u043C\u044B, \u043A\u0443\u0431 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(^(b;2))))', '(*(+(a;-(b));+(a;b)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(a;b)))', '(+(^(a;2);-(^(b;2))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);2))', '(+(^(a;2);*(2;a;b);^(b;2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a;b);^(b;2)))', '(^(+(a;b);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a);1))', '(^(+(a;1);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));2))', '(+(^(a;2);-(*(2;a;b));^(b;2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a;b));^(b;2)))', '(^(+(a;-(b));2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a));1))', '(^(+(a;-(1));2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);3))', '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', '(^(+(a;b);3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2));*(3;a);1))', '(^(+(a;1);3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));3))', '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', '(^(+(a;-(b));3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2)));*(3;a);-(1)))', '(^(+(a;-(1));3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(^(b;3))))', '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', '(+(^(a;3);-(^(b;3))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(1));+(^(a;2);a;1)))', '(+(^(a;3);-(^(1;3))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);^(b;3)))', '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', '(+(^(a;3);^(b;3)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;1);+(^(a;2);-(a);1)))', '(+(^(a;3);^(1;3)))', 25, false, true, false, false, 'SORTED')])), new RulePackITR('Logarithm', void 0, void 0, 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C', 'Basic Properties Without Regard to Domain', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 \u0443\u0447\u0435\u0442\u0430 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ShortMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;log(b;a)))', '(b)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(1;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(A;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c);a))', '(+(log(b;a);log(c;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a)))', '(log(*(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d);a))', '(+(log(b;a);log(c;a);log(d;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a)))', '(log(*(b;c;d);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d;e);a))', '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', '(log(*(b;c;d;e);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);-(log(c;a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(b;c);a))', '(*(c;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(c;log(b;a)))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(log(b;a);c))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;^(a;k)))', '(/(log(b;a);k))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(b;a);k))', '(log(b;^(a;k)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;log(b;a)))', '(log(a;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(/(1;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(c;a);log(b;a)))', '(log(c;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(-(log(/(c;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(c;b);a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;a))', '(+(-(log(/(1;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(1;b);a))))', '(log(b;a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(1;b);a))', '(+(-(log(b;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(b;a))))', '(log(/(1;b);a))', 25, false, false, false, false)]))]);
+  }
+  LogarithmsStandardMathRulePacks$Companion.prototype.get = function () {
+    return this.defaultStandardMathRulePacks;
+  };
+  LogarithmsStandardMathRulePacks$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var LogarithmsStandardMathRulePacks$Companion_instance = null;
+  function LogarithmsStandardMathRulePacks$Companion_getInstance() {
+    if (LogarithmsStandardMathRulePacks$Companion_instance === null) {
+      new LogarithmsStandardMathRulePacks$Companion();
+    }
+    return LogarithmsStandardMathRulePacks$Companion_instance;
+  }
+  LogarithmsStandardMathRulePacks.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'LogarithmsStandardMathRulePacks',
+    interfaces: []
+  };
+  function PostprocessorRulePack() {
+    PostprocessorRulePack$Companion_getInstance();
+  }
+  function PostprocessorRulePack$Companion() {
+    PostprocessorRulePack$Companion_instance = this;
+    this.postprocessorRulePack = listOf(new RulePackITR('PostprocessorRules', void 0, void 0, 'Postprocessor Rules', '\u041F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u043F\u043E\u0441\u0442\u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440\u0430', 'Postprocessor Rules', '\u041F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u043F\u043E\u0441\u0442\u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440\u0430', "This rules are applied to every autogenerated task in order to normalize it's form", '\u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u043A \u043A\u0430\u0436\u0434\u043E\u0439 \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u043E\u0439 \u0430\u0432\u0442\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C \u0437\u0430\u0434\u0430\u0447\u0435 \u0441 \u0446\u0435\u043B\u044C\u044E \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u0447\u0438 \u043A \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E\u043C\u0443 \u0432\u0438\u0434\u0443', 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(+(-(a)))))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(+(-(a))))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(-(a)))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(1;a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;a))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*((+(-(A)));C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;(+(-(C)))))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));+(-(B))))', '(*(A;B))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(1))))', '(+(-(*(A;1))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;a))', '(1)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;a);a))', '(1)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(1;a)))', '(a)', 4, false, true, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;(+(-(C)))))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(B;A)))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;/(B;C)))', '(/(*(A;C);B))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(-(1))))', '(/(1;a))', 40, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^((/(1;a));+(-(1))))', '(a)', 40, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(a;+(-(1)))))', '(a)', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(a;+(-(b)))))', '(^(a;b))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;+(-(C))))', '(/(1;^(A;C)))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;1))', '(A)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a))', '(^(a;2))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a;b))', '(*(^(a;2);b))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(b;a;a))', '(*(b;^(a;2)))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(a));a))', '(+(-(^(a;2))))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(-(a))))', '(+(-(^(a;2))))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*((+(-(a)));(+(-(a)))))', '(^(a;2))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;0.5);2))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;2);0.5))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;(^(a;(+(-(1)))))))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;(^(a;(+(-(b)))))))', '(^(a;b))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;-(a)))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(a);a))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;0))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(0;a))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(0;a))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(0;a))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;b;c))', '(/(*(a;c);b))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a;b);c))', '(+(a;b;c))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a;b);-(c)))', '(+(a;b;+(-(c))))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a;-(b));c))', '(+(a;+(-(b));c))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;^(/(b;c);n)))', '(/(*(a;^(c;n));^(b;n)))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;0.5))', '(*(2;a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(n;/(a;n)))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(not(a)))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;a))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;a))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true)])));
+  }
+  PostprocessorRulePack$Companion.prototype.get = function () {
+    return this.postprocessorRulePack.get_za3lpa$(0);
+  };
+  PostprocessorRulePack$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var PostprocessorRulePack$Companion_instance = null;
+  function PostprocessorRulePack$Companion_getInstance() {
+    if (PostprocessorRulePack$Companion_instance === null) {
+      new PostprocessorRulePack$Companion();
+    }
+    return PostprocessorRulePack$Companion_instance;
+  }
+  PostprocessorRulePack.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'PostprocessorRulePack',
+    interfaces: []
+  };
   function RuleTag_0(name, ordinal, code, readyForUseInProduction) {
     if (readyForUseInProduction === void 0)
       readyForUseInProduction = true;
@@ -39375,6 +38951,47 @@ var twf_js = function (_, Kotlin) {
     }
   }
   RuleTag_0.valueOf_61zpoe$ = RuleTag$valueOf_0;
+  function SortOrder(name, ordinal, code) {
+    Enum.call(this);
+    this.code = code;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function SortOrder_initFields() {
+    SortOrder_initFields = function () {
+    };
+    SortOrder$ASC_instance = new SortOrder('ASC', 0, '\u041F\u043E \u0432\u043E\u0437\u0440\u0430\u0441\u0442\u0430\u043D\u0438\u044E');
+    SortOrder$DESC_instance = new SortOrder('DESC', 1, '\u041F\u043E \u0443\u0431\u044B\u0432\u0430\u043D\u0438\u044E');
+  }
+  var SortOrder$ASC_instance;
+  function SortOrder$ASC_getInstance() {
+    SortOrder_initFields();
+    return SortOrder$ASC_instance;
+  }
+  var SortOrder$DESC_instance;
+  function SortOrder$DESC_getInstance() {
+    SortOrder_initFields();
+    return SortOrder$DESC_instance;
+  }
+  SortOrder.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SortOrder',
+    interfaces: [Enum]
+  };
+  function SortOrder$values() {
+    return [SortOrder$ASC_getInstance(), SortOrder$DESC_getInstance()];
+  }
+  SortOrder.values = SortOrder$values;
+  function SortOrder$valueOf(name) {
+    switch (name) {
+      case 'ASC':
+        return SortOrder$ASC_getInstance();
+      case 'DESC':
+        return SortOrder$DESC_getInstance();
+      default:throwISE('No enum constant mathhelper.twf.taskautogeneration.SortOrder.' + name);
+    }
+  }
+  SortOrder.valueOf_61zpoe$ = SortOrder$valueOf;
   function SortType(name, ordinal, code) {
     Enum.call(this);
     this.code = code;
@@ -39384,24 +39001,18 @@ var twf_js = function (_, Kotlin) {
   function SortType_initFields() {
     SortType_initFields = function () {
     };
-    SortType$BY_RULE_TAG_USAGE_DESC_instance = new SortType('BY_RULE_TAG_USAGE_DESC', 0, '\u041F\u043E \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u0443 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0445 \u0442\u0435\u0433\u043E\u0432 (\u043F\u043E \u0443\u0431\u044B\u0432\u0430\u043D\u0438\u044E)');
-    SortType$BY_TASK_LENGTH_DESC_instance = new SortType('BY_TASK_LENGTH_DESC', 1, '\u041F\u043E \u0434\u043B\u0438\u043D\u0435 \u0432\u044B\u0440\u0430\u0436\u0435\u043D\u0438\u044F (\u043F\u043E \u0443\u0431\u044B\u0432\u0430\u043D\u0438\u044E)');
-    SortType$BY_TASK_LENGTH_ASC_instance = new SortType('BY_TASK_LENGTH_ASC', 2, '\u041F\u043E \u0434\u043B\u0438\u043D\u0435 \u0432\u044B\u0440\u0430\u0436\u0435\u043D\u0438\u044F (\u043F\u043E \u0432\u043E\u0437\u0440\u0430\u0441\u0442\u0430\u043D\u0438\u044E)');
+    SortType$BY_RULE_TAG_USAGE_instance = new SortType('BY_RULE_TAG_USAGE', 0, '\u041F\u043E \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u0443 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0445 \u0442\u0435\u0433\u043E\u0432');
+    SortType$BY_TASK_LENGTH_instance = new SortType('BY_TASK_LENGTH', 1, '\u041F\u043E \u0434\u043B\u0438\u043D\u0435 \u0432\u044B\u0440\u0430\u0436\u0435\u043D\u0438\u044F');
   }
-  var SortType$BY_RULE_TAG_USAGE_DESC_instance;
-  function SortType$BY_RULE_TAG_USAGE_DESC_getInstance() {
+  var SortType$BY_RULE_TAG_USAGE_instance;
+  function SortType$BY_RULE_TAG_USAGE_getInstance() {
     SortType_initFields();
-    return SortType$BY_RULE_TAG_USAGE_DESC_instance;
+    return SortType$BY_RULE_TAG_USAGE_instance;
   }
-  var SortType$BY_TASK_LENGTH_DESC_instance;
-  function SortType$BY_TASK_LENGTH_DESC_getInstance() {
+  var SortType$BY_TASK_LENGTH_instance;
+  function SortType$BY_TASK_LENGTH_getInstance() {
     SortType_initFields();
-    return SortType$BY_TASK_LENGTH_DESC_instance;
-  }
-  var SortType$BY_TASK_LENGTH_ASC_instance;
-  function SortType$BY_TASK_LENGTH_ASC_getInstance() {
-    SortType_initFields();
-    return SortType$BY_TASK_LENGTH_ASC_instance;
+    return SortType$BY_TASK_LENGTH_instance;
   }
   SortType.$metadata$ = {
     kind: Kind_CLASS,
@@ -39409,17 +39020,15 @@ var twf_js = function (_, Kotlin) {
     interfaces: [Enum]
   };
   function SortType$values() {
-    return [SortType$BY_RULE_TAG_USAGE_DESC_getInstance(), SortType$BY_TASK_LENGTH_DESC_getInstance(), SortType$BY_TASK_LENGTH_ASC_getInstance()];
+    return [SortType$BY_RULE_TAG_USAGE_getInstance(), SortType$BY_TASK_LENGTH_getInstance()];
   }
   SortType.values = SortType$values;
   function SortType$valueOf(name) {
     switch (name) {
-      case 'BY_RULE_TAG_USAGE_DESC':
-        return SortType$BY_RULE_TAG_USAGE_DESC_getInstance();
-      case 'BY_TASK_LENGTH_DESC':
-        return SortType$BY_TASK_LENGTH_DESC_getInstance();
-      case 'BY_TASK_LENGTH_ASC':
-        return SortType$BY_TASK_LENGTH_ASC_getInstance();
+      case 'BY_RULE_TAG_USAGE':
+        return SortType$BY_RULE_TAG_USAGE_getInstance();
+      case 'BY_TASK_LENGTH':
+        return SortType$BY_TASK_LENGTH_getInstance();
       default:throwISE('No enum constant mathhelper.twf.taskautogeneration.SortType.' + name);
     }
   }
@@ -39469,7 +39078,7 @@ var twf_js = function (_, Kotlin) {
       return previousCompare !== 0 ? previousCompare : closure$comparison(a, b);
     };
   }
-  function GeneratorSettings(expressionGenerationDirection, targetWeight, targetWeightWindowCoefficient, taskStartGenerator, compiledConfiguration, expressionSubstitutions, maxCountSelectedOfTasksOnIteration, minWidthOfRulesApplicationsOnIteration, maxWidthOfRulesApplicationsOnIteration, minStepsCountInAutogeneration, extendReduceFactor, extendingExpressionSubstitutions, reducingExpressionSubstitutions, postprocessExpressionSubstitutions, mandatoryResultTransformations, newVariablesExpressionSubstitutions, nodeIdsToTransformSelector, sortType, maxTaskCount) {
+  function GeneratorSettings(expressionGenerationDirection, targetWeight, targetWeightWindowCoefficient, taskStartGenerator, compiledConfiguration, expressionSubstitutions, maxCountSelectedOfTasksOnIteration, minWidthOfRulesApplicationsOnIteration, maxWidthOfRulesApplicationsOnIteration, minStepsCountInAutogeneration, extendReduceFactor, extendingExpressionSubstitutions, reducingExpressionSubstitutions, postprocessExpressionSubstitutions, mandatoryResultTransformations, newVariablesExpressionSubstitutions, nodeIdsToTransformSelector, sortType, sortOrder, maxTaskCount) {
     if (expressionGenerationDirection === void 0)
       expressionGenerationDirection = ExpressionGenerationDirection$FINAL_TO_ORIGINAL_getInstance();
     if (targetWeight === void 0)
@@ -39526,7 +39135,9 @@ var twf_js = function (_, Kotlin) {
     if (nodeIdsToTransformSelector === void 0)
       nodeIdsToTransformSelector = GeneratorSettings_init$lambda;
     if (sortType === void 0)
-      sortType = SortType$BY_RULE_TAG_USAGE_DESC_getInstance();
+      sortType = SortType$BY_RULE_TAG_USAGE_getInstance();
+    if (sortOrder === void 0)
+      sortOrder = SortOrder$DESC_getInstance();
     if (maxTaskCount === void 0)
       maxTaskCount = 50;
     this.expressionGenerationDirection = expressionGenerationDirection;
@@ -39547,6 +39158,7 @@ var twf_js = function (_, Kotlin) {
     this.newVariablesExpressionSubstitutions = newVariablesExpressionSubstitutions;
     this.nodeIdsToTransformSelector = nodeIdsToTransformSelector;
     this.sortType = sortType;
+    this.sortOrder = sortOrder;
     this.maxTaskCount = maxTaskCount;
   }
   function GeneratorSettings_init$lambda(expressionNode) {
@@ -39612,13 +39224,16 @@ var twf_js = function (_, Kotlin) {
     return this.sortType;
   };
   GeneratorSettings.prototype.component19 = function () {
+    return this.sortOrder;
+  };
+  GeneratorSettings.prototype.component20 = function () {
     return this.maxTaskCount;
   };
-  GeneratorSettings.prototype.copy_limwlm$ = function (expressionGenerationDirection, targetWeight, targetWeightWindowCoefficient, taskStartGenerator, compiledConfiguration, expressionSubstitutions, maxCountSelectedOfTasksOnIteration, minWidthOfRulesApplicationsOnIteration, maxWidthOfRulesApplicationsOnIteration, minStepsCountInAutogeneration, extendReduceFactor, extendingExpressionSubstitutions, reducingExpressionSubstitutions, postprocessExpressionSubstitutions, mandatoryResultTransformations, newVariablesExpressionSubstitutions, nodeIdsToTransformSelector, sortType, maxTaskCount) {
-    return new GeneratorSettings(expressionGenerationDirection === void 0 ? this.expressionGenerationDirection : expressionGenerationDirection, targetWeight === void 0 ? this.targetWeight : targetWeight, targetWeightWindowCoefficient === void 0 ? this.targetWeightWindowCoefficient : targetWeightWindowCoefficient, taskStartGenerator === void 0 ? this.taskStartGenerator : taskStartGenerator, compiledConfiguration === void 0 ? this.compiledConfiguration : compiledConfiguration, expressionSubstitutions === void 0 ? this.expressionSubstitutions : expressionSubstitutions, maxCountSelectedOfTasksOnIteration === void 0 ? this.maxCountSelectedOfTasksOnIteration : maxCountSelectedOfTasksOnIteration, minWidthOfRulesApplicationsOnIteration === void 0 ? this.minWidthOfRulesApplicationsOnIteration : minWidthOfRulesApplicationsOnIteration, maxWidthOfRulesApplicationsOnIteration === void 0 ? this.maxWidthOfRulesApplicationsOnIteration : maxWidthOfRulesApplicationsOnIteration, minStepsCountInAutogeneration === void 0 ? this.minStepsCountInAutogeneration : minStepsCountInAutogeneration, extendReduceFactor === void 0 ? this.extendReduceFactor : extendReduceFactor, extendingExpressionSubstitutions === void 0 ? this.extendingExpressionSubstitutions : extendingExpressionSubstitutions, reducingExpressionSubstitutions === void 0 ? this.reducingExpressionSubstitutions : reducingExpressionSubstitutions, postprocessExpressionSubstitutions === void 0 ? this.postprocessExpressionSubstitutions : postprocessExpressionSubstitutions, mandatoryResultTransformations === void 0 ? this.mandatoryResultTransformations : mandatoryResultTransformations, newVariablesExpressionSubstitutions === void 0 ? this.newVariablesExpressionSubstitutions : newVariablesExpressionSubstitutions, nodeIdsToTransformSelector === void 0 ? this.nodeIdsToTransformSelector : nodeIdsToTransformSelector, sortType === void 0 ? this.sortType : sortType, maxTaskCount === void 0 ? this.maxTaskCount : maxTaskCount);
+  GeneratorSettings.prototype.copy_dqe0z5$ = function (expressionGenerationDirection, targetWeight, targetWeightWindowCoefficient, taskStartGenerator, compiledConfiguration, expressionSubstitutions, maxCountSelectedOfTasksOnIteration, minWidthOfRulesApplicationsOnIteration, maxWidthOfRulesApplicationsOnIteration, minStepsCountInAutogeneration, extendReduceFactor, extendingExpressionSubstitutions, reducingExpressionSubstitutions, postprocessExpressionSubstitutions, mandatoryResultTransformations, newVariablesExpressionSubstitutions, nodeIdsToTransformSelector, sortType, sortOrder, maxTaskCount) {
+    return new GeneratorSettings(expressionGenerationDirection === void 0 ? this.expressionGenerationDirection : expressionGenerationDirection, targetWeight === void 0 ? this.targetWeight : targetWeight, targetWeightWindowCoefficient === void 0 ? this.targetWeightWindowCoefficient : targetWeightWindowCoefficient, taskStartGenerator === void 0 ? this.taskStartGenerator : taskStartGenerator, compiledConfiguration === void 0 ? this.compiledConfiguration : compiledConfiguration, expressionSubstitutions === void 0 ? this.expressionSubstitutions : expressionSubstitutions, maxCountSelectedOfTasksOnIteration === void 0 ? this.maxCountSelectedOfTasksOnIteration : maxCountSelectedOfTasksOnIteration, minWidthOfRulesApplicationsOnIteration === void 0 ? this.minWidthOfRulesApplicationsOnIteration : minWidthOfRulesApplicationsOnIteration, maxWidthOfRulesApplicationsOnIteration === void 0 ? this.maxWidthOfRulesApplicationsOnIteration : maxWidthOfRulesApplicationsOnIteration, minStepsCountInAutogeneration === void 0 ? this.minStepsCountInAutogeneration : minStepsCountInAutogeneration, extendReduceFactor === void 0 ? this.extendReduceFactor : extendReduceFactor, extendingExpressionSubstitutions === void 0 ? this.extendingExpressionSubstitutions : extendingExpressionSubstitutions, reducingExpressionSubstitutions === void 0 ? this.reducingExpressionSubstitutions : reducingExpressionSubstitutions, postprocessExpressionSubstitutions === void 0 ? this.postprocessExpressionSubstitutions : postprocessExpressionSubstitutions, mandatoryResultTransformations === void 0 ? this.mandatoryResultTransformations : mandatoryResultTransformations, newVariablesExpressionSubstitutions === void 0 ? this.newVariablesExpressionSubstitutions : newVariablesExpressionSubstitutions, nodeIdsToTransformSelector === void 0 ? this.nodeIdsToTransformSelector : nodeIdsToTransformSelector, sortType === void 0 ? this.sortType : sortType, sortOrder === void 0 ? this.sortOrder : sortOrder, maxTaskCount === void 0 ? this.maxTaskCount : maxTaskCount);
   };
   GeneratorSettings.prototype.toString = function () {
-    return 'GeneratorSettings(expressionGenerationDirection=' + Kotlin.toString(this.expressionGenerationDirection) + (', targetWeight=' + Kotlin.toString(this.targetWeight)) + (', targetWeightWindowCoefficient=' + Kotlin.toString(this.targetWeightWindowCoefficient)) + (', taskStartGenerator=' + Kotlin.toString(this.taskStartGenerator)) + (', compiledConfiguration=' + Kotlin.toString(this.compiledConfiguration)) + (', expressionSubstitutions=' + Kotlin.toString(this.expressionSubstitutions)) + (', maxCountSelectedOfTasksOnIteration=' + Kotlin.toString(this.maxCountSelectedOfTasksOnIteration)) + (', minWidthOfRulesApplicationsOnIteration=' + Kotlin.toString(this.minWidthOfRulesApplicationsOnIteration)) + (', maxWidthOfRulesApplicationsOnIteration=' + Kotlin.toString(this.maxWidthOfRulesApplicationsOnIteration)) + (', minStepsCountInAutogeneration=' + Kotlin.toString(this.minStepsCountInAutogeneration)) + (', extendReduceFactor=' + Kotlin.toString(this.extendReduceFactor)) + (', extendingExpressionSubstitutions=' + Kotlin.toString(this.extendingExpressionSubstitutions)) + (', reducingExpressionSubstitutions=' + Kotlin.toString(this.reducingExpressionSubstitutions)) + (', postprocessExpressionSubstitutions=' + Kotlin.toString(this.postprocessExpressionSubstitutions)) + (', mandatoryResultTransformations=' + Kotlin.toString(this.mandatoryResultTransformations)) + (', newVariablesExpressionSubstitutions=' + Kotlin.toString(this.newVariablesExpressionSubstitutions)) + (', nodeIdsToTransformSelector=' + Kotlin.toString(this.nodeIdsToTransformSelector)) + (', sortType=' + Kotlin.toString(this.sortType)) + (', maxTaskCount=' + Kotlin.toString(this.maxTaskCount)) + ')';
+    return 'GeneratorSettings(expressionGenerationDirection=' + Kotlin.toString(this.expressionGenerationDirection) + (', targetWeight=' + Kotlin.toString(this.targetWeight)) + (', targetWeightWindowCoefficient=' + Kotlin.toString(this.targetWeightWindowCoefficient)) + (', taskStartGenerator=' + Kotlin.toString(this.taskStartGenerator)) + (', compiledConfiguration=' + Kotlin.toString(this.compiledConfiguration)) + (', expressionSubstitutions=' + Kotlin.toString(this.expressionSubstitutions)) + (', maxCountSelectedOfTasksOnIteration=' + Kotlin.toString(this.maxCountSelectedOfTasksOnIteration)) + (', minWidthOfRulesApplicationsOnIteration=' + Kotlin.toString(this.minWidthOfRulesApplicationsOnIteration)) + (', maxWidthOfRulesApplicationsOnIteration=' + Kotlin.toString(this.maxWidthOfRulesApplicationsOnIteration)) + (', minStepsCountInAutogeneration=' + Kotlin.toString(this.minStepsCountInAutogeneration)) + (', extendReduceFactor=' + Kotlin.toString(this.extendReduceFactor)) + (', extendingExpressionSubstitutions=' + Kotlin.toString(this.extendingExpressionSubstitutions)) + (', reducingExpressionSubstitutions=' + Kotlin.toString(this.reducingExpressionSubstitutions)) + (', postprocessExpressionSubstitutions=' + Kotlin.toString(this.postprocessExpressionSubstitutions)) + (', mandatoryResultTransformations=' + Kotlin.toString(this.mandatoryResultTransformations)) + (', newVariablesExpressionSubstitutions=' + Kotlin.toString(this.newVariablesExpressionSubstitutions)) + (', nodeIdsToTransformSelector=' + Kotlin.toString(this.nodeIdsToTransformSelector)) + (', sortType=' + Kotlin.toString(this.sortType)) + (', sortOrder=' + Kotlin.toString(this.sortOrder)) + (', maxTaskCount=' + Kotlin.toString(this.maxTaskCount)) + ')';
   };
   GeneratorSettings.prototype.hashCode = function () {
     var result = 0;
@@ -39640,11 +39255,12 @@ var twf_js = function (_, Kotlin) {
     result = result * 31 + Kotlin.hashCode(this.newVariablesExpressionSubstitutions) | 0;
     result = result * 31 + Kotlin.hashCode(this.nodeIdsToTransformSelector) | 0;
     result = result * 31 + Kotlin.hashCode(this.sortType) | 0;
+    result = result * 31 + Kotlin.hashCode(this.sortOrder) | 0;
     result = result * 31 + Kotlin.hashCode(this.maxTaskCount) | 0;
     return result;
   };
   GeneratorSettings.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.expressionGenerationDirection, other.expressionGenerationDirection) && Kotlin.equals(this.targetWeight, other.targetWeight) && Kotlin.equals(this.targetWeightWindowCoefficient, other.targetWeightWindowCoefficient) && Kotlin.equals(this.taskStartGenerator, other.taskStartGenerator) && Kotlin.equals(this.compiledConfiguration, other.compiledConfiguration) && Kotlin.equals(this.expressionSubstitutions, other.expressionSubstitutions) && Kotlin.equals(this.maxCountSelectedOfTasksOnIteration, other.maxCountSelectedOfTasksOnIteration) && Kotlin.equals(this.minWidthOfRulesApplicationsOnIteration, other.minWidthOfRulesApplicationsOnIteration) && Kotlin.equals(this.maxWidthOfRulesApplicationsOnIteration, other.maxWidthOfRulesApplicationsOnIteration) && Kotlin.equals(this.minStepsCountInAutogeneration, other.minStepsCountInAutogeneration) && Kotlin.equals(this.extendReduceFactor, other.extendReduceFactor) && Kotlin.equals(this.extendingExpressionSubstitutions, other.extendingExpressionSubstitutions) && Kotlin.equals(this.reducingExpressionSubstitutions, other.reducingExpressionSubstitutions) && Kotlin.equals(this.postprocessExpressionSubstitutions, other.postprocessExpressionSubstitutions) && Kotlin.equals(this.mandatoryResultTransformations, other.mandatoryResultTransformations) && Kotlin.equals(this.newVariablesExpressionSubstitutions, other.newVariablesExpressionSubstitutions) && Kotlin.equals(this.nodeIdsToTransformSelector, other.nodeIdsToTransformSelector) && Kotlin.equals(this.sortType, other.sortType) && Kotlin.equals(this.maxTaskCount, other.maxTaskCount)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.expressionGenerationDirection, other.expressionGenerationDirection) && Kotlin.equals(this.targetWeight, other.targetWeight) && Kotlin.equals(this.targetWeightWindowCoefficient, other.targetWeightWindowCoefficient) && Kotlin.equals(this.taskStartGenerator, other.taskStartGenerator) && Kotlin.equals(this.compiledConfiguration, other.compiledConfiguration) && Kotlin.equals(this.expressionSubstitutions, other.expressionSubstitutions) && Kotlin.equals(this.maxCountSelectedOfTasksOnIteration, other.maxCountSelectedOfTasksOnIteration) && Kotlin.equals(this.minWidthOfRulesApplicationsOnIteration, other.minWidthOfRulesApplicationsOnIteration) && Kotlin.equals(this.maxWidthOfRulesApplicationsOnIteration, other.maxWidthOfRulesApplicationsOnIteration) && Kotlin.equals(this.minStepsCountInAutogeneration, other.minStepsCountInAutogeneration) && Kotlin.equals(this.extendReduceFactor, other.extendReduceFactor) && Kotlin.equals(this.extendingExpressionSubstitutions, other.extendingExpressionSubstitutions) && Kotlin.equals(this.reducingExpressionSubstitutions, other.reducingExpressionSubstitutions) && Kotlin.equals(this.postprocessExpressionSubstitutions, other.postprocessExpressionSubstitutions) && Kotlin.equals(this.mandatoryResultTransformations, other.mandatoryResultTransformations) && Kotlin.equals(this.newVariablesExpressionSubstitutions, other.newVariablesExpressionSubstitutions) && Kotlin.equals(this.nodeIdsToTransformSelector, other.nodeIdsToTransformSelector) && Kotlin.equals(this.sortType, other.sortType) && Kotlin.equals(this.sortOrder, other.sortOrder) && Kotlin.equals(this.maxTaskCount, other.maxTaskCount)))));
   };
   function generateTrigonometricTasks$lambda(closure$settings) {
     return function () {
@@ -39772,27 +39388,32 @@ var twf_js = function (_, Kotlin) {
       return 'after final filter: ' + joinToString(destination, ', \n');
     };
   }
+  function generateTrigonometricTasks$lambda_13(closure$generatorIterationCounter) {
+    return function () {
+      return 'iterations total: ' + closure$generatorIterationCounter.v;
+    };
+  }
   function generateTrigonometricTasks(settings) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     var compiledConfiguration = settings.compiledConfiguration;
     var expressionComparator = compiledConfiguration.factComparator.expressionComparator;
     var taskStartGeneratedExpression = settings.taskStartGenerator(compiledConfiguration);
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda(settings), MessageType$TECHNICAL_getInstance());
     var $receiver = settings.expressionSubstitutions;
     var destination = ArrayList_init();
-    var tmp$_3;
-    tmp$_3 = $receiver.iterator();
-    while (tmp$_3.hasNext()) {
-      var element = tmp$_3.next();
+    var tmp$_4;
+    tmp$_4 = $receiver.iterator();
+    while (tmp$_4.hasNext()) {
+      var element = tmp$_4.next();
       var list = element.tagsForTaskGenerator;
       addAll(destination, list);
     }
     var $receiver_0 = distinct(destination);
     var destination_0 = ArrayList_init();
-    var tmp$_4;
-    tmp$_4 = $receiver_0.iterator();
-    while (tmp$_4.hasNext()) {
-      var element_0 = tmp$_4.next();
+    var tmp$_5;
+    tmp$_5 = $receiver_0.iterator();
+    while (tmp$_5.hasNext()) {
+      var element_0 = tmp$_5.next();
       if (element_0 !== RuleTag$BASIC_MATH_getInstance_0())
         destination_0.add_11rb$(element_0);
     }
@@ -39813,6 +39434,7 @@ var twf_js = function (_, Kotlin) {
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_2(currentTasksAfterSplittingConstants), MessageType$TECHNICAL_getInstance());
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_3(currentTasksAfterSplittingConstants), MessageType$TECHNICAL_getInstance());
     var stepId = {v: 1};
+    var generatorIterationCounter = {v: 0};
     var targetWeightThreshold = settings.targetWeight + 2;
     var taskMaxWeightPrev = -1.0;
     var taskMaxWeight = {v: 0.0};
@@ -39827,17 +39449,32 @@ var twf_js = function (_, Kotlin) {
       tmp$ = currentTasks.iterator();
       while (tmp$.hasNext()) {
         var currentTask = tmp$.next();
+        var tmp$_6;
+        var sum = 0.0;
+        tmp$_6 = currentTask.usedSubstitutions.iterator();
+        while (tmp$_6.hasNext()) {
+          var element_1 = tmp$_6.next();
+          sum += element_1.difficultyInTaskAutoGeneration;
+        }
+        if (sum < settings.targetWeight * settings.extendReduceFactor) {
+          tmp$_0 = settings.extendingExpressionSubstitutions;
+        }
+         else {
+          tmp$_0 = settings.reducingExpressionSubstitutions;
+        }
+        setExpressionSubstitutions(compiledConfiguration, tmp$_0);
         var numberOfTrials = settings.maxWidthOfRulesApplicationsOnIteration;
         var tasksProducedFromThis = ArrayList_init();
         for (var j = 1; j <= numberOfTrials; j++) {
           log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_6(stepIdCopy, j), MessageType$TECHNICAL_getInstance());
           tryToGenerateNewTasks(currentTask, tasksProducedFromThis, settings, stepId.v);
+          generatorIterationCounter.v = generatorIterationCounter.v + 1 | 0;
           newTasks.addAll_brywnq$(tasksProducedFromThis);
-          var tmp$_5 = j >= settings.minWidthOfRulesApplicationsOnIteration;
-          if (tmp$_5) {
-            tmp$_5 = !tasksProducedFromThis.isEmpty();
+          var tmp$_7 = j >= settings.minWidthOfRulesApplicationsOnIteration;
+          if (tmp$_7) {
+            tmp$_7 = !tasksProducedFromThis.isEmpty();
           }
-          if (tmp$_5) {
+          if (tmp$_7) {
             break;
           }
         }
@@ -39845,12 +39482,12 @@ var twf_js = function (_, Kotlin) {
       newTasks = unify(newTasks, compiledConfiguration);
       var $receiver_1 = newTasks;
       var destination_1 = LinkedHashMap_init_0();
-      var tmp$_6;
-      tmp$_6 = $receiver_1.iterator();
-      while (tmp$_6.hasNext()) {
-        var element_1 = tmp$_6.next();
-        var tmp$_7;
-        var key = (tmp$_7 = lastOrNull(element_1.previousExpressions)) != null ? tmp$_7.identifier : null;
+      var tmp$_8;
+      tmp$_8 = $receiver_1.iterator();
+      while (tmp$_8.hasNext()) {
+        var element_2 = tmp$_8.next();
+        var tmp$_9;
+        var key = (tmp$_9 = lastOrNull(element_2.previousExpressions)) != null ? tmp$_9.identifier : null;
         var tmp$_0_0;
         var value = destination_1.get_11rb$(key);
         if (value == null) {
@@ -39862,23 +39499,23 @@ var twf_js = function (_, Kotlin) {
           tmp$_0_0 = value;
         }
         var list_0 = tmp$_0_0;
-        list_0.add_11rb$(element_1);
+        list_0.add_11rb$(element_2);
       }
       var groupsByPreviousExpression = destination_1;
       if (groupsByPreviousExpression.isEmpty()) {
-        tmp$_0 = 0;
+        tmp$_1 = 0;
       }
        else {
         var x = settings.maxCountSelectedOfTasksOnIteration / groupsByPreviousExpression.size;
-        tmp$_0 = numberToInt(Math_0.ceil(x));
+        tmp$_1 = numberToInt(Math_0.ceil(x));
       }
-      var maxCountPerGroup = tmp$_0;
+      var maxCountPerGroup = tmp$_1;
       var newCurrentTasksAfterCut = ArrayList_init();
-      tmp$_1 = groupsByPreviousExpression.entries.iterator();
-      while (tmp$_1.hasNext()) {
-        var tmp$_8 = tmp$_1.next();
-        var tasksInGroup = tmp$_8.value;
-        var sortedTasks = sortTasks(tasksInGroup, settings.sortType, tagsChosen);
+      tmp$_2 = groupsByPreviousExpression.entries.iterator();
+      while (tmp$_2.hasNext()) {
+        var tmp$_10 = tmp$_2.next();
+        var tasksInGroup = tmp$_10.value;
+        var sortedTasks = sortTasks(tasksInGroup, settings.sortType, settings.sortOrder, tagsChosen);
         var b = tasksInGroup.size;
         newCurrentTasksAfterCut.addAll_brywnq$(sortedTasks.subList_vux9f0$(0, Math_0.min(maxCountPerGroup, b)));
       }
@@ -39886,12 +39523,12 @@ var twf_js = function (_, Kotlin) {
       newTasks = newCurrentTasksAfterCut;
       allTasks.addAll_brywnq$(newTasks);
       var $receiver_2 = allTasks;
-      var tmp$_9;
+      var tmp$_11;
       var set = HashSet_init();
       var list_1 = ArrayList_init();
-      tmp$_9 = $receiver_2.iterator();
-      while (tmp$_9.hasNext()) {
-        var e = tmp$_9.next();
+      tmp$_11 = $receiver_2.iterator();
+      while (tmp$_11.hasNext()) {
+        var e = tmp$_11.next();
         var key_0 = e.currentExpression.toString();
         if (set.add_11rb$(key_0))
           list_1.add_11rb$(e);
@@ -39901,51 +39538,51 @@ var twf_js = function (_, Kotlin) {
       taskMaxWeightPrev = taskMaxWeight.v;
       var $receiver_3 = allTasks;
       var destination_2 = ArrayList_init_0(collectionSizeOrDefault($receiver_3, 10));
-      var tmp$_10;
-      tmp$_10 = $receiver_3.iterator();
-      while (tmp$_10.hasNext()) {
-        var item = tmp$_10.next();
-        var tmp$_11 = destination_2.add_11rb$;
-        var tmp$_12;
-        var sum = 0.0;
-        tmp$_12 = item.usedSubstitutions.iterator();
-        while (tmp$_12.hasNext()) {
-          var element_2 = tmp$_12.next();
-          sum += element_2.difficultyInTaskAutoGeneration;
+      var tmp$_12;
+      tmp$_12 = $receiver_3.iterator();
+      while (tmp$_12.hasNext()) {
+        var item = tmp$_12.next();
+        var tmp$_13 = destination_2.add_11rb$;
+        var tmp$_14;
+        var sum_0 = 0.0;
+        tmp$_14 = item.usedSubstitutions.iterator();
+        while (tmp$_14.hasNext()) {
+          var element_3 = tmp$_14.next();
+          sum_0 += element_3.difficultyInTaskAutoGeneration;
         }
-        tmp$_11.call(destination_2, sum);
+        tmp$_13.call(destination_2, sum_0);
       }
-      taskMaxWeight.v = (tmp$_2 = max_0(destination_2)) != null ? tmp$_2 : 0.0;
+      taskMaxWeight.v = (tmp$_3 = max_0(destination_2)) != null ? tmp$_3 : 0.0;
       stepId.v = stepId.v + 1 | 0;
     }
-    var tmp$_13;
-    tmp$_13 = allTasks.iterator();
-    while (tmp$_13.hasNext()) {
-      var element_3 = tmp$_13.next();
-      applyAllSubstitutions(element_3.currentExpression, settings.mandatoryResultTransformations);
-      element_3.currentExpression = simplifyAndNormalizeExpression(element_3.currentExpression, compiledConfiguration);
+    var tmp$_15;
+    tmp$_15 = allTasks.iterator();
+    while (tmp$_15.hasNext()) {
+      var element_4 = tmp$_15.next();
+      applyAllSubstitutions(element_4.currentExpression, settings.mandatoryResultTransformations);
+      element_4.currentExpression = simplifyAndNormalizeExpression(element_4.currentExpression, compiledConfiguration);
     }
     var $receiver_4 = allTasks;
     var destination_3 = ArrayList_init_0(collectionSizeOrDefault($receiver_4, 10));
-    var tmp$_14;
-    tmp$_14 = $receiver_4.iterator();
-    while (tmp$_14.hasNext()) {
-      var item_0 = tmp$_14.next();
+    var tmp$_16;
+    tmp$_16 = $receiver_4.iterator();
+    while (tmp$_16.hasNext()) {
+      var item_0 = tmp$_16.next();
       destination_3.add_11rb$(postprocess(item_0, settings.postprocessExpressionSubstitutions, compiledConfiguration, stepId.v));
     }
     allTasks = toMutableList(destination_3);
     var resultAllTasks = {v: unify(allTasks, compiledConfiguration)};
-    var tmp$_15;
-    tmp$_15 = resultAllTasks.v.iterator();
-    while (tmp$_15.hasNext()) {
-      var element_4 = tmp$_15.next();
-      var $receiver_5 = element_4.usedSubstitutions;
+    var tmp$_17;
+    tmp$_17 = resultAllTasks.v.iterator();
+    while (tmp$_17.hasNext()) {
+      var element_5 = tmp$_17.next();
+      var $receiver_5 = element_5.usedSubstitutions;
       var destination_4 = LinkedHashMap_init_0();
-      var tmp$_16;
-      tmp$_16 = $receiver_5.iterator();
-      while (tmp$_16.hasNext()) {
-        var element_5 = tmp$_16.next();
-        var key_1 = element_5.code;
+      var tmp$_18;
+      tmp$_18 = $receiver_5.iterator();
+      while (tmp$_18.hasNext()) {
+        var element_6 = tmp$_18.next();
+        var key_1 = element_6.code;
         var tmp$_0_1;
         var value_0 = destination_4.get_11rb$(key_1);
         if (value_0 == null) {
@@ -39957,70 +39594,70 @@ var twf_js = function (_, Kotlin) {
           tmp$_0_1 = value_0;
         }
         var list_2 = tmp$_0_1;
-        list_2.add_11rb$(element_5);
+        list_2.add_11rb$(element_6);
       }
       var $receiver_6 = destination_4.values;
       var destination_5 = ArrayList_init_0(collectionSizeOrDefault($receiver_6, 10));
-      var tmp$_17;
-      tmp$_17 = $receiver_6.iterator();
-      while (tmp$_17.hasNext()) {
-        var item_1 = tmp$_17.next();
+      var tmp$_19;
+      tmp$_19 = $receiver_6.iterator();
+      while (tmp$_19.hasNext()) {
+        var item_1 = tmp$_19.next();
         destination_5.add_11rb$(first(item_1));
       }
-      element_4.requiredSubstitutions = toMutableSet_1(destination_5);
-      var $receiver_7 = element_4.requiredSubstitutions;
+      element_5.requiredSubstitutions = toMutableSet_1(destination_5);
+      var $receiver_7 = element_5.requiredSubstitutions;
       var destination_6 = ArrayList_init_0(collectionSizeOrDefault($receiver_7, 10));
-      var tmp$_18;
-      tmp$_18 = $receiver_7.iterator();
-      while (tmp$_18.hasNext()) {
-        var item_2 = tmp$_18.next();
+      var tmp$_20;
+      tmp$_20 = $receiver_7.iterator();
+      while (tmp$_20.hasNext()) {
+        var item_2 = tmp$_20.next();
         destination_6.add_11rb$(new HintITR('Use rule ' + '$' + '$' + expressionToTexString(item_2.left) + '=' + expressionToTexString(item_2.right) + '$' + '$', '\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439 \u043F\u0440\u0430\u0432\u0438\u043B\u043E ' + '$' + '$' + expressionToTexString(item_2.left) + '=' + expressionToTexString(item_2.right) + '$' + '$'));
       }
-      element_4.hints = toMutableList(destination_6);
+      element_5.hints = toMutableList(destination_6);
       var $receiver_8 = ArrayList_init();
-      $receiver_8.addAll_brywnq$(element_4.previousExpressions);
-      $receiver_8.add_11rb$(element_4.currentExpression);
+      $receiver_8.addAll_brywnq$(element_5.previousExpressions);
+      $receiver_8.add_11rb$(element_5.currentExpression);
       var expressionsInSolution = $receiver_8;
-      element_4.solution = joinToString(expressionsInSolution, ' = ', void 0, void 0, void 0, void 0, generateTrigonometricTasks$lambda$lambda);
+      element_5.solution = joinToString(expressionsInSolution, ' = ', void 0, void 0, void 0, void 0, generateTrigonometricTasks$lambda$lambda);
     }
     var tasksBeforeFinalFilter = resultAllTasks.v;
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_8(tasksBeforeFinalFilter), MessageType$TECHNICAL_getInstance());
     var $receiver_9 = resultAllTasks.v;
     var destination_7 = ArrayList_init();
-    var tmp$_19;
-    tmp$_19 = $receiver_9.iterator();
-    while (tmp$_19.hasNext()) {
-      var element_6 = tmp$_19.next();
-      if (validateTask(element_6, taskStartGeneratedExpression, expressionComparator))
-        destination_7.add_11rb$(element_6);
+    var tmp$_21;
+    tmp$_21 = $receiver_9.iterator();
+    while (tmp$_21.hasNext()) {
+      var element_7 = tmp$_21.next();
+      if (validateTask(element_7, taskStartGeneratedExpression, expressionComparator))
+        destination_7.add_11rb$(element_7);
     }
     var destination_8 = ArrayList_init();
-    var tmp$_20;
-    tmp$_20 = destination_7.iterator();
-    while (tmp$_20.hasNext()) {
-      var element_7 = tmp$_20.next();
-      if (verifyAllPartsHasBeenTransformed(initialTask.currentExpression, element_7.currentExpression))
-        destination_8.add_11rb$(element_7);
+    var tmp$_22;
+    tmp$_22 = destination_7.iterator();
+    while (tmp$_22.hasNext()) {
+      var element_8 = tmp$_22.next();
+      if (verifyAllPartsHasBeenTransformed(initialTask.currentExpression, element_8.currentExpression))
+        destination_8.add_11rb$(element_8);
     }
     resultAllTasks.v = toMutableList(destination_8);
     var minWeight = (1 - settings.targetWeightWindowCoefficient) * settings.targetWeight;
     var maxWeight = (1 + settings.targetWeightWindowCoefficient) * settings.targetWeight;
     var $receiver_10 = resultAllTasks.v;
     var destination_9 = ArrayList_init();
-    var tmp$_21;
-    tmp$_21 = $receiver_10.iterator();
-    while (tmp$_21.hasNext()) {
-      var element_8 = tmp$_21.next();
-      var tmp$_22 = rangeTo(minWeight, maxWeight);
-      var tmp$_23;
-      var sum_0 = 0.0;
-      tmp$_23 = element_8.usedSubstitutions.iterator();
-      while (tmp$_23.hasNext()) {
-        var element_9 = tmp$_23.next();
-        sum_0 += element_9.difficultyInTaskAutoGeneration;
+    var tmp$_23;
+    tmp$_23 = $receiver_10.iterator();
+    while (tmp$_23.hasNext()) {
+      var element_9 = tmp$_23.next();
+      var tmp$_24 = rangeTo(minWeight, maxWeight);
+      var tmp$_25;
+      var sum_1 = 0.0;
+      tmp$_25 = element_9.usedSubstitutions.iterator();
+      while (tmp$_25.hasNext()) {
+        var element_10 = tmp$_25.next();
+        sum_1 += element_10.difficultyInTaskAutoGeneration;
       }
-      if (tmp$_22.contains_mef7kx$(sum_0))
-        destination_9.add_11rb$(element_8);
+      if (tmp$_24.contains_mef7kx$(sum_1))
+        destination_9.add_11rb$(element_9);
     }
     var tasksWithNeededComplexity = toMutableList(destination_9);
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_9(tasksWithNeededComplexity), MessageType$TECHNICAL_getInstance());
@@ -40028,19 +39665,19 @@ var twf_js = function (_, Kotlin) {
       log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_10(tasksWithNeededComplexity), MessageType$TECHNICAL_getInstance());
       var $receiver_11 = resultAllTasks.v;
       var destination_10 = ArrayList_init();
-      var tmp$_24;
-      tmp$_24 = $receiver_11.iterator();
-      while (tmp$_24.hasNext()) {
-        var element_10 = tmp$_24.next();
-        var tmp$_25;
-        var sum_1 = 0.0;
-        tmp$_25 = element_10.usedSubstitutions.iterator();
-        while (tmp$_25.hasNext()) {
-          var element_11 = tmp$_25.next();
-          sum_1 += element_11.difficultyInTaskAutoGeneration;
+      var tmp$_26;
+      tmp$_26 = $receiver_11.iterator();
+      while (tmp$_26.hasNext()) {
+        var element_11 = tmp$_26.next();
+        var tmp$_27;
+        var sum_2 = 0.0;
+        tmp$_27 = element_11.usedSubstitutions.iterator();
+        while (tmp$_27.hasNext()) {
+          var element_12 = tmp$_27.next();
+          sum_2 += element_12.difficultyInTaskAutoGeneration;
         }
-        if (sum_1 <= maxWeight)
-          destination_10.add_11rb$(element_10);
+        if (sum_2 <= maxWeight)
+          destination_10.add_11rb$(element_11);
       }
       resultAllTasks.v = toMutableList(destination_10);
       var $receiver_12 = resultAllTasks.v;
@@ -40052,67 +39689,68 @@ var twf_js = function (_, Kotlin) {
      else {
       resultAllTasks.v = tasksWithNeededComplexity;
     }
-    resultAllTasks.v = sortTasks(resultAllTasks.v, settings.sortType, tagsChosen);
-    var tmp$_26 = resultAllTasks.v;
+    resultAllTasks.v = sortTasks(resultAllTasks.v, settings.sortType, settings.sortOrder, tagsChosen);
+    var tmp$_28 = resultAllTasks.v;
     var a = resultAllTasks.v.size;
     var b_0 = settings.maxTaskCount;
-    resultAllTasks.v = tmp$_26.subList_vux9f0$(0, Math_0.min(a, b_0));
+    resultAllTasks.v = tmp$_28.subList_vux9f0$(0, Math_0.min(a, b_0));
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_12(resultAllTasks), MessageType$TECHNICAL_getInstance());
+    log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_13(generatorIterationCounter), MessageType$TECHNICAL_getInstance());
     var $receiver_13 = resultAllTasks.v;
     var destination_11 = ArrayList_init_0(collectionSizeOrDefault($receiver_13, 10));
-    var tmp$_27;
-    tmp$_27 = $receiver_13.iterator();
-    while (tmp$_27.hasNext()) {
-      var item_3 = tmp$_27.next();
-      var tmp$_28 = destination_11.add_11rb$;
-      var tmp$_29 = void 0;
-      var tmp$_30 = taskStartGeneratedExpression.code;
+    var tmp$_29;
+    tmp$_29 = $receiver_13.iterator();
+    while (tmp$_29.hasNext()) {
+      var item_3 = tmp$_29.next();
+      var tmp$_30 = destination_11.add_11rb$;
       var tmp$_31 = void 0;
-      var tmp$_32 = void 0;
-      var tmp$_33 = taskStartGeneratedExpression.nameEn;
-      var tmp$_34 = taskStartGeneratedExpression.nameRu;
-      var tmp$_35 = taskStartGeneratedExpression.descriptionShortEn;
-      var tmp$_36 = taskStartGeneratedExpression.descriptionShortRu;
-      var tmp$_37 = taskStartGeneratedExpression.descriptionEn;
-      var tmp$_38 = taskStartGeneratedExpression.descriptionRu;
-      var tmp$_39 = taskStartGeneratedExpression.subjectType;
+      var tmp$_32 = taskStartGeneratedExpression.code;
+      var tmp$_33 = void 0;
+      var tmp$_34 = void 0;
+      var tmp$_35 = taskStartGeneratedExpression.nameEn;
+      var tmp$_36 = taskStartGeneratedExpression.nameRu;
+      var tmp$_37 = taskStartGeneratedExpression.descriptionShortEn;
+      var tmp$_38 = taskStartGeneratedExpression.descriptionShortRu;
+      var tmp$_39 = taskStartGeneratedExpression.descriptionEn;
+      var tmp$_40 = taskStartGeneratedExpression.descriptionRu;
+      var tmp$_41 = taskStartGeneratedExpression.subjectType;
       var $receiver_14 = item_3.usedSubstitutions;
       var destination_12 = ArrayList_init();
-      var tmp$_40;
-      tmp$_40 = $receiver_14.iterator();
-      while (tmp$_40.hasNext()) {
-        var element_12 = tmp$_40.next();
-        var list_3 = element_12.tagsForTaskGenerator;
+      var tmp$_42;
+      tmp$_42 = $receiver_14.iterator();
+      while (tmp$_42.hasNext()) {
+        var element_13 = tmp$_42.next();
+        var list_3 = element_13.tagsForTaskGenerator;
         addAll(destination_12, list_3);
       }
       var destination_13 = ArrayList_init_0(collectionSizeOrDefault(destination_12, 10));
-      var tmp$_41;
-      tmp$_41 = destination_12.iterator();
-      while (tmp$_41.hasNext()) {
-        var item_4 = tmp$_41.next();
+      var tmp$_43;
+      tmp$_43 = destination_12.iterator();
+      while (tmp$_43.hasNext()) {
+        var item_4 = tmp$_43.next();
         destination_13.add_11rb$(item_4.name);
       }
-      var tmp$_42 = toMutableSet_1(destination_13);
-      var tmp$_43 = item_3.startExpression.toString();
-      var tmp$_44 = void 0;
-      var tmp$_45 = void 0;
-      var tmp$_46 = item_3.currentExpression.toString();
+      var tmp$_44 = toMutableSet_1(destination_13);
+      var tmp$_45 = item_3.startExpression.toString();
+      var tmp$_46 = void 0;
       var tmp$_47 = void 0;
-      var tmp$_48 = void 0;
+      var tmp$_48 = item_3.currentExpression.toString();
       var tmp$_49 = void 0;
       var tmp$_50 = void 0;
-      var tmp$_51 = emptyList();
-      var tmp$_52 = emptyList();
-      var tmp$_53 = item_3.previousExpressions.size;
-      var tmp$_54 = item_3.time;
-      var tmp$_55;
-      var sum_2 = 0.0;
-      tmp$_55 = item_3.usedSubstitutions.iterator();
-      while (tmp$_55.hasNext()) {
-        var element_13 = tmp$_55.next();
-        sum_2 += element_13.difficultyInTaskAutoGeneration;
+      var tmp$_51 = void 0;
+      var tmp$_52 = void 0;
+      var tmp$_53 = emptyList();
+      var tmp$_54 = emptyList();
+      var tmp$_55 = item_3.previousExpressions.size;
+      var tmp$_56 = item_3.time;
+      var tmp$_57;
+      var sum_3 = 0.0;
+      tmp$_57 = item_3.usedSubstitutions.iterator();
+      while (tmp$_57.hasNext()) {
+        var element_14 = tmp$_57.next();
+        sum_3 += element_14.difficultyInTaskAutoGeneration;
       }
-      tmp$_28.call(destination_11, new TaskITR(tmp$_29, tmp$_30, tmp$_31, tmp$_32, tmp$_33, tmp$_34, tmp$_35, tmp$_36, tmp$_37, tmp$_38, tmp$_39, tmp$_42, tmp$_43, tmp$_44, tmp$_45, 'expression', tmp$_46, tmp$_47, tmp$_48, '', tmp$_49, tmp$_50, tmp$_51, tmp$_52, tmp$_53, tmp$_54, sum_2, settings.targetWeight, item_3.solution, mapOf(to('data', item_3.solutionsStepTree)), mapOf(to('data', item_3.hints)), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, item_3.expressionTaskIntermediateData));
+      tmp$_30.call(destination_11, new TaskITR(tmp$_31, tmp$_32, tmp$_33, tmp$_34, tmp$_35, tmp$_36, tmp$_37, tmp$_38, tmp$_39, tmp$_40, tmp$_41, tmp$_44, tmp$_45, tmp$_46, tmp$_47, 'expression', tmp$_48, tmp$_49, tmp$_50, '', tmp$_51, tmp$_52, tmp$_53, tmp$_54, tmp$_55, tmp$_56, sum_3, settings.targetWeight, item_3.solution, mapOf(to('data', item_3.solutionsStepTree)), mapOf(to('data', item_3.hints)), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, item_3.expressionTaskIntermediateData));
     }
     return destination_11;
   }
@@ -40122,30 +39760,27 @@ var twf_js = function (_, Kotlin) {
     };
   }
   function sortTasks$lambda_0(it) {
-    return it.currentExpression.getDepth();
-  }
-  function sortTasks$lambda_1(it) {
     return it.currentExpression.identifier.length;
   }
-  function sortTasks$lambda_2(closure$expressionLengthAscComparator) {
+  function sortTasks$lambda_1(closure$expressionLengthComparator) {
     return function (t1, t2) {
-      return reversed_0(closure$expressionLengthAscComparator).compare(t1, t2);
+      return closure$expressionLengthComparator.v.compare(t1, t2);
     };
   }
-  function sortTasks(tasks, sortType, tagsChosen) {
+  function sortTasks(tasks, sortType, sortOrder, tagsChosen) {
     var tmp$;
-    var tagUsageDescComparator = reversed_0(new Comparator$ObjectLiteral_11(compareBy$lambda_5(sortTasks$lambda(tagsChosen))));
-    var treeDepthDescComparator = reversed_0(new Comparator$ObjectLiteral_11(compareBy$lambda_5(sortTasks$lambda_0)));
-    var expressionLengthAscComparator = new Comparator$ObjectLiteral_11(compareBy$lambda_5(sortTasks$lambda_1));
+    var tagUsageComparator = new Comparator$ObjectLiteral_11(compareBy$lambda_5(sortTasks$lambda(tagsChosen)));
+    var expressionLengthComparator = {v: new Comparator$ObjectLiteral_11(compareBy$lambda_5(sortTasks$lambda_0))};
+    if (sortOrder === SortOrder$DESC_getInstance()) {
+      tagUsageComparator = reversed_0(tagUsageComparator);
+      expressionLengthComparator.v = reversed_0(expressionLengthComparator.v);
+    }
     switch (sortType.name) {
-      case 'BY_RULE_TAG_USAGE_DESC':
-        tmp$ = toMutableList(sortedWith(tasks, new Comparator$ObjectLiteral_12(thenComparator$lambda(tagUsageDescComparator, sortTasks$lambda_2(expressionLengthAscComparator)))));
+      case 'BY_RULE_TAG_USAGE':
+        tmp$ = toMutableList(sortedWith(tasks, new Comparator$ObjectLiteral_12(thenComparator$lambda(tagUsageComparator, sortTasks$lambda_1(expressionLengthComparator)))));
         break;
-      case 'BY_TASK_LENGTH_DESC':
-        tmp$ = toMutableList(sortedWith(tasks, reversed_0(expressionLengthAscComparator)));
-        break;
-      case 'BY_TASK_LENGTH_ASC':
-        tmp$ = toMutableList(sortedWith(tasks, expressionLengthAscComparator));
+      case 'BY_TASK_LENGTH':
+        tmp$ = toMutableList(sortedWith(tasks, expressionLengthComparator.v));
         break;
       default:tmp$ = Kotlin.noWhenBranchMatched();
         break;
@@ -40153,24 +39788,9 @@ var twf_js = function (_, Kotlin) {
     return tmp$;
   }
   function tryToGenerateNewTasks(currentTask, newCurrentTasks, settings, stepId) {
-    var tmp$;
     var compiledConfiguration = settings.compiledConfiguration;
     var currentExpression = currentTask.currentExpression;
     currentExpression.computeNodeIdsAsNumbersInDirectTraversalAndDistancesToRoot_ydzd23$();
-    var tmp$_0;
-    var sum = 0.0;
-    tmp$_0 = currentTask.usedSubstitutions.iterator();
-    while (tmp$_0.hasNext()) {
-      var element = tmp$_0.next();
-      sum += element.difficultyInTaskAutoGeneration;
-    }
-    if (sum < settings.targetWeight * settings.extendReduceFactor) {
-      tmp$ = settings.extendingExpressionSubstitutions;
-    }
-     else {
-      tmp$ = settings.reducingExpressionSubstitutions;
-    }
-    setExpressionSubstitutions(compiledConfiguration, tmp$);
     placesThenSubstitutionsGenerator(currentTask, newCurrentTasks, compiledConfiguration, stepId);
     substitutionsThenPlacesGenerator(currentTask, newCurrentTasks, settings, stepId);
   }
@@ -40459,88 +40079,6 @@ var twf_js = function (_, Kotlin) {
     }
     return unifiedTasks;
   }
-  function LogarithmsRulePack() {
-    LogarithmsRulePack$Companion_getInstance();
-  }
-  function LogarithmsRulePack$Companion() {
-    LogarithmsRulePack$Companion_instance = this;
-    this.extendingFromSingleNumber = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(1)))', '(log(a;/(1;a)))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(log(1;a))', 25, true, false, false, false, void 0, void 0, void 0, 2.7), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(+(log(a;b);-(log(a;b))))', 25, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(log(a;a))', 25, true, false, false, false, void 0, void 0, void 0, 2.6), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(x;log(a;1)))', 25, true, false, false, false, void 0, void 0, void 0, 2.6), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(+(log(a;a);log(b;b)))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(2)', '(log(^(a;2);a))', 25, true, false, false, false, void 0, void 0, void 0, 4.75), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(3)', '(log(^(a;3);a))', 25, true, false, false, false, void 0, void 0, void 0, 4.75), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(3)', '(+(log(a;a);log(b;b);log(c;c)))', 25, true, false, false, false, void 0, void 0, void 0, 3.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(4)', '(log(^(a;4);a))', 25, true, false, false, false, void 0, void 0, void 0, 5.0)]);
-    this.extendingFromSimpleLogarithm = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;a))', '(/(log(a;b);log(a;b)))', 25, true, false, false, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;a))', '(log(*(a;3);*(a;3)))', 25, true, false, false, false, void 0, void 0, void 0, 2.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;a))', '(log(*(a;2);*(a;2)))', 25, true, false, false, false, void 0, void 0, void 0, 2.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(*(a;1);b))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(/(a;1);b))', 25, true, false, false, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(^(a;1);b))', 25, true, false, true, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(log(/(*(a;c);c);b))', 25, true, false, true, false, void 0, void 0, void 0, 1.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(+(-(log(/(1;a);b))))', 25, true, false, false, false, void 0, void 0, void 0, 6.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(c;b))', '(/(log(c;a);log(b;a)))', 25, true, false, false, false, void 0, void 0, void 0, 5.0)]);
-    this.extendingInLogarithmContext = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(a;2);b))', '(log(+(*(-(a;b);+(a;b));^(b;2));b))', 25, true, false, false, false, void 0, void 0, void 0, 5.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(1;a);b))', '(+(log(a;b);0))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(2;a);b))', '(+(log(a;b);log(a;b)))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, true, false, false, false, void 0, void 0, void 0, 2.5), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, true, false, false, false, void 0, void 0, void 0, 2.5)]);
-    this.extendingFromFraction = listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(m;k))', '(log(^(a;k);^(a;m)))', 25, true, false, false, false, void 0, void 0, void 0, 3.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;k))', '(log(^(a;k);a))', 25, true, false, false, false, void 0, void 0, void 0, 3.0)]);
-    this.logarithmsRulePack = new RulePackITR('LogarithmExtending', void 0, void 0, 'Logarithm extending rules', '\u0420\u0430\u0441\u0448\u0438\u0440\u044F\u044E\u0449\u0438\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043D\u0430 \u043B\u043E\u0433\u0430\u0440\u0438\u0444\u043C\u044B', '', '', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'Logarithm')), plus(plus(plus(this.extendingFromSingleNumber, this.extendingFromSimpleLogarithm), this.extendingInLogarithmContext), this.extendingFromFraction));
-  }
-  LogarithmsRulePack$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var LogarithmsRulePack$Companion_instance = null;
-  function LogarithmsRulePack$Companion_getInstance() {
-    if (LogarithmsRulePack$Companion_instance === null) {
-      new LogarithmsRulePack$Companion();
-    }
-    return LogarithmsRulePack$Companion_instance;
-  }
-  LogarithmsRulePack.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'LogarithmsRulePack',
-    interfaces: []
-  };
-  function LogarithmsStandardMathRulePacks() {
-    LogarithmsStandardMathRulePacks$Companion_getInstance();
-  }
-  function LogarithmsStandardMathRulePacks$Companion() {
-    LogarithmsStandardMathRulePacks$Companion_instance = this;
-    this.defaultStandardMathRulePacks = listOf_0([new RulePackITR('ArithmeticPositiveAddition', void 0, void 0, 'Addition of Positive Numbers', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u0447\u0435\u0442 \u0434\u043B\u044F \u043D\u0430\u0447\u0438\u043D\u0430\u044E\u0449\u0438\u0445', 'Addition of Positive Numbers', '\u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0447\u0438\u0441\u0435\u043B. \u0421\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u044B \u0442\u0430\u043A, \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u0434\u0430\u0442\u044C \u0432\u044B\u0439\u0442\u0438 \u0432 \u043E\u0442\u0440\u0438\u0446\u0430\u0442\u0435\u043B\u044C\u043D\u0443\u044E \u043E\u0431\u043B\u0430\u0441\u0442\u044C', 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 35, true, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('PositiveNumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false)])), new RulePackITR('ArithmeticAddition', void 0, void 0, 'Addition and Subtraction', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', 'Arithmetic Addition and Subtraction', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435', void 0, void 0, 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a))', '(a)', 30, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;b))', '(+(b;a))', 20, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(a;0))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(+(-(a)))))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(+(-(a))))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(-(a)))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(+(-(+(-(a)))))', 95, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;-(a)))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(a);a))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(-(a))))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(-(a));a))', '(0)', 4, false, false, false, false), new RuleITR('SimpleComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('ZeroComputation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 5, false, false, false, false), new RuleITR('NumberPlusMinus1', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 20, false, false, false, false), new RuleITR('MinusInOutBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 31, false, false, false, false), new RuleITR('ParentBracketsExpansion', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ArgumentsSwap', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutation', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 40, false, false, false, false), new RuleITR('ArgumentsPermutationInOriginalOrder', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 41, false, false, false, false), new RuleITR('AdditiveComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false)])), new RulePackITR('ArithmeticMultiplication', void 0, void 0, 'Addition Subtraction Multiplication', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Arithmetic Addition, Subtraction and Multiplication', '\u0410\u0440\u0438\u0444\u043C\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435 \u0438 \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticAddition')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;0))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(0;a))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0)', '(*(a;0))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;1))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(1;a))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(*(a;1))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;b))', '(*(b;a))', 20, true, false, false, false), new RuleITR('OpeningBrackets', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 30, false, false, false, false), new RuleITR('ReduceArithmetic', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('TwoSidesArithmeticReduce', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('MultiplicationFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;a))', '(*(2;a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;+(a)))', '(*(2;a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a);a))', '(*(2;a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(2;a))', '(+(a;a))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;*(a;n)))', '(*(a;+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(n;1)))', '(+(a;*(a;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(*(a;n);a))', '(*(a;+(1;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(1;n)))', '(+(*(a;n);a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(*(A;C)))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;-(C)))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);C))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(*(A;C))))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(+(-(*(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(*(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(*(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(-(A);-(B)))', '(*(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;B))', '(*(+(-(A));+(-(B))))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));+(-(B))))', '(*(A;B))', 35, false, false, false, false)])), new RulePackITR('ArithmeticDivision', void 0, void 0, 'Rational Numbers', '\u0420\u0430\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0447\u0438\u0441\u043B\u0430', 'Addition, Subtraction, Multiplication and Division', '\u0421\u043B\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0443\u043D\u043E\u0436\u0435\u043D\u0438\u0435 \u0438 \u0434\u0435\u043B\u0435\u043D\u0438\u0435', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(0;a))', '(0)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;1))', '(a)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;a))', '(1)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;a);a))', '(1)', 4, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(1;a)))', '(a)', 4, false, true, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(/(1;/(1;a)))', 90, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(0.5)', '(/(1;2))', 15, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;2))', '(0.5)', 5, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;b))', '(/(*(a;b);*(b;b)))', 90, true, false, false, false), new RuleITR('MultiplicativeComplicatingExtension', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 92, false, false, false, false), new RuleITR('ReduceFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 10, false, false, false, false), new RuleITR('DecimalToFraction', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(/(A;C)))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;-(C)))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);C))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(/(A;C))))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(+(-(/(A;C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(/(+(-(A));C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(/(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(-(A);-(B)))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(+(-(A));+(-(B))))', 80, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));+(-(B))))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);/(A;D)))', '(/(+(*(B;D);*(C;A));*(C;D)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(/(B;C);-(/(A;D))))', '(/(+(*(B;D);-(*(C;A)));*(C;D)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;A)))', '(B)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;A);A))', '(B)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;/(B;C)))', '(/(*(A;B);C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(B;C);A))', '(/(*(A;B);C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(/(1;/(B;A)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(B;A)))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;B);C))', '(*(A;/(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(/(B;C);A))', '(/(B;*(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;*(A;C)))', '(/(/(B;C);A))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;/(B;C)))', '(/(*(A;C);B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;C);B))', '(/(A;/(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(A;B);/(1;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;*(B;C)))', '(*(/(1;B);/(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(A;B);/(1;C)))', '(/(A;*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;B);/(A;C)))', '(/(A;*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(D;B);/(A;C)))', '(/(*(D;A);*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;C)))', '(*(/(D;B);/(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(B;A)))', '(/(D;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);*(D;C)))', '(/(A;C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(D;A);D))', '(A)', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(*(A;D);D))', '(A)', 35, false, false, false, false)])), new RulePackITR('ArithmeticExponentiation', void 0, void 0, 'Algebraic Numbers', '\u0410\u043B\u0433\u0435\u0431\u0440\u0430\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0447\u0438\u0441\u043B\u0430', 'Pow, Ratio, Product, Difference, Sum', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C, \u0447\u0430\u0441\u0442\u043D\u043E\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C, \u0441\u0443\u043C\u043C\u0430', 'Pow, Division, Multiplication, Subtraction, Addition', '\u0412\u043E\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435 \u0432 \u0441\u0442\u0435\u043F\u0435\u043D\u044C, \u0434\u0435\u043B\u0435\u043D\u0438\u0435, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0447\u0438\u0442\u0430\u043D\u0438\u0435, \u0441\u043B\u043E\u0436\u0435\u043D\u0438\u0435', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticDivision')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(a;1))', 95, true, false, true, false, void 0, void 0, void 0, 0.0), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;2))', 95, true, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(1)', '(^(1;3))', 95, true, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;a))', '(^(a;+(-(1))))', 80, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(-(1))))', '(/(1;a))', 40, false, false, false, false), new RuleITR('PowFactorization', void 0, void 0, void 0, void 0, void 0, void 0, '', '', 15, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(b;-(c))))', '(/(^(a;b);^(a;c)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;b);^(a;c)))', '(^(a;+(b;-(c))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(B;^(A;C)))', '(*(B;^(A;+(-(C)))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(B;^(A;+(-(C)))))', '(/(B;^(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(A;C)))', '(^(A;+(-(C))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;+(-(C))))', '(/(1;^(A;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;B))', '(^(/(B;A);+(-(1))))', 35, true, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;A);+(-(1))))', '(/(A;B))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;0))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(1;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;1))', '(A)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(0;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a))', '(^(a;2))', 40, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(*(a;a))', 40, false, false, true, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;^(a;n)))', '(^(a;+(n;1)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;1)))', '(*(a;^(a;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(^(a;n);a))', '(^(a;+(1;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(1;n)))', '(*(^(a;n);a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(a;n);a))', '(^(a;+(n;-(1))))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(n;-(1))))', '(/(^(a;n);a))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;*(B;C)))', '(^(^(A;B);C))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(A;B);C))', '(^(A;*(B;C)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(/(B;C);A))', '(/(^(B;A);^(C;A)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(^(B;A);^(C;A)))', '(^(/(B;C);A))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);2))', '(^(A;2))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));2))', '(^(A;2))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;*(2;n)))', '(^(+(-(a));*(2;n)))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;2))', '(^(+(-(a));2))', 35, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;b);/(1;b)))', '(a)', 5, false, false, false, false)])), new RulePackITR('ArithmeticPowExtension', void 0, void 0, 'Pow from Root and Root from Pow', '\u0421\u0442\u0435\u043F\u0435\u043D\u044C \u0438\u0437 \u043A\u043E\u0440\u043D\u044F \u0438 \u043A\u043E\u0440\u0435\u043D\u044C \u0438\u0437 \u0441\u0442\u0435\u043F\u0435\u043D\u0438', 'Straight and Reverse Application of Root and Pow', '\u041F\u0440\u044F\u043C\u043E\u0435 \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u043E\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0441\u0442\u0435\u043F\u0435\u043D\u0438 \u0438 \u043A\u043E\u0440\u043D\u044F', 'Moved to separate rule pack because of not full domain', '\u0412\u044B\u043D\u0435\u0441\u0435\u043D\u043E \u0432 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0430\u043A\u0435\u0442 \u043F\u0440\u0430\u0432\u0438\u043B \u0442\u0430\u043A \u043A\u0430\u043A \u043D\u0435 \u0432\u0435\u0437\u0434\u0435 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043E', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;2);/(1;2)))', 96, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;2));2))', 96, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;3);/(1;3)))', 96, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(a)', '(^(^(a;/(1;3));3))', 96, false, false, false, false)])), new RulePackITR('ShortMultiplication', void 0, void 0, 'Short Multiplication', '\u0421\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0435 \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435', 'Short Multiplication Formulas', '\u0424\u043E\u0440\u043C\u0443\u043B\u044B \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u043D\u043E\u0433\u043E \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u044F', 'Difference of Squares, Square of Sum, Square of Difference, Sum of Cubes, Difference of Cubes, Cube of Sum, Cube of Difference', '\u0420\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0432\u0430\u0434\u0440\u0430\u0442\u043E\u0432, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0441\u0443\u043C\u043C\u044B, \u043A\u0432\u0430\u0434\u0440\u0430\u0442 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438, \u0441\u0443\u043C\u043C\u0430 \u043A\u0443\u0431\u043E\u0432, \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u044C \u043A\u0443\u0431\u043E\u0432, \u043A\u0443\u0431 \u0441\u0443\u043C\u043C\u044B, \u043A\u0443\u0431 \u0440\u0430\u0437\u043D\u043E\u0441\u0442\u0438', 'standard_math', listOf(new RulePackLinkITR(void 0, 'ArithmeticExponentiation')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(^(b;2))))', '(*(+(a;-(b));+(a;b)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(a;b)))', '(+(^(a;2);-(^(b;2))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);2))', '(+(^(a;2);*(2;a;b);^(b;2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a;b);^(b;2)))', '(^(+(a;b);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);*(2;a);1))', '(^(+(a;1);2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));2))', '(+(^(a;2);-(*(2;a;b));^(b;2)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a;b));^(b;2)))', '(^(+(a;-(b));2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;2);-(*(2;a));1))', '(^(+(a;-(1));2))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;b);3))', '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2);b);*(3;a;^(b;2));^(b;3)))', '(^(+(a;b);3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);*(3;^(a;2));*(3;a);1))', '(^(+(a;1);3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(a;-(b));3))', '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2);b));*(3;a;^(b;2));-(^(b;3))))', '(^(+(a;-(b));3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(*(3;^(a;2)));*(3;a);-(1)))', '(^(+(a;-(1));3))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);-(^(b;3))))', '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', 25, true, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(b));+(^(a;2);*(a;b);^(b;2))))', '(+(^(a;3);-(^(b;3))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;-(1));+(^(a;2);a;1)))', '(+(^(a;3);-(^(1;3))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(^(a;3);^(b;3)))', '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;b);+(^(a;2);-(*(a;b));^(b;2))))', '(+(^(a;3);^(b;3)))', 25, false, true, false, false, 'SORTED'), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(a;1);+(^(a;2);-(a);1)))', '(+(^(a;3);^(1;3)))', 25, false, true, false, false, 'SORTED')])), new RulePackITR('Logarithm', void 0, void 0, 'Logarithm', '\u041B\u043E\u0433\u0430\u0440\u0438\u0444\u043C', 'Basic Properties Without Regard to Domain', '\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0431\u0435\u0437 \u0443\u0447\u0435\u0442\u0430 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F', void 0, void 0, 'standard_math', listOf(new RulePackLinkITR(void 0, 'ShortMultiplication')), listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;log(b;a)))', '(b)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(1;A))', '(0)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(A;A))', '(1)', 5, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c);a))', '(+(log(b;a);log(c;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a)))', '(log(*(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d);a))', '(+(log(b;a);log(c;a);log(d;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a)))', '(log(*(b;c;d);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(*(b;c;d;e);a))', '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);log(c;a);log(d;a);log(e;a)))', '(log(*(b;c;d;e);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(log(b;a);-(log(c;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(log(b;a);-(log(c;a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(^(b;c);a))', '(*(c;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(c;log(b;a)))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(log(b;a);c))', '(log(^(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;^(a;k)))', '(/(log(b;a);k))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(b;a);k))', '(log(b;^(a;k)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;log(b;a)))', '(log(a;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(a;b))', '(/(1;log(b;a)))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(log(c;a);log(b;a)))', '(log(c;b))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(b;c);a))', '(+(-(log(/(c;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(c;b);a))))', '(log(/(b;c);a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(b;a))', '(+(-(log(/(1;b);a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(/(1;b);a))))', '(log(b;a))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(log(/(1;b);a))', '(+(-(log(b;a))))', 25, false, false, false, false), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(log(b;a))))', '(log(/(1;b);a))', 25, false, false, false, false)]))]);
-  }
-  LogarithmsStandardMathRulePacks$Companion.prototype.get = function () {
-    return this.defaultStandardMathRulePacks;
-  };
-  LogarithmsStandardMathRulePacks$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var LogarithmsStandardMathRulePacks$Companion_instance = null;
-  function LogarithmsStandardMathRulePacks$Companion_getInstance() {
-    if (LogarithmsStandardMathRulePacks$Companion_instance === null) {
-      new LogarithmsStandardMathRulePacks$Companion();
-    }
-    return LogarithmsStandardMathRulePacks$Companion_instance;
-  }
-  LogarithmsStandardMathRulePacks.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'LogarithmsStandardMathRulePacks',
-    interfaces: []
-  };
-  function PostprocessorRulePack() {
-    PostprocessorRulePack$Companion_getInstance();
-  }
-  function PostprocessorRulePack$Companion() {
-    PostprocessorRulePack$Companion_instance = this;
-    this.postprocessorRulePack = listOf(new RulePackITR('PostprocessorRules', void 0, void 0, 'Postprocessor Rules', '\u041F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u043F\u043E\u0441\u0442\u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440\u0430', 'Postprocessor Rules', '\u041F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u043F\u043E\u0441\u0442\u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440\u0430', "This rules are applied to every autogenerated task in order to normalize it's form", '\u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u043A \u043A\u0430\u0436\u0434\u043E\u0439 \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u043E\u0439 \u0430\u0432\u0442\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C \u0437\u0430\u0434\u0430\u0447\u0435 \u0441 \u0446\u0435\u043B\u044C\u044E \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u0447\u0438 \u043A \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E\u043C\u0443 \u0432\u0438\u0434\u0443', 'standard_math', void 0, listOf_0([new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(+(-(a)))))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(+(-(a))))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(-(-(a)))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(1;a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;a))', '(*(2;a))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*((+(-(A)));C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;(+(-(C)))))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));C))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(C))))', '(+(-(*(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(A));+(-(B))))', '(*(A;B))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(A;+(-(1))))', '(+(-(*(A;1))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;1))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;a))', '(1)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(/(1;a);a))', '(1)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(1;a)))', '(a)', 4, false, true, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;(+(-(C)))))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(+(-(A));C))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;+(-(C))))', '(+(-(/(A;C))))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;/(B;A)))', '(/(A;B))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(A;/(B;C)))', '(/(*(A;C);B))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(a;+(-(1))))', '(/(1;a))', 40, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^((/(1;a));+(-(1))))', '(a)', 40, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(a;+(-(1)))))', '(a)', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;^(a;+(-(b)))))', '(^(a;b))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;+(-(C))))', '(/(1;^(A;C)))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(A;1))', '(A)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a))', '(^(a;2))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;a;b))', '(*(^(a;2);b))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(b;a;a))', '(*(b;^(a;2)))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(+(-(a));a))', '(+(-(^(a;2))))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;+(-(a))))', '(+(-(^(a;2))))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*((+(-(a)));(+(-(a)))))', '(^(a;2))', 40, false, false, true, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(-(A);2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));*(2;n)))', '(^(A;*(2;n)))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(+(-(A));2))', '(^(A;2))', 35, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;0.5);2))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(^(^(a;2);0.5))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;(^(a;(+(-(1)))))))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;(^(a;(+(-(b)))))))', '(^(a;b))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;-(a)))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(-(a);a))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(a;0))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(0;a))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(0;a))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(a;0))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(0;a))', '(0)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;b;c))', '(/(*(a;c);b))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a;b);c))', '(+(a;b;c))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a;b);-(c)))', '(+(a;b;+(-(c))))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(+(+(a;-(b));c))', '(+(a;+(-(b));c))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;^(/(b;c);n)))', '(/(*(a;^(c;n));^(b;n)))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(a;0.5))', '(*(2;a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(*(n;/(a;n)))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;tg(a)))', '(ctg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(1;ctg(a)))', '(tg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(sin(a);cos(a)))', '(tg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(/(cos(a);sin(a)))', '(ctg(a))', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(not(not(a)))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a;a))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a;a))', '(a)', 5, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(or(a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(and(a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true), new RuleITR('', void 0, void 0, void 0, void 0, void 0, void 0, '(alleq(a))', '(a)', 4, false, false, false, false, void 0, void 0, void 0, 0.0, true)])));
-  }
-  PostprocessorRulePack$Companion.prototype.get = function () {
-    return this.postprocessorRulePack.get_za3lpa$(0);
-  };
-  PostprocessorRulePack$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var PostprocessorRulePack$Companion_instance = null;
-  function PostprocessorRulePack$Companion_getInstance() {
-    if (PostprocessorRulePack$Companion_instance === null) {
-      new PostprocessorRulePack$Companion();
-    }
-    return PostprocessorRulePack$Companion_instance;
-  }
-  PostprocessorRulePack.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'PostprocessorRulePack',
-    interfaces: []
-  };
   function VariableLink(targetVariable, computingExpression, sourceVariables, comparisonType) {
     this.targetVariable = targetVariable;
     this.computingExpression = computingExpression;
@@ -41011,52 +40549,520 @@ var twf_js = function (_, Kotlin) {
     }
     return result.toString();
   }
-  _.createCompiledConfigurationFromExpressionSubstitutionsAndParams = createCompiledConfigurationFromExpressionSubstitutionsAndParams_JS;
-  _.createConfigurationFromRulePacksAndParams = createConfigurationFromRulePacksAndParams_JS;
-  _.createConfigurationFromRulePacksAndDetailSolutionCheckingParams = createConfigurationFromRulePacksAndDetailSolutionCheckingParams_JS;
-  _.stringToExpression = stringToExpression_JS;
-  _.structureStringToExpression = structureStringToExpression_JS;
-  _.cloneExpression = cloneExpression_JS;
-  _.expressionToString = expressionToString_JS;
-  _.expressionToUnicodeString = expressionToUnicodeString_JS;
-  _.expressionToTexString = expressionToTexString_JS;
-  _.expressionToStructureString = expressionToStructureString_JS;
-  _.stringToStructureString = stringToStructureString_JS;
-  _.expressionSubstitutionFromStrings = expressionSubstitutionFromStrings;
-  _.expressionSubstitutionFromStructureStrings = expressionSubstitutionFromStructureStrings_JS;
-  _.findApplicableSubstitutionsInSelectedPlace = findApplicableSubstitutionsInSelectedPlace_JS;
-  _.findSubstitutionPlacesInExpression = findSubstitutionPlacesInExpression;
-  _.applySubstitution = applySubstitution;
-  _.checkSolutionInTex = checkSolutionInTex_JS;
-  _.checkSolutionInTexWithCompiledConfiguration = checkSolutionInTexWithCompiledConfiguration_JS;
-  _.createCompiledConfigurationFromITR = createCompiledConfigurationFromITR_JS;
-  _.checkSolutionInTexITR = checkSolutionInTexITR_JS;
-  _.getParsedExpressionByMathML = getParsedExpressionByMathML;
-  _.checkFactsInMathML = checkFactsInMathML;
-  _.getUserLogInPlainText = getUserLogInPlainText;
-  _.getUserLogInJson = getUserLogInJson;
-  _.getAllLogInPlainText = getAllLogInPlainText;
-  _.getAllLogInJson = getAllLogInJson;
-  _.encryptSolution = encryptSolution;
-  _.encryptResult = encryptResult;
-  _.decodeUrlSymbols = decodeUrlSymbols_JS;
-  _.compareWithoutSubstitutions = compareWithoutSubstitutions;
-  _.createExpressionFrontInput = createExpressionFrontInput_JS;
-  _.createRuleITR = createRuleITR_JS;
-  _.createRulePackLinkITR = createRulePackLinkITR_JS;
-  _.createRulePackITR = createRulePackITR_JS;
-  _.createTaskITR = createTaskITR_JS;
-  _.arrayToList = arrayToList_JS;
-  _.listToArray = listToArray_JS;
-  _.arrayToSet = arrayToSet_JS;
-  _.dinamicToMap = dinamicToMap_JS;
-  _.jsonStringToMap = jsonStringToMap_JS;
-  _.jsonToMap = jsonToMap_JS;
-  _.generateTasks = generateTasks_JS;
-  _.getAllTagsForGeneration = getAllTagsForGeneration_JS;
-  _.getAllSortTypesForGeneration = getAllSortTypesForGeneration_JS;
-  _.getLogOfGeneration = getLogOfGeneration_JS;
-  _.getReportOfGeneration = getReportOfGeneration_JS;
+  function createCompiledConfigurationFromExpressionSubstitutionsAndParams_JS(expressionSubstitutions, additionalParamsMap) {
+    if (additionalParamsMap === void 0) {
+      additionalParamsMap = emptyMap();
+    }
+    return createCompiledConfigurationFromExpressionSubstitutionsAndParams(expressionSubstitutions, additionalParamsMap);
+  }
+  function createConfigurationFromRulePacksAndParams_JS(rulePacks, additionalParamsMap) {
+    if (rulePacks === void 0) {
+      rulePacks = copyToArray(listOf('Algebra'));
+    }
+    if (additionalParamsMap === void 0) {
+      additionalParamsMap = emptyMap();
+    }
+    return createConfigurationFromRulePacksAndParams(rulePacks, additionalParamsMap);
+  }
+  function createConfigurationFromRulePacksAndDetailSolutionCheckingParams_JS(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, wellKnownFunctions, unlimitedWellKnownFunctions, expressionTransformationRules) {
+    if (rulePacks === void 0) {
+      rulePacks = copyToArray(listOf('Algebra'));
+    }
+    if (wellKnownFunctionsString === void 0)
+      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
+    if (expressionTransformationRulesString === void 0)
+      expressionTransformationRulesString = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
+    if (maxExpressionTransformationWeight === void 0)
+      maxExpressionTransformationWeight = '1.0';
+    if (unlimitedWellKnownFunctionsString === void 0)
+      unlimitedWellKnownFunctionsString = wellKnownFunctionsString;
+    if (taskContextExpressionTransformationRules === void 0)
+      taskContextExpressionTransformationRules = '';
+    if (maxDistBetweenDiffSteps === void 0)
+      maxDistBetweenDiffSteps = '';
+    if (scopeFilter === void 0)
+      scopeFilter = '';
+    if (wellKnownFunctions === void 0)
+      wellKnownFunctions = [];
+    if (unlimitedWellKnownFunctions === void 0)
+      unlimitedWellKnownFunctions = wellKnownFunctions;
+    if (expressionTransformationRules === void 0)
+      expressionTransformationRules = [];
+    return createConfigurationFromRulePacksAndDetailSolutionCheckingParams(rulePacks, wellKnownFunctionsString, expressionTransformationRulesString, maxExpressionTransformationWeight, unlimitedWellKnownFunctionsString, taskContextExpressionTransformationRules, maxDistBetweenDiffSteps, scopeFilter, toList(wellKnownFunctions), toList(unlimitedWellKnownFunctions), toList(expressionTransformationRules));
+  }
+  function stringToExpression_JS(string, scope, isMathMl, functionConfiguration, compiledConfiguration) {
+    if (scope === void 0)
+      scope = '';
+    if (isMathMl === void 0)
+      isMathMl = false;
+    if (functionConfiguration === void 0) {
+      var $receiver = split(scope, [';']);
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.length > 0)
+          destination.add_11rb$(element);
+      }
+      functionConfiguration = new FunctionConfiguration(toSet(destination));
+    }
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
+    return stringToExpression(string, scope, isMathMl, functionConfiguration, compiledConfiguration);
+  }
+  function structureStringToExpression_JS(structureString, scope, functionConfiguration) {
+    if (scope === void 0)
+      scope = '';
+    if (functionConfiguration === void 0) {
+      var $receiver = split(scope, [';']);
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.length > 0)
+          destination.add_11rb$(element);
+      }
+      functionConfiguration = new FunctionConfiguration(toSet(destination));
+    }
+    return structureStringToExpression(structureString, scope, functionConfiguration);
+  }
+  function cloneExpression_JS(expressionNode) {
+    return expressionNode.clone();
+  }
+  function expressionToString_JS(expressionNode, characterEscapingDepth) {
+    if (characterEscapingDepth === void 0)
+      characterEscapingDepth = 1;
+    return expressionToString(expressionNode, characterEscapingDepth);
+  }
+  function expressionToUnicodeString_JS(expressionNode, characterEscapingDepth) {
+    if (characterEscapingDepth === void 0)
+      characterEscapingDepth = 1;
+    return expressionToUnicodeString(expressionNode, characterEscapingDepth);
+  }
+  function expressionToTexString_JS(expressionNode, characterEscapingDepth) {
+    if (characterEscapingDepth === void 0)
+      characterEscapingDepth = 1;
+    return expressionToTexString(expressionNode, characterEscapingDepth);
+  }
+  function expressionToStructureString_JS(expressionNode) {
+    return expressionToStructureString(expressionNode);
+  }
+  function stringToStructureString_JS(string, scope, isMathMl, functionConfiguration, compiledConfiguration) {
+    if (scope === void 0)
+      scope = '';
+    if (isMathMl === void 0)
+      isMathMl = false;
+    if (functionConfiguration === void 0) {
+      var $receiver = split(scope, [';']);
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.length > 0)
+          destination.add_11rb$(element);
+      }
+      functionConfiguration = new FunctionConfiguration(toSet(destination));
+    }
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
+    return stringToStructureString(string, scope, isMathMl, functionConfiguration, compiledConfiguration);
+  }
+  function expressionSubstitutionFromStrings_0(left, right, scope, basedOnTaskContext, functionConfiguration, compiledConfiguration) {
+    if (scope === void 0)
+      scope = '';
+    if (basedOnTaskContext === void 0)
+      basedOnTaskContext = false;
+    if (functionConfiguration === void 0) {
+      var $receiver = split(scope, [';']);
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.length > 0)
+          destination.add_11rb$(element);
+      }
+      functionConfiguration = new FunctionConfiguration(toSet(destination));
+    }
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
+    return expressionSubstitutionFromStrings(left, right, scope, basedOnTaskContext, void 0, void 0, void 0, void 0, void 0, functionConfiguration, compiledConfiguration);
+  }
+  function expressionSubstitutionFromStructureStrings_JS(leftStructureString, rightStructureString, basedOnTaskContext, matchJumbledAndNested, simpleAdditional, isExtending, priority, code, nameEn, nameRu) {
+    if (leftStructureString === void 0)
+      leftStructureString = '';
+    if (rightStructureString === void 0)
+      rightStructureString = '';
+    if (basedOnTaskContext === void 0)
+      basedOnTaskContext = false;
+    if (matchJumbledAndNested === void 0)
+      matchJumbledAndNested = false;
+    if (simpleAdditional === void 0)
+      simpleAdditional = false;
+    if (isExtending === void 0)
+      isExtending = false;
+    if (priority === void 0)
+      priority = 50;
+    if (code === void 0)
+      code = '';
+    if (nameEn === void 0)
+      nameEn = '';
+    if (nameRu === void 0)
+      nameRu = '';
+    return expressionSubstitutionFromStructureStrings(leftStructureString, rightStructureString, basedOnTaskContext, matchJumbledAndNested, simpleAdditional, isExtending, priority, code, nameEn, nameRu);
+  }
+  function findApplicableSubstitutionsInSelectedPlace_JS(expression, selectedNodeIds, compiledConfiguration, simplifyNotSelectedTopArguments, withReadyApplicationResult) {
+    if (simplifyNotSelectedTopArguments === void 0)
+      simplifyNotSelectedTopArguments = false;
+    if (withReadyApplicationResult === void 0)
+      withReadyApplicationResult = true;
+    return copyToArray(findApplicableSubstitutionsInSelectedPlace(expression, selectedNodeIds, compiledConfiguration, simplifyNotSelectedTopArguments, withReadyApplicationResult));
+  }
+  function findSubstitutionPlacesInExpression_0(expression, substitution) {
+    return copyToArray(findSubstitutionPlacesInExpression(expression, substitution));
+  }
+  function applySubstitution_1(expression, substitution, substitutionPlaces) {
+    return applySubstitution(expression, substitution, toList(substitutionPlaces));
+  }
+  function checkSolutionInTex_JS(originalTexSolution, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, comparisonSign, wellKnownFunctions, wellKnownFunctionsString, unlimitedWellKnownFunctions, unlimitedWellKnownFunctionsString, expressionTransformationRules, expressionTransformationRulesString, taskContextExpressionTransformationRules, rulePacks, maxExpressionTransformationWeight, maxDistBetweenDiffSteps, scopeFilter, shortErrorDescription) {
+    if (startExpressionIdentifier === void 0)
+      startExpressionIdentifier = '';
+    if (targetFactPattern === void 0)
+      targetFactPattern = '';
+    if (additionalFactsIdentifiers === void 0)
+      additionalFactsIdentifiers = '';
+    if (endExpressionIdentifier === void 0)
+      endExpressionIdentifier = '';
+    if (targetFactIdentifier === void 0)
+      targetFactIdentifier = '';
+    if (comparisonSign === void 0)
+      comparisonSign = '';
+    if (wellKnownFunctions === void 0)
+      wellKnownFunctions = [];
+    if (wellKnownFunctionsString === void 0)
+      wellKnownFunctionsString = ';;;0;;;;;;1;;;+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1;;;^;;;-1';
+    if (unlimitedWellKnownFunctions === void 0)
+      unlimitedWellKnownFunctions = wellKnownFunctions;
+    if (unlimitedWellKnownFunctionsString === void 0)
+      unlimitedWellKnownFunctionsString = wellKnownFunctionsString;
+    if (expressionTransformationRules === void 0)
+      expressionTransformationRules = [];
+    if (expressionTransformationRulesString === void 0)
+      expressionTransformationRulesString = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
+    if (taskContextExpressionTransformationRules === void 0)
+      taskContextExpressionTransformationRules = '';
+    if (rulePacks === void 0) {
+      rulePacks = copyToArray(emptyList());
+    }
+    if (maxExpressionTransformationWeight === void 0)
+      maxExpressionTransformationWeight = '1.0';
+    if (maxDistBetweenDiffSteps === void 0)
+      maxDistBetweenDiffSteps = '';
+    if (scopeFilter === void 0)
+      scopeFilter = '';
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
+    return checkSolutionInTex(originalTexSolution, startExpressionIdentifier, targetFactPattern, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, comparisonSign, toList(wellKnownFunctions), wellKnownFunctionsString, toList(unlimitedWellKnownFunctions), unlimitedWellKnownFunctionsString, toList(expressionTransformationRules), expressionTransformationRulesString, taskContextExpressionTransformationRules, rulePacks, maxExpressionTransformationWeight, maxDistBetweenDiffSteps, scopeFilter, shortErrorDescription);
+  }
+  function checkSolutionInTexWithCompiledConfiguration_JS(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, comparisonSign, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription) {
+    if (startExpressionIdentifier === void 0)
+      startExpressionIdentifier = '';
+    if (targetFactPattern === void 0)
+      targetFactPattern = '';
+    if (additionalFactsIdentifiers === void 0)
+      additionalFactsIdentifiers = '';
+    if (endExpressionIdentifier === void 0)
+      endExpressionIdentifier = '';
+    if (targetFactIdentifier === void 0)
+      targetFactIdentifier = '';
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
+    return checkSolutionInTexWithCompiledConfiguration(originalTexSolution, compiledConfiguration, startExpressionIdentifier, targetFactPattern, comparisonSign, additionalFactsIdentifiers, endExpressionIdentifier, targetFactIdentifier, shortErrorDescription);
+  }
+  function createCompiledConfigurationFromITR_JS(taskITR, rulePacksITR, comparisonSettings) {
+    if (comparisonSettings === void 0)
+      comparisonSettings = new ComparisonSettings();
+    return createCompiledConfigurationFromITR(taskITR, rulePacksITR, comparisonSettings);
+  }
+  function checkSolutionInTexITR_JS(originalTexSolution, taskITR, rulePacksITR, shortErrorDescription, skipTrivialCheck, comparisonSettings, inputCompiledConfiguration) {
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
+    if (skipTrivialCheck === void 0)
+      skipTrivialCheck = false;
+    if (comparisonSettings === void 0)
+      comparisonSettings = new ComparisonSettings();
+    if (inputCompiledConfiguration === void 0)
+      inputCompiledConfiguration = null;
+    return checkSolutionInTexITR(originalTexSolution, taskITR, rulePacksITR, shortErrorDescription, skipTrivialCheck, comparisonSettings, inputCompiledConfiguration);
+  }
+  function getParsedExpressionByMathML(mathML) {
+    var expressionTreeParser = new ExpressionTreeParser(mathML);
+    expressionTreeParser.parse();
+    var root = expressionTreeParser.root;
+    return root.toString();
+  }
+  function checkFactsInMathML_0(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts) {
+    if (wellKnownFunctions === void 0)
+      wellKnownFunctions = '+;;;-1;;;-;;;-1;;;*;;;-1;;;/;;;-1';
+    if (expressionTransformationRules === void 0)
+      expressionTransformationRules = 'S(i, a, a, f(i));;;f(a);;;S(i, a, b, f(i));;;S(i, a, b-1, f(i)) + f(b)';
+    if (targetFactIdentifier === void 0)
+      targetFactIdentifier = '';
+    if (targetVariablesNames === void 0)
+      targetVariablesNames = '';
+    if (minNumberOfMultipliersInAnswer === void 0)
+      minNumberOfMultipliersInAnswer = '';
+    if (maxNumberOfDivisionsInAnswer === void 0)
+      maxNumberOfDivisionsInAnswer = '';
+    if (additionalFactsIdentifiers === void 0)
+      additionalFactsIdentifiers = '';
+    if (maxExpressionTransformationWeight === void 0)
+      maxExpressionTransformationWeight = '1.0';
+    if (unlimitedWellKnownFunctions === void 0)
+      unlimitedWellKnownFunctions = wellKnownFunctions;
+    if (shortErrorDescription === void 0)
+      shortErrorDescription = '0';
+    if (taskContextExpressionTransformationRules === void 0)
+      taskContextExpressionTransformationRules = '';
+    if (allowedVariablesNames === void 0)
+      allowedVariablesNames = '';
+    if (maxDistBetweenDiffSteps === void 0)
+      maxDistBetweenDiffSteps = '';
+    if (forbiddenFunctions === void 0)
+      forbiddenFunctions = '';
+    if (scopeFilter === void 0)
+      scopeFilter = '';
+    if (makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts === void 0)
+      makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts = '0';
+    return checkFactsInMathML(brushedMathML, wellKnownFunctions, expressionTransformationRules, targetFactIdentifier, targetVariablesNames, minNumberOfMultipliersInAnswer, maxNumberOfDivisionsInAnswer, additionalFactsIdentifiers, maxExpressionTransformationWeight, unlimitedWellKnownFunctions, shortErrorDescription, taskContextExpressionTransformationRules, allowedVariablesNames, maxDistBetweenDiffSteps, forbiddenFunctions, scopeFilter, makeFirstSingleTransformationChainFactCorrectWithoutAdditionalFacts);
+  }
+  function getUserLogInPlainText() {
+    return log_1.getLogInPlainText_ap6kjd$(MessageType$USER_getInstance());
+  }
+  function getUserLogInJson() {
+    return log_1.getLogInJson_j7vfu1$(MessageType$USER_getInstance());
+  }
+  function getAllLogInPlainText() {
+    return log_1.getLogInPlainText_ap6kjd$();
+  }
+  function getAllLogInJson() {
+    return log_1.getLogInJson_j7vfu1$();
+  }
+  function encryptSolution(solution) {
+    return hashCode(solution).toString() + '_' + solution.length;
+  }
+  function encryptResult(result, solution) {
+    return result + ' ' + hashCode(solution) + '_' + solution.length;
+  }
+  function decodeUrlSymbols_JS(string) {
+    return decodeUrlSymbols(string);
+  }
+  function compareWithoutSubstitutions_1(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, compiledConfiguration) {
+    if (scope === void 0)
+      scope = setOf('');
+    if (notChangesOnVariablesFunction === void 0)
+      notChangesOnVariablesFunction = setOf_0(['+', '-', '*', '/', '^']);
+    if (maxExpressionBustCount === void 0)
+      maxExpressionBustCount = 4096;
+    if (functionConfiguration === void 0)
+      functionConfiguration = new FunctionConfiguration(scope, notChangesOnVariablesFunction);
+    if (comparisonSettings === void 0) {
+      var $receiver = new ComparisonSettings();
+      $receiver.maxExpressionBustCount = maxExpressionBustCount;
+      comparisonSettings = $receiver;
+    }
+    if (compiledConfiguration === void 0)
+      compiledConfiguration = new CompiledConfiguration(void 0, functionConfiguration);
+    return compareWithoutSubstitutions(left, right, scope, notChangesOnVariablesFunction, maxExpressionBustCount, functionConfiguration, comparisonSettings, new DebugOutputMessages(), compiledConfiguration);
+  }
+  function createExpressionFrontInput_JS(expression, format) {
+    return createExpressionFrontInput(expression, format);
+  }
+  function createRuleITR_JS(code, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, left, right, priority, isExtending, matchJumbledAndNested, simpleAdditional, basedOnTaskContext, normalizationType, weight, subjectType) {
+    if (code === void 0)
+      code = null;
+    if (nameEn === void 0)
+      nameEn = null;
+    if (nameRu === void 0)
+      nameRu = null;
+    if (descriptionShortEn === void 0)
+      descriptionShortEn = null;
+    if (descriptionShortRu === void 0)
+      descriptionShortRu = null;
+    if (descriptionEn === void 0)
+      descriptionEn = null;
+    if (descriptionRu === void 0)
+      descriptionRu = null;
+    if (left === void 0)
+      left = null;
+    if (right === void 0)
+      right = null;
+    if (priority === void 0)
+      priority = null;
+    if (isExtending === void 0)
+      isExtending = null;
+    if (matchJumbledAndNested === void 0)
+      matchJumbledAndNested = null;
+    if (simpleAdditional === void 0)
+      simpleAdditional = null;
+    if (basedOnTaskContext === void 0)
+      basedOnTaskContext = null;
+    if (normalizationType === void 0)
+      normalizationType = null;
+    if (weight === void 0)
+      weight = null;
+    if (subjectType === void 0)
+      subjectType = null;
+    return createRuleITR(code, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, left, right, priority, isExtending, matchJumbledAndNested, simpleAdditional, basedOnTaskContext, normalizationType, weight, subjectType);
+  }
+  function createRulePackLinkITR_JS(namespaceCode, rulePackCode) {
+    if (namespaceCode === void 0)
+      namespaceCode = null;
+    if (rulePackCode === void 0)
+      rulePackCode = null;
+    return createRulePackLinkITR(namespaceCode, rulePackCode);
+  }
+  function createRulePackITR_JS(code, version, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, rulePacks, rules, otherCheckSolutionData, otherAutoGenerationData, otherData) {
+    if (code === void 0)
+      code = null;
+    if (version === void 0)
+      version = 0;
+    if (namespaceCode === void 0)
+      namespaceCode = null;
+    if (nameEn === void 0)
+      nameEn = null;
+    if (nameRu === void 0)
+      nameRu = null;
+    if (descriptionShortEn === void 0)
+      descriptionShortEn = null;
+    if (descriptionShortRu === void 0)
+      descriptionShortRu = null;
+    if (descriptionEn === void 0)
+      descriptionEn = null;
+    if (descriptionRu === void 0)
+      descriptionRu = null;
+    if (subjectType === void 0)
+      subjectType = 'standard_math';
+    if (rulePacks === void 0)
+      rulePacks = null;
+    if (rules === void 0)
+      rules = null;
+    if (otherCheckSolutionData === void 0)
+      otherCheckSolutionData = null;
+    if (otherAutoGenerationData === void 0)
+      otherAutoGenerationData = null;
+    if (otherData === void 0)
+      otherData = null;
+    return createRulePackITR(code, version, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, rulePacks != null ? toList(rulePacks) : null, rules != null ? toList(rules) : null, otherCheckSolutionData, otherAutoGenerationData, otherData);
+  }
+  function createTaskITR_JS(taskCreationType, code, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, tags, originalExpression, goalType, goalExpression, goalPattern, goalNumberProperty, otherGoalData, rulePacks, rules, stepsNumber, time, difficulty, solution, solutionsStepsTree, interestingFacts, nextRecommendedTasks, hints, otherCheckSolutionData, countOfAutoGeneratedTasks, otherAutoGenerationData, otherAwardData, otherData) {
+    if (taskCreationType === void 0)
+      taskCreationType = 'manual';
+    if (code === void 0)
+      code = null;
+    if (namespaceCode === void 0)
+      namespaceCode = null;
+    if (nameEn === void 0)
+      nameEn = null;
+    if (nameRu === void 0)
+      nameRu = null;
+    if (descriptionShortEn === void 0)
+      descriptionShortEn = null;
+    if (descriptionShortRu === void 0)
+      descriptionShortRu = null;
+    if (descriptionEn === void 0)
+      descriptionEn = null;
+    if (descriptionRu === void 0)
+      descriptionRu = null;
+    if (subjectType === void 0)
+      subjectType = null;
+    if (tags === void 0)
+      tags = null;
+    if (originalExpression === void 0)
+      originalExpression = null;
+    if (goalType === void 0)
+      goalType = null;
+    if (goalExpression === void 0)
+      goalExpression = null;
+    if (goalPattern === void 0)
+      goalPattern = null;
+    if (goalNumberProperty === void 0)
+      goalNumberProperty = null;
+    if (otherGoalData === void 0)
+      otherGoalData = null;
+    if (rulePacks === void 0)
+      rulePacks = null;
+    if (rules === void 0)
+      rules = null;
+    if (stepsNumber === void 0)
+      stepsNumber = null;
+    if (time === void 0)
+      time = null;
+    if (solution === void 0)
+      solution = null;
+    if (solutionsStepsTree === void 0)
+      solutionsStepsTree = null;
+    if (interestingFacts === void 0)
+      interestingFacts = null;
+    if (nextRecommendedTasks === void 0)
+      nextRecommendedTasks = null;
+    if (hints === void 0)
+      hints = null;
+    if (otherCheckSolutionData === void 0)
+      otherCheckSolutionData = null;
+    if (countOfAutoGeneratedTasks === void 0)
+      countOfAutoGeneratedTasks = 0;
+    if (otherAutoGenerationData === void 0)
+      otherAutoGenerationData = null;
+    if (otherAwardData === void 0)
+      otherAwardData = null;
+    if (otherData === void 0)
+      otherData = null;
+    return createTaskITR(taskCreationType, code, namespaceCode, nameEn, nameRu, descriptionShortEn, descriptionShortRu, descriptionEn, descriptionRu, subjectType, tags, originalExpression, goalType, goalExpression, goalPattern, goalNumberProperty, otherGoalData, rulePacks, rules, stepsNumber, time, difficulty, solution, solutionsStepsTree, interestingFacts, nextRecommendedTasks, hints, otherCheckSolutionData, countOfAutoGeneratedTasks, otherAutoGenerationData, otherAwardData, otherData);
+  }
+  function arrayToList_JS(data) {
+    return toList(data);
+  }
+  function listToArray_JS(data) {
+    return copyToArray(data);
+  }
+  function arrayToSet_JS(data) {
+    return toSet_0(data);
+  }
+  function dinamicToMap_JS(data) {
+    return mapOf_1(data);
+  }
+  function jsonStringToMap_JS(json) {
+    return JsonParser$Companion_getInstance().parseMap_61zpoe$(json);
+  }
+  function jsonToMap_JS(json) {
+    return JsonParser$Companion_getInstance().parseMapRecursive_qk3xy8$(json);
+  }
+  function generateTasks_JS(area, startExpression, rulepacks, additionalParamsJsonString) {
+    if (rulepacks === void 0)
+      rulepacks = [];
+    if (additionalParamsJsonString === void 0)
+      additionalParamsJsonString = '{}';
+    return generateTasks(area, startExpression, rulepacks, additionalParamsJsonString);
+  }
+  function getAllTagsForGeneration_JS(area) {
+    return getAllTagsForGeneration(area);
+  }
+  function getAllSortTypesForGeneration_JS() {
+    return getAllSortTypesForGeneration();
+  }
+  function getAllSortOrdersForGeneration_JS() {
+    return getAllSortOrdersForGeneration();
+  }
+  function getLogOfGeneration_JS() {
+    return getLogOfGeneration();
+  }
+  function getReportOfGeneration_JS() {
+    return getReportOfGeneration();
+  }
   var package$mathhelper = _.mathhelper || (_.mathhelper = {});
   var package$twf = package$mathhelper.twf || (package$mathhelper.twf = {});
   var package$api = package$twf.api || (package$twf.api = {});
@@ -41089,9 +41095,9 @@ var twf_js = function (_, Kotlin) {
   package$api.getLogicNewVariablesSubstitutions_fzusl$ = getLogicNewVariablesSubstitutions;
   package$api.getLogicNewVariablesSubstitutions_ddfifv$ = getLogicNewVariablesSubstitutions_0;
   package$api.normalizeExpressionToUsualForm_37rhgh$ = normalizeExpressionToUsualForm;
-  package$api.compareWithoutSubstitutions_99zg4x$ = compareWithoutSubstitutions_0;
+  package$api.compareWithoutSubstitutions_99zg4x$ = compareWithoutSubstitutions;
   package$api.compareByPattern_hn76cs$ = compareByPattern;
-  package$api.compareWithoutSubstitutions_mymgxz$ = compareWithoutSubstitutions_1;
+  package$api.compareWithoutSubstitutions_mymgxz$ = compareWithoutSubstitutions_0;
   package$api.compareByPattern_amuzyr$ = compareByPattern_0;
   package$api.compareWithoutSubstitutionsStructureStrings_jl9eag$ = compareWithoutSubstitutionsStructureStrings;
   package$api.stringToExpression_a30txs$ = stringToExpression;
@@ -41107,12 +41113,12 @@ var twf_js = function (_, Kotlin) {
   package$api.investigateIfExpressionFormIsStructureString_61zpoe$ = investigateIfExpressionFormIsStructureString;
   package$api.decodeUrlSymbols_61zpoe$ = decodeUrlSymbols;
   package$api.optGenerateSimpleComputationRule_2yjvs5$ = optGenerateSimpleComputationRule;
-  package$api.expressionSubstitutionFromStrings_wbi1s5$ = expressionSubstitutionFromStrings_0;
+  package$api.expressionSubstitutionFromStrings_wbi1s5$ = expressionSubstitutionFromStrings;
   package$api.expressionSubstitutionFromStructureStrings_nw1435$ = expressionSubstitutionFromStructureStrings;
   package$api.expressionSubstitutionFromRuleITR_bftldu$ = expressionSubstitutionFromRuleITR;
   package$api.expressionSubstitutionsFromRulePackITR_314120$ = expressionSubstitutionsFromRulePackITR;
-  package$api.findSubstitutionPlacesInExpression_58u35j$ = findSubstitutionPlacesInExpression_0;
-  package$api.applySubstitution_efjes9$ = applySubstitution_0;
+  package$api.findSubstitutionPlacesInExpression_58u35j$ = findSubstitutionPlacesInExpression;
+  package$api.applySubstitution_efjes9$ = applySubstitution;
   package$api.createCompiledConfigurationFromExpressionSubstitutionsAndParams_red3nl$ = createCompiledConfigurationFromExpressionSubstitutionsAndParams;
   package$api.findApplicableSubstitutionsInSelectedPlace_8wbcfm$ = findApplicableSubstitutionsInSelectedPlace;
   package$api.applySubstitutionInSelectedPlace_x5zgqy$ = applySubstitutionInSelectedPlace;
@@ -41142,6 +41148,7 @@ var twf_js = function (_, Kotlin) {
   package$api.getReportOfGeneration = getReportOfGeneration;
   package$api.getAllTagsForGeneration_61zpoe$ = getAllTagsForGeneration;
   package$api.getAllSortTypesForGeneration = getAllSortTypesForGeneration;
+  package$api.getAllSortOrdersForGeneration = getAllSortOrdersForGeneration;
   package$api.getDefaultRulePacks = getDefaultRulePacks;
   package$api.mapTargetWeight_mqu1mq$ = mapTargetWeight;
   var package$baseoperations = package$twf.baseoperations || (package$twf.baseoperations = {});
@@ -41368,6 +41375,166 @@ var twf_js = function (_, Kotlin) {
   package$defaultcontent.RulePackFrontInput = RulePackFrontInput;
   package$defaultcontent.toRulePackFrontInput_1vuwuy$ = toRulePackFrontInput;
   package$defaultcontent.GameFrontInput = GameFrontInput;
+  Object.defineProperty(ModifiedLogicRulePacks, 'Companion', {
+    get: ModifiedLogicRulePacks$Companion_getInstance
+  });
+  var package$defaultrulepacks = package$defaultcontent.defaultrulepacks || (package$defaultcontent.defaultrulepacks = {});
+  var package$logic = package$defaultrulepacks.logic || (package$defaultrulepacks.logic = {});
+  package$logic.ModifiedLogicRulePacks = ModifiedLogicRulePacks;
+  Object.defineProperty(NewWeightsLogicRulePack, 'Companion', {
+    get: NewWeightsLogicRulePack$Companion_getInstance
+  });
+  package$logic.NewWeightsLogicRulePack = NewWeightsLogicRulePack;
+  Object.defineProperty(ReportType, 'RESULT_ONLY', {
+    get: ReportType$RESULT_ONLY_getInstance
+  });
+  Object.defineProperty(ReportType, 'RESULT_WITH_POSTPROCESSING', {
+    get: ReportType$RESULT_WITH_POSTPROCESSING_getInstance
+  });
+  Object.defineProperty(ReportType, 'RESULT_WITH_SUBSTITUTIONS', {
+    get: ReportType$RESULT_WITH_SUBSTITUTIONS_getInstance
+  });
+  Object.defineProperty(ReportType, 'RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS', {
+    get: ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_getInstance
+  });
+  var package$autogeneration = package$defaultrulepacks.autogeneration || (package$defaultrulepacks.autogeneration = {});
+  package$autogeneration.ReportType = ReportType;
+  Object.defineProperty(RulePackProvider, 'Companion', {
+    get: RulePackProvider$Companion_getInstance
+  });
+  package$autogeneration.RulePackProvider = RulePackProvider;
+  Object.defineProperty(RuleTag, 'BASIC_MATH', {
+    get: RuleTag$BASIC_MATH_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_FUNCTIONS_DEFINITION', {
+    get: RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_STANDARD_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_BASIC_IDENTITY', {
+    get: RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_PERIODIC', {
+    get: RuleTag$TRIGONOMETRY_PERIODIC_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SHIFTING', {
+    get: RuleTag$TRIGONOMETRY_SHIFTING_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_DOUBLE_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_TRIPLE_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_HALF_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_MULTI_ANGLES', {
+    get: RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_POWER_REDUCING', {
+    get: RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS', {
+    get: RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_AUXILIARY_ARGUMENT', {
+    get: RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION', {
+    get: RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_EULER_FORMULAS', {
+    get: RuleTag$TRIGONOMETRY_EULER_FORMULAS_getInstance
+  });
+  Object.defineProperty(RuleTag, 'TRIGONOMETRY_HYPERBOLIC_FUNCTIONS', {
+    get: RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_getInstance
+  });
+  package$autogeneration.RuleTag = RuleTag;
+  Object.defineProperty(TaskSpecificLogicRulePacks, 'Companion', {
+    get: TaskSpecificLogicRulePacks$Companion_getInstance
+  });
+  package$logic.TaskSpecificLogicRulePacks = TaskSpecificLogicRulePacks;
+  Object.defineProperty(TexReportUtils, 'Companion', {
+    get: TexReportUtils$Companion_getInstance
+  });
+  package$autogeneration.TexReportUtils = TexReportUtils;
+  Object.defineProperty(TrigonometricRulePacks, 'Companion', {
+    get: TrigonometricRulePacks$Companion_getInstance
+  });
+  package$autogeneration.TrigonometricRulePacks = TrigonometricRulePacks;
+  Object.defineProperty(DefaultCombinatoricsRulePacks, 'Companion', {
+    get: DefaultCombinatoricsRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.DefaultCombinatoricsRulePacks = DefaultCombinatoricsRulePacks;
+  Object.defineProperty(DefaultComplexRulePacks, 'Companion', {
+    get: DefaultComplexRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.DefaultComplexRulePacks = DefaultComplexRulePacks;
+  Object.defineProperty(DefaultRulePacks, 'Companion', {
+    get: DefaultRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.DefaultRulePacks = DefaultRulePacks;
+  Object.defineProperty(LogicRulePacks, 'Companion', {
+    get: LogicRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.LogicRulePacks = LogicRulePacks;
+  Object.defineProperty(DefaultPhysicsRulePacks, 'Companion', {
+    get: DefaultPhysicsRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.DefaultPhysicsRulePacks = DefaultPhysicsRulePacks;
+  Object.defineProperty(SetRulePacks, 'Companion', {
+    get: SetRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.SetRulePacks = SetRulePacks;
+  Object.defineProperty(DefaultStandardMathRulePacks, 'Companion', {
+    get: DefaultStandardMathRulePacks$Companion_getInstance
+  });
+  package$defaultrulepacks.DefaultStandardMathRulePacks = DefaultStandardMathRulePacks;
+  Object.defineProperty(CombinatoricTaskSets, 'Companion', {
+    get: CombinatoricTaskSets$Companion_getInstance
+  });
+  var package$defaulttasksets = package$defaultcontent.defaulttasksets || (package$defaultcontent.defaulttasksets = {});
+  package$defaulttasksets.CombinatoricTaskSets = CombinatoricTaskSets;
+  Object.defineProperty(DefaultTaskSets, 'Companion', {
+    get: DefaultTaskSets$Companion_getInstance
+  });
+  package$defaulttasksets.DefaultTaskSets = DefaultTaskSets;
+  Object.defineProperty(LogicTaskSets, 'Companion', {
+    get: LogicTaskSets$Companion_getInstance
+  });
+  package$defaulttasksets.LogicTaskSets = LogicTaskSets;
+  Object.defineProperty(SetTaskSets, 'Companion', {
+    get: SetTaskSets$Companion_getInstance
+  });
+  package$defaulttasksets.SetTaskSets = SetTaskSets;
+  Object.defineProperty(TriginometryTaskSets, 'Companion', {
+    get: TriginometryTaskSets$Companion_getInstance
+  });
+  package$defaulttasksets.TriginometryTaskSets = TriginometryTaskSets;
+  Object.defineProperty(TrigonometryStepByStep, 'Companion', {
+    get: TrigonometryStepByStep$Companion_getInstance
+  });
+  package$defaulttasksets.TrigonometryStepByStep = TrigonometryStepByStep;
   Object.defineProperty(TaskTagCode, 'PROOF', {
     get: TaskTagCode$PROOF_getInstance
   });
@@ -41505,166 +41672,6 @@ var twf_js = function (_, Kotlin) {
     get: TaskSetTagCode$EXTRAORDINARY_getInstance
   });
   package$defaultcontent.TaskSetTagCode = TaskSetTagCode;
-  Object.defineProperty(DefaultCombinatoricsRulePacks, 'Companion', {
-    get: DefaultCombinatoricsRulePacks$Companion_getInstance
-  });
-  var package$defaultrulepacks = package$defaultcontent.defaultrulepacks || (package$defaultcontent.defaultrulepacks = {});
-  package$defaultrulepacks.DefaultCombinatoricsRulePacks = DefaultCombinatoricsRulePacks;
-  Object.defineProperty(DefaultComplexRulePacks, 'Companion', {
-    get: DefaultComplexRulePacks$Companion_getInstance
-  });
-  package$defaultrulepacks.DefaultComplexRulePacks = DefaultComplexRulePacks;
-  Object.defineProperty(DefaultRulePacks, 'Companion', {
-    get: DefaultRulePacks$Companion_getInstance
-  });
-  package$defaultrulepacks.DefaultRulePacks = DefaultRulePacks;
-  Object.defineProperty(LogicRulePacks, 'Companion', {
-    get: LogicRulePacks$Companion_getInstance
-  });
-  package$defaultrulepacks.LogicRulePacks = LogicRulePacks;
-  Object.defineProperty(DefaultPhysicsRulePacks, 'Companion', {
-    get: DefaultPhysicsRulePacks$Companion_getInstance
-  });
-  package$defaultrulepacks.DefaultPhysicsRulePacks = DefaultPhysicsRulePacks;
-  Object.defineProperty(SetRulePacks, 'Companion', {
-    get: SetRulePacks$Companion_getInstance
-  });
-  package$defaultrulepacks.SetRulePacks = SetRulePacks;
-  Object.defineProperty(DefaultStandardMathRulePacks, 'Companion', {
-    get: DefaultStandardMathRulePacks$Companion_getInstance
-  });
-  package$defaultrulepacks.DefaultStandardMathRulePacks = DefaultStandardMathRulePacks;
-  Object.defineProperty(ModifiedLogicRulePacks, 'Companion', {
-    get: ModifiedLogicRulePacks$Companion_getInstance
-  });
-  var package$logic = package$defaultrulepacks.logic || (package$defaultrulepacks.logic = {});
-  package$logic.ModifiedLogicRulePacks = ModifiedLogicRulePacks;
-  Object.defineProperty(NewWeightsLogicRulePack, 'Companion', {
-    get: NewWeightsLogicRulePack$Companion_getInstance
-  });
-  package$logic.NewWeightsLogicRulePack = NewWeightsLogicRulePack;
-  Object.defineProperty(ReportType, 'RESULT_ONLY', {
-    get: ReportType$RESULT_ONLY_getInstance
-  });
-  Object.defineProperty(ReportType, 'RESULT_WITH_POSTPROCESSING', {
-    get: ReportType$RESULT_WITH_POSTPROCESSING_getInstance
-  });
-  Object.defineProperty(ReportType, 'RESULT_WITH_SUBSTITUTIONS', {
-    get: ReportType$RESULT_WITH_SUBSTITUTIONS_getInstance
-  });
-  Object.defineProperty(ReportType, 'RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS', {
-    get: ReportType$RESULT_WITH_SUBSTITUTIONS_AND_INTERMEDIATE_EXPRESSIONS_getInstance
-  });
-  var package$autogeneration = package$defaultrulepacks.autogeneration || (package$defaultrulepacks.autogeneration = {});
-  package$autogeneration.ReportType = ReportType;
-  Object.defineProperty(RulePackProvider, 'Companion', {
-    get: RulePackProvider$Companion_getInstance
-  });
-  package$autogeneration.RulePackProvider = RulePackProvider;
-  Object.defineProperty(RuleTag, 'BASIC_MATH', {
-    get: RuleTag$BASIC_MATH_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_FUNCTIONS_DEFINITION', {
-    get: RuleTag$TRIGONOMETRY_FUNCTIONS_DEFINITION_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_STANDARD_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_STANDARD_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_BASIC_IDENTITY', {
-    get: RuleTag$TRIGONOMETRY_BASIC_IDENTITY_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_PERIODIC', {
-    get: RuleTag$TRIGONOMETRY_PERIODIC_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SHIFTING', {
-    get: RuleTag$TRIGONOMETRY_SHIFTING_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS', {
-    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES', {
-    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_PROPERTIES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED', {
-    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_ADVANCED_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_INVERSE_FUNCTIONS_STANDARD_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_SIN_COS_SUM_AND_DIFF_OF_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_TG_CTG_SUM_AND_DIFF_OF_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_DOUBLE_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_DOUBLE_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_TRIPLE_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_TRIPLE_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_HALF_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_HALF_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_MULTI_ANGLES', {
-    get: RuleTag$TRIGONOMETRY_MULTI_ANGLES_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_POWER_REDUCING', {
-    get: RuleTag$TRIGONOMETRY_POWER_REDUCING_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS', {
-    get: RuleTag$TRIGONOMETRY_SUM_AND_DIFF_OF_FUNCTIONS_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_AUXILIARY_ARGUMENT', {
-    get: RuleTag$TRIGONOMETRY_AUXILIARY_ARGUMENT_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION', {
-    get: RuleTag$TRIGONOMETRY_WEIERSTRASS_SUBSTITUTION_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_EULER_FORMULAS', {
-    get: RuleTag$TRIGONOMETRY_EULER_FORMULAS_getInstance
-  });
-  Object.defineProperty(RuleTag, 'TRIGONOMETRY_HYPERBOLIC_FUNCTIONS', {
-    get: RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_getInstance
-  });
-  package$autogeneration.RuleTag = RuleTag;
-  Object.defineProperty(TaskSpecificLogicRulePacks, 'Companion', {
-    get: TaskSpecificLogicRulePacks$Companion_getInstance
-  });
-  package$logic.TaskSpecificLogicRulePacks = TaskSpecificLogicRulePacks;
-  Object.defineProperty(TexReportUtils, 'Companion', {
-    get: TexReportUtils$Companion_getInstance
-  });
-  package$autogeneration.TexReportUtils = TexReportUtils;
-  Object.defineProperty(TrigonometricRulePacks, 'Companion', {
-    get: TrigonometricRulePacks$Companion_getInstance
-  });
-  package$autogeneration.TrigonometricRulePacks = TrigonometricRulePacks;
-  Object.defineProperty(CombinatoricTaskSets, 'Companion', {
-    get: CombinatoricTaskSets$Companion_getInstance
-  });
-  var package$defaulttasksets = package$defaultcontent.defaulttasksets || (package$defaultcontent.defaulttasksets = {});
-  package$defaulttasksets.CombinatoricTaskSets = CombinatoricTaskSets;
-  Object.defineProperty(DefaultTaskSets, 'Companion', {
-    get: DefaultTaskSets$Companion_getInstance
-  });
-  package$defaulttasksets.DefaultTaskSets = DefaultTaskSets;
-  Object.defineProperty(LogicTaskSets, 'Companion', {
-    get: LogicTaskSets$Companion_getInstance
-  });
-  package$defaulttasksets.LogicTaskSets = LogicTaskSets;
-  Object.defineProperty(SetTaskSets, 'Companion', {
-    get: SetTaskSets$Companion_getInstance
-  });
-  package$defaulttasksets.SetTaskSets = SetTaskSets;
-  Object.defineProperty(TriginometryTaskSets, 'Companion', {
-    get: TriginometryTaskSets$Companion_getInstance
-  });
-  package$defaulttasksets.TriginometryTaskSets = TriginometryTaskSets;
-  Object.defineProperty(TrigonometryStepByStep, 'Companion', {
-    get: TrigonometryStepByStep$Companion_getInstance
-  });
-  package$defaulttasksets.TrigonometryStepByStep = TrigonometryStepByStep;
   var package$expressiondomain = package$twf.expressiondomain || (package$twf.expressiondomain = {});
   package$expressiondomain.containsUncertainties_7illpf$ = containsUncertainties;
   var package$expressiontree = package$twf.expressiontree || (package$twf.expressiontree = {});
@@ -41796,7 +41803,7 @@ var twf_js = function (_, Kotlin) {
   package$expressiontree.generateSimpleComputationSubstitutions_cg0uhp$ = generateSimpleComputationSubstitutions;
   package$expressiontree.generateNumberTransformationSubstitutions_cg0uhp$ = generateNumberTransformationSubstitutions;
   package$expressiontree.generateComplicatingExtensionSubstitutions_cg0uhp$ = generateComplicatingExtensionSubstitutions;
-  package$expressiontree.applySubstitution_fta3rf$ = applySubstitution_1;
+  package$expressiontree.applySubstitution_fta3rf$ = applySubstitution_0;
   package$expressiontree.generateFormIndependentSubstitutionsBySelectedNodes_cg0uhp$ = generateFormIndependentSubstitutionsBySelectedNodes;
   package$expressiontree.generateFormDependentSubstitutionsBySelectedNodes_43p103$ = generateFormDependentSubstitutionsBySelectedNodes;
   package$expressiontree.generateFormDependentSubstitutionsBySelectedNodesWithExpressionSimplifications_3fn77o$ = generateFormDependentSubstitutionsBySelectedNodesWithExpressionSimplifications;
@@ -42063,7 +42070,7 @@ var twf_js = function (_, Kotlin) {
     }
   });
   var package$mainpoints = package$twf.mainpoints || (package$twf.mainpoints = {});
-  package$mainpoints.checkFactsInMathML_ahi09q$ = checkFactsInMathML_0;
+  package$mainpoints.checkFactsInMathML_ahi09q$ = checkFactsInMathML;
   package$mainpoints.replaceSpaceMathMLAliases_61zpoe$ = replaceSpaceMathMLAliases;
   Object.defineProperty(package$mainpoints, 'spaceRegex', {
     get: function () {
@@ -42404,6 +42411,19 @@ var twf_js = function (_, Kotlin) {
   package$taskautogeneration.containsTrigonometricFunctionInResult_vlq1sf$ = containsTrigonometricFunctionInResult_0;
   package$taskautogeneration.insideExponent_7illpf$ = insideExponent;
   package$taskautogeneration.insideTrigonometricFunction_qrf28w$ = insideTrigonometricFunction;
+  Object.defineProperty(LogarithmsRulePack, 'Companion', {
+    get: LogarithmsRulePack$Companion_getInstance
+  });
+  var package$rulepack = package$taskautogeneration.rulepack || (package$taskautogeneration.rulepack = {});
+  package$rulepack.LogarithmsRulePack = LogarithmsRulePack;
+  Object.defineProperty(LogarithmsStandardMathRulePacks, 'Companion', {
+    get: LogarithmsStandardMathRulePacks$Companion_getInstance
+  });
+  package$rulepack.LogarithmsStandardMathRulePacks = LogarithmsStandardMathRulePacks;
+  Object.defineProperty(PostprocessorRulePack, 'Companion', {
+    get: PostprocessorRulePack$Companion_getInstance
+  });
+  package$rulepack.PostprocessorRulePack = PostprocessorRulePack;
   Object.defineProperty(RuleTag_0, 'BASIC_MATH', {
     get: RuleTag$BASIC_MATH_getInstance_0
   });
@@ -42471,37 +42491,28 @@ var twf_js = function (_, Kotlin) {
     get: RuleTag$TRIGONOMETRY_HYPERBOLIC_FUNCTIONS_getInstance_0
   });
   package$taskautogeneration.RuleTag = RuleTag_0;
-  Object.defineProperty(SortType, 'BY_RULE_TAG_USAGE_DESC', {
-    get: SortType$BY_RULE_TAG_USAGE_DESC_getInstance
+  Object.defineProperty(SortOrder, 'ASC', {
+    get: SortOrder$ASC_getInstance
   });
-  Object.defineProperty(SortType, 'BY_TASK_LENGTH_DESC', {
-    get: SortType$BY_TASK_LENGTH_DESC_getInstance
+  Object.defineProperty(SortOrder, 'DESC', {
+    get: SortOrder$DESC_getInstance
   });
-  Object.defineProperty(SortType, 'BY_TASK_LENGTH_ASC', {
-    get: SortType$BY_TASK_LENGTH_ASC_getInstance
+  package$taskautogeneration.SortOrder = SortOrder;
+  Object.defineProperty(SortType, 'BY_RULE_TAG_USAGE', {
+    get: SortType$BY_RULE_TAG_USAGE_getInstance
+  });
+  Object.defineProperty(SortType, 'BY_TASK_LENGTH', {
+    get: SortType$BY_TASK_LENGTH_getInstance
   });
   package$taskautogeneration.SortType = SortType;
   package$taskautogeneration.GeneratorSettings = GeneratorSettings;
   package$taskautogeneration.generateTrigonometricTasks_n20lef$ = generateTrigonometricTasks;
-  package$taskautogeneration.sortTasks_gb8ha2$ = sortTasks;
+  package$taskautogeneration.sortTasks_hb2lgh$ = sortTasks;
   package$taskautogeneration.tryToGenerateNewTasks_lm7l3j$ = tryToGenerateNewTasks;
   package$taskautogeneration.placesThenSubstitutionsGenerator_v8ou3a$ = placesThenSubstitutionsGenerator;
   package$taskautogeneration.substitutionsThenPlacesGenerator_lm7l3j$ = substitutionsThenPlacesGenerator;
   package$taskautogeneration.getTagUsage_6h8poe$ = getTagUsage;
   package$taskautogeneration.unify_xqvr29$ = unify;
-  Object.defineProperty(LogarithmsRulePack, 'Companion', {
-    get: LogarithmsRulePack$Companion_getInstance
-  });
-  var package$rulepack = package$taskautogeneration.rulepack || (package$taskautogeneration.rulepack = {});
-  package$rulepack.LogarithmsRulePack = LogarithmsRulePack;
-  Object.defineProperty(LogarithmsStandardMathRulePacks, 'Companion', {
-    get: LogarithmsStandardMathRulePacks$Companion_getInstance
-  });
-  package$rulepack.LogarithmsStandardMathRulePacks = LogarithmsStandardMathRulePacks;
-  Object.defineProperty(PostprocessorRulePack, 'Companion', {
-    get: PostprocessorRulePack$Companion_getInstance
-  });
-  package$rulepack.PostprocessorRulePack = PostprocessorRulePack;
   var package$testpointgeneration = package$twf.testpointgeneration || (package$twf.testpointgeneration = {});
   package$testpointgeneration.VariableLink = VariableLink;
   package$testpointgeneration.VariableData = VariableData;
@@ -42521,6 +42532,53 @@ var twf_js = function (_, Kotlin) {
   package$visualization.dropPerformedTexBrushing_61zpoe$ = dropPerformedTexBrushing;
   package$visualization.addWithSpaceIfNeed_s47sd7$ = addWithSpaceIfNeed;
   package$visualization.dropPerformedTexBrushingInternal_61zpoe$ = dropPerformedTexBrushingInternal;
+  _.createCompiledConfigurationFromExpressionSubstitutionsAndParams = createCompiledConfigurationFromExpressionSubstitutionsAndParams_JS;
+  _.createConfigurationFromRulePacksAndParams = createConfigurationFromRulePacksAndParams_JS;
+  _.createConfigurationFromRulePacksAndDetailSolutionCheckingParams = createConfigurationFromRulePacksAndDetailSolutionCheckingParams_JS;
+  _.stringToExpression = stringToExpression_JS;
+  _.structureStringToExpression = structureStringToExpression_JS;
+  _.cloneExpression = cloneExpression_JS;
+  _.expressionToString = expressionToString_JS;
+  _.expressionToUnicodeString = expressionToUnicodeString_JS;
+  _.expressionToTexString = expressionToTexString_JS;
+  _.expressionToStructureString = expressionToStructureString_JS;
+  _.stringToStructureString = stringToStructureString_JS;
+  _.expressionSubstitutionFromStrings = expressionSubstitutionFromStrings_0;
+  _.expressionSubstitutionFromStructureStrings = expressionSubstitutionFromStructureStrings_JS;
+  _.findApplicableSubstitutionsInSelectedPlace = findApplicableSubstitutionsInSelectedPlace_JS;
+  _.findSubstitutionPlacesInExpression = findSubstitutionPlacesInExpression_0;
+  _.applySubstitution = applySubstitution_1;
+  _.checkSolutionInTex = checkSolutionInTex_JS;
+  _.checkSolutionInTexWithCompiledConfiguration = checkSolutionInTexWithCompiledConfiguration_JS;
+  _.createCompiledConfigurationFromITR = createCompiledConfigurationFromITR_JS;
+  _.checkSolutionInTexITR = checkSolutionInTexITR_JS;
+  _.getParsedExpressionByMathML = getParsedExpressionByMathML;
+  _.checkFactsInMathML = checkFactsInMathML_0;
+  _.getUserLogInPlainText = getUserLogInPlainText;
+  _.getUserLogInJson = getUserLogInJson;
+  _.getAllLogInPlainText = getAllLogInPlainText;
+  _.getAllLogInJson = getAllLogInJson;
+  _.encryptSolution = encryptSolution;
+  _.encryptResult = encryptResult;
+  _.decodeUrlSymbols = decodeUrlSymbols_JS;
+  _.compareWithoutSubstitutions = compareWithoutSubstitutions_1;
+  _.createExpressionFrontInput = createExpressionFrontInput_JS;
+  _.createRuleITR = createRuleITR_JS;
+  _.createRulePackLinkITR = createRulePackLinkITR_JS;
+  _.createRulePackITR = createRulePackITR_JS;
+  _.createTaskITR = createTaskITR_JS;
+  _.arrayToList = arrayToList_JS;
+  _.listToArray = listToArray_JS;
+  _.arrayToSet = arrayToSet_JS;
+  _.dinamicToMap = dinamicToMap_JS;
+  _.jsonStringToMap = jsonStringToMap_JS;
+  _.jsonToMap = jsonToMap_JS;
+  _.generateTasks = generateTasks_JS;
+  _.getAllTagsForGeneration = getAllTagsForGeneration_JS;
+  _.getAllSortTypesForGeneration = getAllSortTypesForGeneration_JS;
+  _.getAllSortOrdersForGeneration = getAllSortOrdersForGeneration_JS;
+  _.getLogOfGeneration = getLogOfGeneration_JS;
+  _.getReportOfGeneration = getReportOfGeneration_JS;
   MainChainPart.prototype.check_i0qcxd$ = ComparableTransformationsPart.prototype.check_i0qcxd$;
   MainLineNode.prototype.isSolutionForVariables_axkv0l$ = MainChainPart.prototype.isSolutionForVariables_axkv0l$;
   MainLineNode.prototype.check_i0qcxd$ = MainChainPart.prototype.check_i0qcxd$;
