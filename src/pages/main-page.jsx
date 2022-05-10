@@ -372,8 +372,8 @@ const MainPage = () => {
               setCurrentMode("Solve");
               let startExpression = taskText;
               let goalExpression = answerText;
-              setStartSS(convertMathInput("TEX", "STRUCTURE_STRING", goalExpression));
-              setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", startExpression));
+              setStartSS(convertMathInput("TEX", "STRUCTURE_STRING", startExpression));
+              setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", goalExpression));
               setStartTex(startExpression);
               setEndTex(goalExpression);
               setSolutionInTex(startExpression + "= ... =" + goalExpression);
