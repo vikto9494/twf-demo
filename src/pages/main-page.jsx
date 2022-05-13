@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Alert, Button, Select, Tooltip } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
 import { EditableMathField, StaticMathField } from "react-mathquill";
+import MathQuillMultyline from "../components/math-quill-multyline/math-quill-multyline";
 // custom components
 import Multiselect from 'multiselect-react-dropdown';
 import GameEditor from "../components/game-editor/game-editor";
@@ -307,11 +308,12 @@ const MainPage = () => {
   };
 
   const getMathQuillNotebook = () => {
-    return <EditableMathField
+    return <MathQuillMultyline
         latex={solutionInTex}
-        mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
-        onChange={(mathField) => {
-          setSolutionInTex(mathField.latex());
+        //mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
+        onChange={(s: string[]) => {
+          console.log("Changed");
+           setSolutionInTex(s.pop());
         }}
         style={{
           minWidth: "40rem",
@@ -661,24 +663,7 @@ const MainPage = () => {
             <h1>Write statement and check if it's correct (in TeX)</h1>
           )}
           <div className="tex-solution">
-          {currentMode !== "GenerateTasks" && (
-            <div className="tex-solution__operations">
-              {actions.map((action, i) => {
-                const { iconUrl, latexCmd, tooltip } = action;
-                return (
-                  <div key={i} className="tex-solution__operation">
-                    {tooltip ? (
-                      <Tooltip title={tooltip} placement="bottom">
-                        <img src={iconUrl} onClick={() => latexCmd()} />
-                      </Tooltip>
-                    ) : (
-                      <img src={iconUrl} onClick={() => latexCmd()} />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            )}
+          {currentMode !== "GenerateTasks"}
 
             {currentMode === "GenerateTasks" && (
               <div style={{ "marginBottom": "50px" }}>
@@ -713,6 +698,7 @@ const MainPage = () => {
                       <Button type="primary" onClick={() => {
                         // callback is provided in useEffect
                         setShowSpinner(true);
+
                       }
                       }>
                         Generate tasks!
