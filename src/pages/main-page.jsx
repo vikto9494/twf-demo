@@ -272,8 +272,17 @@ const MainPage = () => {
     setSolutionInTex(res.validatedSolution);
   };
 
-  const onGenerateTasksInput = () => {    
-    let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
+  const onGenerateTasksInput = () => {  
+    let startExpression = ""
+    try {  
+      startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
+    }
+    catch (err) {
+      setSuccessMsg(null);
+      setCurrentTasks([]);
+      setSolutionError(err['message']);
+      return
+    }
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
     const additionalParamsJsonString = JSON.stringify({
@@ -282,12 +291,22 @@ const MainPage = () => {
       sort: sortType['name$'],
       sortOrder: sortOrder['name$']
     });
-    const tasks = generateTasks(
-      area,
-      startExpression,
-      [],
-        additionalParamsJsonString
-    );
+    let tasks = []
+    try {
+      tasks = generateTasks(
+        area,
+        startExpression,
+        [],
+          additionalParamsJsonString
+      );
+    }
+    catch (err) {
+      setSuccessMsg(null);
+      setCurrentTasks([]);
+      setSolutionError(err['message']);
+      return
+    }
+    
 
     if (tasks.errorMessage) {
       setSuccessMsg(null);
