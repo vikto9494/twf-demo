@@ -54,6 +54,14 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
   const [lockText, setLockText] = useState(false);
 
 
+  // OnChange
+
+  const onChangeRef = useRef(onChange);
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange])
+
+
   // Reset
   //setLockText(true)
   //setNumLines(1);
@@ -111,7 +119,9 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
     }*/
     for (let i = 0; i < mathPairs.length; i++) {
       mathPairs[i].text = splitted[i];
-      mathPairs[i].mathLine?.latex(mathPairs[i].text)
+      if (mathPairs[i].text) {
+        mathPairs[i].mathLine?.latex(mathPairs[i].text);
+      }
     }
     //initcnt = (mathPairs.length)
     console.log(counter);
@@ -121,12 +131,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
     //setLockText(textState);
   }, [latex])
 
-  // OnChange
 
-  const onChangeRef = useRef(onChange);
-  useEffect(() => {
-    onChangeRef.current = onChange;
-  }, [onChange])
   const UpdateId = () =>
   {
     let newid = [];
@@ -146,7 +151,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
     rez = "";
     for (let i = 0; i < mathPairsid.length; i++) {
       if (mathPairs[mathPairsid[i]].text) {
-        if (mathPairs[mathPairsid[i]].text.localeCompare("undefined") != 0)
+        if (mathPairs[mathPairsid[i]]?.text?.localeCompare("undefined") != 0)
           rez += mathPairs[mathPairsid[i]].text;
         else
           rez += " "
@@ -317,14 +322,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                 if (matPair.id != -1)
                 {
                   return(<>
-                    <button
-                        className="btn"
-                        onClick={() => {
-                          onButtonDelLine(matPair.id);
-                        }}
-                    >
-                      -
-                    </button>
+
                     <EditableMathField
                         latex={matPair.text}
                         config={config}
@@ -341,8 +339,9 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                               mPair.text = mPair?.mathLine?.latex();
                           if (onChangeRef.current && lockText == false)
                           {
-                            let a = ["", ""]
-                            a.push(onButtonConcat())
+                            //let a = ["", ""]
+                            //a.push(onButtonConcat())
+                            let a = onButtonConcat();
                             onChangeRef.current(a);
                           }
                         }}
@@ -496,9 +495,13 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                               }
                             }
                             setLockText(false);
-                            let a = ["", ""]
-                            a.push(onButtonConcat())
-                            onChangeRef.current(a);
+                            //let a = ["", ""]
+                            //a.push(onButtonConcat())
+                            let a = onButtonConcat();
+                            if (onChange)
+                            { // @ts-ignore
+                              onChangeRef.current(a);
+                            }
                           }
                           if (e.key == 'Backspace'){
                             let textState = lockText;
@@ -588,9 +591,13 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                               }
                             }
                             setLockText(false);
-                            let a = ["", ""]
-                            a.push(onButtonConcat())
-                            onChangeRef.current(a);
+                            //let a = ["", ""];
+                            //a.push(onButtonConcat());
+                            let a = onButtonConcat();
+                            if (onChange)
+                            { // @ts-ignore
+                              onChangeRef.current(a);
+                            }
                           }
                           if (e.key == 'ArrowUp') {
                             console.log(e.key);
@@ -655,14 +662,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
 
         <div className = "mq-multyline-buttons">
 
-          <button
-              className="btn"
-              onClick={() => {
-                onButtonConcat();
-              }}
-          >
-            Log solution
-          </button>
+
         </div>
       </div>
   );

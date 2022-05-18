@@ -39,6 +39,8 @@ addStyles();
 let alertCount = 0; //To avoid alert duplicates. TODO: make something normal
 
 const MainPage = () => {
+  //let mathQuillMultyline = MathQuillMultyline({});
+
   const { Option } = Select;
   // getting url query params
   const navigate = useNavigate();
@@ -64,6 +66,7 @@ const MainPage = () => {
       ? urlSignToPlainSign(comparisonTypeUrl)
       : "="
   );
+
   // local utils
   const formSolutionStartingTex = () => {
     if (currentMode === "GenerateTasks") {
@@ -311,9 +314,12 @@ const MainPage = () => {
     return <MathQuillMultyline
         latex={solutionInTex}
         //mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
-        onChange={(s: string[]) => {
-          console.log("Changed");
-           setSolutionInTex(s.pop());
+        onChange={(s) => {
+          //if (s.length != 3)
+          //  return
+          //console.log("solutionInTex");
+          //console.log(solutionInTex);
+          setSolutionInTex(s);
         }}
         style={{
           minWidth: "40rem",
