@@ -148,6 +148,7 @@ const MainPage = () => {
   const [sortType, setSortType] = useState(getDefaultSortType());
   const [sortOrder, setSortOrder] = useState(getDefaultSortOrder());
   const [complexityValue, setComplexityValue] = useState(40);
+  const [depthValue, setDepthValue] = useState(20);
 
   function getDefaultSortType() {
     let defaultSortType = getAllSortTypesForGeneration()
@@ -287,6 +288,7 @@ const MainPage = () => {
 
     const additionalParamsJsonString = JSON.stringify({
       complexity: (complexityValue / 100.0).toString(),
+      depth: (depthValue / 100.0).toString(),
       tags: currentTags.map(tag => tag['name$']),
       sort: sortType['name$'],
       sortOrder: sortOrder['name$']
@@ -319,7 +321,7 @@ const MainPage = () => {
     if (tasks.length > 0 && tasks.every(task => task['difficulty'] < task['targetDifficulty'] 
       && task['targetDifficulty'] - task['difficulty'] > 1)) {
       setSuccessMsg(null);
-      setSolutionError("Can't generate tasks of given complexity setting. Please reduce complexity or add more tags.");
+      setSolutionError("Can't generate tasks with given complexity. You can: reduce complexity; add more tags; extend depth.");
     }
 
     setCurrentTasks(tasks);
@@ -784,6 +786,12 @@ const MainPage = () => {
                     axis="x"
                     x={complexityValue}
                     onChange={({ x }) => setComplexityValue(x)}
+                  />
+                  <h3>Depth of generation</h3>
+                  <Slider
+                    axis="x"
+                    x={depthValue}
+                    onChange={({ x }) => setDepthValue(x)}
                   />
                   <h3>Sort By</h3>
                   <Select

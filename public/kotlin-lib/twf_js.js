@@ -64,6 +64,7 @@ var twf_js = function (_, Kotlin) {
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Pair = Kotlin.kotlin.Pair;
   var mutableMapOf = Kotlin.kotlin.collections.mutableMapOf_qfcya0$;
+  var isFinite = Kotlin.kotlin.isFinite_yrwdxr$;
   var mapOf_0 = Kotlin.kotlin.collections.mapOf_qfcya0$;
   var removeAll = Kotlin.kotlin.collections.removeAll_qafx1e$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
@@ -110,7 +111,6 @@ var twf_js = function (_, Kotlin) {
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var isNaN_0 = Kotlin.kotlin.isNaN_yrwdxr$;
   var toList_1 = Kotlin.kotlin.collections.toList_abgq59$;
-  var isFinite = Kotlin.kotlin.isFinite_yrwdxr$;
   var isInfinite = Kotlin.kotlin.isInfinite_yrwdxr$;
   var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
   var sortWith = Kotlin.kotlin.collections.sortWith_nqfjgj$;
@@ -1962,7 +1962,7 @@ var twf_js = function (_, Kotlin) {
       rulepacks = [];
     if (additionalParamsJsonString === void 0)
       additionalParamsJsonString = '{}';
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
     log_1.clear();
     if (!equals(area, '(Trigonometry)')) {
       return [];
@@ -1974,10 +1974,10 @@ var twf_js = function (_, Kotlin) {
      else {
       var $receiver = Kotlin.isType(tmp$ = parsedAdditionalParams.get_11rb$('tags'), List) ? tmp$ : throwCCE();
       var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
-      var tmp$_4;
-      tmp$_4 = $receiver.iterator();
-      while (tmp$_4.hasNext()) {
-        var item = tmp$_4.next();
+      var tmp$_7;
+      tmp$_7 = $receiver.iterator();
+      while (tmp$_7.hasNext()) {
+        var item = tmp$_7.next();
         destination.add_11rb$(RuleTag$valueOf_0(item));
       }
       var tagsChosen = toMutableList(destination);
@@ -1987,7 +1987,9 @@ var twf_js = function (_, Kotlin) {
       tmp$_0 = copyToArray(tagsChosen);
     }
     var tags = tmp$_0;
-    var settings = new GeneratorSettings(void 0, mapTargetWeight(toDouble(typeof (tmp$_1 = parsedAdditionalParams.get_11rb$('complexity')) === 'string' ? tmp$_1 : throwCCE())), void 0, generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_mh4gj9$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks), tags), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, SortType$valueOf(typeof (tmp$_2 = parsedAdditionalParams.get_11rb$('sort')) === 'string' ? tmp$_2 : throwCCE()), SortOrder$valueOf(typeof (tmp$_3 = parsedAdditionalParams.get_11rb$('sortOrder')) === 'string' ? tmp$_3 : throwCCE()));
+    tmp$_2 = mapTargetWeight(toDouble(typeof (tmp$_1 = parsedAdditionalParams.get_11rb$('complexity')) === 'string' ? tmp$_1 : throwCCE()));
+    tmp$_4 = mapTargetGenerationDepth(toDouble(typeof (tmp$_3 = parsedAdditionalParams.get_11rb$('depth')) === 'string' ? tmp$_3 : throwCCE()));
+    var settings = new GeneratorSettings(void 0, tmp$_2, void 0, generateTasks$lambda(startExpression), void 0, ExpressionUtils$Companion_getInstance().toExpressionSubstitutions_mh4gj9$(toList(rulepacks.length === 0 ? getDefaultRulePacks() : rulepacks), tags), tmp$_4, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, SortType$valueOf(typeof (tmp$_5 = parsedAdditionalParams.get_11rb$('sort')) === 'string' ? tmp$_5 : throwCCE()), SortOrder$valueOf(typeof (tmp$_6 = parsedAdditionalParams.get_11rb$('sortOrder')) === 'string' ? tmp$_6 : throwCCE()));
     var tasks = generateTrigonometricTasks(settings);
     log_1.addMessage_cte53e$(generateTasks$lambda_0(tasks), MessageType$USER_getInstance());
     return copyToArray(tasks);
@@ -2054,6 +2056,13 @@ var twf_js = function (_, Kotlin) {
     if (maxTargetWeight === void 0)
       maxTargetWeight = 7;
     return minTargetWeight + complexity * (maxTargetWeight - minTargetWeight | 0);
+  }
+  function mapTargetGenerationDepth(depth, minDepth, maxDepth) {
+    if (minDepth === void 0)
+      minDepth = 2;
+    if (maxDepth === void 0)
+      maxDepth = 24;
+    return numberToInt(minDepth + depth * (maxDepth - minDepth | 0));
   }
   function BaseNumber(number) {
     this.number = number;
@@ -2197,6 +2206,12 @@ var twf_js = function (_, Kotlin) {
   };
   BaseOperationsComputation.prototype.compute_em03xr$ = function (expressionNode) {
     var tmp$, tmp$_0;
+    if (this.computationType_0 === ComputationType$DOUBLE_getInstance()) {
+      log_1.expressionDoubleComputationsCount = log_1.expressionDoubleComputationsCount + 1 | 0;
+    }
+     else {
+      log_1.expressionComplexComputationsCount = log_1.expressionComplexComputationsCount + 1 | 0;
+    }
     if (expressionNode.children.isEmpty()) {
       if (equals(expressionNode.value, 'sys_def_i_complex')) {
         tmp$_0 = Complex_init(Real_init(0), Real_init(1), Form$ALGEBRAIC_getInstance());
@@ -2356,16 +2371,66 @@ var twf_js = function (_, Kotlin) {
     return ensureNotNull(ensureNotNull(this.baseComputationOperations_0.get_11rb$(this.computationType_0)).get_11rb$('*'))(listOfArgs);
   };
   BaseOperationsComputation.prototype.sumN_0 = function (expression) {
-    var deploymentOfSum = this.unfold_0(this.convertToFoldedExpression_0(expression));
-    return this.plus_0(deploymentOfSum);
-  };
-  BaseOperationsComputation.prototype.convertToFoldedExpression_0 = function (expression) {
-    if (!this.isFoldedExpression_0(expression)) {
-      throw IllegalArgumentException_init(expression.value + ' is not folded');
+    var tmp$;
+    var from = this.convertToDouble_0(this.compute_em03xr$(expression.children.get_za3lpa$(1)));
+    var to = this.convertToDouble_0(this.compute_em03xr$(expression.children.get_za3lpa$(2)));
+    var iter = from;
+    if (this.computationType_0 === ComputationType$DOUBLE_getInstance()) {
+      var result = 0.0;
+      while (iter <= to) {
+        var expressionI = expression.children.get_za3lpa$(3).cloneWithVariableReplacement_y0zsll$(mutableMapOf([new Pair(expression.children.get_za3lpa$(0).value, iter.toString())]));
+        result += typeof (tmp$ = this.compute_em03xr$(expressionI)) === 'number' ? tmp$ : throwCCE();
+        if (!isFinite(result)) {
+          return result;
+        }
+        iter = iter + 1;
+      }
+      return result;
     }
-    var from = this.compute_em03xr$(expression.children.get_za3lpa$(1));
-    var to = this.compute_em03xr$(expression.children.get_za3lpa$(2));
-    return new BaseOperationsComputation$FoldedExpression(expression.children.get_za3lpa$(0).value, this.convertToDouble_0(from), this.convertToDouble_0(to), expression.children.get_za3lpa$(3));
+     else {
+      var result_0 = toComplex(0);
+      while (iter <= to) {
+        var expressionI_0 = expression.children.get_za3lpa$(3).cloneWithVariableReplacement_y0zsll$(mutableMapOf([new Pair(expression.children.get_za3lpa$(0).value, iter.toString())]));
+        var tmp$_0;
+        result_0.plusAssign_m1n3ex$(Kotlin.isType(tmp$_0 = this.compute_em03xr$(expressionI_0), Complex) ? tmp$_0 : throwCCE());
+        if (!result_0.isFinite()) {
+          return result_0;
+        }
+        iter = iter + 1;
+      }
+      return result_0;
+    }
+  };
+  BaseOperationsComputation.prototype.prodN_0 = function (expression) {
+    var tmp$;
+    var from = this.convertToDouble_0(this.compute_em03xr$(expression.children.get_za3lpa$(1)));
+    var to = this.convertToDouble_0(this.compute_em03xr$(expression.children.get_za3lpa$(2)));
+    var iter = from;
+    if (this.computationType_0 === ComputationType$DOUBLE_getInstance()) {
+      var result = 1.0;
+      while (iter <= to) {
+        var expressionI = expression.children.get_za3lpa$(3).cloneWithVariableReplacement_y0zsll$(mutableMapOf([new Pair(expression.children.get_za3lpa$(0).value, iter.toString())]));
+        result *= typeof (tmp$ = this.compute_em03xr$(expressionI)) === 'number' ? tmp$ : throwCCE();
+        if (!isFinite(result)) {
+          return result;
+        }
+        iter = iter + 1;
+      }
+      return result;
+    }
+     else {
+      var result_0 = toComplex(1);
+      while (iter <= to) {
+        var expressionI_0 = expression.children.get_za3lpa$(3).cloneWithVariableReplacement_y0zsll$(mutableMapOf([new Pair(expression.children.get_za3lpa$(0).value, iter.toString())]));
+        var tmp$_0;
+        result_0.timesAssign_m1n3ex$(Kotlin.isType(tmp$_0 = this.compute_em03xr$(expressionI_0), Complex) ? tmp$_0 : throwCCE());
+        if (!result_0.isFinite()) {
+          return result_0;
+        }
+        iter = iter + 1;
+      }
+      return result_0;
+    }
   };
   BaseOperationsComputation.prototype.convertToDouble_0 = function (value) {
     var tmp$, tmp$_0, tmp$_1;
@@ -2380,20 +2445,6 @@ var twf_js = function (_, Kotlin) {
         break;
     }
     return tmp$_1;
-  };
-  BaseOperationsComputation.prototype.unfold_0 = function (foldedExpression) {
-    var deployedArguments = ArrayList_init();
-    var iter = foldedExpression.from;
-    while (iter <= foldedExpression.to) {
-      var expression = foldedExpression.expression.cloneWithVariableReplacement_y0zsll$(mutableMapOf([new Pair(foldedExpression.nameOfZVariable, iter.toString())]));
-      deployedArguments.add_11rb$(this.compute_em03xr$(expression));
-      iter = iter + 1;
-    }
-    return deployedArguments;
-  };
-  BaseOperationsComputation.prototype.prodN_0 = function (expression) {
-    var deploymentOfProd = this.unfold_0(this.convertToFoldedExpression_0(expression));
-    return this.mul_0(deploymentOfProd);
   };
   function BaseOperationsComputation$baseComputationOperations$lambda(this$BaseOperationsComputation) {
     return function (listOfArgs) {
@@ -15405,7 +15456,7 @@ var twf_js = function (_, Kotlin) {
         var tmp$_3 = tmp$_0.next();
         var expression = tmp$_3.key;
         var variable = tmp$_3.value;
-        if (this.children.size === expression.children.size) {
+        if (equals(this.value, expression.value) && fastFunctionArgumentsUnequalityTest(this, expression)) {
           if (expressionComparator != null && expressionComparator.compiledConfiguration.comparisonSettings.useTestingToCompareFunctionArgumentsInProbabilityComparison && !hasBoolFunctions) {
             if (expressionComparator.baseOperationsDefinitions.definedFunctionNameNumberOfArgsSet.contains_11rb$(this.value + '_' + toString(this.children.size)) || expressionComparator.baseOperationsDefinitions.definedFunctionNameNumberOfArgsSet.contains_11rb$(this.value + '_-1')) {
               if (expressionComparator.probabilityTestComparison_je0ger$(this, expression, ComparisonType$EQUAL_getInstance())) {
@@ -15744,6 +15795,27 @@ var twf_js = function (_, Kotlin) {
     root.addChild_em03xr$(expression);
     root.computeIdentifier_5osufp$();
     return root;
+  }
+  function fastFunctionArgumentsUnequalityTest(lArgumentsNode, rArgumentsNode) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    if (lArgumentsNode.children.size !== rArgumentsNode.children.size) {
+      return false;
+    }
+    var startIndex = (tmp$_1 = (tmp$_0 = (tmp$ = lArgumentsNode.functionStringDefinition) != null ? tmp$.function : null) != null ? tmp$_0.numberOfDefinitionArguments : null) != null ? tmp$_1 : 0;
+    if (startIndex === 0) {
+      tmp$_2 = get_lastIndex(lArgumentsNode.children);
+      for (var i = startIndex; i <= tmp$_2; i++) {
+        if (lArgumentsNode.children.get_za3lpa$(i).nodeType !== rArgumentsNode.children.get_za3lpa$(i).nodeType) {
+          return false;
+        }
+        if (lArgumentsNode.children.get_za3lpa$(i).nodeType === NodeType$VARIABLE_getInstance() && rArgumentsNode.children.get_za3lpa$(i).nodeType === NodeType$VARIABLE_getInstance()) {
+          if (!equals(lArgumentsNode.children.get_za3lpa$(i).value, rArgumentsNode.children.get_za3lpa$(i).value)) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
   }
   var zero;
   var one;
@@ -31105,6 +31177,8 @@ var twf_js = function (_, Kotlin) {
     interfaces: []
   };
   function LazyLog() {
+    this.expressionDoubleComputationsCount = 0;
+    this.expressionComplexComputationsCount = 0;
     this.probabilityTestComparisonCount = 0;
     this.logicFullSearchComparison = 0;
     this.consideredExpressionTransformationsCount = 0;
@@ -31115,6 +31189,8 @@ var twf_js = function (_, Kotlin) {
   LazyLog.prototype.clear = function () {
     this.currentLevel = 0;
     this.log.clear();
+    this.expressionDoubleComputationsCount = 0;
+    this.expressionComplexComputationsCount = 0;
     this.probabilityTestComparisonCount = 0;
     this.logicFullSearchComparison = 0;
     this.consideredExpressionTransformationsCount = 0;
@@ -32966,6 +33042,9 @@ var twf_js = function (_, Kotlin) {
   Complex.prototype.getImaginary = function () {
     return this.imaginary_0;
   };
+  Complex.prototype.isFinite = function () {
+    return this.real_0.isFinite() && this.imaginary_0.isFinite();
+  };
   Complex.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Complex',
@@ -33221,6 +33300,9 @@ var twf_js = function (_, Kotlin) {
   };
   Real.prototype.toString = function () {
     return this.value.toString();
+  };
+  Real.prototype.isFinite = function () {
+    return isFinite(this.value);
   };
   Real.$metadata$ = {
     kind: Kind_CLASS,
@@ -38754,26 +38836,27 @@ var twf_js = function (_, Kotlin) {
     if (node.nodeType === NodeType$FUNCTION_getInstance() && equals(node.value, '/')) {
       var nominatorNodes = getMultipliers(node.children.get_za3lpa$(0));
       var denominatorNodes = getMultipliers(node.children.get_za3lpa$(1));
-      var nominatorNodesAfterReduce = makeReduce(nominatorNodes, denominatorNodes);
-      var denominatorNodesAfterReduce = makeReduce(denominatorNodes, nominatorNodes);
-      reduceIntegersInFraction(node, nominatorNodesAfterReduce, denominatorNodesAfterReduce);
-      if (nominatorNodesAfterReduce.isEmpty()) {
+      makeReduce(nominatorNodes, denominatorNodes);
+      nominatorNodes = reduceOnes(nominatorNodes);
+      denominatorNodes = reduceOnes(denominatorNodes);
+      reduceIntegersInFraction(node, nominatorNodes, denominatorNodes);
+      if (nominatorNodes.isEmpty()) {
         node.children.set_wxm5ur$(0, ExpressionNodeBuilder$Companion_getInstance().buildNodeFromConstant_73ahh6$(1, node));
       }
-       else if (nominatorNodesAfterReduce.size === 1) {
-        node.children.set_wxm5ur$(0, nominatorNodesAfterReduce.get_za3lpa$(0));
+       else if (nominatorNodes.size === 1) {
+        node.children.set_wxm5ur$(0, nominatorNodes.get_za3lpa$(0));
       }
        else {
-        node.children.get_za3lpa$(0).children = nominatorNodesAfterReduce;
+        node.children.get_za3lpa$(0).children = nominatorNodes;
       }
-      if (denominatorNodesAfterReduce.isEmpty()) {
+      if (denominatorNodes.isEmpty()) {
         node.children.set_wxm5ur$(1, ExpressionNodeBuilder$Companion_getInstance().buildNodeFromConstant_73ahh6$(1, node));
       }
-       else if (denominatorNodesAfterReduce.size === 1) {
-        node.children.set_wxm5ur$(1, denominatorNodesAfterReduce.get_za3lpa$(0));
+       else if (denominatorNodes.size === 1) {
+        node.children.set_wxm5ur$(1, denominatorNodes.get_za3lpa$(0));
       }
        else {
-        node.children.get_za3lpa$(1).children = denominatorNodesAfterReduce;
+        node.children.get_za3lpa$(1).children = denominatorNodes;
       }
     }
   }
@@ -38796,38 +38879,68 @@ var twf_js = function (_, Kotlin) {
     nominatorNodes.add_wxm5ur$(0, ExpressionNodeBuilder$Companion_getInstance().buildNodeFromConstant_73ahh6$(nominatorResult, parentNode));
     denominatorNodes.add_wxm5ur$(0, ExpressionNodeBuilder$Companion_getInstance().buildNodeFromConstant_73ahh6$(denominatorResult, parentNode));
   }
-  function makeReduce(nodesToReduce, nodesMustNotBeInResult) {
-    var tmp$;
-    var result = ArrayList_init();
-    tmp$ = nodesToReduce.iterator();
-    loop_label: while (tmp$.hasNext()) {
-      var node = tmp$.next();
-      if (equals(node.value, '1') || equals(node.value, '(1)')) {
-        continue loop_label;
+  function reduceOnes(nodes) {
+    if (nodes.size > 1) {
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = nodes.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (!equals(element.identifier, '1') && !equals(element.identifier, '(1)'))
+          destination.add_11rb$(element);
       }
-      var none$result;
-      none$break: do {
-        var tmp$_0;
-        if (Kotlin.isType(nodesMustNotBeInResult, Collection) && nodesMustNotBeInResult.isEmpty()) {
-          none$result = true;
-          break none$break;
-        }
-        tmp$_0 = nodesMustNotBeInResult.iterator();
-        while (tmp$_0.hasNext()) {
-          var element = tmp$_0.next();
+      return toMutableList(destination);
+    }
+    return nodes;
+  }
+  function makeReduce(nominatorNodes, denominatorNodes) {
+    var tmp$, tmp$_0;
+    var nominatorNodesCopy = toMutableList(nominatorNodes);
+    var denominatorNodesCopy = toMutableList(denominatorNodes);
+    tmp$ = nominatorNodesCopy.iterator();
+    while (tmp$.hasNext()) {
+      var node = tmp$.next();
+      var firstOrNull$result;
+      firstOrNull$break: do {
+        var tmp$_1;
+        tmp$_1 = denominatorNodes.iterator();
+        while (tmp$_1.hasNext()) {
+          var element = tmp$_1.next();
           if (equals(element.identifier, node.identifier)) {
-            none$result = false;
-            break none$break;
+            firstOrNull$result = element;
+            break firstOrNull$break;
           }
         }
-        none$result = true;
+        firstOrNull$result = null;
       }
        while (false);
-      if (none$result) {
-        result.add_11rb$(node);
+      var nodeToRemove = firstOrNull$result;
+      if (nodeToRemove != null) {
+        denominatorNodes.remove_11rb$(nodeToRemove);
       }
     }
-    return result;
+    tmp$_0 = denominatorNodesCopy.iterator();
+    while (tmp$_0.hasNext()) {
+      var node_0 = tmp$_0.next();
+      var firstOrNull$result_0;
+      firstOrNull$break: do {
+        var tmp$_2;
+        tmp$_2 = nominatorNodes.iterator();
+        while (tmp$_2.hasNext()) {
+          var element_0 = tmp$_2.next();
+          if (equals(element_0.identifier, node_0.identifier)) {
+            firstOrNull$result_0 = element_0;
+            break firstOrNull$break;
+          }
+        }
+        firstOrNull$result_0 = null;
+      }
+       while (false);
+      var nodeToRemove_0 = firstOrNull$result_0;
+      if (nodeToRemove_0 != null) {
+        nominatorNodes.remove_11rb$(nodeToRemove_0);
+      }
+    }
   }
   function getMultipliers(node) {
     if (node.nodeType === NodeType$FUNCTION_getInstance() && equals(node.value, '*')) {
@@ -39386,7 +39499,7 @@ var twf_js = function (_, Kotlin) {
     if (minStepsCountInAutogeneration === void 0)
       minStepsCountInAutogeneration = 5;
     if (extendReduceFactor === void 0)
-      extendReduceFactor = 0.5;
+      extendReduceFactor = 1.5;
     if (extendingExpressionSubstitutions === void 0) {
       var $receiver = expressionSubstitutions;
       var destination = ArrayList_init();
@@ -39427,7 +39540,7 @@ var twf_js = function (_, Kotlin) {
     if (sortOrder === void 0)
       sortOrder = SortOrder$DESC_getInstance();
     if (maxTaskCount === void 0)
-      maxTaskCount = 30;
+      maxTaskCount = 50;
     this.expressionGenerationDirection = expressionGenerationDirection;
     this.targetWeight = targetWeight;
     this.targetWeightWindowCoefficient = targetWeightWindowCoefficient;
@@ -39967,68 +40080,77 @@ var twf_js = function (_, Kotlin) {
      else {
       resultAllTasks.v = tasksWithNeededComplexity;
     }
+    var tmp$_27;
+    tmp$_27 = resultAllTasks.v.iterator();
+    while (tmp$_27.hasNext()) {
+      var element_13 = tmp$_27.next();
+      var isEqual = compiledConfiguration.factComparator.expressionComparator.fastProbabilityCheckOnIncorrectTransformation_41dun6$(element_13.startExpression, element_13.currentExpression);
+      if (!isEqual) {
+        println(element_13.startExpression.toString() + ' != ' + element_13.currentExpression);
+      }
+    }
     resultAllTasks.v = sortTasks(resultAllTasks.v, settings.sortType, settings.sortOrder, tagsChosen);
-    var tmp$_27 = resultAllTasks.v;
+    var tmp$_28 = resultAllTasks.v;
     var a = resultAllTasks.v.size;
     var b_0 = settings.maxTaskCount;
-    resultAllTasks.v = tmp$_27.subList_vux9f0$(0, Math_0.min(a, b_0));
+    resultAllTasks.v = tmp$_28.subList_vux9f0$(0, Math_0.min(a, b_0));
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_12(resultAllTasks), MessageType$TECHNICAL_getInstance());
     log_1.addMessage_cte53e$(generateTrigonometricTasks$lambda_13(generatorIterationCounter), MessageType$TECHNICAL_getInstance());
     var $receiver_12 = resultAllTasks.v;
     var destination_10 = ArrayList_init_0(collectionSizeOrDefault($receiver_12, 10));
-    var tmp$_28;
-    tmp$_28 = $receiver_12.iterator();
-    while (tmp$_28.hasNext()) {
-      var item_2 = tmp$_28.next();
-      var tmp$_29 = destination_10.add_11rb$;
-      var tmp$_30 = void 0;
-      var tmp$_31 = taskStartGeneratedExpression.code;
-      var tmp$_32 = void 0;
+    var tmp$_29;
+    tmp$_29 = $receiver_12.iterator();
+    while (tmp$_29.hasNext()) {
+      var item_2 = tmp$_29.next();
+      var tmp$_30 = destination_10.add_11rb$;
+      var tmp$_31 = void 0;
+      var tmp$_32 = taskStartGeneratedExpression.code;
       var tmp$_33 = void 0;
-      var tmp$_34 = taskStartGeneratedExpression.nameEn;
-      var tmp$_35 = taskStartGeneratedExpression.nameRu;
-      var tmp$_36 = taskStartGeneratedExpression.descriptionShortEn;
-      var tmp$_37 = taskStartGeneratedExpression.descriptionShortRu;
-      var tmp$_38 = taskStartGeneratedExpression.descriptionEn;
-      var tmp$_39 = taskStartGeneratedExpression.descriptionRu;
-      var tmp$_40 = taskStartGeneratedExpression.subjectType;
+      var tmp$_34 = void 0;
+      var tmp$_35 = taskStartGeneratedExpression.nameEn;
+      var tmp$_36 = taskStartGeneratedExpression.nameRu;
+      var tmp$_37 = taskStartGeneratedExpression.descriptionShortEn;
+      var tmp$_38 = taskStartGeneratedExpression.descriptionShortRu;
+      var tmp$_39 = taskStartGeneratedExpression.descriptionEn;
+      var tmp$_40 = taskStartGeneratedExpression.descriptionRu;
+      var tmp$_41 = taskStartGeneratedExpression.subjectType;
       var $receiver_13 = item_2.usedSubstitutions;
       var destination_11 = ArrayList_init();
-      var tmp$_41;
-      tmp$_41 = $receiver_13.iterator();
-      while (tmp$_41.hasNext()) {
-        var element_13 = tmp$_41.next();
-        var list_3 = element_13.tagsForTaskGenerator;
+      var tmp$_42;
+      tmp$_42 = $receiver_13.iterator();
+      while (tmp$_42.hasNext()) {
+        var element_14 = tmp$_42.next();
+        var list_3 = element_14.tagsForTaskGenerator;
         addAll(destination_11, list_3);
       }
       var destination_12 = ArrayList_init_0(collectionSizeOrDefault(destination_11, 10));
-      var tmp$_42;
-      tmp$_42 = destination_11.iterator();
-      while (tmp$_42.hasNext()) {
-        var item_3 = tmp$_42.next();
+      var tmp$_43;
+      tmp$_43 = destination_11.iterator();
+      while (tmp$_43.hasNext()) {
+        var item_3 = tmp$_43.next();
         destination_12.add_11rb$(item_3.name);
       }
-      var tmp$_43 = toMutableSet_1(destination_12);
-      var tmp$_44 = item_2.startExpression.toString();
-      var tmp$_45 = void 0;
+      var tmp$_44 = toMutableSet_1(destination_12);
+      var tmp$_45 = item_2.startExpression.toString();
       var tmp$_46 = void 0;
-      var tmp$_47 = item_2.currentExpression.toString();
-      var tmp$_48 = void 0;
+      var tmp$_47 = void 0;
+      var tmp$_48 = item_2.currentExpression.toString();
       var tmp$_49 = void 0;
       var tmp$_50 = void 0;
       var tmp$_51 = void 0;
-      var tmp$_52 = emptyList();
+      var tmp$_52 = void 0;
       var tmp$_53 = emptyList();
-      var tmp$_54 = item_2.previousExpressions.size;
-      var tmp$_55 = item_2.time;
-      var tmp$_56;
+      var tmp$_54 = emptyList();
+      var tmp$_55 = item_2.previousExpressions.size;
+      var tmp$_56 = item_2.time;
+      var tmp$_57;
       var sum_3 = 0.0;
-      tmp$_56 = item_2.usedSubstitutions.iterator();
-      while (tmp$_56.hasNext()) {
-        var element_14 = tmp$_56.next();
-        sum_3 += element_14.difficultyInTaskAutoGeneration;
+      tmp$_57 = item_2.usedSubstitutions.iterator();
+      while (tmp$_57.hasNext()) {
+        var element_15 = tmp$_57.next();
+        sum_3 += element_15.difficultyInTaskAutoGeneration;
       }
-      tmp$_29.call(destination_10, new TaskITR(tmp$_30, tmp$_31, tmp$_32, tmp$_33, tmp$_34, tmp$_35, tmp$_36, tmp$_37, tmp$_38, tmp$_39, tmp$_40, tmp$_43, tmp$_44, tmp$_45, tmp$_46, 'expression', tmp$_47, tmp$_48, tmp$_49, '', tmp$_50, tmp$_51, tmp$_52, tmp$_53, tmp$_54, tmp$_55, sum_3, settings.targetWeight, item_2.solution, mapOf(to('data', item_2.solutionsStepTree)), mapOf(to('data', item_2.hints)), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, item_2.expressionTaskIntermediateData));
+      tmp$_30.call(destination_10, new TaskITR(tmp$_31, tmp$_32, tmp$_33, tmp$_34, tmp$_35, tmp$_36, tmp$_37, tmp$_38, tmp$_39, tmp$_40, tmp$_41, tmp$_44, tmp$_45, tmp$_46, tmp$_47, 'expression', tmp$_48, tmp$_49, tmp$_50, '', tmp$_51, tmp$_52, tmp$_53, tmp$_54, tmp$_55, tmp$_56, sum_3, settings.targetWeight, item_2.solution, mapOf(to('data', item_2.solutionsStepTree)), mapOf(to('data', item_2.hints)), void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, item_2.expressionTaskIntermediateData));
     }
     return destination_10;
   }
@@ -41431,6 +41553,7 @@ var twf_js = function (_, Kotlin) {
   package$api.getAllSortOrdersForGeneration = getAllSortOrdersForGeneration;
   package$api.getDefaultRulePacks = getDefaultRulePacks;
   package$api.mapTargetWeight_mqu1mq$ = mapTargetWeight;
+  package$api.mapTargetGenerationDepth_mqu1mq$ = mapTargetGenerationDepth;
   var package$baseoperations = package$twf.baseoperations || (package$twf.baseoperations = {});
   package$baseoperations.BaseNumber = BaseNumber;
   package$baseoperations.BaseOperationDefinitionWithDomain = BaseOperationDefinitionWithDomain;
@@ -42005,6 +42128,7 @@ var twf_js = function (_, Kotlin) {
   package$expressiontree.subtractionTree_heho5o$ = subtractionTree;
   package$expressiontree.divisionTree_heho5o$ = divisionTree;
   package$expressiontree.addRootNodeToExpression_em03xr$ = addRootNodeToExpression;
+  package$expressiontree.fastFunctionArgumentsUnequalityTest_heho5o$ = fastFunctionArgumentsUnequalityTest;
   Object.defineProperty(package$expressiontree, 'zero', {
     get: function () {
       return zero;
@@ -42678,6 +42802,7 @@ var twf_js = function (_, Kotlin) {
   package$taskautogeneration.reduceFractions_u0dnxg$ = reduceFractions;
   package$taskautogeneration.traverseAndReduceFractions_em03xr$ = traverseAndReduceFractions;
   package$taskautogeneration.reduceIntegersInFraction_bnakz5$ = reduceIntegersInFraction;
+  package$taskautogeneration.reduceOnes_u9mnl$ = reduceOnes;
   package$taskautogeneration.makeReduce_ixh1dg$ = makeReduce;
   package$taskautogeneration.getMultipliers_em03xr$ = getMultipliers;
   package$taskautogeneration.reduceTerms_ncoq99$ = reduceTerms;
