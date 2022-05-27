@@ -148,7 +148,7 @@ const MainPage = () => {
   const [sortType, setSortType] = useState(getDefaultSortType());
   const [sortOrder, setSortOrder] = useState(getDefaultSortOrder());
   const [complexityValue, setComplexityValue] = useState(40);
-  const [depthValue, setDepthValue] = useState(20);
+  const [depthValue, setDepthValue] = useState(50);
 
   function getDefaultSortType() {
     let defaultSortType = getAllSortTypesForGeneration()
