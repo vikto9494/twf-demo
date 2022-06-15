@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { addStyles, EditableMathField, MathField, EditableMathFieldProps } from "react-mathquill";
 // style
 import "./math-quill-multyline.scss";
-import "../tex-editor-actions-tab/tex-editor-actions-tab.scss"
+import "../tex-editor-actions-tab/tex-editor-actions-tab.scss";
 
 // icons
 import fracIcon from "../../assets/math-symbols/frac.svg";
@@ -25,7 +25,7 @@ import setminusIcon from "../../assets/math-symbols/setminus.svg";
 // tools
 
 import { EndString, BeginString, FindOpenTags, FindChangedText } from "./math-quill-multyline-tools";
-//import onCheckTexSolutionInput from "../../pages/main-page"
+
 
 interface MathPair {
   text?: string;
@@ -39,18 +39,20 @@ type MultylineProps = {
   onChange?: Function,
   config?: object,
 }
-const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
+const MathQuillMultyline: React.FC<MultylineProps> = ({
+                                                        latex,
                                                         onChange,
                                                         config,
-                                                        ...otherProps}) => {
-  const [numLines, setNumLines] = useState(1);
-  const [counter, setCounter] = useState(10);
-  const [first, setFirst] = useState(1);
-  const [mathPairs, setMathPairs] = useState([{ text: "solution", id: 1, mathLine: undefined }]);
-  const [focusId, setFocusId] = useState(1);
-  const [mathPairsid, setMathPairsid] = useState([0]);
-  //const [lockText, setLockText] = useState(false);
-  const changedText = useRef("");
+                                                        ...otherProps
+                                                      }) => {
+  const [numLines, setNumLines] = useState<number>(1);
+  const [counter, setCounter] = useState<number>(10);
+  const [first, setFirst] = useState<number>(1);
+  const [mathPairs, setMathPairs] = useState<MathPair[]>([{ text: "solution", id: 1, mathLine: undefined }]);
+  const [focusId, setFocusId] = useState<number>(1);
+  const [mathPairsid, setMathPairsid] = useState<number[]>([0]);
+  const [lockText, setLockText] = useState<boolean>(false);
+  const changedText = useRef<string>("");
 
   for (let i = 0; i < mathPairs.length; i++) {
     if (mathPairs[i].id != -1) {
@@ -66,7 +68,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
   splitted = [];
   splitted2 = [];
   if (latex)
-    splitted = latex.split("\n", 200);
+    splitted = latex.split("\n");
   else
     splitted = [""];
   console.log("in latex");
@@ -140,7 +142,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
     splitted = splitted2.concat(splitted);
   }
   useEffect(() => {
-    //let textState = lockText;
+    let textState = lockText;
     // Calculate current num of lines
     let currLines = 0;
     for (let i = 0; i < mathPairs.length; i++) {
@@ -162,7 +164,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
       mathPairs[i].text = splitted[j];
       j++;
       if (mathPairs[i].text || mathPairs[i].text == "") {
-        mathPairs[i].mathLine?.latex(mathPairs[i].text);
+        mathPairs[i].mathLine?.latex(mathPairs[i].text as string);
       }
       if (mathPairs[i] && focusId == mathPairs[i].id) {
         mathPairs[i].mathLine?.focus();
@@ -234,8 +236,8 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
 
 
   const onButtonDelLine = (id?: number) => {
-    //let textState = lockText;
-    //setLockText(true);
+    let textState = lockText;
+    setLockText(true);
     if (id) {
       let idx = mathPairs.findIndex((mp: MathPair) => {
         return mp.id == id;
@@ -250,7 +252,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
       mathPairs[mathPairsid[idx1 - 1]]?.mathLine?.focus();
       UpdateId();
     }
-    //setLockText(textState);
+    setLockText(textState);
   };
   const actions = [
     {
@@ -350,7 +352,6 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                           console.log("text1->" + mathField.text());
                         }}
                         onChange={(mathField: MathField) => {
-                          console.log("--------------------->>>")
                           for (let mPair of mathPairs) {
                             if (mPair && mPair.text != mPair?.mathLine?.latex()) {
                               let oldText = mPair.text;
@@ -366,13 +367,12 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                               mPair.text = mPair?.mathLine?.latex();
                             }
                           }
-                          if (onChangeRef.current/* && lockText == false*/) {
-                            console.log("++++++++++++++++++>>>")
+                          if (onChangeRef.current && lockText == false) {
                             let a = ["0"];
                             a.push(onButtonConcat());
-                            //if (onChange) {
+                            if (onChange) { // @ts-ignore
                               onChangeRef.current(a);
-                            //}
+                            }
                           }
                         }}
                         onFocus={() => {
@@ -380,11 +380,11 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                           console.log("OnFocus");
                         }}
                         onKeyDown={(e) => {
-                          //setLockText(false);
+                          setLockText(false);
                           let localText = changedText.current;
                           if (e.key == "Enter") {
-                            //let textState = lockText;
-                            //setLockText(true);
+                            let textState = lockText;
+                            setLockText(true);
                             console.log("Enter press here! ");
                             if (focusId && focusId != -1) {
                               let focusedPair = mathPairs.find((mp: MathPair) => {
@@ -486,7 +486,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                                       mathPairs[listLine[i + 1]].mathLine?.focus();
                                       mathPairs[listLine[i + 1]].shiftCursor = 0;
                                       if (mathPairs[listLine[i + 1]].id)
-                                        setFocusId(mathPairs[listLine[i + 1]].id);
+                                        setFocusId(mathPairs[listLine[i + 1]].id as number);
                                     } else
                                       console.error("Last line cant be added");
                                   }
@@ -494,7 +494,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                               }
                             }
                             // Submit changes
-                            //setLockText(false);
+                            setLockText(false);
                             UpdateId();
                             let a = ["1"];
                             a.push(onButtonConcat());
@@ -504,8 +504,8 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                             }
                           }
                           if (e.key == "Backspace") {
-                            //let textState = lockText;
-                            //setLockText(true);
+                            let textState = lockText;
+                            setLockText(true);
                             console.log(e.key);
                             if (focusId && focusId != -1) {
                               let focusedPair = mathPairs.find((mp: MathPair) => {
@@ -521,7 +521,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                                 onButtonDelLine(matPair.id);
                                 console.log("Delete");
                                 // Submit changes
-                                //setLockText(false);
+                                setLockText(false);
                                 UpdateId();
                                 let a = ["1"];
                                 a.push(onButtonConcat());
@@ -580,7 +580,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                                       }
                                       onButtonDelLine(mathPairs[mathPairsid[currPairid]].id);
                                       // Submit changes
-                                      //setLockText(false);
+                                      setLockText(false);
                                       UpdateId();
                                       let a = ["1"];
                                       a.push(onButtonConcat());

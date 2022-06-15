@@ -1,5 +1,5 @@
 
-import { EndString, BeginString, FindOpenTags } from "../math-quill-multyline-tools";
+import { EndString, BeginString, FindOpenTags, FindChangedText } from "../math-quill-multyline-tools";
 
 // EndString tests
 it('Endstring -- in: "(" ', () => {
@@ -48,7 +48,29 @@ it('BeginString test1', () => {
 it('FindOpenTags -- test1', () => {
   let a = FindOpenTags(["{", "{"], "\\textcolor{purple}{3+4\\underline{3+");
   expect(a).toBeDefined();
-  expect(a?.out).toBe("\\underline{\\textcolor{purple}{");
+  expect(a?.out).toBe("\\textcolor{purple}{\\underline{");
   expect(a?.flagPoss).toBeTruthy();
   expect(a?.L).toBe(2);
+});
+it('FindOpenTags -- test2', () => {
+  let a = FindOpenTags(["{"], "\\textcolor{red}{\\textcolor{purple}{=}P\\left(m\\right)\\cdot ");
+  expect(a).toBeDefined();
+  expect(a?.out).toBe("\\textcolor{red}{");
+  expect(a?.flagPoss).toBeTruthy();
+  expect(a?.L).toBe(1);
+});
+// FindChangedText
+it('FindChangedText -- test1', () => {
+  let a = FindChangedText("abcef", "bcef");
+  expect(a).toBe("a");
+  a = FindChangedText("bcef", "bcef");
+  expect(a).toBe("");
+  a = FindChangedText("cef", "bcef");
+  expect(a).toBe("b");
+  a = FindChangedText("ef", "bcef");
+  expect(a).toBe("bc");
+  a = FindChangedText("f", "bcef");
+  expect(a).toBe("bce");
+  a = FindChangedText("", "bcef");
+  expect(a).toBe("bcef");
 });

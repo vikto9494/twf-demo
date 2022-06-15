@@ -1,10 +1,10 @@
 // hooks and libs
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 // lib components
 import { Alert, Button, Select, Tooltip } from "antd";
 import ClipLoader from "react-spinners/ClipLoader";
-import { EditableMathField, StaticMathField } from "react-mathquill";
+import {EditableMathField, MathField, StaticMathField} from "react-mathquill";
 import MathQuillMultyline from "../components/math-quill-multyline/math-quill-multyline";
 // custom components
 import Multiselect from 'multiselect-react-dropdown';
@@ -199,7 +199,9 @@ const MainPage = () => {
   const [currentMode, setCurrentMode] = useState(
     modes.includes(modeUrl) ? modeUrl : "Play"
   );
-  const [solutionInTex, setSolutionInTex] = useState(formSolutionStartingTex());
+  const solutionInTex = useRef(formSolutionStartingTex());
+  const [solutionInTexStart, setSolutionInTexStart] = useState(formSolutionStartingTex());
+  const [mathField, setMathField] = useState();
   const [showSpinner, setShowSpinner] = useState(false);
   // input check messages
   const [startError, setStartError] = useState(null);
@@ -243,7 +245,7 @@ const MainPage = () => {
       setEndError(null);
       setSuccessMsg(null);
       setSolutionError(null);
-      setSolutionInTex(formSolutionStartingTex());
+      setSolutionInTexStart(formSolutionStartingTex());
       if (currentMode === "Play") {
         await reverseGameMode();
       }
@@ -260,7 +262,7 @@ const MainPage = () => {
 
   const onCheckTexSolutionInput = () => {
     const res = checkTex(
-      solutionInTex,
+      solutionInTex.current,
       startSS,
       endSS,
       selectedComparisonSign,
@@ -273,7 +275,7 @@ const MainPage = () => {
       setSolutionError(null);
       setSuccessMsg("Congratulations! Correct solution!");
     }
-    setSolutionInTex(res.validatedSolution);
+    setSolutionInTexStart(res.validatedSolution);
   };
 
   const onGenerateTasksInput = () => {    
@@ -312,14 +314,21 @@ const MainPage = () => {
 
   const getMathQuillNotebook = () => {
     return <MathQuillMultyline
-        latex={solutionInTex}
+        latex={solutionInTexStart}
         //mathquillDidMount={(mathField) => setSolutionMathField(mathField)}
         onChange={(s) => {
-          //if (s.length != 3)
-          //  return
-          //console.log("solutionInTex");
-          //console.log(solutionInTex);
-          setSolutionInTex(s);
+
+          if (s && s.length !== 2) {
+            console.error("BAD FUNC CALLED");
+          }
+
+          solutionInTex.current = s[1];
+          console.log("solutionInTex.current!!!")
+          console.log(solutionInTex.current)
+          if (s[0] === "1") {
+            setSolutionInTexStart(s[1]);
+          }
+
         }}
         style={{
           minWidth: "40rem",
@@ -395,7 +404,7 @@ const MainPage = () => {
               setEndSS(convertMathInput("TEX", "STRUCTURE_STRING", goalExpression));
               setStartTex(startExpression);
               setEndTex(goalExpression);
-              setSolutionInTex(startExpression + "= ... =" + goalExpression);
+              setSolutionInTexStart(startExpression + "= ... =" + goalExpression);
               setSuccessMsg(null);
               setCurrentTasks([]);
             }}
@@ -438,7 +447,7 @@ const MainPage = () => {
       // endExpression,
       // comparisonSign,
       // TODO: add rulePacks
-    } = checkStatement(solutionInTex, []);
+    } = checkStatement(solutionInTex.current, []);
     if (res.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(res.errorMessage);
@@ -449,7 +458,7 @@ const MainPage = () => {
     // setStartTex(startExpression);
     // setEndTex(endExpression);
     // setSelectedComparisonSign(urlSignToPlainSign(comparisonSign));
-    setSolutionInTex(res.validatedSolution);
+    setSolutionInTexStart(res.validatedSolution);
   };
 
   useEffect(() => {
@@ -821,7 +830,7 @@ const MainPage = () => {
             {correctSolution && (
               <Button
                 onClick={() => {
-                  setSolutionInTex(correctSolution);
+                  setSolutionInTexStart(correctSolution);
                 }}
                 style={{
                   marginTop: "10px",
