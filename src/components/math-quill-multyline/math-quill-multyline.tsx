@@ -51,7 +51,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
   const [mathPairs, setMathPairs] = useState<MathPair[]>([{ text: "solution", id: 1, mathLine: undefined }]);
   const [focusId, setFocusId] = useState<number>(1);
   const [mathPairsid, setMathPairsid] = useState<number[]>([0]);
-  const [lockText, setLockText] = useState<boolean>(false);
+  //const [lockText, setLockText] = useState<boolean>(false);
   const changedText = useRef<string>("");
 
   for (let i = 0; i < mathPairs.length; i++) {
@@ -142,7 +142,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
     splitted = splitted2.concat(splitted);
   }
   useEffect(() => {
-    let textState = lockText;
+    //let textState = lockText;
     // Calculate current num of lines
     let currLines = 0;
     for (let i = 0; i < mathPairs.length; i++) {
@@ -236,8 +236,8 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
 
 
   const onButtonDelLine = (id?: number) => {
-    let textState = lockText;
-    setLockText(true);
+    //let textState = lockText;
+    //setLockText(true);
     if (id) {
       let idx = mathPairs.findIndex((mp: MathPair) => {
         return mp.id == id;
@@ -252,7 +252,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
       mathPairs[mathPairsid[idx1 - 1]]?.mathLine?.focus();
       UpdateId();
     }
-    setLockText(textState);
+    //setLockText(textState);
   };
   const actions = [
     {
@@ -367,7 +367,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                               mPair.text = mPair?.mathLine?.latex();
                             }
                           }
-                          if (onChangeRef.current && lockText == false) {
+                          if (onChangeRef.current /*&& lockText == false*/) {
                             let a = ["0"];
                             a.push(onButtonConcat());
                             if (onChange) { // @ts-ignore
@@ -380,11 +380,11 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                           console.log("OnFocus");
                         }}
                         onKeyDown={(e) => {
-                          setLockText(false);
+                          //setLockText(false);
                           let localText = changedText.current;
                           if (e.key == "Enter") {
-                            let textState = lockText;
-                            setLockText(true);
+                            //let textState = lockText;
+                            //setLockText(true);
                             console.log("Enter press here! ");
                             if (focusId && focusId != -1) {
                               let focusedPair = mathPairs.find((mp: MathPair) => {
@@ -452,7 +452,11 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                                   s0 = s0 + tags;
                                 } else if (tags2?.flagPoss == true) {
                                   ;
-                                } else {
+                                } else if (s0 === "") // begin line
+                                {
+                                  ;
+                                }
+                                else {
                                   if (tags2)
                                     console.log(tags2.L);
                                   console.log(l);
@@ -494,7 +498,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                               }
                             }
                             // Submit changes
-                            setLockText(false);
+                            //setLockText(false);
                             UpdateId();
                             let a = ["1"];
                             a.push(onButtonConcat());
@@ -504,8 +508,8 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                             }
                           }
                           if (e.key == "Backspace") {
-                            let textState = lockText;
-                            setLockText(true);
+                            //let textState = lockText;
+                            //setLockText(true);
                             console.log(e.key);
                             if (focusId && focusId != -1) {
                               let focusedPair = mathPairs.find((mp: MathPair) => {
@@ -521,7 +525,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                                 onButtonDelLine(matPair.id);
                                 console.log("Delete");
                                 // Submit changes
-                                setLockText(false);
+                                //setLockText(false);
                                 UpdateId();
                                 let a = ["1"];
                                 a.push(onButtonConcat());
@@ -580,7 +584,7 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({
                                       }
                                       onButtonDelLine(mathPairs[mathPairsid[currPairid]].id);
                                       // Submit changes
-                                      setLockText(false);
+                                      //setLockText(false);
                                       UpdateId();
                                       let a = ["1"];
                                       a.push(onButtonConcat());

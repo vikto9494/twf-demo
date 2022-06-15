@@ -452,7 +452,11 @@ const MathQuillMultyline: React.FC<MultylineProps> = ({latex,
                                   s0 = s0 + tags;
                                 } else if (tags2?.flagPoss == true) {
                                   ;
-                                } else {
+                                } else if (s0 === "") // begin line
+                                {
+                                  ;
+                                }
+                                else {
                                   if (tags2)
                                     console.log(tags2.L);
                                   console.log(l);
