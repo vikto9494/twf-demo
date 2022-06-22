@@ -934,8 +934,7 @@ function PrintTree(TWF_v, init_font_size, app) {
           compiledConfiguration,
           true,
           true
-        )
-        .toArray();
+        );
     }
     let new_arr = [];
     for (let i = 0; i < arr.length; i++) {
@@ -971,8 +970,7 @@ function PrintTree(TWF_v, init_font_size, app) {
           compiledConfiguration,
           true,
           true
-        )
-        .toArray();
+        );
 
       let new_arr = [];
       for (let i = 0; i < arr.length; i++) {

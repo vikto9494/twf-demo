@@ -1,0 +1,17 @@
+@import "../../styles/abstracts/variables";
+
+.tex-editor-actions-tab {
+  display: flex;
+  background-color: #B2DFDB;
+  padding: 1rem;
+  border: 1px solid #00796B;
+  border-radius: 5px 5px 0 0;
+  border-bottom: none;
+  &__operation > img {
+    width: 2rem;
+    margin-right: 1rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
