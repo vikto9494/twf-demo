@@ -152,6 +152,7 @@ const MainPage = () => {
   const [sortType, setSortType] = useState(getDefaultSortType());
   const [sortOrder, setSortOrder] = useState(getDefaultSortOrder());
   const [complexityValue, setComplexityValue] = useState(40);
+  const [depthValue, setDepthValue] = useState(25);
 
   function getDefaultSortType() {
     let defaultSortType = getAllSortTypesForGeneration()
@@ -278,35 +279,57 @@ const MainPage = () => {
     setSolutionInTexStart(res.validatedSolution);
   };
 
-  const onGenerateTasksInput = () => {    
-    let startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
+  const onGenerateTasksInput = () => {  
+    let startExpression = ""
+    try {  
+      startExpression = convertMathInput("TEX", "STRUCTURE_STRING", startTaskForGenerator);
+    }
+    catch (err) {
+      setSuccessMsg(null);
+      setCurrentTasks([]);
+      console.log(err);
+      setSolutionError(err['message']);
+      return
+    }
     let area = convertMathInput("TEX", "STRUCTURE_STRING", currentRulePack);
 
     const additionalParamsJsonString = JSON.stringify({
       complexity: (complexityValue / 100.0).toString(),
+      depth: (depthValue / 100.0).toString(),
       tags: currentTags.map(tag => tag['name$']),
       sort: sortType['name$'],
       sortOrder: sortOrder['name$']
     });
-    const tasks = generateTasks(
-      area,
-      startExpression,
-      [],
-        additionalParamsJsonString
-    );
+    let tasks = []
+    try {
+      tasks = generateTasks(
+        area,
+        startExpression,
+        [],
+          additionalParamsJsonString
+      );
+    }
+    catch (err) {
+      setSuccessMsg(null);
+      setCurrentTasks([]);
+      setSolutionError('Ошибка генерации. Попробуйте ещё раз. ' + err['message']);
+      console.log(err);
+      return
+    }
+    
 
     if (tasks.errorMessage) {
       setSuccessMsg(null);
       setSolutionError(tasks.errorMessage);
     } else {
       setSolutionError(null);
-      setSuccessMsg("Tasks generated total: " + tasks.length);
+      setSuccessMsg("Сгенерировано задач: " + tasks.length);
     }
 
     if (tasks.length > 0 && tasks.every(task => task['difficulty'] < task['targetDifficulty'] 
       && task['targetDifficulty'] - task['difficulty'] > 1)) {
       setSuccessMsg(null);
-      setSolutionError("Can't generate tasks of given complexity setting. Please reduce complexity or add more tags.");
+      setSolutionError("Не получилось получить задачи с такими требованиями. Вы можете: попробовать снова; поменять ответ; понизить сложность; добавить больше тем; увеличить глубину.");
     }
 
     setCurrentTasks(tasks);
@@ -338,13 +361,44 @@ const MainPage = () => {
     />
   }
 
-  const getMathQuillNotebooks = () => {
-    if (currentMode !== 'GenerateTasks') {
-      return getMathQuillNotebook();
+  const getSubjectAreaSection = () => {
+    if (currentMode === 'GenerateTasks') {
+      return;
     }
-
     let content = [];
-
+    if (!hideDetails) {
+      content.push(
+        <div className="app__add-inputs">
+          <div className="app__input-group">
+            <label>Subject Area</label>
+            <Select
+              defaultValue={currentRulePack}
+              onChange={(value) => {
+                setCurrentRulePack(value);
+              }}
+              style={{ width: "150px" }}
+            >
+              {rulePacks.map((option) => (
+                <Option key={option} value={option}>
+                  {option}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <Button type="primary" onClick={onCreateTask}>
+            Change Task!
+          </Button>
+        </div>
+      )
+    }
+    return content;
+  }
+  
+  const getSectionForDevelopers = () => {
+    if (currentMode !== 'GenerateTasks') {
+      return;
+    }
+    let content = [];
     //if (currentTasks.length > 0) {
       content.push(
         <div>
@@ -360,12 +414,11 @@ const MainPage = () => {
             }}
             type="primary"
           >
-            Get log of generation
+            Скачать лог
           </Button>
         </div>
       );
     //}
-
     if (currentTasks.length > 0) {
       content.push(
         <div>
@@ -381,12 +434,19 @@ const MainPage = () => {
             }}
             type="primary"
           >
-            Get report of generation
+            Скачать отчёт
           </Button>
         </div>
       );
     }
+    return content;
+  }
 
+  const getMathQuillNotebooks = () => {
+    if (currentMode !== 'GenerateTasks') {
+      return getMathQuillNotebook();
+    }
+    let content = [];
     let notebooksCount = currentTasks.length;
     for (let i = 0; i < notebooksCount; i++) {
       let task = currentTasks[i];
@@ -413,7 +473,7 @@ const MainPage = () => {
             }}
             type="primary"
           >
-          Solve
+          Решить
           </Button>
 
           <EditableMathField
@@ -624,29 +684,7 @@ const MainPage = () => {
               )}
             </div>
           </div>
-          {!hideDetails && (
-            <div className="app__add-inputs">
-              <div className="app__input-group">
-                <label>Subject Area</label>
-                <Select
-                  defaultValue={currentRulePack}
-                  onChange={(value) => {
-                    setCurrentRulePack(value);
-                  }}
-                  style={{ width: "150px" }}
-                >
-                  {rulePacks.map((option) => (
-                    <Option key={option} value={option}>
-                      {option}
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-              <Button type="primary" onClick={onCreateTask}>
-                Change Task!
-              </Button>
-            </div>
-          )}
+          {getSubjectAreaSection()}
         </div>
       )}
 
@@ -682,13 +720,13 @@ const MainPage = () => {
 
             {currentMode === "GenerateTasks" && (
               <div style={{ "marginBottom": "50px" }}>
-                <h1>Generator settings</h1>
+                <h1>Генератор задач на преобразование выражений</h1>
                 <div className="app__inputs">
                   <div className={createDefaultAndDisabledClassName("app__tex-inputs")}>
                     <div
                       className={createDefaultAndDisabledClassName("app__tex-input")}
                     >
-                      <h2>Start expression: </h2>
+                      <h2>Ответ на задачу: </h2>
                       {!hideDetails ? (
                         <EditableMathField
                           latex={startTaskForGenerator}
@@ -716,7 +754,7 @@ const MainPage = () => {
 
                       }
                       }>
-                        Generate tasks!
+                        Генерировать!
                       </Button>
                     </div>
                     <div
@@ -724,30 +762,10 @@ const MainPage = () => {
                     >
                     </div>
                   </div>
-                  {!hideDetails && (
-                    <div className="app__add-inputs">
-                      <div className="app__input-group">
-                        <label>Subject Area</label>
-                        <Select
-                          defaultValue={currentRulePack}
-                          onChange={(value) => {
-                            setCurrentRulePack(value);
-                          }}
-                          style={{ width: "150px" }}
-                        >
-                          {rulePacks.map((option) => (
-                            <Option key={option} value={option}>
-                              {option}
-                            </Option>
-                          ))}
-                        </Select>
-                      </div>
-                    </div>
-                  )}
                 </div>
                 <ClipLoader loading={showSpinner} /> 
                 <div style = {{maxWidth: "800px"}}>
-                  <h3>Tags</h3>
+                  <h3>Темы</h3>
                   <div>
                   <Multiselect
                     displayValue="code"
@@ -758,16 +776,22 @@ const MainPage = () => {
                     avoidHighlightFirstOption={true}
                     showArrow={true}
                     hidePlaceholder={true}
-                    selectedValues={currentTags.length === 0 ? defaultTags : currentTags}
+                    selectedValues={currentTags}
                   />
                   </div>
-                  <h3>Complexity</h3>
+                  <h3>Сложность задачи</h3>
                   <Slider
                     axis="x"
                     x={complexityValue}
                     onChange={({ x }) => setComplexityValue(x)}
                   />
-                  <h3>Sort By</h3>
+                  <h3>Глубина генерации</h3>
+                  <Slider
+                    axis="x"
+                    x={depthValue}
+                    onChange={({ x }) => setDepthValue(x)}
+                  />
+                  <h3>Сортировать</h3>
                   <Select
                     defaultValue={getDefaultSortType()['code']}
                     onChange={(sortType) => {
@@ -781,7 +805,7 @@ const MainPage = () => {
                       </Option>
                     ))}
                   </Select>
-                  <h3>Sort Order</h3>
+                  <h3>Направление сортировки</h3>
                   <Select
                     defaultValue={getDefaultSortOrder()['code']}
                     onChange={(sortOrder) => {
@@ -798,7 +822,8 @@ const MainPage = () => {
                 </div>
               </div>
             )}
-            {getMathQuillNotebooks()}    
+            {getSectionForDevelopers()}    
+            {getMathQuillNotebooks()} 
           </div>
           
           {(successMsg || solutionError) && (
