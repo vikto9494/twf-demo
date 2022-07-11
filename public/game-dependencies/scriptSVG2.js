@@ -295,6 +295,17 @@ function PrintTree(TWF_v, init_font_size, app) {
     return delta;
   }
 
+  function is_need_brackets_function(name) {
+    return (name === "and" ||
+        name === "or" ||
+        name === "xor" ||
+        name === "alleq" ||
+        name === "set-" ||
+        name === "implic" ||
+        name === "nand" ||
+        name === "nor");
+  }
+
   function recPrintTree(v, size) {
     let vert_shift = -default_vert_shift_offset[min(size, max_size)];
     let delta = 0;
@@ -518,14 +529,7 @@ function PrintTree(TWF_v, init_font_size, app) {
       let first_child, another_child, cur_shift, tmp;
       [first_child, cur_shift] = recPrintTree(v.children[0], size);
       vert_shift = min(cur_shift, vert_shift);
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
@@ -544,14 +548,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         delta += draw(cur_cont, tmp, delta) + interletter_interval;
         [another_child, cur_shift] = recPrintTree(v.children[i], size);
         vert_shift = min(cur_shift, vert_shift);
-        if (
-          v.children[i].value === "and" ||
-          v.children[i].value === "or" ||
-          v.children[i].value === "xor" ||
-          v.children[i].value === "alleq" ||
-          v.children[i].value === "set-" ||
-          v.children[i].value === "implic"
-        ) {
+        if (is_need_brackets_function(v.children[i].value)) {
           delta = draw_with_brackets(
             cur_cont,
             another_child,
@@ -570,14 +567,7 @@ function PrintTree(TWF_v, init_font_size, app) {
       let first_child, another_child, cur_shift, tmp;
       [first_child, cur_shift] = recPrintTree(v.children[0], size);
       vert_shift = min(cur_shift, vert_shift);
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
@@ -596,14 +586,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         delta += draw(cur_cont, tmp, delta) + interletter_interval;
         [another_child, cur_shift] = recPrintTree(v.children[i], size);
         vert_shift = min(cur_shift, vert_shift);
-        if (
-          v.children[i].value === "and" ||
-          v.children[i].value === "or" ||
-          v.children[i].value === "xor" ||
-          v.children[i].value === "alleq" ||
-          v.children[i].value === "set-" ||
-          v.children[i].value === "implic"
-        ) {
+        if (is_need_brackets_function(v.children[i].value)) {
           delta = draw_with_brackets(
             cur_cont,
             another_child,
@@ -622,14 +605,7 @@ function PrintTree(TWF_v, init_font_size, app) {
       let first_child, another_child, cur_shift, tmp;
       [first_child, cur_shift] = recPrintTree(v.children[0], size);
       vert_shift = min(cur_shift, vert_shift);
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
@@ -648,14 +624,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         delta += draw(cur_cont, tmp, delta) + interletter_interval;
         [another_child, cur_shift] = recPrintTree(v.children[i], size);
         vert_shift = min(cur_shift, vert_shift);
-        if (
-          v.children[i].value === "and" ||
-          v.children[i].value === "or" ||
-          v.children[i].value === "xor" ||
-          v.children[i].value === "alleq" ||
-          v.children[i].value === "set-" ||
-          v.children[i].value === "implic"
-        ) {
+        if (is_need_brackets_function(v.children[i].value)) {
           delta = draw_with_brackets(
             cur_cont,
             another_child,
@@ -674,14 +643,7 @@ function PrintTree(TWF_v, init_font_size, app) {
       let first_child, another_child, cur_shift, tmp;
       [first_child, cur_shift] = recPrintTree(v.children[0], size);
       vert_shift = min(cur_shift, vert_shift);
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
@@ -700,14 +662,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         delta += draw(cur_cont, tmp, delta) + interletter_interval;
         [another_child, cur_shift] = recPrintTree(v.children[i], size);
         vert_shift = min(cur_shift, vert_shift);
-        if (
-          v.children[i].value === "and" ||
-          v.children[i].value === "or" ||
-          v.children[i].value === "xor" ||
-          v.children[i].value === "alleq" ||
-          v.children[i].value === "set-" ||
-          v.children[i].value === "implic"
-        ) {
+        if (is_need_brackets_function(v.children[i].value)) {
           delta = draw_with_brackets(
             cur_cont,
             another_child,
@@ -722,18 +677,87 @@ function PrintTree(TWF_v, init_font_size, app) {
             interletter_interval;
         }
       }
+    } else if (v.value === "nand") {
+      let first_child, another_child, cur_shift, tmp;
+      [first_child, cur_shift] = recPrintTree(v.children[0], size);
+      vert_shift = min(cur_shift, vert_shift);
+      if (is_need_brackets_function(v.children[0].value)) {
+        delta = draw_with_brackets(
+            cur_cont,
+            first_child,
+            delta,
+            cur_shift,
+            size,
+            v.children[0].twfNode.nodeId
+        );
+      } else {
+        delta +=
+            v_draw(cur_cont, first_child, delta, cur_shift, size) +
+            interletter_interval;
+      }
+      for (let i = 1; i < v.children.length; i++) {
+        tmp = interactive_text("↑", cur_cont, size, v.twfNode.nodeId);
+        delta += draw(cur_cont, tmp, delta) + interletter_interval;
+        [another_child, cur_shift] = recPrintTree(v.children[i], size);
+        vert_shift = min(cur_shift, vert_shift);
+        if (is_need_brackets_function(v.children[i].value)) {
+          delta = draw_with_brackets(
+              cur_cont,
+              another_child,
+              delta,
+              cur_shift,
+              size,
+              v.children[i].twfNode.nodeId
+          );
+        } else {
+          delta +=
+              v_draw(cur_cont, another_child, delta, cur_shift, size) +
+              interletter_interval;
+        }
+      }
+    } else if (v.value === "nor") {
+      let first_child, another_child, cur_shift, tmp;
+      [first_child, cur_shift] = recPrintTree(v.children[0], size);
+      vert_shift = min(cur_shift, vert_shift);
+      if (is_need_brackets_function(v.children[0].value)) {
+        delta = draw_with_brackets(
+            cur_cont,
+            first_child,
+            delta,
+            cur_shift,
+            size,
+            v.children[0].twfNode.nodeId
+        );
+      } else {
+        delta +=
+            v_draw(cur_cont, first_child, delta, cur_shift, size) +
+            interletter_interval;
+      }
+      for (let i = 1; i < v.children.length; i++) {
+        tmp = interactive_text("↓", cur_cont, size, v.twfNode.nodeId);
+        delta += draw(cur_cont, tmp, delta) + interletter_interval;
+        [another_child, cur_shift] = recPrintTree(v.children[i], size);
+        vert_shift = min(cur_shift, vert_shift);
+        if (is_need_brackets_function(v.children[i].value)) {
+          delta = draw_with_brackets(
+              cur_cont,
+              another_child,
+              delta,
+              cur_shift,
+              size,
+              v.children[i].twfNode.nodeId
+          );
+        } else {
+          delta +=
+              v_draw(cur_cont, another_child, delta, cur_shift, size) +
+              interletter_interval;
+        }
+      }
     } else if (v.value === "set-") {
       let first_child, another_child, cur_shift, tmp;
       [first_child, cur_shift] = recPrintTree(v.children[0], size);
       vert_shift = min(cur_shift, vert_shift);
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
@@ -752,14 +776,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         delta += draw(cur_cont, tmp, delta) + interletter_interval;
         [another_child, cur_shift] = recPrintTree(v.children[i], size);
         vert_shift = min(cur_shift, vert_shift);
-        if (
-          v.children[i].value === "and" ||
-          v.children[i].value === "or" ||
-          v.children[i].value === "xor" ||
-          v.children[i].value === "alleq" ||
-          v.children[i].value === "set-" ||
-          v.children[i].value === "implic"
-        ) {
+        if (is_need_brackets_function(v.children[i].value)) {
           delta = draw_with_brackets(
             cur_cont,
             another_child,
@@ -778,14 +795,7 @@ function PrintTree(TWF_v, init_font_size, app) {
       let first_child, another_child, cur_shift, tmp;
       [first_child, cur_shift] = recPrintTree(v.children[0], size);
       vert_shift = min(cur_shift, vert_shift);
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
@@ -804,14 +814,7 @@ function PrintTree(TWF_v, init_font_size, app) {
         delta += draw(cur_cont, tmp, delta) + interletter_interval;
         [another_child, cur_shift] = recPrintTree(v.children[i], size);
         vert_shift = min(cur_shift, vert_shift);
-        if (
-          v.children[i].value === "and" ||
-          v.children[i].value === "or" ||
-          v.children[i].value === "xor" ||
-          v.children[i].value === "alleq" ||
-          v.children[i].value === "set-" ||
-          v.children[i].value === "implic"
-        ) {
+        if (is_need_brackets_function(v.children[i].value)) {
           delta = draw_with_brackets(
             cur_cont,
             another_child,
@@ -832,14 +835,7 @@ function PrintTree(TWF_v, init_font_size, app) {
       vert_shift = min(cur_shift, vert_shift);
       tmp = interactive_text("\u00AC", cur_cont, size, v.twfNode.nodeId);
       delta += draw(cur_cont, tmp, delta) + interletter_interval;
-      if (
-        v.children[0].value === "and" ||
-        v.children[0].value === "or" ||
-        v.children[0].value === "xor" ||
-        v.children[0].value === "alleq" ||
-        v.children[0].value === "set-" ||
-        v.children[0].value === "implic"
-      ) {
+      if (is_need_brackets_function(v.children[0].value)) {
         delta = draw_with_brackets(
           cur_cont,
           first_child,
