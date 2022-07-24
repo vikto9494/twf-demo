@@ -129,6 +129,11 @@ export const checkTex = (
   );
 };
 
+export const getAllLogInPlainText = () => {
+  let log = twf_js.getAllLogInPlainText();
+  return log;
+};
+
 export const getLogOfGeneration = () => {
   let log = twf_js.getLogOfGeneration();
   return log;

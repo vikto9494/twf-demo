@@ -19,6 +19,7 @@ import {
   generateTasks,
   decodeUrlSymbols,
   checkStatement,
+  getAllLogInPlainText,
   getAllTagsForGeneration,
   getLogOfGeneration,
   getReportOfGeneration,
@@ -186,6 +187,7 @@ const MainPage = () => {
         selectedComparisonSign === "<="
       ? "2+4\\cdot \\cos \\left(2\\cdot x\\right)+\\cos \\left(4\\cdot x\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+\\left(2\\cdot \\cos ^2\\left(2\\cdot x\\right)-1\\right)\\le 3+4\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)+2\\cdot \\left(2\\cdot \\cos ^2\\left(x\\right)-1\\right)^2-1\\le 8\\cdot \\cos \\left(x\\right)^4"
       : null;
+  const showGetLogButton = true;
 
 
   const [startTaskForGenerator, setStartTaskForGenerator] = useState(
@@ -255,11 +257,11 @@ const MainPage = () => {
 
   const onSelectTag = (selectedList, selectedItem) => {
     setCurrentTags(selectedList);
-  }
+  };
 
   const onRemoveTag = (selectedList, selectedItem) => {
     setCurrentTags(selectedList);
-  }
+  };
 
   const onCheckTexSolutionInput = () => {
     const res = checkTex(
@@ -440,7 +442,7 @@ const MainPage = () => {
       );
     }
     return content;
-  }
+  };
 
   const getMathQuillNotebooks = () => {
     if (currentMode !== 'GenerateTasks') {
@@ -534,57 +536,6 @@ const MainPage = () => {
 
   // tex solution commands
   const [solutionMathField, setSolutionMathField] = useState(null);
-  const actions = [
-    {
-      iconUrl: sumIcon,
-      latexCmd: () => {
-        if (solutionMathField) {
-          solutionMathField.cmd("\\sum");
-        }
-      },
-    },
-    {
-      iconUrl: squareIcon,
-      latexCmd: () => {
-        if (solutionMathField) {
-          solutionMathField.cmd("\\sqrt");
-        }
-      },
-    },
-    {
-      iconUrl: piIcon,
-      latexCmd: () => {
-        if (solutionMathField) {
-          solutionMathField.cmd("\\pi");
-        }
-      },
-    },
-    // TODO: find icons and finish
-    // {
-    //   iconUrl: andIcon,
-    //   latexCmd: "\\land",
-    // },
-    // {
-    //   iconUrl: orIcon,
-    //   latexCmd: "\\lor",
-    // },
-    // {
-    //   iconUrl: oplusIcon,
-    //   latexCmd: "\\oplus",
-    // },
-    // {
-    //   iconUrl: negIcon,
-    //   latexCmd: "\\neg",
-    // },
-    // {
-    //   iconUrl: impliesIcon,
-    //   latexCmd: "\\implies",
-    // },
-    // {
-    //   iconUrl: setminusIcon,
-    //   latexCmd: "\\setminus",
-    // },
-  ];
 
   return (
     <div className="app">
@@ -852,18 +803,35 @@ const MainPage = () => {
               </Button>
             }
 
-            {correctSolution && (
+            {currentMode !== "GenerateTasks" && correctSolution && (
               <Button
                 onClick={() => {
                   setSolutionInTexStart(correctSolution);
                 }}
                 style={{
-                  marginTop: "10px",
+                  marginTop: "1rem",
                 }}
                 type="success"
               >
                 Get correct solution
               </Button>
+            )}
+
+            {currentMode !== "GenerateTasks" && showGetLogButton && (
+                <Button
+                    onClick={function () {
+                      var blob = new Blob([getAllLogInPlainText()], {
+                        type: "text/plain;charset=utf-8;",
+                      });
+                      saveAs(blob, "verification_log.txt");
+                    }}
+                    style={{
+                      marginTop: "1rem",
+                    }}
+                    type="primary"
+                >
+                  Get log
+                </Button>
             )}
           </div>
         </div>
